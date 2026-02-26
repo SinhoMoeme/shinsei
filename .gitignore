@@ -1,0 +1,12 @@
+/build/
+/release/bin/
+/src/libs/shinsei/
+
+/msys2_path.txt
+
+/src/third-party/**/*
+!/src/third-party/
+!/src/third-party/include/
+!/src/third-party/include/python3/
+!/src/third-party/libs/
+!/src/third-party/libs/python3/
