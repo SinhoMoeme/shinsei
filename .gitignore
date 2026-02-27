@@ -1,11 +1,20 @@
 /build/
 msys2_path.txt
 
-/release/bin/**
-!/release/bin/**/*.gitkeep
+/release/bin/*
+!/release/bin/*.gitkeep
+!/release/bin/libs/*.gitkeep
+!/release/bin/libs/shinsei/*.gitkeep
+!/release/bin/libs/shinsei/ex/*.gitkeep
 
-/src/libs/shinsei/**
-!/src/libs/shinsei/**/*.gitkeep
+/src/libs/shinsei/*
+!/src/libs/*.gitkeep
+!/src/libs/shinsei/*.gitkeep
+!/src/libs/shinsei/ex/*.gitkeep
 
-/src/third-party/**
-!/src/third-party/**/*.gitkeep
+/src/third-party/*
+!/src/third-party/*.gitkeep
+!/src/third-party/include/*.gitkeep
+!/src/third-party/include/python3/*.gitkeep
+!/src/third-party/libs/*.gitkeep
+!/src/third-party/libs/python3/*.gitkeep

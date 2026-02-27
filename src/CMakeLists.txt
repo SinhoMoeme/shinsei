@@ -69,7 +69,7 @@ option(SHINSEI_BUILD_EX_POSTGRESQL "Enable PostgreSQL module for shinsei EX" ON)
 
 if(SHINSEI_BUILD_MINIMAL)
 	set(SHINSEI_BUILD_EX OFF CACHE BOOL "" FORCE)
-	target_compile_definitions(shinsei::build_lib
+	target_compile_definitions(_shinsei_build_lib
 		INTERFACE _SHINSEI_BUILD_MINIMAL
 	)
 	message(STATUS "shinsei: Enabled minimal mode.")
@@ -138,6 +138,13 @@ endfunction()
 shinseiApplyOptionMacro(SHINSEI_BUILD_EX_POSTGRESQL "")
 shinseiApplyOptionMacro(SHINSEI_BUILD_EX_SQLITE "")
 shinseiApplyOptionMacro(SHINSEI_BUILD_EX_PYTHON3 "")
+
+if(SHINSEI_BUILD_MINIMAL)
+	message(STATUS "shinsei: Building minimal modules...")
+else()
+	message(STATUS "shinsei: Building standard modules...")
+endif()
+add_subdirectory(struct)
 
 if(SHINSEI_BUILD_EX)
 	message(STATUS "shinsei: Building EX modules...")
