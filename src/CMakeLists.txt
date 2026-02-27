@@ -1,26 +1,64 @@
 cmake_minimum_required(VERSION 3.5...3.31)
 project(Shinsei_SinhoMoeme)
 
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+
+option(SHINSEI_USE_SOURCE_LAYOUT
+    "Output build artifacts into source-tree layout"
+    OFF
+)
+
+if(SHINSEI_USE_SOURCE_LAYOUT)
+    set(_SHINSEI_DEFAULT_LIB
+        "${CMAKE_CURRENT_SOURCE_DIR}/libs"
+    )
+    set(_SHINSEI_DEFAULT_BIN
+        "${CMAKE_CURRENT_SOURCE_DIR}/../release/bin"
+    )
+else()
+    set(_SHINSEI_DEFAULT_LIB
+        "${CMAKE_BINARY_DIR}/shinsei/lib"
+    )
+    set(_SHINSEI_DEFAULT_BIN
+        "${CMAKE_BINARY_DIR}/shinsei/bin"
+    )
+endif()
+
+set(SHINSEI_LIBRARY_DIR
+    "${_SHINSEI_DEFAULT_LIB}"
+    CACHE PATH "Shinsei library output directory"
+)
+
+set(SHINSEI_RUNTIME_DIR
+    "${_SHINSEI_DEFAULT_BIN}"
+    CACHE PATH "Shinsei runtime output directory"
+)
+
 add_library(_shinsei_build_lib INTERFACE)
+add_library(shinsei::build_lib ALIAS _shinsei_build_lib)
+
+add_library(_shinsei_minimal INTERFACE)
+add_library(shinsei::minimal ALIAS _shinsei_minimal)
+
+add_library(_shinsei_std INTERFACE)
+add_library(shinsei::std ALIAS _shinsei_std)
+
+target_link_libraries(_shinsei_std INTERFACE _shinsei_minimal)
 
 target_compile_definitions(_shinsei_build_lib
     INTERFACE _SHINSEI_BUILD_LIB
 )
 
-set(_SHINSEI_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
-set(_SHINSEI_LIBRARY_DIR ${CMAKE_SOURCE_DIR}/libs)
-set(_SHINSEI_BINARY_DIR ${CMAKE_SOURCE_DIR}/../release/bin)
+set(_SHINSEI_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(_SHINSEI_LIBRARY_DIR ${SHINSEI_LIBRARY_DIR})
+set(_SHINSEI_BINARY_DIR  ${SHINSEI_RUNTIME_DIR})
 
 target_include_directories(_shinsei_build_lib
-    INTERFACE ${_SHINSEI_INCLUDE_DIR}
+    INTERFACE
+        $<BUILD_INTERFACE:${_SHINSEI_INCLUDE_DIR}>
+        $<INSTALL_INTERFACE:include>
 )
-
-set(_SHINSEI_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${_SHINSEI_LIBRARY_DIR}/shinsei)
-set(_SHINSEI_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${_SHINSEI_LIBRARY_DIR}/shinsei)
-set(_SHINSEI_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${_SHINSEI_BINARY_DIR}/libs/shinsei)
-set(_SHINSEI_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${_SHINSEI_LIBRARY_DIR}/shinsei/debug)
-set(_SHINSEI_LIBRARY_OUTPUT_DIRECTORY_DEBUG ${_SHINSEI_LIBRARY_DIR}/shinsei/debug)
-set(_SHINSEI_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${_SHINSEI_BINARY_DIR}/libs/shinsei/debug)
 
 option(SHINSEI_BUILD_FORCE_INTERNAL_DEPS "Force use internal third-party libs for shinsei" OFF)
 option(SHINSEI_BUILD_MINIMAL "Build minimal shinsei (no OS and EX)" OFF)
@@ -31,7 +69,7 @@ option(SHINSEI_BUILD_EX_POSTGRESQL "Enable PostgreSQL module for shinsei EX" ON)
 
 if(SHINSEI_BUILD_MINIMAL)
 	set(SHINSEI_BUILD_EX OFF CACHE BOOL "" FORCE)
-	target_compile_definitions(_shinsei_build_lib
+	target_compile_definitions(shinsei::build_lib
 		INTERFACE _SHINSEI_BUILD_MINIMAL
 	)
 	message(STATUS "shinsei: Enabled minimal mode.")
@@ -41,11 +79,15 @@ if(SHINSEI_BUILD_EX)
     target_compile_definitions(_shinsei_build_lib
 		INTERFACE _SHINSEI_BUILD_EX
 	)
-	set(SHINSEI_THIRDPARTY_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/third-party/include)
-	set(SHINSEI_THIRDPARTY_LIBRARY_DIR ${CMAKE_SOURCE_DIR}/third-party/libs)
+	set(SHINSEI_THIRDPARTY_INCLUDE_DIR
+		${CMAKE_CURRENT_SOURCE_DIR}/third-party/include
+	)
+	set(SHINSEI_THIRDPARTY_LIBRARY_DIR
+		${CMAKE_CURRENT_SOURCE_DIR}/third-party/libs
+	)
 	target_include_directories(_shinsei_build_lib
     INTERFACE
-		${SHINSEI_THIRDPARTY_INCLUDE_DIR}
+        $<BUILD_INTERFACE:${SHINSEI_THIRDPARTY_INCLUDE_DIR}>
 	)
 	message(STATUS "shinsei: Enabled EX mode.")
 else()
@@ -101,3 +143,30 @@ if(SHINSEI_BUILD_EX)
 	message(STATUS "shinsei: Building EX modules...")
 	add_subdirectory(ex)
 endif()
+
+install(TARGETS
+    _shinsei_build_lib
+    _shinsei_minimal
+    _shinsei_std
+    EXPORT shinseiTargets
+)
+
+install(DIRECTORY include/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+install(EXPORT shinseiTargets
+    NAMESPACE shinsei::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/shinsei
+)
+
+configure_package_config_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/shinseiConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/shinseiConfig.cmake
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/shinsei
+)
+
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/shinseiConfig.cmake
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/shinsei
+)

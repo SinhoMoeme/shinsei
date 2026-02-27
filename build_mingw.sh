@@ -18,6 +18,7 @@ cmake "$SRC_DIR" \
 	-DCMAKE_C_STANDARD=23 \
 	-DCMAKE_CXX_STANDARD=26 \
 	-DBUILD_SHARED_LIBS=OFF \
+	-DSHINSEI_USE_SOURCE_LAYOUT=ON \
 	-DCMAKE_CXX_FLAGS_RELEASE="-O3 -flto -march=x86-64 -static-libgcc -static-libstdc++ -static" \
 	-DCMAKE_C_FLAGS_RELEASE="-O3 -flto -march=x86-64 -static-libgcc -static-libstdc++ -static"
 

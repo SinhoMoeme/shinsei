@@ -1,11 +1,11 @@
 /build/
-/msys2_path.txt
+msys2_path.txt
 
-/release/bin/*
-!/release/bin/**/.gitkeep
+/release/bin/**
+!/release/bin/**/*.gitkeep
 
-/src/libs/shinsei/*
-!/src/libs/shinsei/**/.gitkeep
+/src/libs/shinsei/**
+!/src/libs/shinsei/**/*.gitkeep
 
-/src/third-party/*
-!/src/third-party/**/.gitkeep
+/src/third-party/**
+!/src/third-party/**/*.gitkeep
