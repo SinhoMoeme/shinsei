@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.18...3.31)
 
-set(MODULE_NAME shinsei_struct)
-set(SOURCE_NAME struct)
+set(MODULE_NAME shinsei_io)
+set(SOURCE_NAME io)
 
 project(Shinsei_SinhoMoeme_${MODULE_NAME})
 
@@ -105,6 +105,7 @@ if(SHINSEI_MINIMAL_SHARED)
 endif()
 
 # PATH
+
 set(SUBDIR "")
 
 file(MAKE_DIRECTORY "${_SHINSEI_LIBRARY_DIR}/shinsei/${SUBDIR}")

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.18...3.31)
 
-set(MODULE_NAME shinsei_struct)
-set(SOURCE_NAME struct)
+set(MODULE_NAME shinsei_path)
+set(SOURCE_NAME path)
 
 project(Shinsei_SinhoMoeme_${MODULE_NAME})
 
@@ -47,6 +47,7 @@ target_link_libraries(${MODULE_NAME}_static
     PRIVATE
         shinsei::minimal
         shinsei::std
+		shinsei::str_static
 )
 
 # SHARED
@@ -91,6 +92,7 @@ target_link_libraries(${MODULE_NAME}_shared
     PRIVATE
         shinsei::minimal
         shinsei::std
+		shinsei::str_static
 )
 
 if(SHINSEI_MINIMAL_SHARED)
@@ -105,6 +107,7 @@ if(SHINSEI_MINIMAL_SHARED)
 endif()
 
 # PATH
+
 set(SUBDIR "")
 
 file(MAKE_DIRECTORY "${_SHINSEI_LIBRARY_DIR}/shinsei/${SUBDIR}")

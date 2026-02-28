@@ -144,7 +144,12 @@ if(SHINSEI_BUILD_MINIMAL)
 else()
 	message(STATUS "shinsei: Building standard modules...")
 endif()
+
 add_subdirectory(struct)
+add_subdirectory(io)
+add_subdirectory(str)
+add_subdirectory(path)
+add_subdirectory(sys)
 
 if(SHINSEI_BUILD_EX)
 	message(STATUS "shinsei: Building EX modules...")

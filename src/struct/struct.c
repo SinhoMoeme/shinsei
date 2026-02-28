@@ -10,7 +10,7 @@ shinsei_object_t* shinsei_object_t_con(const void *const val,shinsei_deallocator
 
 
 void shinsei_object_t_dec(shinsei_object_t *const obj){
-	if(shinsei_object_t_isLegal(obj)) obj->deallocator(obj->val);
+	if(shinsei_object_t_isLegal(obj)) obj->deallocator((void*)obj->val);
 	free(obj);
 	return;
 }
@@ -38,7 +38,7 @@ void shinsei_object_t_alloc(shinsei_object_t *const obj,const void *const val){
 
 bool shinsei_object_t_free(shinsei_object_t *const obj){
 	if(!shinsei_object_t_isLegal(obj)) return 0;
-	obj->deallocator(obj->val);
+	obj->deallocator((void*)obj->val);
 	obj->val=nullptr;
 	return 1;
 }

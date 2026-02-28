@@ -1,0 +1,1 @@
+#include"shinsei/path.h"

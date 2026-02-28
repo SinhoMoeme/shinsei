@@ -17,28 +17,28 @@ typedef struct{
 extern "C" {
 #endif
 
-_SHINSEI_LIB_API pystack_t* shinsei_ex_pystack_t_conA();
-_SHINSEI_LIB_API pystack_t* shinsei_ex_pystack_t_conB(PyObject**restrict data,const size_t size,const size_t cap);
+_SHINSEI_LIB_API pystack_t* shinsei_ex_pystack_t_con();
+_SHINSEI_LIB_API pystack_t* shinsei_ex_pystack_t_conCopy(PyObject **const restrict data,const size_t size,const size_t cap);
 
-_SHINSEI_LIB_API void shinsei_ex_pystack_t_dec(pystack_t*restrict this);
+_SHINSEI_LIB_API void shinsei_ex_pystack_t_dec(pystack_t *const restrict this);
 
-_SHINSEI_LIB_API bool shinsei_ex_pystack_t_expand(pystack_t*restrict this,const size_t more_cap);
+_SHINSEI_LIB_API bool shinsei_ex_pystack_t_expand(pystack_t*const restrict this,const size_t more_cap);
 
-_SHINSEI_LIB_API bool shinsei_ex_pystack_t_shrink(pystack_t*restrict this,const size_t less_cap);
+_SHINSEI_LIB_API bool shinsei_ex_pystack_t_shrink(pystack_t*const restrict this,const size_t less_cap);
 
-_SHINSEI_LIB_API PyObject* shinsei_ex_pystack_t_top(const pystack_t*restrict this);
+_SHINSEI_LIB_API PyObject* shinsei_ex_pystack_t_top(const pystack_t*const restrict this);
 
-_SHINSEI_LIB_API bool shinsei_ex_pystack_t_empty(const pystack_t*restrict this);
+_SHINSEI_LIB_API bool shinsei_ex_pystack_t_empty(const pystack_t*const restrict this);
 
-_SHINSEI_LIB_API size_t shinsei_ex_pystack_t_size(const pystack_t*restrict this);
+_SHINSEI_LIB_API size_t shinsei_ex_pystack_t_size(const pystack_t*const restrict this);
 
-_SHINSEI_LIB_API void shinsei_ex_pystack_t_pop(pystack_t*restrict this);
+_SHINSEI_LIB_API void shinsei_ex_pystack_t_pop(pystack_t*const restrict this);
+                                                        
+_SHINSEI_LIB_API bool shinsei_ex_pystack_t_push(pystack_t*const restrict this,const PyObject*const val);
 
-_SHINSEI_LIB_API bool shinsei_ex_pystack_t_push(pystack_t*restrict this,const PyObject* val);
+_SHINSEI_LIB_API void shinsei_ex_pystack_t_swap(pystack_t*const restrict this,pystack_t*const restrict src);
 
-_SHINSEI_LIB_API void shinsei_ex_pystack_t_swap(pystack_t*restrict this,pystack_t*restrict src);
-
-_SHINSEI_LIB_API void shinsei_ex_pystack_t_clear(pystack_t*restrict this);
+_SHINSEI_LIB_API void shinsei_ex_pystack_t_clear(pystack_t*const restrict this);
 
 #ifdef __cplusplus
 }
