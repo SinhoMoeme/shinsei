@@ -1,0 +1,3 @@
+#pragma once
+
+#include"shinsei/ex/python3/struct.h"

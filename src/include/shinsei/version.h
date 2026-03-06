@@ -1,0 +1,7 @@
+#pragma once
+
+#define _SHINSEI_VERSION_MAJOR 0
+#define _SHINSEI_VERSION_MINOR 1
+#define _SHINSEI_VERSION_PATCH 0
+
+#define _SHINSEI_VERSION "0.1.0-alpha"
