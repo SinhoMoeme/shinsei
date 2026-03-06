@@ -244,6 +244,8 @@ function(shinseiAddModule MODULE_NAME SOURCE_NAME)
 
     target_compile_options(${MODULE_NAME}_minimal_shared PRIVATE
         $<$<CONFIG:Release>:-static-libgcc>
+		$<$<CONFIG:Release>:-static>
+		-fvisibility=hidden
     )
 	
 	shinseiApplyOutputDirs(${MODULE_NAME}_minimal_static "minimal")
@@ -273,18 +275,19 @@ function(shinseiAddModule MODULE_NAME SOURCE_NAME)
 
         target_compile_options(${MODULE_NAME}_shared PRIVATE
             $<$<CONFIG:Release>:-static-libgcc>
+			$<$<CONFIG:Release>:-static>
+			-fvisibility=hidden
         )
+		
 
-        if(SHINSEI_MINIMAL_SHARED)
-            set_target_properties(${MODULE_NAME}_shared PROPERTIES
-                C_VISIBILITY_PRESET hidden
-                VISIBILITY_INLINES_HIDDEN YES
-            )
+		set_target_properties(${MODULE_NAME}_shared PROPERTIES
+			C_VISIBILITY_PRESET hidden
+			VISIBILITY_INLINES_HIDDEN YES
+		)
 
-            target_compile_definitions(${MODULE_NAME}_shared
-                PRIVATE _SHINSEI_BUILD_SHARED
-            )
-        endif()
+		target_compile_definitions(${MODULE_NAME}_shared
+			PRIVATE _SHINSEI_BUILD_SHARED
+		)
 		
 		shinseiApplyOutputDirs(${MODULE_NAME}_static "")
 		shinseiApplyOutputDirs(${MODULE_NAME}_shared "")
@@ -398,15 +401,21 @@ add_library(shinsei-minimal_shared SHARED
 )
 
 set_target_properties(shinsei-minimal_static PROPERTIES OUTPUT_NAME shinsei-minimal)
-set_target_properties(shinsei-minimal_shared PROPERTIES OUTPUT_NAME shinsei-minimal)
+set_target_properties(shinsei-minimal_shared PROPERTIES
+	OUTPUT_NAME shinsei-minimal
+	C_VISIBILITY_PRESET hidden
+    VISIBILITY_INLINES_HIDDEN YES
+)
 
 target_compile_options(shinsei-minimal_static PRIVATE
 	$<$<CONFIG:Release>:-static-libgcc>
+	$<$<CONFIG:Release>:-static>
 )
 
 target_compile_options(shinsei-minimal_shared PRIVATE
 	$<$<CONFIG:Release>:-static-libgcc>
 	$<$<CONFIG:Release>:-static>
+	-fvisibility=hidden
 )
 
 shinseiApplyOutputDirs(shinsei-minimal_static "")
@@ -425,15 +434,21 @@ if(NOT SHINSEI_BUILD_MINIMAL)
 	)
 
     set_target_properties(shinsei_static PROPERTIES OUTPUT_NAME shinsei)
-    set_target_properties(shinsei_shared PROPERTIES OUTPUT_NAME shinsei)
+    set_target_properties(shinsei_shared PROPERTIES
+		OUTPUT_NAME shinsei
+		C_VISIBILITY_PRESET hidden
+		VISIBILITY_INLINES_HIDDEN YES
+	)
 
     target_compile_options(shinsei_static PRIVATE
 		$<$<CONFIG:Release>:-static-libgcc>
+		$<$<CONFIG:Release>:-static>
     )
 	
     target_compile_options(shinsei_shared PRIVATE
 		$<$<CONFIG:Release>:-static-libgcc>
         $<$<CONFIG:Release>:-static>
+		-fvisibility=hidden
     )
 
     shinseiApplyOutputDirs(shinsei_static "")
@@ -498,15 +513,21 @@ if(SHINSEI_BUILD_EX)
 	
 	target_compile_options(shinsei-ex_static PRIVATE
 		$<$<CONFIG:Release>:-static-libgcc>
+		$<$<CONFIG:Release>:-static>
 	)
 
 	target_compile_options(shinsei-ex_shared PRIVATE
 		$<$<CONFIG:Release>:-static-libgcc>
 		$<$<CONFIG:Release>:-static>
+		-fvisibility=hidden
 	)
 	
     set_target_properties(shinsei-ex_static PROPERTIES OUTPUT_NAME shinsei-ex)
-    set_target_properties(shinsei-ex_shared PROPERTIES OUTPUT_NAME shinsei-ex)
+    set_target_properties(shinsei-ex_shared PROPERTIES
+		OUTPUT_NAME shinsei-ex
+		C_VISIBILITY_PRESET hidden
+		VISIBILITY_INLINES_HIDDEN YES
+	)
 	
 	shinseiApplyOutputDirs(shinsei-ex_static "")
     shinseiApplyOutputDirs(shinsei-ex_shared "")

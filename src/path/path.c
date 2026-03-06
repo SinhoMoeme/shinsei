@@ -1,9 +1,9 @@
 #include"shinsei/minimal/path.h"
 
-bool shinsei_isWindowsPathDelimiterA(const char ch){
+bool shinsei_isWindowsPathDelimiterA(const int ch){
 	return (ch|0x20)=='/';
 }
-bool shinsei_isWindowsPathDelimiterW(const wchar_t ch){
+bool shinsei_isWindowsPathDelimiterW(const wint_t ch){
 	return (ch|0x20)==L'/';
 }
 bool shinsei_isWindowsPathDelimiterU8S(const char8_t**const restrict str_ptr,const size_t len){
@@ -26,10 +26,10 @@ bool shinsei_isWindowsPathDelimiterU32(const char32_t ch){
 	return (ch|0x20)==U'/';
 }
 
-bool shinsei_isLinuxPathDelimiterA(const char ch){
+bool shinsei_isLinuxPathDelimiterA(const int ch){
 	return ch=='/';
 }
-bool shinsei_isLinuxPathDelimiterW(const wchar_t ch){
+bool shinsei_isLinuxPathDelimiterW(const wint_t ch){
 	return ch==L'/';
 }
 bool shinsei_isLinuxPathDelimiterU8S(const char8_t**const restrict str_ptr,const size_t len){
@@ -52,7 +52,7 @@ bool shinsei_isLinuxPathDelimiterU32(const char32_t ch){
 	return ch==U'/';
 }
 
-bool shinsei_isWindowsPathIllegalCharA(const char ch){
+bool shinsei_isWindowsPathIllegalCharA(const int ch){
 	if((unsigned char)ch<32) return true;
 	switch(ch){
 		case '"':
@@ -69,7 +69,7 @@ bool shinsei_isWindowsPathIllegalCharA(const char ch){
 	}
 	return false;
 }
-bool shinsei_isWindowsPathIllegalCharW(const wchar_t ch){
+bool shinsei_isWindowsPathIllegalCharW(const wint_t ch){
 	if((unsigned int)ch<32) return true;
 	switch(ch){
 		case L'"':
@@ -136,6 +136,22 @@ bool shinsei_isWindowsPathIllegalCharU32(const char32_t ch){
 		}
 	}
 	return false;
+}
+
+bool shinsei_isLinuxPathIllegalCharA(const int ch){
+	return !ch||ch==SHINSEI_PATH_LINUX_DELIMITER_A;
+}
+bool shinsei_isLinuxPathIllegalCharW(const wint_t ch){
+	return !ch||ch==SHINSEI_PATH_LINUX_DELIMITER_W;
+}
+bool shinsei_isLinuxPathIllegalCharU8(const char8_t ch){
+	return !ch||ch==SHINSEI_PATH_LINUX_DELIMITER_U8;
+}
+bool shinsei_isLinuxPathIllegalCharU16(const char16_t ch){
+	return !ch||ch==SHINSEI_PATH_LINUX_DELIMITER_U8;
+}
+bool shinsei_isLinuxPathIllegalCharU32(const char32_t ch){
+	return !ch||ch==SHINSEI_PATH_LINUX_DELIMITER_U8;
 }
 
 int shinsei_windowsPathNormalizeA(char*const restrict path,size_t*const restrict len){

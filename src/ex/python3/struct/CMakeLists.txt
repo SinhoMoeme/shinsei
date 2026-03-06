@@ -33,14 +33,18 @@ target_link_libraries(${MODULE_NAME}_obj
 # ex static
 add_library(${MODULE_NAME}_static STATIC
     $<TARGET_OBJECTS:${MODULE_NAME}_obj>
+	$<TARGET_OBJECTS:shinsei_${SOURCE_NAME}_obj>
+	$<TARGET_OBJECTS:shinsei_${SOURCE_NAME}_minimal_obj>
 )
 
 set_target_properties(${MODULE_NAME}_static PROPERTIES
     OUTPUT_NAME shinsei_ex_python3_${SOURCE_NAME}
 )
 
-target_link_libraries(${MODULE_NAME}_static
-    PUBLIC shinsei::ex::python
+target_compile_options(${MODULE_NAME}_static PRIVATE
+	$<$<CONFIG:Release>:-static-libgcc>
+	$<$<CONFIG:Release>:-static>
+    -fvisibility=hidden
 )
 
 shinseiApplyOutputDirs(${MODULE_NAME}_static ex/python3)
@@ -48,10 +52,18 @@ shinseiApplyOutputDirs(${MODULE_NAME}_static ex/python3)
 # ex shared
 add_library(${MODULE_NAME}_shared SHARED
     $<TARGET_OBJECTS:${MODULE_NAME}_obj>
+	$<TARGET_OBJECTS:shinsei_${SOURCE_NAME}_obj>
+	$<TARGET_OBJECTS:shinsei_${SOURCE_NAME}_minimal_obj>
 )
 
 set_target_properties(${MODULE_NAME}_shared PROPERTIES
     OUTPUT_NAME shinsei_ex_python3_${SOURCE_NAME}
+)
+
+target_compile_options(${MODULE_NAME}_shared PRIVATE
+	$<$<CONFIG:Release>:-static-libgcc>
+	$<$<CONFIG:Release>:-static>
+    -fvisibility=hidden
 )
 
 target_link_libraries(${MODULE_NAME}_shared

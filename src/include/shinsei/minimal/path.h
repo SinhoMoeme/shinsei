@@ -51,29 +51,29 @@
 extern "C" {
 #endif
 
-_SHINSEI_LIB_API bool shinsei_isWindowsPathDelimiterA(const char ch);
-_SHINSEI_LIB_API bool shinsei_isWindowsPathDelimiterW(const wchar_t ch);
-_SHINSEI_LIB_API bool shinsei_isWindowsPathDelimiterU8S(const unsigned char**const restrict str_ptr,const size_t len);
-_SHINSEI_LIB_API bool shinsei_isWindowsPathDelimiterU16S(const char16_t**const restrict str_ptr,const size_t len);
-_SHINSEI_LIB_API bool shinsei_isWindowsPathDelimiterU32(const char32_t ch);
+_SHINSEI_LIB_API bool shinsei_isWindowsPathDelimiterA(const int ch);
+bool shinsei_isWindowsPathDelimiterW(const wint_t ch);
+bool shinsei_isWindowsPathDelimiterU8S(const char8_t**const restrict str_ptr,const size_t len);
+bool shinsei_isWindowsPathDelimiterU16S(const char16_t**const restrict str_ptr,const size_t len);
+bool shinsei_isWindowsPathDelimiterU32(const char32_t ch);
 
-_SHINSEI_LIB_API bool shinsei_isLinuxPathDelimiterA(const char ch);
-_SHINSEI_LIB_API bool shinsei_isLinuxPathDelimiterW(const wchar_t ch);
-_SHINSEI_LIB_API bool shinsei_isLinuxPathDelimiterU8S(const unsigned char**const restrict str_ptr,const size_t len);
-_SHINSEI_LIB_API bool shinsei_isLinuxPathDelimiterU16S(const char16_t**restrict str_ptr,const size_t len);
-_SHINSEI_LIB_API bool shinsei_isLinuxPathDelimiterU32(const char32_t ch);
+bool shinsei_isLinuxPathDelimiterA(const int ch);
+bool shinsei_isLinuxPathDelimiterW(const wint_t ch);
+bool shinsei_isLinuxPathDelimiterU8S(const char8_t**const restrict str_ptr,const size_t len);
+bool shinsei_isLinuxPathDelimiterU16S(const char16_t**const restrict str_ptr,const size_t len);
+bool shinsei_isLinuxPathDelimiterU32(const char32_t ch);
 
-_SHINSEI_LIB_API bool shinsei_isWindowsPathIllegalCharA(const char ch);
-_SHINSEI_LIB_API bool shinsei_isWindowsPathIllegalCharW(const wchar_t ch);
-_SHINSEI_LIB_API bool shinsei_isWindowsPathIllegalCharU8(const char8_t ch);
-_SHINSEI_LIB_API bool shinsei_isWindowsPathIllegalCharU16(const char16_t ch);
-_SHINSEI_LIB_API bool shinsei_isWindowsPathIllegalCharU32(const char32_t ch);
+bool shinsei_isWindowsPathIllegalCharA(const int ch);
+bool shinsei_isWindowsPathIllegalCharW(const wint_t ch);
+bool shinsei_isWindowsPathIllegalCharU8(const char8_t ch);
+bool shinsei_isWindowsPathIllegalCharU16(const char16_t ch);
+bool shinsei_isWindowsPathIllegalCharU32(const char32_t ch);
 
-_SHINSEI_LIB_API bool shinsei_isLinuxPathIllegalCharA(const char ch);
-_SHINSEI_LIB_API bool shinsei_isLinuxPathIllegalCharW(const wchar_t ch);
-_SHINSEI_LIB_API bool shinsei_isLinuxPathIllegalCharU8(const char8_t ch);
-_SHINSEI_LIB_API bool shinsei_isLinuxPathIllegalCharU16(const char16_t ch);
-_SHINSEI_LIB_API bool shinsei_isLinuxPathIllegalCharU32(const char32_t ch);
+bool shinsei_isLinuxPathIllegalCharA(const int ch);
+bool shinsei_isLinuxPathIllegalCharW(const wint_t ch);
+bool shinsei_isLinuxPathIllegalCharU8(const char8_t ch);
+bool shinsei_isLinuxPathIllegalCharU16(const char16_t ch);
+bool shinsei_isLinuxPathIllegalCharU32(const char32_t ch);
 
 _SHINSEI_LIB_API int shinsei_windowsPathNormalizeA(char*const restrict path,size_t*const restrict len);
 _SHINSEI_LIB_API int shinsei_windowsPathNormalizeW(wchar_t*const restrict path,size_t*const restrict len);
