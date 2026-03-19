@@ -211,4 +211,11 @@
         #define __builtin_wmempcpy(dst,src,len) ((wchar_t*)wmemcpy(dst,src,len)+(len))
 	#endif
 	
+	// __builtin_unreachable
+	#if defined(_SHINSEI_OS_MSVC)
+		#define SHINSEI_UNREACHABLE __assume(0)
+	#else
+		#define SHINSEI_UNREACHABLE __builtin_unreachable()
+	#endif
+	
 #endif

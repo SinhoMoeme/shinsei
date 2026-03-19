@@ -11,9 +11,9 @@
 #endif
 
 typedef struct{
-	PyObject** data;
 	size_t size;
 	size_t cap;
+	PyObject** data;
 }pystack_t;
 
 #ifdef _SHINSEI_OS_CPP
