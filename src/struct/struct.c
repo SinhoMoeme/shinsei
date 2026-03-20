@@ -1,5 +1,6 @@
 #include"shinsei/minimal/struct.h"
 
+// object_t
 shinsei_object_t* shinsei_object_t_con(const void *const val,shinsei_deallocator_t deallocator){
 	shinsei_object_t* res=(shinsei_object_t*)malloc(sizeof(shinsei_object_t));
 	if(res==nullptr) return nullptr;
@@ -47,3 +48,5 @@ void shinsei_object_t_setDeallocator(shinsei_object_t *const obj,shinsei_dealloc
 	obj->deallocator=deallocator;
 	return;
 }
+
+// stack_t
