@@ -27,7 +27,7 @@ extern "C" {
 #endif
 
 // object_t
-shinsei_object_t* shinsei_object_t_con(const void *const val,shinsei_deallocator_t deallocator);
+_SHINSEI_LIB_API shinsei_object_t* shinsei_object_t_con(const void *const val,shinsei_deallocator_t deallocator);
 
 _SHINSEI_LIB_API void shinsei_object_t_dec(shinsei_object_t *const obj);
 

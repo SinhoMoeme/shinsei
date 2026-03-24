@@ -1,8 +1,7 @@
 #pragma once
 
 #include"shinsei/struct.h"
-#define HAVE_SSIZE_T 1
-#include"python3/Python.h"
+#include"shinsei/ex/python3/gil.h"
 
 #ifdef _SHINSEI_OS_CONSTEXPR
 	static _SHINSEI_OS_CONSTEXPR size_t shinsei_ex_pystack_t_DEF_CAP=8;
@@ -26,7 +25,7 @@ _SHINSEI_LIB_API shinsei_ex_pystack_t* shinsei_ex_pystack_t_con();
 // Copy constructor
 _SHINSEI_LIB_API shinsei_ex_pystack_t* shinsei_ex_pystack_t_conAssign(const shinsei_ex_pystack_t*const restrict src);
 // Move constructor
-_SHINSEI_LIB_API shinsei_ex_pystack_t* shinsei_ex_pystack_t_conMove(shinsei_ex_pystack_t** const restrict src);
+_SHINSEI_LIB_API shinsei_ex_pystack_t* shinsei_ex_pystack_t_conMove(shinsei_ex_pystack_t* const restrict src);
 
 // Destructor
 _SHINSEI_LIB_API void shinsei_ex_pystack_t_dec(shinsei_ex_pystack_t *const restrict this);
@@ -84,7 +83,7 @@ _SHINSEI_LIB_API void shinsei_ex_pystack_t_move(shinsei_ex_pystack_t*const restr
 
 // Attach the stack from another one
 _SHINSEI_LIB_API void shinsei_ex_pystack_t_attach(shinsei_ex_pystack_t*const restrict this,const shinsei_ex_pystack_t*const restrict src);
-_SHINSEI_LIB_API void shinsei_ex_pystack_t_attachValue(shinsei_ex_pystack_t*const restrict this,const int_fast32_t ctrl,const size_t size,const size_t cap,PyObject** data);
+_SHINSEI_LIB_API void shinsei_ex_pystack_t_attachValue(shinsei_ex_pystack_t*const restrict this,const int_fast32_t ctrl,const size_t size,const size_t cap,PyObject**const data);
 
 // Free all elements
 _SHINSEI_LIB_API void shinsei_ex_pystack_t_freeData(shinsei_ex_pystack_t*const restrict this);

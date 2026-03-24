@@ -498,7 +498,8 @@ if(SHINSEI_BUILD_EX)
 
     if(SHINSEI_BUILD_EX_PYTHON3)
 		target_sources(shinsei-ex_static PRIVATE
-			$<TARGET_OBJECTS:shinsei_ex_python3_obj>
+		$<TARGET_OBJECTS:shinsei_ex_python3_gil_obj>
+			$<TARGET_OBJECTS:shinsei_ex_python3_struct_obj>
 		)
 		
 		target_link_libraries(shinsei-ex_static
@@ -506,7 +507,8 @@ if(SHINSEI_BUILD_EX)
 		)
 
 		target_sources(shinsei-ex_shared PRIVATE
-			$<TARGET_OBJECTS:shinsei_ex_python3_obj>
+		$<TARGET_OBJECTS:shinsei_ex_python3_gil_obj>
+			$<TARGET_OBJECTS:shinsei_ex_python3_struct_obj>
 		)
 		
 		target_link_libraries(shinsei-ex_shared

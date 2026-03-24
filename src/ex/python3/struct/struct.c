@@ -1,7 +1,9 @@
 #include"shinsei/ex/python3/struct.h"
 
+// [Internal] 
+
 // [Internal] Default constructor
-inline static bool con(shinsei_ex_pystack_t*const restrict this){
+_SHINSEI_OS_INLINE static bool con(shinsei_ex_pystack_t*const restrict this){
 	this->ctrl=0;
 	register size_t cap=shinsei_ex_pystack_t_DEF_CAP;
 	do{
@@ -17,24 +19,23 @@ inline static bool con(shinsei_ex_pystack_t*const restrict this){
 }
 
 // [Internal] Assign the stack and all elements
-inline static bool assign(shinsei_ex_pystack_t*const restrict this,const shinsei_ex_pystack_t*const restrict src){
+_SHINSEI_OS_INLINE static bool assign(shinsei_ex_pystack_t*const restrict this,const shinsei_ex_pystack_t*const restrict src){
 	PyObject**const new_data=(PyObject**)malloc(src->cap*sizeof(PyObject*));
 	if(__builtin_expect(new_data==nullptr,0)) return false;
-	free(this->data);
 	this->data=new_data;
 	this->ctrl=src->ctrl;
 	this->size=src->size;
 	this->cap=src->cap;
 	PyGILState_STATE g_state=PyGILState_Ensure();
 	for(size_t i=0;i<this->size;++i){
-		register const PyObject*const now=Py_NewRef(src->data[i]);
+		register PyObject*const now=Py_NewRef(src->data[i]);
 		this->data[i]=now;
 	}
 	PyGILState_Release(g_state);
 	return true;
 }
 // [Internal] Free all elements
-inline static boid freeData(shinsei_ex_pystack_t* const restrict this){
+_SHINSEI_OS_INLINE static void freeData(shinsei_ex_pystack_t* const restrict this){
 	register size_t i=0;
 	PyGILState_STATE g_state=PyGILState_Ensure();
 	while(i<this->size){
@@ -47,10 +48,11 @@ inline static boid freeData(shinsei_ex_pystack_t* const restrict this){
 }
 
 // [Internal] Move the ownership to another stack
-inline static void move(shinsei_ex_pystack_t*const restrict this,shinsei_ex_pystack_t*const restrict src){
+_SHINSEI_OS_INLINE static void move(shinsei_ex_pystack_t*const restrict this,shinsei_ex_pystack_t*const restrict src){
 	__builtin_memcpy(this,src,sizeof(shinsei_ex_pystack_t));
 	src->data=nullptr;
-	src->ctrl=src->size=src->size=0;
+	src->ctrl=0;
+	src->size=src->cap=0;
 	return;
 }
 
@@ -80,7 +82,7 @@ shinsei_ex_pystack_t* shinsei_ex_pystack_t_conAssign(const shinsei_ex_pystack_t*
 	return this;
 }
 // Move constructor
-shinsei_ex_pystack_t* shinsei_ex_pystack_t_conMove(shinsei_ex_pystack_t** const restrict src){
+shinsei_ex_pystack_t* shinsei_ex_pystack_t_conMove(shinsei_ex_pystack_t* const restrict src){
 	register shinsei_ex_pystack_t *const this=(shinsei_ex_pystack_t *const)malloc(sizeof(shinsei_ex_pystack_t));
 	if(__builtin_expect(this==nullptr,0)) return nullptr;
 	move(this,src);
@@ -105,7 +107,7 @@ bool shinsei_ex_pystack_t_expand(shinsei_ex_pystack_t*const restrict this,const 
 
 // Shrink capacity by less_cap
 bool shinsei_ex_pystack_t_shrink(shinsei_ex_pystack_t*const restrict this,const size_t less_cap){
-	const bool min_triggered=tis->cap<=less_cap||this->cap-less_cap<=shinsei_ex_pystack_t_DEF_CAP;
+	const bool min_triggered=this->cap<=less_cap||this->cap-less_cap<=shinsei_ex_pystack_t_DEF_CAP;
 	const size_t new_cap=min_triggered*shinsei_ex_pystack_t_DEF_CAP+!min_triggered*(this->cap-less_cap);
 	register PyObject **const ptr=(PyObject **const)realloc(this->data,new_cap*sizeof(PyObject*));
 	if(__builtin_expect(ptr==nullptr,0)) return false;
@@ -234,12 +236,15 @@ void shinsei_ex_pystack_t_setSize(shinsei_ex_pystack_t*const restrict this,const
 
 // Assign the stack and all elements
 bool shinsei_ex_pystack_t_assign(shinsei_ex_pystack_t*const restrict this,const shinsei_ex_pystack_t*const restrict src){
+	if(this->data) freeData(this);
 	return assign(this,src);
 }
 
 // Move the ownership to another stack
 void shinsei_ex_pystack_t_move(shinsei_ex_pystack_t*const restrict this,shinsei_ex_pystack_t* const restrict src){
-	return move(this,src);
+	if(this->data) freeData(this);
+	move(this,src);
+	return;
 }
 
 // Attach the stack from another one
@@ -247,7 +252,7 @@ void shinsei_ex_pystack_t_attach(shinsei_ex_pystack_t*const restrict this,const 
 	__builtin_memcpy(this,src,sizeof(shinsei_ex_pystack_t));
 	return;
 }
-void shinsei_ex_pystack_t_attachValue(shinsei_ex_pystack_t*const restrict this,const int_fast32_t ctrl,const size_t size,const size_t cap,PyObject** data){
+void shinsei_ex_pystack_t_attachValue(shinsei_ex_pystack_t*const restrict this,const int_fast32_t ctrl,const size_t size,const size_t cap,PyObject**const data){
 	this->ctrl=ctrl;
 	this->size=size;
 	this->cap=cap;
@@ -271,5 +276,6 @@ bool shinsei_ex_pystack_t_asAssign(shinsei_ex_pystack_t*const restrict this,cons
 }
 // Static move constructor
 void shinsei_ex_pystack_t_asMove(shinsei_ex_pystack_t*const restrict this,shinsei_ex_pystack_t* const restrict src){
-	return move(this,src);
+	move(this,src);
+	return;
 }

@@ -128,6 +128,21 @@
 #elif(defined(_SHINSEI_OS_C)&&_SHINSEI_OS_C>=2023)
 	#define _SHINSEI_OS_CONSTEXPR constexpr
 	#define _SHINSEI_OS_CONSTEXPR_FUNC
+#else
+	#define _SHINSEI_OS_CONSTEXPR
+	#define _SHINSEI_OS_CONSTEXPR_FUNC
+#endif
+
+//inline
+#if(defined(_SHINSEI_OS_CPP)&&_SHINSEI_OS_CPP>=2017)
+	#define _SHINSEI_OS_INLINE inline
+	#define _SHINSEI_OS_INLINE_VAR inline
+#elif(defined(_SHINSEI_OS_C)&&_SHINSEI_OS_C>=2011)
+	#define _SHINSEI_OS_INLINE inline
+	#define _SHINSEI_OS_INLINE_VAR
+#else
+	#define _SHINSEI_OS_INLINE
+	#define _SHINSEI_OS_INLINE_VAR
 #endif
 
 // Compatibility macros

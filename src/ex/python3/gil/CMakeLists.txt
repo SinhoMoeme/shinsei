@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.18)
 
 set(MODULE_NAME shinsei_ex_python3)
-set(SOURCE_NAME struct)
+set(SOURCE_NAME gil)
 
 project(SinhoMoeme_${MODULE_NAME}_${SOURCE_NAME})
 
