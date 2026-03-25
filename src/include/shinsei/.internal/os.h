@@ -88,7 +88,7 @@
 	#else
 		#define _SHINSEI_OS_CPP 0
 	#endif
-#elif defined(__STDC_VERSION__)||defined(__STDC__)
+#elif(defined(__STDC_VERSION__)||defined(__STDC__))
 	#if(__STDC_VERSION__>=202311L)
         #define _SHINSEI_OS_C_23
 		#define _SHINSEI_OS_C 2023
@@ -134,14 +134,17 @@
 #endif
 
 //inline
-#if(defined(_SHINSEI_OS_CPP)&&_SHINSEI_OS_CPP>=2017)
+#if(defined(_SHINSEI_OS_MSVC)&&!defined(_SHINSEI_OS_CPP))
+	#define _SHINSEI_OS_INLINE __inline
+#elif(defined(_SHINSEI_OS_CPP)||(defined(_SHINSEI_OS_C)&&_SHINSEI_OS_C>=1999))
 	#define _SHINSEI_OS_INLINE inline
-	#define _SHINSEI_OS_INLINE_VAR inline
-#elif(defined(_SHINSEI_OS_C)&&_SHINSEI_OS_C>=2011)
-	#define _SHINSEI_OS_INLINE inline
-	#define _SHINSEI_OS_INLINE_VAR
 #else
 	#define _SHINSEI_OS_INLINE
+#endif
+
+#if(defined(_SHINSEI_OS_CPP)&&_SHINSEI_OS_CPP>=2017)
+	#define _SHINSEI_OS_INLINE_VAR inline
+#else
 	#define _SHINSEI_OS_INLINE_VAR
 #endif
 
