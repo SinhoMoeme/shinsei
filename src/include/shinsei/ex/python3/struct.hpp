@@ -15,7 +15,7 @@ namespace shinsei{
 			}
 			// Copy constructor
 			pystack_t(const pystack_t& src){
-				if(!::shinsei_ex_pystack_t_asAssign(&obj,&src.obj)) throw std::bad_alloc();
+				if(!::shinsei_ex_pystack_t_asAssign(&obj,src.cObj())) throw std::bad_alloc();
 				return;
 			}
 			pystack_t(const ::shinsei_ex_pystack_t& src){
@@ -24,7 +24,7 @@ namespace shinsei{
 			}
 			// Move constructor
 			pystack_t(pystack_t&& src)noexcept{
-				::shinsei_ex_pystack_t_asMove(&obj,&src.obj);
+				::shinsei_ex_pystack_t_asMove(&obj,src.cObj());
 				return;
 			}
 			pystack_t(::shinsei_ex_pystack_t&& src)noexcept{
@@ -103,7 +103,7 @@ namespace shinsei{
 			
 			// Swap 2 stacks
 			void swap(pystack_t& src){
-				::shinsei_ex_pystack_t_swap(&obj,&src.obj);
+				::shinsei_ex_pystack_t_swap(&obj,src.cObj());
 				return;
 			}
 			void swap(::shinsei_ex_pystack_t& src){
@@ -125,14 +125,14 @@ namespace shinsei{
 			
 			// Assign the stack and all elements
 			bool assign(const pystack_t& src){
-				return ::shinsei_ex_pystack_t_assign(&obj,&src.obj);
+				return ::shinsei_ex_pystack_t_assign(&obj,src.cObj());
 			}
 			bool assign(const ::shinsei_ex_pystack_t& src){
 				return ::shinsei_ex_pystack_t_assign(&obj,&src);
 			}
 			pystack_t& operator=(const pystack_t& src){
 				if(this==&src) return *this;
-				::shinsei_ex_pystack_t_assign(&obj,&src.obj);
+				::shinsei_ex_pystack_t_assign(&obj,src.cObj());
 				return *this;
 			}
 			pystack_t& operator=(const ::shinsei_ex_pystack_t& src){
@@ -142,7 +142,7 @@ namespace shinsei{
 			
 			// Move the ownership to another stack
 			void move(pystack_t& src)noexcept{
-				::shinsei_ex_pystack_t_move(&obj,&src.obj);
+				::shinsei_ex_pystack_t_move(&obj,src.cObj());
 				return;
 			}
 			void move(::shinsei_ex_pystack_t& src)noexcept{
@@ -151,7 +151,7 @@ namespace shinsei{
 			}
 			pystack_t& operator=(pystack_t&& src)noexcept{
 				if(this==&src) return *this;
-				::shinsei_ex_pystack_t_move(&obj,&src.obj);
+				::shinsei_ex_pystack_t_move(&obj,src.cObj());
 				return *this;
 			}
 			pystack_t& operator=(::shinsei_ex_pystack_t&& src)noexcept{
@@ -161,7 +161,7 @@ namespace shinsei{
 			
 			// Attach the stack from another one
 			void attach(const pystack_t& src){
-				::shinsei_ex_pystack_t_attach(&obj,&src.obj);
+				::shinsei_ex_pystack_t_attach(&obj,src.cObj());
 				return;
 			}
 			void attach(const ::shinsei_ex_pystack_t& src){
@@ -189,34 +189,43 @@ namespace shinsei{
 			explicit pystack_t(shinsei::in_place_t){
 				if(!::shinsei_ex_pystack_t_as(&obj)) throw std::bad_alloc();
 			}
-			
-			
 			// Static copy constructor
 			static bool asAssign(pystack_t*const restrict ptr,const pystack_t& src){
-				return ::shinsei_ex_pystack_t_asAssign(ptr->cObj(),&src.obj);
+				return ::shinsei_ex_pystack_t_asAssign(ptr->cObj(),src.cObj());
 			}
 			static bool asAssign(pystack_t*const restrict ptr,const ::shinsei_ex_pystack_t& src){
 				return ::shinsei_ex_pystack_t_asAssign(ptr->cObj(),&src);
 			}
 			static bool asAssign(::shinsei_ex_pystack_t*const restrict ptr,const pystack_t& src){
-				return ::shinsei_ex_pystack_t_asAssign(ptr,&src.obj);
+				return ::shinsei_ex_pystack_t_asAssign(ptr,src.cObj());
 			}
 			static bool asAssign(::shinsei_ex_pystack_t*const restrict ptr,const ::shinsei_ex_pystack_t& src){
 				return ::shinsei_ex_pystack_t_asAssign(ptr,&src);
 			}
-			
+			explicit pystack_t(shinsei::in_place_t,const pystack_t& src){
+				return ::shinsei_ex_pystack_t_asAssign(&obj,src.cObj());
+			}
+			explicit pystack_t(shinsei::in_place_t,const ::shinsei_ex_pystack_t& src){
+				return ::shinsei_ex_pystack_t_asAssign(&obj,&src);
+			}
 			// Static move constructor
 			static void asMove(pystack_t*const restrict ptr,pystack_t& src){
-				return ::shinsei_ex_pystack_t_asMove(ptr->cObj(),&src.obj);
+				return ::shinsei_ex_pystack_t_asMove(ptr->cObj(),src.cObj());
 			}
 			static void asMove(pystack_t*const restrict ptr,::shinsei_ex_pystack_t& src){
 				return ::shinsei_ex_pystack_t_asMove(ptr->cObj(),&src);
 			}
 			static void asMove(::shinsei_ex_pystack_t*const restrict ptr,pystack_t& src){
-				return ::shinsei_ex_pystack_t_asMove(ptr,&src.obj);
+				return ::shinsei_ex_pystack_t_asMove(ptr,src.cObj());
 			}
 			static void asMove(::shinsei_ex_pystack_t*const restrict ptr,::shinsei_ex_pystack_t& src){
 				return ::shinsei_ex_pystack_t_asMove(ptr,&src);
+			}
+			explicit pystack_t(shinsei::in_place_t,pystack_t& src){
+				return ::shinsei_ex_pystack_t_asMove(&obj,src.cObj());
+			}
+			explicit pystack_t(shinsei::in_place_t,::shinsei_ex_pystack_t& src){
+				return ::shinsei_ex_pystack_t_asMove(&obj,&src);
 			}
 			
 			// Inline default constructor
@@ -226,33 +235,46 @@ namespace shinsei{
 			static bool inl(::shinsei_ex_pystack_t*const restrict ptr,const size_t cap){
 				return ::shinsei_ex_pystack_t_inl(ptr,cap);
 			}
-			
+			explicit pystack_t(shinsei::inlined_t,const size_t cap){
+				return ::shinsei_ex-pystack_t_inl(&obj,cap);
+			}
 			// Inline copy constructor
 			static bool inlAssign(pystack_t*const restrict ptr,const pystack_t& src){
-				return ::shinsei_ex_pystack_t_inlAssign(ptr->cObj(),&src.obj);
+				return ::shinsei_ex_pystack_t_inlAssign(ptr->cObj(),src.cObj());
 			}
 			static bool inlAssign(pystack_t*const restrict ptr,const ::shinsei_ex_pystack_t& src){
 				return ::shinsei_ex_pystack_t_inlAssign(ptr->cObj(),&src);
 			}
 			static bool inlAssign(::shinsei_ex_pystack_t*const restrict ptr,const pystack_t& src){
-				return ::shinsei_ex_pystack_t_inlAssign(ptr,&src.obj);
+				return ::shinsei_ex_pystack_t_inlAssign(ptr,src.cObj());
 			}
 			static bool inlAssign(::shinsei_ex_pystack_t*const restrict ptr,const ::shinsei_ex_pystack_t& src){
 				return ::shinsei_ex_pystack_t_inlAssign(ptr,&src);
 			}
-			
+			explicit pystack_t(shinsei::inlined_t,const pystack_t& src){
+				return ::shinsei_ex_pystack_t_inlAssign(&obj,src.cObj());
+			}
+			explicit pystack_t(shinsei::inlined_t,const ::shinsei_ex_pystack_t& src){
+				return ::shinsei_ex_pystack_t_inlAssign(&obj,&src);
+			}
 			// Inline move constructor
 			static void inlMove(pystack_t*const restrict ptr,pystack_t& src){
-				return ::shinsei_ex_pystack_t_inlMove(ptr->cObj(),&src.obj);
+				return ::shinsei_ex_pystack_t_inlMove(ptr->cObj(),src.cObj());
 			}
 			static void inlMove(pystack_t*const restrict ptr,::shinsei_ex_pystack_t& src){
 				return ::shinsei_ex_pystack_t_inlMove(ptr->cObj(),&src);
 			}
 			static void inlMove(::shinsei_ex_pystack_t*const restrict ptr,pystack_t& src){
-				return ::shinsei_ex_pystack_t_inlMove(ptr,&src.obj);
+				return ::shinsei_ex_pystack_t_inlMove(ptr,src.cObj());
 			}
 			static void inlMove(::shinsei_ex_pystack_t*const restrict ptr,::shinsei_ex_pystack_t& src){
 				return ::shinsei_ex_pystack_t_inlMove(ptr,&src);
+			}
+			explicit pystack_t(shinsei::inlined_t,pystack_t& src){
+				return ::shinsei_ex_pystack_t_inlMove(&obj,src.cObj());
+			}
+			explicit pystack_t(shinsei::inlined_t,::shinsei_ex_pystack_t& src){
+				return ::shinsei_ex_pystack_t_inlMove(&obj,&src);
 			}
 			
 			// [Const] C Object

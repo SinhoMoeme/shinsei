@@ -28,3 +28,6 @@
 #else
     #define _SHINSEI_LIB_API
 #endif
+
+// Object control code
+#define _SHINSEI_CTRL_INLINED 1

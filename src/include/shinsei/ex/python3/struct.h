@@ -95,6 +95,13 @@ _SHINSEI_LIB_API bool shinsei_ex_pystack_t_asAssign(shinsei_ex_pystack_t*const r
 // Static move constructor
 _SHINSEI_LIB_API void shinsei_ex_pystack_t_asMove(shinsei_ex_pystack_t*const restrict this,shinsei_ex_pystack_t* const restrict src);
 
+// Inline default constructor
+_SHINSEI_LIB_API bool shinsei_ex_pystack_t_inl(shinsei_ex_pystack_t*const restrict this,const size_t cap);
+// Inline copy constructor
+_SHINSEI_LIB_API bool shinsei_ex_pystack_t_inlAssign(shinsei_ex_pystack_t*const restrict this,const shinsei_ex_pystack_t*const restrict src);
+// Inline move constructor
+_SHINSEI_LIB_API void shinsei_ex_pystack_t_inlMove(shinsei_ex_pystack_t*const restrict this,shinsei_ex_pystack_t* const restrict src);
+
 #ifdef _SHINSEI_OS_CPP
 }
 #endif

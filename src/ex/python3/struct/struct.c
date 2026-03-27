@@ -1,6 +1,30 @@
 #include"shinsei/ex/python3/struct.h"
 
-// [Internal] 
+// [Internal, const] Check if elements are inlined
+_SHINSEI_OS_INLINE static bool inlined(const shinsei_ex_pystack_t*const restrict this){
+	return this->ctrl&_SHINSEI_CTRL_INLINED;
+}
+
+// [Internal, const] Get the element data
+_SHINSEI_OS_INLINE static PyObject** data(const shinsei_ex_pystack_t*const restrict this){
+	return inlined(this)*(PyObject**)&this->data+!inlined(this)*this->data;
+}
+
+// [Internal] Copy the control code
+_SHINSEI_OS_INLINE static void copyCtrl(shinsei_ex_pystack_t*const restrict this,const shinsei_ex_pystack_t*const restrict src){
+	this->ctrl=(this->ctrl&inlined(this))|(src->ctrl&~_SHINSEI_CTRL_INLINED);
+	return;
+}
+
+// [Internal] Copy the element data and size
+_SHINSEI_OS_INLINE static void copyDataAndSize(shinsei_ex_pystack_t*const restrict this,const shinsei_ex_pystack_t*const restrict src){
+	this->size=src->size;
+	if(inlined(src)){
+		this->data=
+	}
+	else this->data=src->data;
+	return;
+}
 
 // [Internal] Default constructor
 _SHINSEI_OS_INLINE static bool con(shinsei_ex_pystack_t*const restrict this){
@@ -20,24 +44,38 @@ _SHINSEI_OS_INLINE static bool con(shinsei_ex_pystack_t*const restrict this){
 
 // [Internal] Assign the stack and all elements
 _SHINSEI_OS_INLINE static bool assign(shinsei_ex_pystack_t*const restrict this,const shinsei_ex_pystack_t*const restrict src){
-	PyObject**const new_data=(PyObject**)malloc(src->cap*sizeof(PyObject*));
+	register PyObject**const new_data=(PyObject**)malloc(src->cap*sizeof(PyObject*));
 	if(__builtin_expect(new_data==nullptr,0)) return false;
 	this->data=new_data;
-	this->ctrl=src->ctrl;
+	copyCtrl(this,src);
 	this->size=src->size;
 	this->cap=src->cap;
-	PyGILState_STATE g_state=PyGILState_Ensure();
-	for(size_t i=0;i<this->size;++i){
-		register PyObject*const now=Py_NewRef(src->data[i]);
+	register PyGILState_STATE g_state=PyGILState_Ensure();
+	for(register size_t i=inlined(this);i<this->size;++i){
+		register PyObject*const now=Py_NewRef(data(src)[i]);
 		this->data[i]=now;
 	}
 	PyGILState_Release(g_state);
 	return true;
 }
+_SHINSEI_OS_INLINE static bool assignUnsafe(shinsei_ex_pystack_t*const restrict this,const shinsei_ex_pystack_t*const restrict src){
+	register PyObject**const new_data=(PyObject**)malloc(src->cap*sizeof(PyObject*));
+	if(__builtin_expect(new_data==nullptr,0)) return false;
+	this->data=new_data;
+	copyCtrl(this,src);
+	this->size=src->size;
+	this->cap=src->cap;
+	for(register size_t i=inlined(this);i<this->size;++i){
+		register PyObject*const now=Py_NewRef(data(src)[i]);
+		this->data[i]=now;
+	}
+	return true;
+}
+
 // [Internal] Free all elements
-_SHINSEI_OS_INLINE static void freeData(shinsei_ex_pystack_t* const restrict this){
+_SHINSEI_OS_INLINE static void freeData(shinsei_ex_pystack_t*const restrict this){
 	register size_t i=0;
-	PyGILState_STATE g_state=PyGILState_Ensure();
+	register PyGILState_STATE g_state=PyGILState_Ensure();
 	while(i<this->size){
 		Py_DecRef(this->data[i]);
 		++i;
@@ -46,14 +84,65 @@ _SHINSEI_OS_INLINE static void freeData(shinsei_ex_pystack_t* const restrict thi
 	free(this->data);
 	return;
 }
+_SHINSEI_OS_INLINE static void freeDataUnsafe(shinsei_ex_pystack_t*const restrict this){
+	register size_t i=0;
+	while(i<this->size){
+		Py_DecRef(this->data[i]);
+		++i;
+	}
+	free(this->data);
+	return;
+}
+_SHINSEI_OS_INLINE static void inlFreeData(shinsei_ex_pystack_t*const restrict this){
+	register size_t i=0;
+	register PyGILState_STATE g_state=PyGILState_Ensure();
+	while(i<this->size){
+		Py_DecRef(data(this)[i]);
+		++i;
+	}
+	PyGILState_Release(g_state);
+	return;
+}
+_SHINSEI_OS_INLINE static void inlFreeDataUnsafe(shinsei_ex_pystack_t*const restrict this){
+	register size_t i=0;
+	while(i<this->size){
+		Py_DecRef(data(this)[i]);
+		++i;
+	}
+	return;
+}
+_SHINSEI_OS_INLINE static void genFreeData(shinsei_ex_pystack_t*const restrict this){
+	(inlFreeData*inlined(this)+freeData*!inlined(this))(this);
+	return;
+}
+_SHINSEI_OS_INLINE static void genFreeDataUnsafe(shinsei_ex_pystack_t*const restrict this){
+	(inlFreeDataUnsafe*inlined(this)+freeDataUnsafe*!inlined(this))(this);
+	return;
+}
 
 // [Internal] Move the ownership to another stack
 _SHINSEI_OS_INLINE static void move(shinsei_ex_pystack_t*const restrict this,shinsei_ex_pystack_t*const restrict src){
-	__builtin_memcpy(this,src,sizeof(shinsei_ex_pystack_t));
+	copyCtrl(this,src);
+	this->size=src->size;
+	this->cap=src->cap;
+	if(inlined(src)){
+		this->data[0]=src->data;
+		for(register size_t i=1;i<this->size;++i) this->data[i]=data(src)[i];
+	}
+	else this->data=src->data;
 	src->data=nullptr;
 	src->ctrl=0;
 	src->size=src->cap=0;
 	return;
+}
+_SHINSEI_OS_INLINE static void incMove(shinsei_ex_pystack_t*const restrict this,shinsei_ex_pystack_t*const restrict src){
+	__builtin_memcpy(this,src,sizeof(shinsei_ex_pystack_t));
+	src->ctrl=_SHINSEI_CTRL_INLINED;
+	src->size=0;
+	return;
+}
+_SHINSEI_OS_INLINE static void genMove(shinsei_ex_pystack_t*const restrict this,shinsei_ex_pystack_t*const restrict src){
+	
 }
 
 // Default constructor
