@@ -12,18 +12,83 @@ _SHINSEI_OS_INLINE static PyObject** data(const shinsei_ex_pystack_t*const restr
 
 // [Internal] Copy the control code
 _SHINSEI_OS_INLINE static void copyCtrl(shinsei_ex_pystack_t*const restrict this,const shinsei_ex_pystack_t*const restrict src){
+	// Copy everything excepts inline bit
 	this->ctrl=(this->ctrl&inlined(this))|(src->ctrl&~_SHINSEI_CTRL_INLINED);
 	return;
 }
 
-// [Internal] Copy the element data and size
-_SHINSEI_OS_INLINE static void copyDataAndSize(shinsei_ex_pystack_t*const restrict this,const shinsei_ex_pystack_t*const restrict src){
-	this->size=src->size;
-	if(inlined(src)){
-		this->data=
+// [Internal] Decrease reference counts of all elements
+_SHINSEI_OS_INLINE static void decreaseDataRef(shinsei_ex_pystack_t*const restrict this){
+	register size_t i=0;
+	register PyGILState_STATE g_state=PyGILState_Ensure();
+	while(i<this->size){
+		Py_DecRef(this->data[i]);
+		++i;
 	}
-	else this->data=src->data;
+	PyGILState_Release(g_state);
 	return;
+}
+_SHINSEI_OS_INLINE static void decreaseDataRefUnsafe(shinsei_ex_pystack_t*const restrict this){
+	register size_t i=0;
+	while(i<this->size){
+		Py_DecRef(this->data[i]);
+		++i;
+	}
+	return;
+}
+
+// [Internal] Free all elements
+_SHINSEI_OS_INLINE static void freeData(shinsei_ex_pystack_t*const restrict this){
+	decreaseDataRef(this);
+	free(this->data);
+	return;
+}
+_SHINSEI_OS_INLINE static void freeDataUnsafe(shinsei_ex_pystack_t*const restrict this){
+	decreaseDataRefUnsafe(this);
+	free(this->data);
+	return;
+}
+
+// [Internal] Copy the element data and size
+_SHINSEI_OS_INLINE static bool copyDataAndSize(shinsei_ex_pystack_t*const restrict this,const shinsei_ex_pystack_t*const restrict src){
+	// Copy the buffer
+	register PyGILState_STATE g_state=PyGILState_Ensure();
+	if(this->cap!=src->cap){
+		register PyObject** new_data=(PyObject**)malloc(src->cap*sizeof(PyObject*));
+		if(__builtin_expect(new_data==nullptr,0)){
+			PyGILState_Release(g_state);
+			return false;
+		}
+		freeDataUnsafe(this);
+		this->data=new_data;
+		this->cap=src->cap;
+	}
+	else decreaseDataRefUnsafe(this);
+	//Copy the content
+	this->size=src->size;
+	PyObject**const old=data(src);
+	for(register size_t i=0;i<this->size;++i){
+		this->data[i]=Py_NewRef(old[i]);
+	}
+	PyGILState_Release(g_state);
+	return true;
+}
+_SHINSEI_OS_INLINE static bool copyDataAndSizeUnsafe(shinsei_ex_pystack_t*const restrict this,const shinsei_ex_pystack_t*const restrict src){
+	// Copy the buffer
+	if(this->cap!=src->cap){
+		register PyObject** new_data=(PyObject**)malloc(src->cap*sizeof(PyObject*));
+		if(__builtin_expect(new_data==nullptr,0)) return false;
+		freeDataUnsafe(this);
+		this->data=new_data;
+		this->cap=src->cap;
+	}
+	else decreaseDataRefUnsafe(this);
+	//Copy the content
+	this->size=src->size;
+	for(register size_t i=0;i<this->size;++i){
+		this->data[i]=Py_NewRef(data(src)[i]);
+	}
+	return true;
 }
 
 // [Internal] Default constructor
@@ -72,27 +137,6 @@ _SHINSEI_OS_INLINE static bool assignUnsafe(shinsei_ex_pystack_t*const restrict 
 	return true;
 }
 
-// [Internal] Free all elements
-_SHINSEI_OS_INLINE static void freeData(shinsei_ex_pystack_t*const restrict this){
-	register size_t i=0;
-	register PyGILState_STATE g_state=PyGILState_Ensure();
-	while(i<this->size){
-		Py_DecRef(this->data[i]);
-		++i;
-	}
-	PyGILState_Release(g_state);
-	free(this->data);
-	return;
-}
-_SHINSEI_OS_INLINE static void freeDataUnsafe(shinsei_ex_pystack_t*const restrict this){
-	register size_t i=0;
-	while(i<this->size){
-		Py_DecRef(this->data[i]);
-		++i;
-	}
-	free(this->data);
-	return;
-}
 _SHINSEI_OS_INLINE static void inlFreeData(shinsei_ex_pystack_t*const restrict this){
 	register size_t i=0;
 	register PyGILState_STATE g_state=PyGILState_Ensure();
