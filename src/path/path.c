@@ -6,17 +6,23 @@ bool shinsei_isWindowsPathDelimiterA(const char ch){
 bool shinsei_isWindowsPathDelimiterW(const wchar_t ch){
 	return (ch|0x20)==L'/';
 }
+bool shinsei_isWindowsPathDelimiterU8(const char8_t ch){
+	return (ch|0x20)==u8'/';
+}
 bool shinsei_isWindowsPathDelimiterU8S(const char8_t**const restrict str_ptr,const size_t len){
 	if(__builtin_expect(!len,0)) return false;
-	register const int size=shinsei_utf8CharSize(**str_ptr);
+	register const int size=shinsei_uTF8CharSize(**str_ptr);
 	if(__builtin_expect(len<(size_t)size,0)) return false;
 	*str_ptr+=size;
 	if(size>1) return false;
 	return (*str_ptr[-1]|0x20)==u8'/';
 }
+bool shinsei_isWindowsPathDelimiterU16(const char16_t ch){
+	return (ch|0x20)==u'/';
+}
 bool shinsei_isWindowsPathDelimiterU16S(const char16_t**const restrict str_ptr,const size_t len){
 	if(__builtin_expect(!len,0)) return false;
-	register const int size=shinsei_utf16CharSize(**str_ptr);
+	register const int size=shinsei_uTF16CharSize(**str_ptr);
 	if(__builtin_expect(len<(size_t)size,0)) return false;
 	*str_ptr+=size;
 	if(size>1) return false;
@@ -27,29 +33,35 @@ bool shinsei_isWindowsPathDelimiterU32(const char32_t ch){
 }
 
 bool shinsei_isLinuxPathDelimiterA(const char ch){
-	return ch==SHINSEI_PATH_LINUX_DELIMITER_A;
+	return ch==SHINSEI_PATH_UNIX_DELIMITER_A;
 }
 bool shinsei_isLinuxPathDelimiterW(const wchar_t ch){
-	return ch==SHINSEI_PATH_LINUX_DELIMITER_W;
+	return ch==SHINSEI_PATH_UNIX_DELIMITER_W;
+}
+bool shinsei_isLinuxPathDelimiterU8(const char8_t ch){
+	return ch==SHINSEI_PATH_UNIX_DELIMITER_U8;
 }
 bool shinsei_isLinuxPathDelimiterU8S(const char8_t**const restrict str_ptr,const size_t len){
 	if(__builtin_expect(!len,0)) return false;
-	register const int size=shinsei_utf8CharSize(**str_ptr);
+	register const int size=shinsei_uTF8CharSize(**str_ptr);
 	if(__builtin_expect(len<(size_t)size,0)) return false;
 	*str_ptr+=size;
 	if(size>1) return false;
-	return *str_ptr[-1]==SHINSEI_PATH_LINUX_DELIMITER_U8;
+	return *str_ptr[-1]==SHINSEI_PATH_UNIX_DELIMITER_U8;
+}
+bool shinsei_isLinuxPathDelimiterU16(const char18_t ch){
+	return ch==SHINSEI_PATH_UNIX_DELIMITER_U16;
 }
 bool shinsei_isLinuxPathDelimiterU16S(const char16_t**const restrict str_ptr,const size_t len){
 	if(__builtin_expect(!len,0)) return false;
-	register const int size=shinsei_utf16CharSize(**str_ptr);
+	register const int size=shinsei_uTF16CharSize(**str_ptr);
 	if(__builtin_expect(len<(size_t)size,0)) return false;
 	*str_ptr+=size;
 	if(size>1) return false;
-	return *str_ptr[-1]==SHINSEI_PATH_LINUX_DELIMITER_U16;
+	return *str_ptr[-1]==SHINSEI_PATH_UNIX_DELIMITER_U16;
 }
 bool shinsei_isLinuxPathDelimiterU32(const char32_t ch){
-	return ch==SHINSEI_PATH_LINUX_DELIMITER_U32;
+	return ch==SHINSEI_PATH_UNIX_DELIMITER_U32;
 }
 
 bool shinsei_isWindowsPathIllegalCharA(const char ch){
@@ -103,9 +115,51 @@ bool shinsei_isWindowsPathIllegalCharU8(const char8_t ch){
 	}
 	return false;
 }
+bool shinsei_isWindowsPathDelimiterU8S(const char8_t**const restrict str_ptr,const size_t len){
+	is(__builtin_expect(!len,0)) return false;
+	register const int size=shinsei_uTF8CharSize(**str_ptr);
+	if(__builtin_expect(len<(size_t)size,0)) return false;
+	*str_ptr+=size;
+	if(size>1) return false;
+	switch(*str_ptr[-1]){
+		case u8'"':
+		case u8'*':
+		case u8'/':
+		case u8'\\':
+		case u8':':
+		case u8'<':
+		case u8'>':
+		case u8'?':
+		case u8'|':{
+			return true;
+		}
+	}
+	return false;
+}
 bool shinsei_isWindowsPathIllegalCharU16(const char16_t ch){
 	if(ch<32) return true;
 	switch(ch){
+		case u'"':
+		case u'*':
+		case u'/':
+		case u'\\':
+		case u':':
+		case u'<':
+		case u'>':
+		case u'?':
+		case u'|':{
+			return true;
+		}
+	}
+	return false;
+}
+bool shinsei_isWindowsPathIllegalCharU16S(const char16_t**const const restrict str_ptr,const size_t len){
+	if(__builtin_expect(!len,0)) return false;
+	register const int size=shinsei_uTF16CharSize(**str_ptr);
+	if(__builtin_expect(len<(size_t)size,0)) return false;
+	*str_ptr+=size;
+	if(size>1) return false;
+	switch(*str_ptr[-1]){
 		case u'"':
 		case u'*':
 		case u'/':
@@ -139,19 +193,35 @@ bool shinsei_isWindowsPathIllegalCharU32(const char32_t ch){
 }
 
 bool shinsei_isLinuxPathIllegalCharA(const char ch){
-	return ch==SHINSEI_PATH_LINUX_DELIMITER_A;
+	return ch=='\0'||ch==SHINSEI_PATH_UNIX_DELIMITER_A;
 }
 bool shinsei_isLinuxPathIllegalCharW(const wchar_t ch){
-	return ch==SHINSEI_PATH_LINUX_DELIMITER_W;
+	return ch==L'\0'||ch==SHINSEI_PATH_UNIX_DELIMITER_W;
 }
 bool shinsei_isLinuxPathIllegalCharU8(const char8_t ch){
-	return ch==SHINSEI_PATH_LINUX_DELIMITER_U8;
+	return ch==u8'\0'||ch==SHINSEI_PATH_UNIX_DELIMITER_U8;
+}
+bool shinsei_isLinuxPathDelimiterU8S(const char8_t**const restrict str_ptr,const size_t len){
+	is(__builtin_expect(!len,0)) return false;
+	register const int size=shinsei_uTF8CharSize(**str_ptr);
+	if(__builtin_expect(len<(size_t)size,0)) return false;
+	*str_ptr+=size;
+	if(size>1) return false;
+	return *str_ptr[-1]==u8'\0'||*str_ptr[-1]==SHINSEI_PATH_UNIX_DELIMITER_U8;
 }
 bool shinsei_isLinuxPathIllegalCharU16(const char16_t ch){
-	return ch==SHINSEI_PATH_LINUX_DELIMITER_U16;
+	return ch==u'\0'||ch==SHINSEI_PATH_UNIX_DELIMITER_U16;
+}
+bool shinsei_isLinuxPathIllegalCharU16S(const char16_t**const const restrict str_ptr,const size_t len){
+	if(__builtin_expect(!len,0)) return false;
+	register const int size=shinsei_uTF16CharSize(**str_ptr);
+	if(__builtin_expect(len<(size_t)size,0)) return false;
+	*str_ptr+=size;
+	if(size>1) return false;
+	return *str_ptr[-1]==u'\0'||*str_ptr[-1]==SHINSEI_PATH_UNIX_DELIMITER_U16;
 }
 bool shinsei_isLinuxPathIllegalCharU32(const char32_t ch){
-	return ch==SHINSEI_PATH_LINUX_DELIMITER_U32;
+	return ch==U'0'||ch==SHINSEI_PATH_UNIX_DELIMITER_U32;
 }
 
 int shinsei_windowsPathNormalizeA(char*const restrict path,size_t*const restrict len){
@@ -160,7 +230,7 @@ int shinsei_windowsPathNormalizeA(char*const restrict path,size_t*const restrict
 	register bool device_path=false;
 	register int res;
 	register char* ptr;
-	register size_t cnt=*len;
+	register const size_t cnt=*len;
 	if(shinsei_isWindowsPathDelimiterA(path[0])){
 		path[0]=SHINSEI_PATH_WINDOWS_DELIMITER_A;
 		if(*len>=2&&shinsei_isWindowsPathDelimiterA(path[1])){
@@ -173,7 +243,7 @@ int shinsei_windowsPathNormalizeA(char*const restrict path,size_t*const restrict
 				}
 				path[3]=SHINSEI_PATH_WINDOWS_DELIMITER_A;
 				device_path=true;
-				// Entended UNC path "\\?\UNC\server\share\xxx"
+				// Extended UNC path "\\?\UNC\server\share\xxx"
 				if(path[2]=='?'&&*len>=8&&(path[4]=='U'||path[4]=='u')&&(path[5]=='N'||path[5]=='n')&&(path[6]=='C'||path[6]=='c')&&shinsei_isWindowsPathDelimiterA(path[7])){
 					path[4]='U';
 					path[5]='N';
@@ -380,7 +450,7 @@ int shinsei_windowsPathNormalizeW(wchar_t*const restrict path,size_t*const restr
 	register bool device_path=false;
 	register int res;
 	register wchar_t* ptr;
-	register size_t cnt=*len;
+	register const size_t cnt=*len;
 	if(shinsei_isWindowsPathDelimiterW(path[0])){
 		path[0]=SHINSEI_PATH_WINDOWS_DELIMITER_W;
 		if(*len>=2&&shinsei_isWindowsPathDelimiterW(path[1])){
@@ -393,7 +463,7 @@ int shinsei_windowsPathNormalizeW(wchar_t*const restrict path,size_t*const restr
 				}
 				path[3]=SHINSEI_PATH_WINDOWS_DELIMITER_W;
 				device_path=true;
-				// Entended UNC path "\\?\UNC\server\share\xxx"
+				// Extended UNC path "\\?\UNC\server\share\xxx"
 				if(path[2]==L'?'&&*len>=8&&(path[4]==L'U'||path[4]==L'u')&&(path[5]==L'N'||path[5]==L'n')&&(path[6]==L'C'||path[6]==L'c')&&shinsei_isWindowsPathDelimiterW(path[7])){
 					path[4]=L'U';
 					path[5]=L'N';
@@ -595,17 +665,943 @@ int shinsei_windowsPathNormalizeW(wchar_t*const restrict path,size_t*const restr
 	return res;
 }
 
-int shinsei_linuxPathNormalizeA(char* path,size_t* len){
-	// Unimplemented. Placeholder.
-	(void)path;
-	(void)len;
-	return 0;
+_SHINSEI_OS_INLINE static int unixPathNormalizeA(char*const restrict path,size_t*const restrict len){
+	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
+	register const bool is_abs=path[0]==SHINSEI_PATH_UNIX_DELIMITER_A;
+	register const size_t cnt=*len;
+	register size_t r=0;
+	register size_t w=0;
+	if(is_abs){
+		// Absolute path. Root is '/'.
+		path[w++]=SHINSEI_PATH_UNIX_DELIMITER_A;
+		++r;
+		while(r<cnt&&path[r]==SHINSEI_PATH_UNIX_DELIMITER_A) ++r;
+	}
+	size_t pos[SHINSEI_PATH_SBO_CNT+1];
+	register size_t front=0;
+	register size_t back=0;
+	while(r<cnt){
+		// Unify delimiter
+		if(path[r]==SHINSEI_PATH_UNIX_DELIMITER_A){
+			if(w>0&&path[w-1]!=SHINSEI_PATH_UNIX_DELIMITER_A){
+				path[w++]=SHINSEI_PATH_UNIX_DELIMITER_A;
+			}
+			// Collapse multiple delimiter
+			while(++r<cnt&&path[r]==SHINSEI_PATH_UNIX_DELIMITER_A);
+			continue;
+		}
+		register const size_t seg_start=w;
+		while(r<cnt&&path[r]!=SHINSEI_PATH_UNIX_DELIMITER_A){
+			path[w++]=path[r++];
+		}
+		register const size_t seg_len=w-seg_start;
+		if(seg_len==1&&path[seg_start]=='.'){
+			// Ignore "."
+			w=seg_start;
+		}
+		else if(seg_len==2&&path[seg_start]=='.'&&path[seg_start+1]=='.'){
+			// Parse ".."
+			if(front!=back){
+				// Pop previous segment
+				back=(back+SHINSEI_PATH_SBO_CNT)%(SHINSEI_PATH_SBO_CNT+1);
+				w=pos[back];
+			}
+			else if(w>!!is_abs){
+				// Manual backtrace
+				register size_t rewind=w-1;
+				register const bool is_prev_back=!is_abs&&rewind>=2&&path[rewind-1]=='.'&&path[rewind-2]=='.'&&(rewind==2||path[rewind-3]==SHINSEI_PATH_UNIX_DELIMITER_A);
+				if(is_prev_back){
+					pos[back]=seg_start;
+					back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+					if(back==front) front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+				}
+				else{
+					while(rewind>0&&path[rewind]!=SHINSEI_PATH_UNIX_DELIMITER_A){
+						--rewind;
+					}
+					w=(path[rewind]==SHINSEI_PATH_UNIX_DELIMITER_A)?rewind+1:0;
+				}
+			}
+			else if(!is_abs){
+				// Relative path. Keep "..".
+				pos[back]=seg_start;
+				back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+				if(back==front){
+					front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+				}
+			}
+			else{
+				// Can't get parent any more
+				w=seg_start;
+			}
+		}
+		else{
+			// Push segment
+			pos[back]=seg_start;
+			back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+			if(back==front){
+				front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+			}
+		}
+	}
+	if(w>1&&path[w-1]==SHINSEI_PATH_UNIX_DELIMITER_A) --w;
+	if(!w&&!is_abs){
+        path[0]='.';
+        w=1;
+    }
+	*len=w;
+	path[*len]='\0';
+	return is_abs*SHINSEI_PATH_ABSOLUTE+!is_abs*SHINSEI_PATH_RELATIVE;
 }
-int shinsei_linuxPathNormalizeW(wchar_t* path,size_t* len){
-	// Unimplemented. Placeholder.
-	(void)path;
-	(void)len;
-	return 0;
+_SHINSEI_OS_INLINE static int unixPathNormalizeW(wchar_t*const restrict path,size_t*const restrict len){
+	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
+	register const bool is_abs=path[0]==SHINSEI_PATH_UNIX_DELIMITER_W;
+	register const size_t cnt=*len;
+	register size_t r=0;
+	register size_t w=0;
+	if(is_abs){
+		// Absolute path. Root is '/'.
+		path[w++]=SHINSEI_PATH_UNIX_DELIMITER_W;
+		++r;
+		while(r<cnt&&path[r]==SHINSEI_PATH_UNIX_DELIMITER_W) ++r;
+	}
+	size_t pos[SHINSEI_PATH_SBO_CNT+1];
+	register size_t front=0;
+	register size_t back=0;
+	while(r<cnt){
+		// Unify delimiter
+		if(path[r]==SHINSEI_PATH_UNIX_DELIMITER_W){
+			if(w>0&&path[w-1]!=SHINSEI_PATH_UNIX_DELIMITER_W){
+				path[w++]=SHINSEI_PATH_UNIX_DELIMITER_W;
+			}
+			// Collapse multiple delimiter
+			while(++r<cnt&&path[r]==SHINSEI_PATH_UNIX_DELIMITER_W);
+			continue;
+		}
+		register const size_t seg_start=w;
+		while(r<cnt&&path[r]!=SHINSEI_PATH_UNIX_DELIMITER_W){
+			path[w++]=path[r++];
+		}
+		register const size_t seg_len=w-seg_start;
+		if(seg_len==1&&path[seg_start]==L'.'){
+			// Ignore "."
+			w=seg_start;
+		}
+		else if(seg_len==2&&path[seg_start]==L'.'&&path[seg_start+1]==L'.'){
+			// Parse ".."
+			if(front!=back){
+				// Pop previous segment
+				back=(back+SHINSEI_PATH_SBO_CNT)%(SHINSEI_PATH_SBO_CNT+1);
+				w=pos[back];
+			}
+			else if(w>!!is_abs){
+				// Manual backtrace
+				register size_t rewind=w-1;
+				register const bool is_prev_back=!is_abs&&rewind>=2&&path[rewind-1]==L'.'&&path[rewind-2]==L'.'&&(rewind==2||path[rewind-3]==SHINSEI_PATH_UNIX_DELIMITER_W);
+				if(is_prev_back){
+					pos[back]=seg_start;
+					back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+					if(back==front) front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+				}
+				else{
+					while(rewind>0&&path[rewind]!=SHINSEI_PATH_UNIX_DELIMITER_W){
+						--rewind;
+					}
+					w=(path[rewind]==SHINSEI_PATH_UNIX_DELIMITER_W)?rewind+1:0;
+				}
+			}
+			else if(!is_abs){
+				// Relative path. Keep "..".
+				pos[back]=seg_start;
+				back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+				if(back==front){
+					front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+				}
+			}
+			else{
+				// Can't get parent any more
+				w=seg_start;
+			}
+		}
+		else{
+			// Push segment
+			pos[back]=seg_start;
+			back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+			if(back==front){
+				front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+			}
+		}
+	}
+	if(w>1&&path[w-1]==SHINSEI_PATH_UNIX_DELIMITER_W) --w;
+	if(!w&&!is_abs){
+        path[0]=L'.';
+        w=1;
+    }
+	*len=w;
+	path[*len]=L'\0';
+	return is_abs*SHINSEI_PATH_ABSOLUTE+!is_abs*SHINSEI_PATH_RELATIVE;
+}
+_SHINSEI_OS_INLINE static int unixPathNormalizeU8(char8_t*const restrict path,size_t*const restrict len){
+	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
+	register const bool is_abs=path[0]==SHINSEI_PATH_UNIX_DELIMITER_U8;
+	register const size_t cnt=*len;
+	register size_t r=0;
+	register size_t w=0;
+	if(is_abs){
+		// Absolute path. Root is '/'.
+		path[w++]=SHINSEI_PATH_UNIX_DELIMITER_U8;
+		++r;
+		while(r<cnt&&path[r]==SHINSEI_PATH_UNIX_DELIMITER_U8) ++r;
+	}
+	size_t pos[SHINSEI_PATH_SBO_CNT+1];
+	register size_t front=0;
+	register size_t back=0;
+	while(r<cnt){
+		// Unify delimiter
+		if(path[r]==SHINSEI_PATH_UNIX_DELIMITER_U8){
+			if(w>0&&path[w-1]!=SHINSEI_PATH_UNIX_DELIMITER_U8){
+				path[w++]=SHINSEI_PATH_UNIX_DELIMITER_U8;
+			}
+			// Collapse multiple delimiter
+			while(++r<cnt&&path[r]==SHINSEI_PATH_UNIX_DELIMITER_U8);
+			continue;
+		}
+		register const size_t seg_start=w;
+		while(r<cnt&&path[r]!=SHINSEI_PATH_UNIX_DELIMITER_U8){
+			path[w++]=path[r++];
+		}
+		register const size_t seg_len=w-seg_start;
+		if(seg_len==1&&path[seg_start]==u8'.'){
+			// Ignore "."
+			w=seg_start;
+		}
+		else if(seg_len==2&&path[seg_start]==u8'.'&&path[seg_start+1]==u8'.'){
+			// Parse ".."
+			if(front!=back){
+				// Pop previous segment
+				back=(back+SHINSEI_PATH_SBO_CNT)%(SHINSEI_PATH_SBO_CNT+1);
+				w=pos[back];
+			}
+			else if(w>!!is_abs){
+				// Manual backtrace
+				register size_t rewind=w-1;
+				register const bool is_prev_back=!is_abs&&rewind>=2&&path[rewind-1]==u8'.'&&path[rewind-2]==u8'.'&&(rewind==2||path[rewind-3]==SHINSEI_PATH_UNIX_DELIMITER_U8);
+				if(is_prev_back){
+					pos[back]=seg_start;
+					back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+					if(back==front) front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+				}
+				else{
+					while(rewind>0&&path[rewind]!=SHINSEI_PATH_UNIX_DELIMITER_U8){
+						--rewind;
+					}
+					w=(path[rewind]==SHINSEI_PATH_UNIX_DELIMITER_U8)?rewind+1:0;
+				}
+			}
+			else if(!is_abs){
+				// Relative path. Keep "..".
+				pos[back]=seg_start;
+				back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+				if(back==front){
+					front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+				}
+			}
+			else{
+				// Can't get parent any more
+				w=seg_start;
+			}
+		}
+		else{
+			// Push segment
+			pos[back]=seg_start;
+			back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+			if(back==front){
+				front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+			}
+		}
+	}
+	if(w>1&&path[w-1]==SHINSEI_PATH_UNIX_DELIMITER_U8) --w;
+	if(!w&&!is_abs){
+        path[0]=u8'.';
+        w=1;
+    }
+	*len=w;
+	path[*len]=u8'\0';
+	return is_abs*SHINSEI_PATH_ABSOLUTE+!is_abs*SHINSEI_PATH_RELATIVE;
+}
+_SHINSEI_OS_INLINE static int unixPathNormalizeU16(char16_t*const restrict path,size_t*const restrict len){
+	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
+	register const bool is_abs=path[0]==SHINSEI_PATH_UNIX_DELIMITER_U16;
+	register const size_t cnt=*len;
+	register size_t r=0;
+	register size_t w=0;
+	if(is_abs){
+		// Absolute path. Root is '/'.
+		path[w++]=SHINSEI_PATH_UNIX_DELIMITER_U16;
+		++r;
+		while(r<cnt&&path[r]==SHINSEI_PATH_UNIX_DELIMITER_U16) ++r;
+	}
+	size_t pos[SHINSEI_PATH_SBO_CNT+1];
+	register size_t front=0;
+	register size_t back=0;
+	while(r<cnt){
+		// Unify delimiter
+		if(path[r]==SHINSEI_PATH_UNIX_DELIMITER_U16){
+			if(w>0&&path[w-1]!=SHINSEI_PATH_UNIX_DELIMITER_U16){
+				path[w++]=SHINSEI_PATH_UNIX_DELIMITER_U16;
+			}
+			// Collapse multiple delimiter
+			while(++r<cnt&&path[r]==SHINSEI_PATH_UNIX_DELIMITER_U16);
+			continue;
+		}
+		register const size_t seg_start=w;
+		while(r<cnt&&path[r]!=SHINSEI_PATH_UNIX_DELIMITER_U16){
+			path[w++]=path[r++];
+		}
+		register const size_t seg_len=w-seg_start;
+		if(seg_len==1&&path[seg_start]==u'.'){
+			// Ignore "."
+			w=seg_start;
+		}
+		else if(seg_len==2&&path[seg_start]==u'.'&&path[seg_start+1]==u'.'){
+			// Parse ".."
+			if(front!=back){
+				// Pop previous segment
+				back=(back+SHINSEI_PATH_SBO_CNT)%(SHINSEI_PATH_SBO_CNT+1);
+				w=pos[back];
+			}
+			else if(w>!!is_abs){
+				// Manual backtrace
+				register size_t rewind=w-1;
+				register const bool is_prev_back=!is_abs&&rewind>=2&&path[rewind-1]==u'.'&&path[rewind-2]==u'.'&&(rewind==2||path[rewind-3]==SHINSEI_PATH_UNIX_DELIMITER_U16);
+				if(is_prev_back){
+					pos[back]=seg_start;
+					back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+					if(back==front) front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+				}
+				else{
+					while(rewind>0&&path[rewind]!=SHINSEI_PATH_UNIX_DELIMITER_U16){
+						--rewind;
+					}
+					w=(path[rewind]==SHINSEI_PATH_UNIX_DELIMITER_U16)?rewind+1:0;
+				}
+			}
+			else if(!is_abs){
+				// Relative path. Keep "..".
+				pos[back]=seg_start;
+				back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+				if(back==front){
+					front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+				}
+			}
+			else{
+				// Can't get parent any more
+				w=seg_start;
+			}
+		}
+		else{
+			// Push segment
+			pos[back]=seg_start;
+			back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+			if(back==front){
+				front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+			}
+		}
+	}
+	if(w>1&&path[w-1]==SHINSEI_PATH_UNIX_DELIMITER_U16) --w;
+	if(!w&&!is_abs){
+        path[0]=u'.';
+        w=1;
+    }
+	*len=w;
+	path[*len]=u'\0';
+	return is_abs*SHINSEI_PATH_ABSOLUTE+!is_abs*SHINSEI_PATH_RELATIVE;
+}
+_SHINSEI_OS_INLINE static int unixPathNormalizeU32(char32_t*const restrict path,size_t*const restrict len){
+	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
+	register const bool is_abs=path[0]==SHINSEI_PATH_UNIX_DELIMITER_U32;
+	register const size_t cnt=*len;
+	register size_t r=0;
+	register size_t w=0;
+	if(is_abs){
+		// Absolute path. Root is '/'.
+		path[w++]=SHINSEI_PATH_UNIX_DELIMITER_U32;
+		++r;
+		while(r<cnt&&path[r]==SHINSEI_PATH_UNIX_DELIMITER_U32) ++r;
+	}
+	size_t pos[SHINSEI_PATH_SBO_CNT+1];
+	register size_t front=0;
+	register size_t back=0;
+	while(r<cnt){
+		// Unify delimiter
+		if(path[r]==SHINSEI_PATH_UNIX_DELIMITER_U32){
+			if(w>0&&path[w-1]!=SHINSEI_PATH_UNIX_DELIMITER_U32){
+				path[w++]=SHINSEI_PATH_UNIX_DELIMITER_U32;
+			}
+			// Collapse multiple delimiter
+			while(++r<cnt&&path[r]==SHINSEI_PATH_UNIX_DELIMITER_U32);
+			continue;
+		}
+		register const size_t seg_start=w;
+		while(r<cnt&&path[r]!=SHINSEI_PATH_UNIX_DELIMITER_U32){
+			path[w++]=path[r++];
+		}
+		register const size_t seg_len=w-seg_start;
+		if(seg_len==1&&path[seg_start]==U'.'){
+			// Ignore "."
+			w=seg_start;
+		}
+		else if(seg_len==2&&path[seg_start]==U'.'&&path[seg_start+1]==U'.'){
+			// Parse ".."
+			if(front!=back){
+				// Pop previous segment
+				back=(back+SHINSEI_PATH_SBO_CNT)%(SHINSEI_PATH_SBO_CNT+1);
+				w=pos[back];
+			}
+			else if(w>!!is_abs){
+				// Manual backtrace
+				register size_t rewind=w-1;
+				register const bool is_prev_back=!is_abs&&rewind>=2&&path[rewind-1]==U'.'&&path[rewind-2]==U'.'&&(rewind==2||path[rewind-3]==SHINSEI_PATH_UNIX_DELIMITER_U32);
+				if(is_prev_back){
+					pos[back]=seg_start;
+					back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+					if(back==front) front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+				}
+				else{
+					while(rewind>0&&path[rewind]!=SHINSEI_PATH_UNIX_DELIMITER_U32){
+						--rewind;
+					}
+					w=(path[rewind]==SHINSEI_PATH_UNIX_DELIMITER_U32)?rewind+1:0;
+				}
+			}
+			else if(!is_abs){
+				// Relative path. Keep "..".
+				pos[back]=seg_start;
+				back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+				if(back==front){
+					front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+				}
+			}
+			else{
+				// Can't get parent any more
+				w=seg_start;
+			}
+		}
+		else{
+			// Push segment
+			pos[back]=seg_start;
+			back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+			if(back==front){
+				front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+			}
+		}
+	}
+	if(w>1&&path[w-1]==SHINSEI_PATH_UNIX_DELIMITER_U32) --w;
+	if(!w&&!is_abs){
+        path[0]=U'.';
+        w=1;
+    }
+	*len=w;
+	path[*len]=U'\0';
+	return is_abs*SHINSEI_PATH_ABSOLUTE+!is_abs*SHINSEI_PATH_RELATIVE;
+}
+#if defined(_SHINSEI_OS_WINDOWS)
+_SHINSEI_OS_INLINE static int unixPathNormalizeN(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeW(path,len);
+}
+#elif defined(_SHINSEI_OS_UNIX)
+_SHINSEI_OS_INLINE static int unixPathNormalizeN(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU8(path,len);
+}
+#endif
+
+int shinsei_unixPathNormalizeA(char*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeA(path,len);
+}
+int shinsei_unixPathNormalizeW(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeW(path,len);
+}
+int shinsei_unixPathNormalizeU8(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU8(path,len);
+}
+int shinsei_unixPathNormalizeU16(char16_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU16(path,len);
+}
+int shinsei_unixPathNormalizeU32(char32_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU32(path,len);
+}
+#if defined(_SHINSEI_OS_WINDOWS)
+int shinsei_unixPathNormalizeN(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#elif defined(_SHINSEI_OS_UNIX)
+int shinsei_unixPathNormalizeN(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#endif
+
+int shinsei_linuxPathNormalizeA(char*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeA(path,len);
+}
+int shinsei_linuxPathNormalizeW(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeW(path,len);
+}
+int shinsei_linuxPathNormalizeU8(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU8(path,len);
+}
+int shinsei_linuxPathNormalizeU16(char16_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU16(path,len);
+}
+int shinsei_linuxPathNormalizeU32(char32_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU32(path,len);
+}
+#if defined(_SHINSEI_OS_WINDOWS)
+int shinsei_linuxPathNormalizeN(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#elif defined(_SHINSEI_OS_UNIX)
+int shinsei_linuxPathNormalizeN(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#endif
+
+int shinsei_applePathNormalizeA(char*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeA(path,len);
+}
+int shinsei_applePathNormalizeW(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeW(path,len);
+}
+int shinsei_applePathNormalizeU8(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU8(path,len);
+}
+int shinsei_applePathNormalizeU16(char16_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU16(path,len);
+}
+int shinsei_applePathNormalizeU32(char32_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU32(path,len);
+}
+#if defined(_SHINSEI_OS_WINDOWS)
+int shinsei_applePathNormalizeN(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#elif defined(_SHINSEI_OS_UNIX)
+int shinsei_applePathNormalizeN(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#endif
+
+int shinsei_sunPathNormalizeA(char*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeA(path,len);
+}
+int shinsei_sunPathNormalizeW(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeW(path,len);
+}
+int shinsei_sunPathNormalizeU8(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU8(path,len);
+}
+int shinsei_sunPathNormalizeU16(char16_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU16(path,len);
+}
+int shinsei_sunPathNormalizeU32(char32_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU32(path,len);
+}
+#if defined(_SHINSEI_OS_WINDOWS)
+int shinsei_sunPathNormalizeN(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#elif defined(_SHINSEI_OS_UNIX)
+int shinsei_sunPathNormalizeN(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#endif
+
+int shinsei_freeBSDPathNormalizeA(char*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeA(path,len);
+}
+int shinsei_freeBSDPathNormalizeW(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeW(path,len);
+}
+int shinsei_freeBSDPathNormalizeU8(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU8(path,len);
+}
+int shinsei_freeBSDPathNormalizeU16(char16_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU16(path,len);
+}
+int shinsei_freeBSDPathNormalizeU32(char32_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU32(path,len);
+}
+#if defined(_SHINSEI_OS_WINDOWS)
+int shinsei_freeBSDPathNormalizeN(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#elif defined(_SHINSEI_OS_UNIX)
+int shinsei_freeBSDPathNormalizeN(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#endif
+
+int shinsei_cygwinPathNormalizeA(char*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeA(path,len);
+}
+int shinsei_cygwinPathNormalizeW(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeW(path,len);
+}
+int shinsei_cygwinPathNormalizeU8(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU8(path,len);
+}
+int shinsei_cygwinPathNormalizeU16(char16_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU16(path,len);
+}
+int shinsei_cygwinPathNormalizeU32(char32_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU32(path,len);
+}
+#if defined(_SHINSEI_OS_WINDOWS)
+int shinsei_cygwinPathNormalizeN(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#elif defined(_SHINSEI_OS_UNIX)
+int shinsei_cygwinPathNormalizeN(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#endif
+
+#if defined(_SHINSEI_OS_WINDOWS)
+int shinsei_nativePathNormalizeA(char*const restrict path,size_t*const restrict len){
+	return windowsPathNormalizeA(path,len);
+}
+int shinsei_nativePathNormalizeW(wchar_t*const restrict path,size_t*const restrict len){
+	return windowsPathNormalizeW(path,len);
+}
+int shinsei_nativePathNormalizeU8(char8_t*const restrict path,size_t*const restrict len){
+	return windowsPathNormalizeU8(path,len);
+}
+int shinsei_nativePathNormalizeU16(char16_t*const restrict path,size_t*const restrict len){
+	return windowsPathNormalizeU16(path,len);
+}
+int shinsei_nativePathNormalizeU32(char32_t*const restrict path,size_t*const restrict len){
+	return windowsPathNormalizeU32(path,len);
+}
+int shinsei_nativePathNormalizeN(wchar_t*const restrict path,size_t*const restrict len){
+	return windowsPathNormalizeN(path,len);
+}
+#elif defined(_SHINSEI_OS_UNIX)
+int shinsei_nativePathNormalizeA(char*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeA(path,len);
+}
+int shinsei_nativePathNormalizeW(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeW(path,len);
+}
+int shinsei_nativePathNormalizeU8(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU8(path,len);
+}
+int shinsei_nativePathNormalizeU16(char16_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU16(path,len);
+}
+int shinsei_nativePathNormalizeU32(char32_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU32(path,len);
+}
+int shinsei_nativePathNormalizeN(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#endif
+
+_SHINSEI_OS_INLINE static int uRLPathNormalizeA(char*const restrict path,size_t*const restrict len){
+	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
+	register const bool is_abs=path[0]==SHINSEI_PATH_URL_DELIMITER_A;
+	if(*len==1){
+		return is_abs*SHINSEI_PATH_ABSOLUTE+!is_abs*SHINSEI_PATH_RELATIVE;
+	}
+	register const bool end_with_slash=path[*len-1]==SHINSEI_PATH_URL_DELIMITER_A;
+	register const size_t cnt=*len-(size_t)end_with_slash;
+	register size_t r=0;
+	register size_t w=0;
+	if(is_abs){
+		// Absolute path. Root is '/'.
+		path[w++]=SHINSEI_PATH_URL_DELIMITER_A;
+		++r;
+		while(r<cnt&&path[r]==SHINSEI_PATH_URL_DELIMITER_A) ++r;
+	}
+	size_t pos[SHINSEI_PATH_SBO_CNT+1];
+	register size_t front=0;
+	register size_t back=0;
+	while(r<cnt){
+		// Unify delimiter
+		if(path[r]==SHINSEI_PATH_URL_DELIMITER_A){
+			if(w>0&&path[w-1]!=SHINSEI_PATH_URL_DELIMITER_A){
+				path[w++]=SHINSEI_PATH_URL_DELIMITER_A;
+			}
+			// Collapse multiple delimiter
+			while(++r<cnt&&path[r]==SHINSEI_PATH_URL_DELIMITER_A);
+			continue;
+		}
+		register const size_t seg_start=w;
+		while(r<cnt&&path[r]!=SHINSEI_PATH_URL_DELIMITER_A){
+			path[w++]=path[r++];
+		}
+		register const size_t seg_len=w-seg_start;
+		if(seg_len==1&&path[seg_start]=='.'){
+			// Ignore "."
+			w=seg_start;
+		}
+		else if(seg_len==2&&path[seg_start]=='.'&&path[seg_start+1]=='.'){
+			// Parse ".."
+			if(front!=back){
+				// Pop previous segment
+				back=(back+SHINSEI_PATH_SBO_CNT)%(SHINSEI_PATH_SBO_CNT+1);
+				w=pos[back];
+			}
+			else if(w>!!is_abs){
+				// Manual backtrace
+				register size_t rewind=w-1;
+				register const bool is_prev_back=!is_abs&&rewind>=2&&path[rewind-1]=='.'&&path[rewind-2]=='.'&&(rewind==2||path[rewind-3]==SHINSEI_PATH_URL_DELIMITER_A);
+				if(is_prev_back){
+					pos[back]=seg_start;
+					back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+					if(back==front) front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+				}
+				else{
+					while(rewind>0&&path[rewind]!=SHINSEI_PATH_URL_DELIMITER_A){
+						--rewind;
+					}
+					w=(path[rewind]==SHINSEI_PATH_URL_DELIMITER_A)?rewind+1:0;
+				}
+			}
+			else if(!is_abs){
+				// Relative path. Keep "..".
+				pos[back]=seg_start;
+				back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+				if(back==front){
+					front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+				}
+			}
+			else{
+				// Can't get parent any more
+				w=seg_start;
+			}
+		}
+		else{
+			// Push segment
+			pos[back]=seg_start;
+			back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+			if(back==front){
+				front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+			}
+		}
+	}
+	if(w>1&&path[w-1]==SHINSEI_PATH_URL_DELIMITER_A) --w;
+	if(!w&&!is_abs){
+        path[0]='.';
+        w=1;
+    }
+	if(end_with_slash){
+		if(is_abs&&w==1){
+			path[1]='\0';
+			*len=1;
+			return SHINSEI_PATH_ABSOLUTE;
+		}
+		path[w]=SHINSEI_PATH_URL_DELIMITER_A;
+	}
+	*len=w+(size_t)end_with_slash;
+	path[*len]='\0';
+	return is_abs*SHINSEI_PATH_ABSOLUTE+!is_abs*SHINSEI_PATH_RELATIVE;
+}
+
+int shinsei_uRLPathNormalizeA(char*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeA(path,len);
+}
+int shinsei_uRLPathNormalizeW(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeW(path,len);
+}
+int shinsei_uRLPathNormalizeU8(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU8(path,len);
+}
+int shinsei_uRLPathNormalizeU16(char16_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU16(path,len);
+}
+int shinsei_uRLPathNormalizeU32(char32_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeU32(path,len);
+}
+#if defined(_SHINSEI_OS_WINDOWS)
+int shinsei_uRLPathNormalizeN(wchar_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#elif defined(_SHINSEI_OS_UNIX)
+int shinsei_uRLPathNormalizeN(char8_t*const restrict path,size_t*const restrict len){
+	return unixPathNormalizeN(path,len);
+}
+#endif
+
+_SHINSEI_OS_INLINE static int unixPathNormalizeNotraversalA(char*const restrict path,size_t*const restrict len){
+	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
+	register const bool is_abs=path[0]==SHINSEI_PATH_UNIX_DELIMITER_A;
+	register const size_t cnt=*len;
+	register size_t r=0;
+	register size_t w=0;
+	if(is_abs){
+		// Absolute path. Root is '/'.
+		path[w++]=SHINSEI_PATH_UNIX_DELIMITER_A;
+		++r;
+		while(r<cnt&&path[r]==SHINSEI_PATH_UNIX_DELIMITER_A) ++r;
+	}
+	size_t pos[SHINSEI_PATH_SBO_CNT+1];
+	register size_t front=0;
+	register size_t back=0;
+	while(r<cnt){
+		// Unify delimiter
+		if(path[r]==SHINSEI_PATH_UNIX_DELIMITER_A){
+			if(w>0&&path[w-1]!=SHINSEI_PATH_UNIX_DELIMITER_A){
+				path[w++]=SHINSEI_PATH_UNIX_DELIMITER_A;
+			}
+			// Collapse multiple delimiter
+			while(++r<cnt&&path[r]==SHINSEI_PATH_UNIX_DELIMITER_A);
+			continue;
+		}
+		register const size_t seg_start=w;
+		while(r<cnt&&path[r]!=SHINSEI_PATH_UNIX_DELIMITER_A){
+			path[w++]=path[r++];
+		}
+		register const size_t seg_len=w-seg_start;
+		if(seg_len==1&&path[seg_start]=='.'){
+			// Ignore "."
+			w=seg_start;
+		}
+		else if(seg_len==2&&path[seg_start]=='.'&&path[seg_start+1]=='.'){
+			// Parse ".."
+			if(front!=back){
+				// Pop previous segment
+				back=(back+SHINSEI_PATH_SBO_CNT)%(SHINSEI_PATH_SBO_CNT+1);
+				w=pos[back];
+			}
+			else if(w>!!is_abs){
+				// Manual backtrace
+				register size_t rewind=w-1;
+				register const bool is_prev_back=!is_abs&&rewind>=2&&path[rewind-1]=='.'&&path[rewind-2]=='.'&&(rewind==2||path[rewind-3]==SHINSEI_PATH_UNIX_DELIMITER_A);
+				if(is_prev_back){
+					return SHINSEI_PATH_ILLEGAL|SHINSEI_PATH_TRAVERSAL;
+				}
+				else{
+					while(rewind>0&&path[rewind]!=SHINSEI_PATH_UNIX_DELIMITER_A){
+						--rewind;
+					}
+					w=(path[rewind]==SHINSEI_PATH_UNIX_DELIMITER_A)?rewind+1:0;
+				}
+			}
+			else if(!is_abs){
+				// Relative path. Keep "..".
+				return SHINSEI_PATH_ILLEGAL|SHINSEI_PATH_TRAVERSAL;
+			}
+			else{
+				// Can't get parent any more
+				w=seg_start;
+			}
+		}
+		else{
+			// Push segment
+			pos[back]=seg_start;
+			back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+			if(back==front){
+				front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+			}
+		}
+	}
+	if(w>1&&path[w-1]==SHINSEI_PATH_UNIX_DELIMITER_A) --w;
+	if(!w&&!is_abs){
+        path[0]='.';
+        w=1;
+    }
+	*len=w;
+	path[*len]='\0';
+	return is_abs*SHINSEI_PATH_ABSOLUTE+!is_abs*SHINSEI_PATH_RELATIVE;
+}
+
+_SHINSEI_OS_INLINE static int uRLPathNormalizeNoTraversalA(char*const restrict path,size_t*const restrict len){
+	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
+	register const bool is_abs=path[0]==SHINSEI_PATH_URL_DELIMITER_A;
+	if(*len==1){
+		return is_abs*SHINSEI_PATH_ABSOLUTE+!is_abs*SHINSEI_PATH_RELATIVE;
+	}
+	register const bool end_with_slash=path[*len-1]==SHINSEI_PATH_URL_DELIMITER_A;
+	register const size_t cnt=*len-(size_t)end_with_slash;
+	register size_t r=0;
+	register size_t w=0;
+	if(is_abs){
+		// Absolute path. Root is '/'.
+		path[w++]=SHINSEI_PATH_URL_DELIMITER_A;
+		++r;
+		while(r<cnt&&path[r]==SHINSEI_PATH_URL_DELIMITER_A) ++r;
+	}
+	size_t pos[SHINSEI_PATH_SBO_CNT+1];
+	register size_t front=0;
+	register size_t back=0;
+	while(r<cnt){
+		// Unify delimiter
+		if(path[r]==SHINSEI_PATH_URL_DELIMITER_A){
+			if(w>0&&path[w-1]!=SHINSEI_PATH_URL_DELIMITER_A){
+				path[w++]=SHINSEI_PATH_URL_DELIMITER_A;
+			}
+			// Collapse multiple delimiter
+			while(++r<cnt&&path[r]==SHINSEI_PATH_URL_DELIMITER_A);
+			continue;
+		}
+		register const size_t seg_start=w;
+		while(r<cnt&&path[r]!=SHINSEI_PATH_URL_DELIMITER_A){
+			path[w++]=path[r++];
+		}
+		register const size_t seg_len=w-seg_start;
+		if(seg_len==1&&path[seg_start]=='.'){
+			// Ignore "."
+			w=seg_start;
+		}
+		else if(seg_len==2&&path[seg_start]=='.'&&path[seg_start+1]=='.'){
+			// Parse ".."
+			if(front!=back){
+				// Pop previous segment
+				back=(back+SHINSEI_PATH_SBO_CNT)%(SHINSEI_PATH_SBO_CNT+1);
+				w=pos[back];
+			}
+			else if(w>!!is_abs){
+				// Manual backtrace
+				register size_t rewind=w-1;
+				register const bool is_prev_back=!is_abs&&rewind>=2&&path[rewind-1]=='.'&&path[rewind-2]=='.'&&(rewind==2||path[rewind-3]==SHINSEI_PATH_URL_DELIMITER_A);
+				if(is_prev_back){
+					return SHINSEI_PATH_ILLEGAL|SHINSEI_PATH_TRAVERSAL;
+				}
+				else{
+					while(rewind>0&&path[rewind]!=SHINSEI_PATH_URL_DELIMITER_A){
+						--rewind;
+					}
+					w=(path[rewind]==SHINSEI_PATH_URL_DELIMITER_A)?rewind+1:0;
+				}
+			}
+			else if(!is_abs){
+				// Relative path. Keep "..".
+				return SHINSEI_PATH_ILLEGAL|SHINSEI_PATH_TRAVERSAL;
+			}
+			else{
+				// Can't get parent any more
+				w=seg_start;
+			}
+		}
+		else{
+			// Push segment
+			pos[back]=seg_start;
+			back=(back+1)%(SHINSEI_PATH_SBO_CNT+1);
+			if(back==front){
+				front=(front+1)%(SHINSEI_PATH_SBO_CNT+1);
+			}
+		}
+	}
+	if(w>1&&path[w-1]==SHINSEI_PATH_URL_DELIMITER_A) --w;
+	if(!w&&!is_abs){
+        path[0]='.';
+        w=1;
+    }
+	if(end_with_slash&&!(is_abs&&w==1)){
+		path[w++]=SHINSEI_PATH_URL_DELIMITER_A;
+	}
+	*len=w;
+	path[*len]='\0';
+	return is_abs*SHINSEI_PATH_ABSOLUTE+!is_abs*SHINSEI_PATH_RELATIVE;
 }
 
 size_t shinsei_windowsPathJoinA(char*const restrict des,const size_t des_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...){
@@ -796,7 +1792,7 @@ size_t shinsei_linuxPathJoinA(char*const restrict des,const size_t des_len,const
             __builtin_memcpy(des,part[0],part_len[0]);
         }
         for(register int i=1;i<path_cnt;++i){
-            des[last++]=SHINSEI_PATH_LINUX_DELIMITER_A;
+            des[last++]=SHINSEI_PATH_UNIX_DELIMITER_A;
             __builtin_memcpy(des+last,part[i],part_len[i]);
             last+=part_len[i];
         }
@@ -815,7 +1811,7 @@ size_t shinsei_linuxPathJoinA(char*const restrict des,const size_t des_len,const
 			register const size_t cur_part_len=va_arg(args,const size_t);
 			res+=cur_part_len+1;
 			if(res<=des_len){
-				des[last++]=SHINSEI_PATH_LINUX_DELIMITER_A;
+				des[last++]=SHINSEI_PATH_UNIX_DELIMITER_A;
 				__builtin_memcpy(des+last,cur_part,cur_part_len);
 			}
 			last=res;
@@ -841,7 +1837,7 @@ size_t shinsei_linuxPathJoinA(char*const restrict des,const size_t des_len,const
 	for(register int i=1;i<path_cnt;++i){
 		register const char*const cur_part=va_arg(args,const char*const);
 		register const size_t cur_part_len=va_arg(args,const size_t);
-		des[last++]=SHINSEI_PATH_LINUX_DELIMITER_A;
+		des[last++]=SHINSEI_PATH_UNIX_DELIMITER_A;
 		__builtin_memcpy(des+last,cur_part,cur_part_len);
 		last+=cur_part_len;
 	}
@@ -876,7 +1872,7 @@ size_t shinsei_linuxPathJoinW(wchar_t*const restrict des,const size_t des_len,co
             __builtin_memcpy(des,part[0],part_len[0]);
         }
         for(register int i=1;i<path_cnt;++i){
-            des[last++]=SHINSEI_PATH_LINUX_DELIMITER_W;
+            des[last++]=SHINSEI_PATH_UNIX_DELIMITER_W;
             __builtin_memcpy(des+last,part[i],part_len[i]);
             last+=part_len[i];
         }
@@ -895,7 +1891,7 @@ size_t shinsei_linuxPathJoinW(wchar_t*const restrict des,const size_t des_len,co
 			register const size_t cur_part_len=va_arg(args,const size_t);
 			res+=cur_part_len+1;
 			if(res<=des_len){
-				des[last++]=SHINSEI_PATH_LINUX_DELIMITER_W;
+				des[last++]=SHINSEI_PATH_UNIX_DELIMITER_W;
 				__builtin_memcpy(des+last,cur_part,cur_part_len);
 			}
 			last=res;
@@ -921,7 +1917,7 @@ size_t shinsei_linuxPathJoinW(wchar_t*const restrict des,const size_t des_len,co
 	for(register int i=1;i<path_cnt;++i){
 		register const wchar_t*const cur_part=va_arg(args,const wchar_t*const);
 		register const size_t cur_part_len=va_arg(args,const size_t);
-		des[last++]=SHINSEI_PATH_LINUX_DELIMITER_W;
+		des[last++]=SHINSEI_PATH_UNIX_DELIMITER_W;
 		__builtin_memcpy(des+last,cur_part,cur_part_len);
 		last+=cur_part_len;
 	}
@@ -971,16 +1967,16 @@ inline static size_t splitHashToPathW(wchar_t*const restrict des,const size_t de
 	return res;
 }
 
-size_t shinsei_splitHashToWindowsPathA(char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt){
+size_t shinsei_splitStrToWindowsPathA(char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt){
 	return splitHashToPathA(des,des_len,src,src_len,folder_len,max_folder_cnt,'\\');
 }
-size_t shinsei_splitHashToWindowsPathW(wchar_t*const restrict des,const size_t des_len,const wchar_t*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt){
+size_t shinsei_splitStrToWindowsPathW(wchar_t*const restrict des,const size_t des_len,const wchar_t*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt){
 	return splitHashToPathW(des,des_len,src,src_len,folder_len,max_folder_cnt,L'\\');
 }
 
-size_t shinsei_splitHashToLinuxPathA(char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt){
+size_t shinsei_splitStrToLinuxPathA(char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt){
 	return splitHashToPathA(des,des_len,src,src_len,folder_len,max_folder_cnt,'/');
 }
-size_t shinsei_splitHashToLinuxPathW(wchar_t*const restrict des,const size_t des_len,const wchar_t*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt){
+size_t shinsei_splitStrToLinuxPathW(wchar_t*const restrict des,const size_t des_len,const wchar_t*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt){
 	return splitHashToPathW(des,des_len,src,src_len,folder_len,max_folder_cnt,L'/');
 }

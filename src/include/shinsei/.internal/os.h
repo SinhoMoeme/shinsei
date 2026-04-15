@@ -16,7 +16,7 @@
 
 // Apple (macOS, iOS, etc.)
 #elif defined(__APPLE__)&&defined(__MACH__)
-    #define _SHINSEI_OS_MACOS
+    #define _SHINSEI_OS_APPLE
     #define _SHINSEI_OS_UNIX
 
 // Linux
@@ -31,7 +31,7 @@
 
 // SunOS / Solaris
 #elif defined(__sun)
-    #define _SHINSEI_OS_SUNOS
+    #define _SHINSEI_OS_SUN
     #define _SHINSEI_OS_UNIX
 
 // Unix
