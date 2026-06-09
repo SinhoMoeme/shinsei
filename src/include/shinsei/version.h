@@ -1,0 +1,7 @@
+#pragma once
+
+#define _SHINSEI_VERSION_MAJOR 0
+#define _SHINSEI_VERSION_MINOR 2
+#define _SHINSEI_VERSION_PATCH 8
+
+#define _SHINSEI_VERSION "0.2.8-alpha"
