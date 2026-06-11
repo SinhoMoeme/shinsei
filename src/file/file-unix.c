@@ -1,5 +1,10 @@
 #include"shinsei/file.h"
 
+#ifdef _SHINSEI_OS_CPP
+#define this _this
+extern "C"{
+#endif
+
 #ifdef _SHINSEI_OS_ATOMIC
 	static struct _SHINSEI_OS_ALIGN_BYTE{
 		volatile int_fast32_t init_flag;
@@ -1013,3 +1018,8 @@ uint_fast64_t shinsei_file_t_getSize(const shinsei_file_t*const restrict this)_S
 	if(__builtin_expect(fstat((int)((intptr_t)this->ptr-1),&st)!=0,0)) return (uint_fast64_t)-1;
 	return (uint_fast64_t)st.st_size;
 }
+
+#ifdef _SHINSEI_OS_CPP
+}
+#undef this
+#endif

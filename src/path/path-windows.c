@@ -1,5 +1,10 @@
 #include"shinsei/path.h"
 
+#ifdef _SHINSEI_OS_CPP
+#define this _this
+extern "C"{
+#endif
+
 #ifdef _SHINSEI_OS_ATOMIC
 	static struct _SHINSEI_OS_ALIGN_BYTE{
 		volatile uint32_t code_page;
@@ -1261,3 +1266,8 @@ size_t shinsei_splitStringToNativePathN(wchar_t*const restrict des_buf,const siz
 	// src_len: The char count of the source string.
 	return shinsei_splitStringToWindowsPathN(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt);
 }
+
+#ifdef _SHINSEI_OS_CPP
+}
+#undef this
+#endif

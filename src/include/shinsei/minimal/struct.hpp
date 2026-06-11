@@ -9,17 +9,17 @@ namespace shinsei{
 		::shinsei_object_definition_t obj;
 	public:
 		// Default constructor
-		object_definition_t(allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr){
+		object_definition_t(allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_as(&obj,allocate_callback,free_callback);
 			return;
 		}
-		// Copy constructor
-		object_definition_t(const object_definition_t& src){
-			::shinsei_object_definition_t_asCopy(&obj,src.cObj());
+		// Assign constructor
+		object_definition_t(const object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_definition_t_asAssign(&obj,src.cObj());
 			return;
 		}
-		object_definition_t(const ::shinsei_object_definition_t& src){
-			::shinsei_object_definition_t_asCopy(&obj,&src);
+		object_definition_t(const ::shinsei_object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_definition_t_asAssign(&obj,&src);
 			return;
 		}
 		// Move constructor
@@ -32,17 +32,17 @@ namespace shinsei{
 			return;
 		}
 		
-		// In-place Constructors
-		explicit object_definition_t(shinsei::in_place_t,allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr){
+		// In-place constructors
+		explicit object_definition_t(shinsei::in_place_t,allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_as(&obj,allocate_callback,free_callback);
 			return;
 		}
-		explicit object_definition_t(shinsei::in_place_t,const object_definition_t& src){
-			::shinsei_object_definition_t_asCopy(&obj,src.cObj());
+		explicit object_definition_t(shinsei::in_place_t,const object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_definition_t_asAssign(&obj,src.cObj());
 			return;
 		}
-		explicit object_definition_t(shinsei::in_place_t,const ::shinsei_object_definition_t& src){
-			::shinsei_object_definition_t_asCopy(&obj,&src);
+		explicit object_definition_t(shinsei::in_place_t,const ::shinsei_object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_definition_t_asAssign(&obj,&src);
 			return;
 		}
 		explicit object_definition_t(shinsei::in_place_t,object_definition_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -54,17 +54,17 @@ namespace shinsei{
 			return;
 		}
 		
-		// Inlined Constructors
+		// Inlined constructors
 		explicit object_definition_t(shinsei::inlined_t,allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_inl(&obj,allocate_callback,free_callback);
 			return;
 		}
 		explicit object_definition_t(shinsei::inlined_t,const object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_object_definition_t_inlCopy(&obj,src.cObj());
+			::shinsei_object_definition_t_inlAssign(&obj,src.cObj());
 			return;
 		}
 		explicit object_definition_t(shinsei::inlined_t,const ::shinsei_object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_object_definition_t_inlCopy(&obj,&src);
+			::shinsei_object_definition_t_inlAssign(&obj,&src);
 			return;
 		}
 		explicit object_definition_t(shinsei::inlined_t,object_definition_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -81,7 +81,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Info & Access
+		// Info & access
 		bool hasAllocateCallback()const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_object_definition_t_hasAllocateCallback(&obj);
 		}
@@ -99,21 +99,21 @@ namespace shinsei{
 			return;
 		}
 		
-		// Standard API Operations
-		void assign(const object_definition_t& src){
+		// Standard API operations
+		void assign(const object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_assign(&obj,src.cObj());
 			return;
 		}
-		void assign(const ::shinsei_object_definition_t& src){
+		void assign(const ::shinsei_object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_assign(&obj,&src);
 			return;
 		}
-		object_definition_t& operator=(const object_definition_t& src){
+		object_definition_t& operator=(const object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
 			if(this==&src) return *this;
 			::shinsei_object_definition_t_assign(&obj,src.cObj());
 			return *this;
 		}
-		object_definition_t& operator=(const ::shinsei_object_definition_t& src){
+		object_definition_t& operator=(const ::shinsei_object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_assign(&obj,&src);
 			return *this;
 		}
@@ -136,35 +136,35 @@ namespace shinsei{
 			return *this;
 		}
 		
-		// Attach Operations
-		void attach(const object_definition_t& src){
+		// Attach operations
+		void attach(const object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_attach(&obj,src.cObj());
 			return;
 		}
-		void attach(const ::shinsei_object_definition_t& src){
+		void attach(const ::shinsei_object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_attach(&obj,&src);
 			return;
 		}
-		void attach(const int_fast32_t ctrl,allocate_copy_callback_t allocate_callback,free_callback_t free_callback){
+		void attach(const int_fast32_t ctrl,allocate_copy_callback_t allocate_callback,free_callback_t free_callback)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_attachValue(&obj,ctrl,allocate_callback,free_callback);
 			return;
 		}
 		
-		// Static Helpers (for explicit C-struct manipulation in user code)
-		static void as(object_definition_t*const restrict ptr,allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr){
+		// Static helpers (for explicit C-struct manipulation in user code)
+		static void as(object_definition_t*const restrict ptr,allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_as(ptr->cObj(),allocate_callback,free_callback);
 			return;
 		}
-		static void as(::shinsei_object_definition_t*const restrict ptr,allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr){
+		static void as(::shinsei_object_definition_t*const restrict ptr,allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_as(ptr,allocate_callback,free_callback);
 			return;
 		}
-		static void as(object_definition_t*const restrict ptr,const object_definition_t& src){
-			::shinsei_object_definition_t_asCopy(ptr->cObj(),src.cObj());
+		static void as(object_definition_t*const restrict ptr,const object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_definition_t_asAssign(ptr->cObj(),src.cObj());
 			return;
 		}
-		static void as(object_definition_t*const restrict ptr,const ::shinsei_object_definition_t& src){
-			::shinsei_object_definition_t_asCopy(ptr->cObj(),&src);
+		static void as(object_definition_t*const restrict ptr,const ::shinsei_object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_definition_t_asAssign(ptr->cObj(),&src);
 			return;
 		}
 		static void as(object_definition_t*const restrict ptr,object_definition_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -185,11 +185,11 @@ namespace shinsei{
 			return;
 		}
 		static void inl(object_definition_t*const restrict ptr,const object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_object_definition_t_inlCopy(ptr->cObj(),src.cObj());
+			::shinsei_object_definition_t_inlAssign(ptr->cObj(),src.cObj());
 			return;
 		}
 		static void inl(object_definition_t*const restrict ptr,const ::shinsei_object_definition_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_object_definition_t_inlCopy(ptr->cObj(),&src);
+			::shinsei_object_definition_t_inlAssign(ptr->cObj(),&src);
 			return;
 		}
 		static void inl(object_definition_t*const restrict ptr,object_definition_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -201,7 +201,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Core Identity Controls
+		// Core identity controls
 		bool inlined()const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_object_definition_t_inlined(&obj);
 		}
@@ -213,7 +213,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Type Casting / Access
+		// Type casting / access
 		::shinsei_object_definition_t* cObj()_SHINSEI_OS_NOEXCEPT{
 			return &obj;
 		}
@@ -233,21 +233,21 @@ namespace shinsei{
 		::shinsei_object_t obj;
 	public:
 		// Default constructor
-		object_t(const void*const val,const object_definition_t& definition){
+		object_t(const void*const val,const object_definition_t& definition)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_as(&obj,val,*definition.cObj());
 			return;
 		}
-		object_t(const void*const val,const ::shinsei_object_definition_t& definition){
+		object_t(const void*const val,const ::shinsei_object_definition_t& definition)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_as(&obj,val,definition);
 			return;
 		}
-		// Copy constructor
-		object_t(const object_t& src){
-			::shinsei_object_t_asCopy(&obj,src.cObj());
+		// Assign constructor
+		object_t(const object_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_t_asAssign(&obj,src.cObj());
 			return;
 		}
-		object_t(const ::shinsei_object_t& src){
-			::shinsei_object_t_asCopy(&obj,&src);
+		object_t(const ::shinsei_object_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_t_asAssign(&obj,&src);
 			return;
 		}
 		// Move constructor
@@ -260,21 +260,21 @@ namespace shinsei{
 			return;
 		}
 		
-		// In-place Constructors
-		explicit object_t(shinsei::in_place_t,const void*const val,const object_definition_t& definition){
+		// In-place constructors
+		explicit object_t(shinsei::in_place_t,const void*const val,const object_definition_t& definition)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_as(&obj,val,*definition.cObj());
 			return;
 		}
-		explicit object_t(shinsei::in_place_t,const void*const val,const ::shinsei_object_definition_t& definition){
+		explicit object_t(shinsei::in_place_t,const void*const val,const ::shinsei_object_definition_t& definition)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_as(&obj,val,definition);
 			return;
 		}
-		explicit object_t(shinsei::in_place_t,const object_t& src){
-			::shinsei_object_t_asCopy(&obj,src.cObj());
+		explicit object_t(shinsei::in_place_t,const object_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_t_asAssign(&obj,src.cObj());
 			return;
 		}
-		explicit object_t(shinsei::in_place_t,const ::shinsei_object_t& src){
-			::shinsei_object_t_asCopy(&obj,&src);
+		explicit object_t(shinsei::in_place_t,const ::shinsei_object_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_t_asAssign(&obj,&src);
 			return;
 		}
 		explicit object_t(shinsei::in_place_t,object_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -286,7 +286,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Inlined Constructors
+		// Inlined constructors
 		explicit object_t(shinsei::inlined_t,const void*const val,const object_definition_t& definition)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_inl(&obj,val,*definition.cObj());
 			return;
@@ -295,12 +295,12 @@ namespace shinsei{
 			::shinsei_object_t_inl(&obj,val,definition);
 			return;
 		}
-		explicit object_t(shinsei::inlined_t,const object_t& src){
-			::shinsei_object_t_inlCopy(&obj,src.cObj());
+		explicit object_t(shinsei::inlined_t,const object_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_t_inlAssign(&obj,src.cObj());
 			return;
 		}
-		explicit object_t(shinsei::inlined_t,const ::shinsei_object_t& src){
-			::shinsei_object_t_inlCopy(&obj,&src);
+		explicit object_t(shinsei::inlined_t,const ::shinsei_object_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_t_inlAssign(&obj,&src);
 			return;
 		}
 		explicit object_t(shinsei::inlined_t,object_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -313,12 +313,12 @@ namespace shinsei{
 		}
 		
 		// Destructor
-		~object_t(){
+		~object_t()_SHINSEI_OS_NOEXCEPT{
 			if(!inlined()) ::shinsei_object_t_freeData(&obj);
 			return;
 		}
 		
-		// Info & Access
+		// Info & access
 		bool hasAllocateCallback()const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_object_t_hasAllocateCallback(&obj);
 		}
@@ -336,19 +336,19 @@ namespace shinsei{
 		}
 		
 		// Modification
-		void alloc(const void*const val){
+		void alloc(const void*const val)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_alloc(&obj,val);
 			return;
 		}
-		void free(){
+		void free()_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_free(&obj);
 			return;
 		}
-		void setDefinition(const object_definition_t& definition){
+		void setDefinition(const object_definition_t& definition)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_setDefinition(&obj,*definition.cObj());
 			return;
 		}
-		void setDefinition(const ::shinsei_object_definition_t& definition){
+		void setDefinition(const ::shinsei_object_definition_t& definition)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_setDefinition(&obj,definition);
 			return;
 		}
@@ -361,21 +361,21 @@ namespace shinsei{
 			return;
 		}
 		
-		// Standard API Operations
-		void assign(const object_t& src){
+		// Standard API operations
+		void assign(const object_t& src)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_assign(&obj,src.cObj());
 			return;
 		}
-		void assign(const ::shinsei_object_t& src){
+		void assign(const ::shinsei_object_t& src)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_assign(&obj,&src);
 			return;
 		}
-		object_t& operator=(const object_t& src){
+		object_t& operator=(const object_t& src)_SHINSEI_OS_NOEXCEPT{
 			if(this==&src) return *this;
 			::shinsei_object_t_assign(&obj,src.cObj());
 			return *this;
 		}
-		object_t& operator=(const ::shinsei_object_t& src){
+		object_t& operator=(const ::shinsei_object_t& src)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_assign(&obj,&src);
 			return *this;
 		}
@@ -398,45 +398,45 @@ namespace shinsei{
 			return *this;
 		}
 		
-		// Attach Operations
-		void attach(const object_t& src){
+		// Attach operations
+		void attach(const object_t& src)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_attach(&obj,src.cObj());
 			return;
 		}
-		void attach(const ::shinsei_object_t& src){
+		void attach(const ::shinsei_object_t& src)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_attach(&obj,&src);
 			return;
 		}
-		void attach(const int_fast32_t ctrl,const void *const val,const object_definition_t& definition){
+		void attach(const int_fast32_t ctrl,const void *const val,const object_definition_t& definition)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_attachValue(&obj,ctrl,val,*definition.cObj());
 			return;
 		}
-		void attach(const int_fast32_t ctrl,const void *const val,const ::shinsei_object_definition_t& definition){
+		void attach(const int_fast32_t ctrl,const void *const val,const ::shinsei_object_definition_t& definition)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_attachValue(&obj,ctrl,val,definition);
 			return;
 		}
 		
-		// Free Data
-		void freeData(){
+		// Free data
+		void freeData()_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_freeData(&obj);
 			return;
 		}
 		
-		// Static Helpers (for explicit C-struct manipulation in user code)
-		static void as(object_t*const restrict ptr,const void *const val,const object_definition_t& definition){
+		// Static helpers (for explicit C-struct manipulation in user code)
+		static void as(object_t*const restrict ptr,const void *const val,const object_definition_t& definition)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_as(ptr->cObj(),val,*definition.cObj());
 			return;
 		}
-		static void as(::shinsei_object_t*const restrict ptr,const void *const val,const ::shinsei_object_definition_t& definition){
+		static void as(::shinsei_object_t*const restrict ptr,const void *const val,const ::shinsei_object_definition_t& definition)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_t_as(ptr,val,definition);
 			return;
 		}
-		static void as(object_t*const restrict ptr,const object_t& src){
-			::shinsei_object_t_asCopy(ptr->cObj(),src.cObj());
+		static void as(object_t*const restrict ptr,const object_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_t_asAssign(ptr->cObj(),src.cObj());
 			return;
 		}
-		static void as(object_t*const restrict ptr,const ::shinsei_object_t& src){
-			::shinsei_object_t_asCopy(ptr->cObj(),&src);
+		static void as(object_t*const restrict ptr,const ::shinsei_object_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_t_asAssign(ptr->cObj(),&src);
 			return;
 		}
 		static void as(object_t*const restrict ptr,object_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -456,12 +456,12 @@ namespace shinsei{
 			::shinsei_object_t_inl(ptr,val,definition);
 			return;
 		}
-		static void inl(object_t*const restrict ptr,const object_t& src){
-			::shinsei_object_t_inlCopy(ptr->cObj(),src.cObj());
+		static void inl(object_t*const restrict ptr,const object_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_t_inlAssign(ptr->cObj(),src.cObj());
 			return;
 		}
-		static void inl(object_t*const restrict ptr,const ::shinsei_object_t& src){
-			::shinsei_object_t_inlCopy(ptr->cObj(),&src);
+		static void inl(object_t*const restrict ptr,const ::shinsei_object_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_object_t_inlAssign(ptr->cObj(),&src);
 			return;
 		}
 		static void inl(object_t*const restrict ptr,object_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -473,7 +473,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Core Identity Controls
+		// Core identity controls
 		bool inlined()const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_object_t_inlined(&obj);
 		}
@@ -485,7 +485,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Type Casting / Access
+		// Type casting / access
 		::shinsei_object_t* cObj()_SHINSEI_OS_NOEXCEPT{
 			return &obj;
 		}
@@ -518,13 +518,13 @@ namespace shinsei{
 			if(!::shinsei_stack_t_asCapacity(&obj,cap,sizeof(T))) throw std::bad_alloc();
 			return;
 		}
-		// Copy constructor
+		// Assign constructor
 		stack_t(const stack_t& src){
-			if(!::shinsei_stack_t_asCopy(&obj,src.cObj())) throw std::bad_alloc();
+			if(!::shinsei_stack_t_asAssign(&obj,src.cObj())) throw std::bad_alloc();
 			return;
 		}
 		stack_t(const ::shinsei_stack_t& src){
-			if(!::shinsei_stack_t_asCopy(&obj,&src)) throw std::bad_alloc();
+			if(!::shinsei_stack_t_asAssign(&obj,&src)) throw std::bad_alloc();
 			return;
 		}
 		// Move constructor
@@ -536,7 +536,7 @@ namespace shinsei{
 			::shinsei_stack_t_asMove(&obj,&src);
 			return;
 		}
-		// From Element/Array
+		// From Element/array
 		stack_t(const size_t repeat_cnt,const T& val){
 			if(!::shinsei_stack_t_asElement(&obj,&val,repeat_cnt,sizeof(T))) throw std::bad_alloc();
 			return;
@@ -546,7 +546,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// In-place Constructors
+		// In-place constructors
 		explicit stack_t(shinsei::in_place_t){
 			if(!::shinsei_stack_t_as(&obj,sizeof(T))) throw std::bad_alloc();
 			return;
@@ -556,11 +556,11 @@ namespace shinsei{
 			return;
 		}
 		explicit stack_t(shinsei::in_place_t,const stack_t& src){
-			if(!::shinsei_stack_t_asCopy(&obj,src.cObj())) throw std::bad_alloc();
+			if(!::shinsei_stack_t_asAssign(&obj,src.cObj())) throw std::bad_alloc();
 			return;
 		}
 		explicit stack_t(shinsei::in_place_t,const ::shinsei_stack_t& src){
-			if(!::shinsei_stack_t_asCopy(&obj,&src)) throw std::bad_alloc();
+			if(!::shinsei_stack_t_asAssign(&obj,&src)) throw std::bad_alloc();
 			return;
 		}
 		explicit stack_t(shinsei::in_place_t,stack_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -580,17 +580,17 @@ namespace shinsei{
 			return;
 		}
 		
-		// Inlined Constructors
+		// Inlined constructors
 		explicit stack_t(shinsei::inlined_t,const size_t cap)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_stack_t_inl(&obj,cap,sizeof(T));
 			return;
 		}
-		explicit stack_t(shinsei::inlined_t,const stack_t& src){
-			if(!::shinsei_stack_t_inlCopy(&obj,src.cObj())) throw std::bad_alloc();
+		explicit stack_t(shinsei::inlined_t,const stack_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_stack_t_inlAssign(&obj,src.cObj());
 			return;
 		}
-		explicit stack_t(shinsei::inlined_t,const ::shinsei_stack_t& src){
-			if(!::shinsei_stack_t_inlCopy(&obj,&src)) throw std::bad_alloc();
+		explicit stack_t(shinsei::inlined_t,const ::shinsei_stack_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_stack_t_inlAssign(&obj,&src);
 			return;
 		}
 		explicit stack_t(shinsei::inlined_t,stack_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -611,7 +611,7 @@ namespace shinsei{
 		}
 		
 		// Destructor
-		~stack_t(){
+		~stack_t()_SHINSEI_OS_NOEXCEPT{
 			if(!inlined()) ::shinsei_stack_t_freeData(&obj);
 			return;
 		}
@@ -634,7 +634,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Info & Access
+		// Info & access
 		bool empty()const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_stack_t_empty(&obj);
 		}
@@ -704,7 +704,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Standard API Operations
+		// Standard API operations
 		void assign(const stack_t& src){
 			if(!::shinsei_stack_t_assign(&obj,src.cObj())) throw std::bad_alloc();
 			return;
@@ -741,7 +741,7 @@ namespace shinsei{
 			return *this;
 		}
 		
-		// Attach Operations
+		// Attach operations
 		void attach(const stack_t& src){
 			if(!::shinsei_stack_t_attach(&obj,src.cObj())) throw std::bad_alloc();
 			return;
@@ -755,13 +755,13 @@ namespace shinsei{
 			return;
 		}
 		
-		// Free Data
-		void freeData(){
+		// Free data
+		void freeData()_SHINSEI_OS_NOEXCEPT{
 			::shinsei_stack_t_freeData(&obj);
 			return;
 		}
 		
-		// Static Helpers (for explicit C-struct manipulation in user code)
+		// Static helpers (for explicit C-struct manipulation in user code)
 		static void as(stack_t*const restrict ptr){
 			if(!::shinsei_stack_t_as(ptr->cObj(),sizeof(T))) throw std::bad_alloc();
 			return;
@@ -779,11 +779,11 @@ namespace shinsei{
 			return;
 		}
 		static void as(stack_t*const restrict ptr,const stack_t& src){
-			if(!::shinsei_stack_t_asCopy(ptr->cObj(),src.cObj())) throw std::bad_alloc();
+			if(!::shinsei_stack_t_asAssign(ptr->cObj(),src.cObj())) throw std::bad_alloc();
 			return;
 		}
 		static void as(::shinsei_stack_t*const restrict ptr,const ::shinsei_stack_t& src){
-			if(!::shinsei_stack_t_asCopy(ptr,&src)) throw std::bad_alloc();
+			if(!::shinsei_stack_t_asAssign(ptr,&src)) throw std::bad_alloc();
 			return;
 		}
 		static void as(stack_t*const restrict ptr,stack_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -819,12 +819,12 @@ namespace shinsei{
 			::shinsei_stack_t_inl(ptr,cap,sizeof(T));
 			return;
 		}
-		static void inl(stack_t*const restrict ptr,const stack_t& src){
-			if(!::shinsei_stack_t_inlCopy(ptr->cObj(),src.cObj())) throw std::bad_alloc();
+		static void inl(stack_t*const restrict ptr,const stack_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_stack_t_inlAssign(ptr->cObj(),src.cObj());
 			return;
 		}
-		static void inl(::shinsei_stack_t*const restrict ptr,const ::shinsei_stack_t& src){
-			if(!::shinsei_stack_t_inlCopy(ptr,&src)) throw std::bad_alloc();
+		static void inl(::shinsei_stack_t*const restrict ptr,const ::shinsei_stack_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_stack_t_inlAssign(ptr,&src);
 			return;
 		}
 		static void inl(stack_t*const restrict ptr,stack_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -836,7 +836,7 @@ namespace shinsei{
 			return;
 		}
 		static void inl(stack_t*const restrict ptr,const T& val,const size_t cnt)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_stack_t_inlElement(ptr,&val,cnt,sizeof(T));
+			::shinsei_stack_t_inlElement(ptr->cObj(),&val,cnt,sizeof(T));
 			return;
 		}
 		static void inl(::shinsei_stack_t*const restrict ptr,const T& val,const size_t cnt)_SHINSEI_OS_NOEXCEPT{
@@ -852,7 +852,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Core Identity Controls
+		// Core identity controls
 		bool inlined()const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_stack_t_inlined(&obj);
 		}
@@ -864,7 +864,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Type Casting / Access
+		// Type casting / access
 		::shinsei_stack_t* cObj()_SHINSEI_OS_NOEXCEPT{
 			return &obj;
 		}
@@ -897,13 +897,13 @@ namespace shinsei{
 			if(!::shinsei_queue_t_asCapacity(&obj,cap,sizeof(T))) throw std::bad_alloc();
 			return;
 		}
-		// Copy constructor
+		// Assign constructor
 		queue_t(const queue_t& src){
-			if(!::shinsei_queue_t_asCopy(&obj,src.cObj())) throw std::bad_alloc();
+			if(!::shinsei_queue_t_asAssign(&obj,src.cObj())) throw std::bad_alloc();
 			return;
 		}
 		queue_t(const ::shinsei_queue_t& src){
-			if(!::shinsei_queue_t_asCopy(&obj,&src)) throw std::bad_alloc();
+			if(!::shinsei_queue_t_asAssign(&obj,&src)) throw std::bad_alloc();
 			return;
 		}
 		// Move constructor
@@ -915,7 +915,7 @@ namespace shinsei{
 			::shinsei_queue_t_asMove(&obj,&src);
 			return;
 		}
-		// From Element/Array
+		// From Element/array
 		queue_t(const size_t repeat_cnt,const T& val){
 			if(!::shinsei_queue_t_asElement(&obj,&val,repeat_cnt,sizeof(T))) throw std::bad_alloc();
 			return;
@@ -925,7 +925,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// In-place Constructors
+		// In-place constructors
 		explicit queue_t(shinsei::in_place_t){
 			if(!::shinsei_queue_t_as(&obj,sizeof(T))) throw std::bad_alloc();
 			return;
@@ -935,11 +935,11 @@ namespace shinsei{
 			return;
 		}
 		explicit queue_t(shinsei::in_place_t,const queue_t& src){
-			if(!::shinsei_queue_t_asCopy(&obj,src.cObj())) throw std::bad_alloc();
+			if(!::shinsei_queue_t_asAssign(&obj,src.cObj())) throw std::bad_alloc();
 			return;
 		}
 		explicit queue_t(shinsei::in_place_t,const ::shinsei_queue_t& src){
-			if(!::shinsei_queue_t_asCopy(&obj,&src)) throw std::bad_alloc();
+			if(!::shinsei_queue_t_asAssign(&obj,&src)) throw std::bad_alloc();
 			return;
 		}
 		explicit queue_t(shinsei::in_place_t,queue_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -959,17 +959,17 @@ namespace shinsei{
 			return;
 		}
 		
-		// Inlined Constructors
+		// Inlined constructors
 		explicit queue_t(shinsei::inlined_t,const size_t cap)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_queue_t_inl(&obj,cap,sizeof(T));
 			return;
 		}
-		explicit queue_t(shinsei::inlined_t,const queue_t& src){
-			if(!::shinsei_queue_t_inlCopy(&obj,src.cObj())) throw std::bad_alloc();
+		explicit queue_t(shinsei::inlined_t,const queue_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_queue_t_inlAssign(&obj,src.cObj());
 			return;
 		}
-		explicit queue_t(shinsei::inlined_t,const ::shinsei_queue_t& src){
-			if(!::shinsei_queue_t_inlCopy(&obj,&src)) throw std::bad_alloc();
+		explicit queue_t(shinsei::inlined_t,const ::shinsei_queue_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_queue_t_inlAssign(&obj,&src);
 			return;
 		}
 		explicit queue_t(shinsei::inlined_t,queue_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -990,7 +990,7 @@ namespace shinsei{
 		}
 		
 		// Destructor
-		~queue_t(){
+		~queue_t()_SHINSEI_OS_NOEXCEPT{
 			if(!inlined()) ::shinsei_queue_t_freeData(&obj);
 			return;
 		}
@@ -1013,7 +1013,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Info & Access
+		// Info & access
 		bool empty()const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_queue_t_empty(&obj);
 		}
@@ -1086,7 +1086,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Standard API Operations
+		// Standard API operations
 		void assign(const queue_t& src){
 			if(!::shinsei_queue_t_assign(&obj,src.cObj())) throw std::bad_alloc();
 			return;
@@ -1123,7 +1123,7 @@ namespace shinsei{
 			return *this;
 		}
 		
-		// Attach Operations
+		// Attach operations
 		void attach(const queue_t& src){
 			if(!::shinsei_queue_t_attach(&obj,src.cObj())) throw std::bad_alloc();
 			return;
@@ -1137,13 +1137,13 @@ namespace shinsei{
 			return;
 		}
 		
-		// Free Data
-		void freeData(){
+		// Free data
+		void freeData()_SHINSEI_OS_NOEXCEPT{
 			::shinsei_queue_t_freeData(&obj);
 			return;
 		}
 		
-		// Static Helpers (for explicit C-struct manipulation in user code)
+		// Static helpers (for explicit C-struct manipulation in user code)
 		static void as(queue_t*const restrict ptr){
 			if(!::shinsei_queue_t_as(ptr->cObj(),sizeof(T))) throw std::bad_alloc();
 			return;
@@ -1161,11 +1161,11 @@ namespace shinsei{
 			return;
 		}
 		static void as(queue_t*const restrict ptr,const queue_t& src){
-			if(!::shinsei_queue_t_asCopy(ptr->cObj(),src.cObj())) throw std::bad_alloc();
+			if(!::shinsei_queue_t_asAssign(ptr->cObj(),src.cObj())) throw std::bad_alloc();
 			return;
 		}
 		static void as(::shinsei_queue_t*const restrict ptr,const ::shinsei_queue_t& src){
-			if(!::shinsei_queue_t_asCopy(ptr,&src)) throw std::bad_alloc();
+			if(!::shinsei_queue_t_asAssign(ptr,&src)) throw std::bad_alloc();
 			return;
 		}
 		static void as(queue_t*const restrict ptr,queue_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -1201,12 +1201,12 @@ namespace shinsei{
 			::shinsei_queue_t_inl(ptr,cap,sizeof(T));
 			return;
 		}
-		static void inl(queue_t*const restrict ptr,const queue_t& src){
-			if(!::shinsei_queue_t_inlCopy(ptr->cObj(),src.cObj())) throw std::bad_alloc();
+		static void inl(queue_t*const restrict ptr,const queue_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_queue_t_inlAssign(ptr->cObj(),src.cObj());
 			return;
 		}
-		static void inl(::shinsei_queue_t*const restrict ptr,const ::shinsei_queue_t& src){
-			if(!::shinsei_queue_t_inlCopy(ptr,&src)) throw std::bad_alloc();
+		static void inl(::shinsei_queue_t*const restrict ptr,const ::shinsei_queue_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_queue_t_inlAssign(ptr,&src);
 			return;
 		}
 		static void inl(queue_t*const restrict ptr,queue_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -1234,7 +1234,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Core Identity Controls
+		// Core identity controls
 		bool inlined()const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_queue_t_inlined(&obj);
 		}
@@ -1246,7 +1246,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Type Casting / Access
+		// Type casting / access
 		::shinsei_queue_t* cObj()_SHINSEI_OS_NOEXCEPT{
 			return &obj;
 		}
@@ -1279,13 +1279,13 @@ namespace shinsei{
 			if(!::shinsei_deque_t_asCapacity(&obj,cap,sizeof(T))) throw std::bad_alloc();
 			return;
 		}
-		// Copy constructor
+		// Assign constructor
 		deque_t(const deque_t& src){
-			if(!::shinsei_deque_t_asCopy(&obj,src.cObj())) throw std::bad_alloc();
+			if(!::shinsei_deque_t_asAssign(&obj,src.cObj())) throw std::bad_alloc();
 			return;
 		}
 		deque_t(const ::shinsei_deque_t& src){
-			if(!::shinsei_deque_t_asCopy(&obj,&src)) throw std::bad_alloc();
+			if(!::shinsei_deque_t_asAssign(&obj,&src)) throw std::bad_alloc();
 			return;
 		}
 		// Move constructor
@@ -1297,7 +1297,7 @@ namespace shinsei{
 			::shinsei_deque_t_asMove(&obj,&src);
 			return;
 		}
-		// From Element/Array
+		// From Element/array
 		deque_t(const size_t repeat_cnt,const T& val){
 			if(!::shinsei_deque_t_asElement(&obj,&val,repeat_cnt,sizeof(T))) throw std::bad_alloc();
 			return;
@@ -1307,7 +1307,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// In-place Constructors
+		// In-place constructors
 		explicit deque_t(shinsei::in_place_t){
 			if(!::shinsei_deque_t_as(&obj,sizeof(T))) throw std::bad_alloc();
 			return;
@@ -1317,11 +1317,11 @@ namespace shinsei{
 			return;
 		}
 		explicit deque_t(shinsei::in_place_t,const deque_t& src){
-			if(!::shinsei_deque_t_asCopy(&obj,src.cObj())) throw std::bad_alloc();
+			if(!::shinsei_deque_t_asAssign(&obj,src.cObj())) throw std::bad_alloc();
 			return;
 		}
 		explicit deque_t(shinsei::in_place_t,const ::shinsei_deque_t& src){
-			if(!::shinsei_deque_t_asCopy(&obj,&src)) throw std::bad_alloc();
+			if(!::shinsei_deque_t_asAssign(&obj,&src)) throw std::bad_alloc();
 			return;
 		}
 		explicit deque_t(shinsei::in_place_t,deque_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -1341,17 +1341,17 @@ namespace shinsei{
 			return;
 		}
 		
-		// Inlined Constructors
+		// Inlined constructors
 		explicit deque_t(shinsei::inlined_t,const size_t cap)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_deque_t_inl(&obj,cap,sizeof(T));
 			return;
 		}
-		explicit deque_t(shinsei::inlined_t,const deque_t& src){
-			if(!::shinsei_deque_t_inlCopy(&obj,src.cObj())) throw std::bad_alloc();
+		explicit deque_t(shinsei::inlined_t,const deque_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_deque_t_inlAssign(&obj,src.cObj());
 			return;
 		}
-		explicit deque_t(shinsei::inlined_t,const ::shinsei_deque_t& src){
-			if(!::shinsei_deque_t_inlCopy(&obj,&src)) throw std::bad_alloc();
+		explicit deque_t(shinsei::inlined_t,const ::shinsei_deque_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_deque_t_inlAssign(&obj,&src);
 			return;
 		}
 		explicit deque_t(shinsei::inlined_t,deque_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -1372,7 +1372,7 @@ namespace shinsei{
 		}
 		
 		// Destructor
-		~deque_t(){
+		~deque_t()_SHINSEI_OS_NOEXCEPT{
 			if(!inlined()) ::shinsei_deque_t_freeData(&obj);
 			return;
 		}
@@ -1395,7 +1395,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Info & Access
+		// Info & access
 		bool empty()const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_deque_t_empty(&obj);
 		}
@@ -1491,7 +1491,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Standard API Operations
+		// Standard API operations
 		void assign(const deque_t& src){
 			if(!::shinsei_deque_t_assign(&obj,src.cObj())) throw std::bad_alloc();
 			return;
@@ -1528,7 +1528,7 @@ namespace shinsei{
 			return *this;
 		}
 		
-		// Attach Operations
+		// Attach operations
 		void attach(const deque_t& src){
 			if(!::shinsei_deque_t_attach(&obj,src.cObj())) throw std::bad_alloc();
 			return;
@@ -1542,13 +1542,13 @@ namespace shinsei{
 			return;
 		}
 		
-		// Free Data
+		// Free data
 		void freeData(){
 			::shinsei_deque_t_freeData(&obj);
 			return;
 		}
 		
-		// Static Helpers (for explicit C-struct manipulation in user code)
+		// Static helpers (for explicit C-struct manipulation in user code)
 		static void as(deque_t*const restrict ptr){
 			if(!::shinsei_deque_t_as(ptr->cObj(),sizeof(T))) throw std::bad_alloc();
 			return;
@@ -1566,11 +1566,11 @@ namespace shinsei{
 			return;
 		}
 		static void as(deque_t*const restrict ptr,const deque_t& src){
-			if(!::shinsei_deque_t_asCopy(ptr->cObj(),src.cObj())) throw std::bad_alloc();
+			if(!::shinsei_deque_t_asAssign(ptr->cObj(),src.cObj())) throw std::bad_alloc();
 			return;
 		}
 		static void as(::shinsei_deque_t*const restrict ptr,const ::shinsei_deque_t& src){
-			if(!::shinsei_deque_t_asCopy(ptr,&src)) throw std::bad_alloc();
+			if(!::shinsei_deque_t_asAssign(ptr,&src)) throw std::bad_alloc();
 			return;
 		}
 		static void as(deque_t*const restrict ptr,deque_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -1606,12 +1606,12 @@ namespace shinsei{
 			::shinsei_deque_t_inl(ptr,cap,sizeof(T));
 			return;
 		}
-		static void inl(deque_t*const restrict ptr,const deque_t& src){
-			if(!::shinsei_deque_t_inlCopy(ptr->cObj(),src.cObj())) throw std::bad_alloc();
+		static void inl(deque_t*const restrict ptr,const deque_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_deque_t_inlAssign(ptr->cObj(),src.cObj());
 			return;
 		}
-		static void inl(::shinsei_deque_t*const restrict ptr,const ::shinsei_deque_t& src){
-			if(!::shinsei_deque_t_inlCopy(ptr,&src)) throw std::bad_alloc();
+		static void inl(::shinsei_deque_t*const restrict ptr,const ::shinsei_deque_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_deque_t_inlAssign(ptr,&src);
 			return;
 		}
 		static void inl(deque_t*const restrict ptr,deque_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -1639,7 +1639,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Core Identity Controls
+		// Core identity controls
 		bool inlined()const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_deque_t_inlined(&obj);
 		}
@@ -1651,7 +1651,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Type Casting / Access
+		// Type casting / access
 		::shinsei_deque_t* cObj()_SHINSEI_OS_NOEXCEPT{
 			return &obj;
 		}
@@ -1684,13 +1684,13 @@ namespace shinsei{
 			if(!::shinsei_vector_t_asCapacity(&obj,cap,sizeof(T))) throw std::bad_alloc();
 			return;
 		}
-		// Copy constructor
+		// Assign constructor
 		vector_t(const vector_t& src){
-			if(!::shinsei_vector_t_asCopy(&obj,src.cObj())) throw std::bad_alloc();
+			if(!::shinsei_vector_t_asAssign(&obj,src.cObj())) throw std::bad_alloc();
 			return;
 		}
 		vector_t(const ::shinsei_vector_t& src){
-			if(!::shinsei_vector_t_asCopy(&obj,&src)) throw std::bad_alloc();
+			if(!::shinsei_vector_t_asAssign(&obj,&src)) throw std::bad_alloc();
 			return;
 		}
 		// Move constructor
@@ -1702,7 +1702,7 @@ namespace shinsei{
 			::shinsei_vector_t_asMove(&obj,&src);
 			return;
 		}
-		// From Element/Array
+		// From Element/array
 		vector_t(const size_t repeat_cnt,const T& val){
 			if(!::shinsei_vector_t_asElement(&obj,&val,repeat_cnt,sizeof(T))) throw std::bad_alloc();
 			return;
@@ -1712,7 +1712,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// In-place Constructors
+		// In-place constructors
 		explicit vector_t(shinsei::in_place_t){
 			if(!::shinsei_vector_t_as(&obj,sizeof(T))) throw std::bad_alloc();
 			return;
@@ -1722,11 +1722,11 @@ namespace shinsei{
 			return;
 		}
 		explicit vector_t(shinsei::in_place_t,const vector_t& src){
-			if(!::shinsei_vector_t_asCopy(&obj,src.cObj())) throw std::bad_alloc();
+			if(!::shinsei_vector_t_asAssign(&obj,src.cObj())) throw std::bad_alloc();
 			return;
 		}
 		explicit vector_t(shinsei::in_place_t,const ::shinsei_vector_t& src){
-			if(!::shinsei_vector_t_asCopy(&obj,&src)) throw std::bad_alloc();
+			if(!::shinsei_vector_t_asAssign(&obj,&src)) throw std::bad_alloc();
 			return;
 		}
 		explicit vector_t(shinsei::in_place_t,vector_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -1746,17 +1746,17 @@ namespace shinsei{
 			return;
 		}
 		
-		// Inlined Constructors
+		// Inlined constructors
 		explicit vector_t(shinsei::inlined_t,const size_t cap)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_vector_t_inl(&obj,cap,sizeof(T));
 			return;
 		}
-		explicit vector_t(shinsei::inlined_t,const vector_t& src){
-			if(!::shinsei_vector_t_inlAssign(&obj,src.cObj())) throw std::bad_alloc();
+		explicit vector_t(shinsei::inlined_t,const vector_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_vector_t_inlAssign(&obj,src.cObj());
 			return;
 		}
-		explicit vector_t(shinsei::inlined_t,const ::shinsei_vector_t& src){
-			if(!::shinsei_vector_t_inlAssign(&obj,&src)) throw std::bad_alloc();
+		explicit vector_t(shinsei::inlined_t,const ::shinsei_vector_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_vector_t_inlAssign(&obj,&src);
 			return;
 		}
 		explicit vector_t(shinsei::inlined_t,vector_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -1800,7 +1800,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Info & Access
+		// Info & access
 		bool empty()const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_vector_t_empty(&obj);
 		}
@@ -1897,7 +1897,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Standard API Operations
+		// Standard API operations
 		void assign(const vector_t& src){
 			if(!::shinsei_vector_t_assign(&obj,src.cObj())) throw std::bad_alloc();
 			return;
@@ -1934,7 +1934,7 @@ namespace shinsei{
 			return *this;
 		}
 		
-		// Attach Operations
+		// Attach operations
 		void attach(const vector_t& src){
 			if(!::shinsei_vector_t_attach(&obj,src.cObj())) throw std::bad_alloc();
 			return;
@@ -1948,13 +1948,13 @@ namespace shinsei{
 			return;
 		}
 		
-		// Free Data
+		// Free data
 		void freeData(){
 			::shinsei_vector_t_freeData(&obj);
 			return;
 		}
 		
-		// Static Helpers (for explicit C-struct manipulation in user code)
+		// Static helpers (for explicit C-struct manipulation in user code)
 		static void as(vector_t*const restrict ptr){
 			if(!::shinsei_vector_t_as(ptr->cObj(),sizeof(T))) throw std::bad_alloc();
 			return;
@@ -1972,11 +1972,11 @@ namespace shinsei{
 			return;
 		}
 		static void as(vector_t*const restrict ptr,const vector_t& src){
-			if(!::shinsei_vector_t_asCopy(ptr->cObj(),src.cObj())) throw std::bad_alloc();
+			if(!::shinsei_vector_t_asAssign(ptr->cObj(),src.cObj())) throw std::bad_alloc();
 			return;
 		}
 		static void as(::shinsei_vector_t*const restrict ptr,const ::shinsei_vector_t& src){
-			if(!::shinsei_vector_t_asCopy(ptr,&src)) throw std::bad_alloc();
+			if(!::shinsei_vector_t_asAssign(ptr,&src)) throw std::bad_alloc();
 			return;
 		}
 		static void as(vector_t*const restrict ptr,vector_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -2012,12 +2012,12 @@ namespace shinsei{
 			::shinsei_vector_t_inl(ptr,cap,sizeof(T));
 			return;
 		}
-		static void inl(vector_t*const restrict ptr,const vector_t& src){
-			if(!::shinsei_vector_t_inlAssign(ptr->cObj(),src.cObj())) throw std::bad_alloc();
+		static void inl(vector_t*const restrict ptr,const vector_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_vector_t_inlAssign(ptr->cObj(),src.cObj());
 			return;
 		}
-		static void inl(::shinsei_vector_t*const restrict ptr,const ::shinsei_vector_t& src){
-			if(!::shinsei_vector_t_inlAssign(ptr,&src)) throw std::bad_alloc();
+		static void inl(::shinsei_vector_t*const restrict ptr,const ::shinsei_vector_t& src)_SHINSEI_OS_NOEXCEPT{
+			::shinsei_vector_t_inlAssign(ptr,&src);
 			return;
 		}
 		static void inl(vector_t*const restrict ptr,vector_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -2045,7 +2045,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Core Identity Controls
+		// Core identity controls
 		bool inlined()const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_vector_t_inlined(&obj);
 		}
@@ -2057,7 +2057,7 @@ namespace shinsei{
 			return;
 		}
 		
-		// Type Casting / Access
+		// Type casting / access
 		::shinsei_vector_t* cObj()_SHINSEI_OS_NOEXCEPT{
 			return &obj;
 		}

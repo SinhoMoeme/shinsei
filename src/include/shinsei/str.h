@@ -4,7 +4,8 @@
 #include"shinsei/.internal/std.h"
 
 #ifdef _SHINSEI_OS_CPP
-extern "C" {
+#define this _this
+extern "C"{
 #endif
 
 _SHINSEI_LIB_API unsigned int shinsei_systemCP()_SHINSEI_OS_NOEXCEPT;

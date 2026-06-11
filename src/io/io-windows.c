@@ -1,5 +1,10 @@
 #include"shinsei/io.h"
 
+#ifdef _SHINSEI_OS_CPP
+#define this _this
+extern "C"{
+#endif
+
 // Copy from minimal/str.c
 _SHINSEI_OS_INLINE static int uTF32CharToUTF16Char(char16_t*const restrict des,const char32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(src<0x10000,1)){
@@ -97,7 +102,8 @@ _SHINSEI_OS_INLINE static void printWNative(const wchar_t*const restrict str,con
 	if(GetConsoleMode(hOut,&mode)){
 		DWORD written=0;
 		WriteConsoleW(hOut,str,(DWORD)len,&written,nullptr);
-	}else{
+	}
+	else{
 		DWORD written=0;
 		WriteFile(hOut,str,(DWORD)(len*sizeof(wchar_t)),&written,nullptr);
 	}
@@ -218,9 +224,8 @@ _SHINSEI_OS_INLINE static void printInt64NativeDec(int64_t val)_SHINSEI_OS_NOEXC
 		const wchar_t minus=L'-';
 		printWNative(&minus,1);
 		printUInt64NativeDec((uint64_t)(-(uint64_t)val));
-	}else{
-		printUInt64NativeDec((uint64_t)val);
 	}
+	else printUInt64NativeDec((uint64_t)val);
 	return;
 }
 
@@ -619,3 +624,8 @@ void shinsei_printBoolCustomN(const bool val,const wchar_t*const restrict true_t
 	printWNative((const wchar_t*)(val*(uintptr_t)true_text+(!val)*(uintptr_t)false_text),val*true_len+(!val)*false_len);
 	return;
 }
+
+#ifdef _SHINSEI_OS_CPP
+}
+#undef this
+#endif

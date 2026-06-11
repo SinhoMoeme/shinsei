@@ -38,7 +38,7 @@ namespace shinsei{
 		
 		// Destructor
 		~sleeper_t()_SHINSEI_OS_NOEXCEPT{
-			::shinsei_sleeper_t_dec(&obj);
+			if(!inlined()) ::shinsei_sleeper_t_freeData(&obj);
 			return;
 		}
 		
@@ -133,7 +133,7 @@ namespace shinsei{
 		
 		// Destructor
 		~clock_t()_SHINSEI_OS_NOEXCEPT{
-			::shinsei_clock_t_dec(&obj);
+			if(!inlined()) ::shinsei_clock_t_freeData(&obj);
 			return;
 		}
 		
@@ -257,7 +257,7 @@ namespace shinsei{
 		
 		// Destructor
 		~thread_t()_SHINSEI_OS_NOEXCEPT{
-			::shinsei_thread_t_dec(&obj);
+			if(!inlined()) ::shinsei_thread_t_freeData(&obj);
 			return;
 		}
 		

@@ -16,11 +16,11 @@ namespace shinsei{
 			return;
 		}
 		arena_meta_t(const arena_meta_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_arena_meta_t_asCopy(&obj,src.cObj());
+			::shinsei_arena_meta_t_asAssign(&obj,src.cObj());
 			return;
 		}
 		arena_meta_t(const ::shinsei_arena_meta_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_arena_meta_t_asCopy(&obj,&src);
+			::shinsei_arena_meta_t_asAssign(&obj,&src);
 			return;
 		}
 		arena_meta_t(arena_meta_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -38,11 +38,11 @@ namespace shinsei{
 			return;
 		}
 		explicit arena_meta_t(shinsei::in_place_t,const arena_meta_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_arena_meta_t_asCopy(&obj,src.cObj());
+			::shinsei_arena_meta_t_asAssign(&obj,src.cObj());
 			return;
 		}
 		explicit arena_meta_t(shinsei::in_place_t,const ::shinsei_arena_meta_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_arena_meta_t_asCopy(&obj,&src);
+			::shinsei_arena_meta_t_asAssign(&obj,&src);
 			return;
 		}
 		explicit arena_meta_t(shinsei::in_place_t,arena_meta_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -60,11 +60,11 @@ namespace shinsei{
 			return;
 		}
 		explicit arena_meta_t(shinsei::inlined_t,const arena_meta_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_arena_meta_t_inlCopy(&obj,src.cObj());
+			::shinsei_arena_meta_t_inlAssign(&obj,src.cObj());
 			return;
 		}
 		explicit arena_meta_t(shinsei::inlined_t,const ::shinsei_arena_meta_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_arena_meta_t_inlCopy(&obj,&src);
+			::shinsei_arena_meta_t_inlAssign(&obj,&src);
 			return;
 		}
 		explicit arena_meta_t(shinsei::inlined_t,arena_meta_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -142,11 +142,11 @@ namespace shinsei{
 			return;
 		}
 		static void as(arena_meta_t*const restrict ptr,const arena_meta_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_arena_meta_t_asCopy(ptr->cObj(),src.cObj());
+			::shinsei_arena_meta_t_asAssign(ptr->cObj(),src.cObj());
 			return;
 		}
 		static void as(arena_meta_t*const restrict ptr,const ::shinsei_arena_meta_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_arena_meta_t_asCopy(ptr->cObj(),&src);
+			::shinsei_arena_meta_t_asAssign(ptr->cObj(),&src);
 			return;
 		}
 		static void as(arena_meta_t*const restrict ptr,arena_meta_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -167,11 +167,11 @@ namespace shinsei{
 			return;
 		}
 		static void inl(arena_meta_t*const restrict ptr,const arena_meta_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_arena_meta_t_inlCopy(ptr->cObj(),src.cObj());
+			::shinsei_arena_meta_t_inlAssign(ptr->cObj(),src.cObj());
 			return;
 		}
 		static void inl(arena_meta_t*const restrict ptr,const ::shinsei_arena_meta_t& src)_SHINSEI_OS_NOEXCEPT{
-			::shinsei_arena_meta_t_inlCopy(ptr->cObj(),&src);
+			::shinsei_arena_meta_t_inlAssign(ptr->cObj(),&src);
 			return;
 		}
 		static void inl(arena_meta_t*const restrict ptr,arena_meta_t&& src)_SHINSEI_OS_NOEXCEPT{
@@ -526,7 +526,7 @@ namespace shinsei{
 		}
 		
 		// In-place tag dispatcher
-		explicit spinlock_t(shinsei::inplace_t,const bool instant_lock=false)_SHINSEI_OS_NOEXCEPT{
+		explicit spinlock_t(shinsei::in_place_t,const bool instant_lock=false)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_spinlock_t_as(&obj,instant_lock);
 			return;
 		}

@@ -1,5 +1,10 @@
 #include"shinsei/minimal/str.h"
 
+#ifdef _SHINSEI_OS_CPP
+#define this _this
+extern "C"{
+#endif
+
 bool shinsei_isANSICodePage(const unsigned int id)_SHINSEI_OS_NOEXCEPT{
 	switch(id){
 		// Count: 152
@@ -4459,7 +4464,7 @@ _SHINSEI_OS_INLINE static void str_setNull(shinsei_string_t*const restrict this)
 	__builtin_memset(str_data(this)+this->size*this->char_size,0,this->char_size);
 }
 
-// [Internal] Expand capacity by more_cap
+// [Internal] Expand capacity
 _SHINSEI_OS_INLINE static bool str_expand(shinsei_string_t*const restrict this,const size_t more_cap)_SHINSEI_OS_NOEXCEPT{
 	if(str_inlined(this)){
 		this->cap+=more_cap;
@@ -4472,7 +4477,7 @@ _SHINSEI_OS_INLINE static bool str_expand(shinsei_string_t*const restrict this,c
 	return true;
 }
 
-// [Internal] Shrink capacity by less_cap
+// [Internal] Shrink capacity
 _SHINSEI_OS_INLINE static bool str_shrink(shinsei_string_t*const restrict this,const size_t less_cap)_SHINSEI_OS_NOEXCEPT{
 	if(str_inlined(this)){
 		this->cap-=less_cap;
@@ -4485,21 +4490,8 @@ _SHINSEI_OS_INLINE static bool str_shrink(shinsei_string_t*const restrict this,c
 	return true;
 }
 
-// [Internal] Reserve capacity
-_SHINSEI_OS_INLINE static bool str_reserve(shinsei_string_t* const restrict this,const size_t cap)_SHINSEI_OS_NOEXCEPT{
-	if(str_inlined(this)){
-		this->cap=cap;
-		return true;
-	}
-	register char*const ptr=(char*)__builtin_realloc(this->data,(cap+1)*this->char_size);
-	if(__builtin_expect(ptr==nullptr,0)) return false;
-	this->cap=cap;
-	this->data=ptr;
-	return true;
-}
-
 // [Internal] Default constructor
-_SHINSEI_OS_INLINE static bool str_as(shinsei_string_t*const restrict this,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool str_con(shinsei_string_t*const restrict this,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
 	this->ctrl=0;
 	this->code_page=0;
 	this->size=0;
@@ -4511,22 +4503,8 @@ _SHINSEI_OS_INLINE static bool str_as(shinsei_string_t*const restrict this,const
 	return true;
 }
 
-// [Internal] Array constructor
-_SHINSEI_OS_INLINE static bool str_asArray(shinsei_string_t*const restrict this,const void*const restrict arr,const size_t len,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
-	this->ctrl=0;
-	this->code_page=0;
-	this->size=len;
-	this->cap=len+!len*shinsei_string_t_DEF_CAP;
-	this->char_size=char_size;
-	this->data=(char*)__builtin_malloc((this->cap+1)*this->char_size);
-	if(__builtin_expect(this->data==nullptr,0)) return false;
-	__builtin_memcpy(str_data(this),arr,len*char_size);
-	str_setNull(this);
-	return true;
-}
-
-// [Internal] Static copy constructor
-_SHINSEI_OS_INLINE static bool str_asCopy(shinsei_string_t*const restrict this,const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
+// [Internal] Assign constructor
+_SHINSEI_OS_INLINE static bool str_asAssign(shinsei_string_t*const restrict this,const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
 	this->ctrl=src->ctrl;
 	this->code_page=src->code_page;
 	this->size=src->size;
@@ -4540,8 +4518,8 @@ _SHINSEI_OS_INLINE static bool str_asCopy(shinsei_string_t*const restrict this,c
 	return true;
 }
 
-// [Internal] Static move constructor
-_SHINSEI_OS_INLINE static void str_asMove(shinsei_string_t*const restrict this,shinsei_string_t* const restrict src)_SHINSEI_OS_NOEXCEPT{
+// [Internal] Move constructor
+_SHINSEI_OS_INLINE static void str_asMove(shinsei_string_t*const restrict this,shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
 	this->ctrl=src->ctrl;
 	this->code_page=src->code_page;
 	this->size=src->size;
@@ -4550,314 +4528,253 @@ _SHINSEI_OS_INLINE static void str_asMove(shinsei_string_t*const restrict this,s
 	if(str_inlined(src)){
 		__builtin_memcpy(str_data(this),str_data(src),(this->size+1)*this->char_size);
 	}
-	else{
-		this->data=src->data;
-	}
+	else this->data=src->data;
 	src->ctrl=0;
+	src->code_page=0;
 	src->size=0;
 	src->cap=0;
 	src->data=nullptr;
 	return;
 }
 
-// [Internal] Free all elements
+// [Internal] Free
 _SHINSEI_OS_INLINE static void str_freeData(shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	__builtin_free(this->data);
 	return;
 }
 
-// [Internal] Assign operations
-_SHINSEI_OS_INLINE static bool str_assign(shinsei_string_t*const restrict this,const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
-	if(!str_inlined(this)&&!str_inlined(src)){
-		if(this->cap!=src->cap){
-			register char* ptr=(char*)__builtin_realloc(this->data,(src->cap+1)*this->char_size);
-			if(__builtin_expect(ptr==nullptr,0)) return false;
-			this->data=ptr;
-		}
-	}
-	else if(!str_inlined(this)&&str_inlined(src)){
-		str_freeData(this);
-	}
-	else if(str_inlined(this)&&!str_inlined(src)){
-		this->data=(char*)__builtin_malloc((src->cap+1)*this->char_size);
-		if(__builtin_expect(this->data==nullptr,0)) return false;
-	}
-	
-	this->ctrl=src->ctrl;
-	this->code_page=src->code_page;
-	this->size=src->size;
-	this->cap=src->cap;
-	__builtin_memcpy(str_data(this),str_data(src),(this->size+1)*this->char_size);
-	return true;
-}
-_SHINSEI_OS_INLINE static bool str_assignRaw(shinsei_string_t*const restrict this,const void*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-	if(this->cap<len){
-		if(!str_reserve(this,len)) return false;
-	}
-	this->size=len;
-	__builtin_memcpy(str_data(this),src,len*this->char_size);
-	str_setNull(this);
-	return true;
-}
-_SHINSEI_OS_INLINE static bool str_assignChar(shinsei_string_t*const restrict this,const void*const restrict ch,const size_t len)_SHINSEI_OS_NOEXCEPT{
-	if(this->cap<len){
-		if(!str_reserve(this,len)) return false;
-	}
-	this->size=len;
-	register char*const dst=str_data(this);
-	for(register size_t i=0;i<len;++i) __builtin_memcpy(dst+i*this->char_size,ch,this->char_size);
-	str_setNull(this);
-	return true;
-}
-
-// [Internal] Append Operations
-_SHINSEI_OS_INLINE static bool str_appendRaw(shinsei_string_t*const restrict this,const void*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+// [Internal] Batch Add
+_SHINSEI_OS_INLINE static bool str_pushBackArray(shinsei_string_t*const restrict this,const void*const restrict arr,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	if(!len) return true;
 	if(this->size+len>this->cap){
-		register const size_t needed=this->size+len-this->cap;
-		if(!str_expand(this,(needed>shinsei_string_t_DEF_CAP)*needed+(needed<=shinsei_string_t_DEF_CAP)*shinsei_string_t_DEF_CAP)) return false;
+		if(str_inlined(this)) return false;
+		register size_t needed=(this->cap<<1>=shinsei_string_t_DEF_CAP)*this->cap+(this->cap<<1<shinsei_string_t_DEF_CAP)*(shinsei_string_t_DEF_CAP-this->cap);
+		needed=(needed<=len)*len+!(needed<=len)*needed;
+		if(!str_expand(this,needed)) return false;
 	}
-	__builtin_memcpy(str_data(this)+this->size*this->char_size,src,len*this->char_size);
-	this->size+=len;
-	str_setNull(this);
-	return true;
-}
-_SHINSEI_OS_INLINE static bool str_appendChar(shinsei_string_t*const restrict this,const void*const restrict ch,const size_t len)_SHINSEI_OS_NOEXCEPT{
-	if(this->size+len>this->cap){
-		register const size_t needed=this->size+len-this->cap;
-		if(!str_expand(this,(needed>shinsei_string_t_DEF_CAP)*needed+(needed<=shinsei_string_t_DEF_CAP)*shinsei_string_t_DEF_CAP)) return false;
-	}
-	register char*const dst=str_data(this);
-	for(register size_t i=0;i<len;++i) __builtin_memcpy(dst+(this->size+i)*this->char_size,ch,this->char_size);
+	__builtin_memcpy(str_data(this)+this->size*this->char_size,arr,len*this->char_size);
 	this->size+=len;
 	str_setNull(this);
 	return true;
 }
 
-// [Internal] Insert & Erase Arrays
+_SHINSEI_OS_INLINE static bool str_pushBackChar(shinsei_string_t*const restrict this,const void*const restrict val,const size_t cnt)_SHINSEI_OS_NOEXCEPT{
+	if(!cnt) return true;
+	if(this->size+cnt>this->cap){
+		if(str_inlined(this)) return false;
+		register size_t needed=(this->cap<<1>=shinsei_string_t_DEF_CAP)*this->cap+(this->cap<<1<shinsei_string_t_DEF_CAP)*(shinsei_string_t_DEF_CAP-this->cap);
+		needed=(needed<=cnt)*cnt+!(needed<=cnt)*needed;
+		if(!str_expand(this,needed)) return false;
+	}
+	register char*const dst=str_data(this);
+	for(register size_t i=0;i<cnt;++i) __builtin_memcpy(dst+(this->size+i)*this->char_size,val,this->char_size);
+	this->size+=cnt;
+	str_setNull(this);
+	return true;
+}
+
+// [Internal] Batch Remove
+_SHINSEI_OS_INLINE static void str_popBackArray(shinsei_string_t*const restrict this,const size_t cnt)_SHINSEI_OS_NOEXCEPT{
+	this->size-=cnt;
+	str_setNull(this);
+	if(str_inlined(this)) return;
+	if(__builtin_expect(this->size>=this->cap>>2,1)) return;
+	str_shrink(this,(this->cap>>1>=shinsei_string_t_DEF_CAP)*(this->cap>>1)+(this->cap>>1<shinsei_string_t_DEF_CAP)*(this->cap-shinsei_string_t_DEF_CAP));
+}
+
+// [Internal] Insert/Erase
 _SHINSEI_OS_INLINE static bool str_insertArray(shinsei_string_t*const restrict this,const size_t idx,const void*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	if(!len) return true;
-	register const size_t safe_idx=(idx>this->size)*this->size+(idx<=this->size)*idx;
 	if(this->size+len>this->cap){
-		register const size_t needed=this->size+len-this->cap;
-		if(!str_expand(this,(needed>shinsei_string_t_DEF_CAP)*needed+(needed<=shinsei_string_t_DEF_CAP)*shinsei_string_t_DEF_CAP)) return false;
+		if(str_inlined(this)) return false;
+		register size_t needed=(this->cap<<1>=shinsei_string_t_DEF_CAP)*this->cap+(this->cap<<1<shinsei_string_t_DEF_CAP)*(shinsei_string_t_DEF_CAP-this->cap);
+		needed=(needed<=len)*len+!(needed<=len)*needed;
+		if(!str_expand(this,needed)) return false;
 	}
-	if(__builtin_expect(safe_idx<this->size,1)){
-		__builtin_memmove(str_data(this)+(safe_idx+len)*this->char_size,str_data(this)+safe_idx*this->char_size,(this->size-safe_idx)*this->char_size);
+	if(__builtin_expect(idx<this->size,1)){
+		__builtin_memmove(str_data(this)+(idx+len)*this->char_size,str_data(this)+idx*this->char_size,(this->size-idx)*this->char_size);
 	}
-	__builtin_memcpy(str_data(this)+safe_idx*this->char_size,src,len*this->char_size);
+	__builtin_memcpy(str_data(this)+idx*this->char_size,src,len*this->char_size);
 	this->size+=len;
 	str_setNull(this);
 	return true;
 }
 
-_SHINSEI_OS_INLINE static bool str_insertChar(shinsei_string_t*const restrict this,const size_t idx,const void*const restrict ch,const size_t repeat_cnt)_SHINSEI_OS_NOEXCEPT{
-	if(!repeat_cnt) return true;
-	register const size_t safe_idx=(idx>this->size)*this->size+(idx<=this->size)*idx;
-	if(this->size+repeat_cnt>this->cap){
-		register const size_t needed=this->size+repeat_cnt-this->cap;
-		if(!str_expand(this,(needed>shinsei_string_t_DEF_CAP)*needed+(needed<=shinsei_string_t_DEF_CAP)*shinsei_string_t_DEF_CAP)) return false;
+_SHINSEI_OS_INLINE static bool str_insertChar(shinsei_string_t*const restrict this,const size_t idx,const void*const restrict val,const size_t cnt)_SHINSEI_OS_NOEXCEPT{
+	if(!cnt) return true;
+	if(this->size+cnt>this->cap){
+		if(str_inlined(this)) return false;
+		register size_t needed=(this->cap<<1>=shinsei_string_t_DEF_CAP)*this->cap+(this->cap<<1<shinsei_string_t_DEF_CAP)*(shinsei_string_t_DEF_CAP-this->cap);
+		needed=(needed<=cnt)*cnt+!(needed<=cnt)*needed;
+		if(!str_expand(this,needed)) return false;
 	}
-	if(__builtin_expect(safe_idx<this->size,1)){
-		__builtin_memmove(str_data(this)+(safe_idx+repeat_cnt)*this->char_size,str_data(this)+safe_idx*this->char_size,(this->size-safe_idx)*this->char_size);
+	if(__builtin_expect(idx<this->size,1)){
+		__builtin_memmove(str_data(this)+(idx+cnt)*this->char_size,str_data(this)+idx*this->char_size,(this->size-idx)*this->char_size);
 	}
 	register char*const dst=str_data(this);
-	for(register size_t i=0;i<repeat_cnt;++i) __builtin_memcpy(dst+(safe_idx+i)*this->char_size,ch,this->char_size);
-	this->size+=repeat_cnt;
+	for(register size_t i=0;i<cnt;++i) __builtin_memcpy(dst+(idx+i)*this->char_size,val,this->char_size);
+	this->size+=cnt;
 	str_setNull(this);
 	return true;
 }
 
 _SHINSEI_OS_INLINE static void str_eraseArray(shinsei_string_t*const restrict this,const size_t idx,const size_t len)_SHINSEI_OS_NOEXCEPT{
-	if(__builtin_expect(idx>=this->size||!len,0)) return;
-	register const size_t safe_len=(idx+len>this->size)*(this->size-idx)+(idx+len<=this->size)*len;
-	if(__builtin_expect(idx+safe_len<this->size,1)){
-		__builtin_memmove(str_data(this)+idx*this->char_size,str_data(this)+(idx+safe_len)*this->char_size,(this->size-idx-safe_len)*this->char_size);
+	if(!len) return;
+	if(__builtin_expect(idx+len<this->size,1)){
+		__builtin_memmove(str_data(this)+idx*this->char_size,str_data(this)+(idx+len)*this->char_size,(this->size-idx-len)*this->char_size);
 	}
-	this->size-=safe_len;
+	this->size-=len;
 	str_setNull(this);
 	if(str_inlined(this)) return;
 	if(__builtin_expect(this->size>=this->cap>>2,1)) return;
-	str_shrink(this,this->cap>>1);
+	str_shrink(this,(this->cap>>1>=shinsei_string_t_DEF_CAP)*(this->cap>>1)+(this->cap>>1<shinsei_string_t_DEF_CAP)*(this->cap-shinsei_string_t_DEF_CAP));
 }
 
-// [Internal] Attach Operations
-_SHINSEI_OS_INLINE static bool str_attach(shinsei_string_t*const restrict this,const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
-	register const bool des_inlined=str_inlined(this);
-	if(!des_inlined){
-		if(this->cap<src->size){
-			register char* ptr=(char*)__builtin_realloc(this->data,(src->size+1)*this->char_size);
-			if(__builtin_expect(ptr==nullptr,0)) return false;
-			this->data=ptr;
-			this->cap=src->size;
-		}
-	}
-	this->ctrl=(src->ctrl&~_SHINSEI_CTRL_INLINED)|(this->ctrl&_SHINSEI_CTRL_INLINED);
-	this->code_page=src->code_page;
-	this->size=src->size;
-	__builtin_memcpy(str_data(this),str_data(src),(this->size+1)*this->char_size);
-	return true;
-}
-
-_SHINSEI_OS_INLINE static bool str_attachValue(shinsei_string_t*const restrict this,const int_fast32_t ctrl,const unsigned int code_page,const size_t size,const size_t cap,void*const ptr,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
-	(void)cap;
-	register const bool des_inlined=str_inlined(this);
-	this->char_size=char_size;
-	if(!des_inlined){
-		if(this->cap<size){
-			register char* new_ptr=(char*)__builtin_realloc(this->data,(size+1)*this->char_size);
-			if(__builtin_expect(new_ptr==nullptr,0)) return false;
-			this->data=new_ptr;
-			this->cap=size;
-		}
-	}
-	this->ctrl=(ctrl&~_SHINSEI_CTRL_INLINED)|(this->ctrl&_SHINSEI_CTRL_INLINED);
-	this->code_page=code_page;
-	this->size=size;
-	__builtin_memcpy(str_data(this),ptr,this->size*this->char_size);
-	str_setNull(this);
-	return true;
-}
-
-// [Internal] Capacity constructor
-_SHINSEI_OS_INLINE static shinsei_string_t* str_conCapacity(const size_t cap,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
-	register shinsei_string_t*const this=(shinsei_string_t*const)__builtin_malloc(sizeof(shinsei_string_t));
-	if(__builtin_expect(this==nullptr,0)) return nullptr;
+// [Internal] Constructors
+_SHINSEI_OS_INLINE static bool str_conCapacity(shinsei_string_t*const restrict this,const size_t cap,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
 	this->ctrl=0;
 	this->code_page=0;
 	this->size=0;
 	this->cap=cap;
 	this->char_size=char_size;
 	this->data=(char*)__builtin_malloc((this->cap+1)*this->char_size);
-	if(__builtin_expect(this->data==nullptr,0)){
-		__builtin_free(this);
-		return nullptr;
-	}
+	if(__builtin_expect(this->data==nullptr,0)) return false;
 	str_setNull(this);
-	return this;
+	return true;
 }
 
-_SHINSEI_OS_INLINE static shinsei_string_t* str_substr(const shinsei_string_t*const restrict this,const size_t idx,const size_t len)_SHINSEI_OS_NOEXCEPT{
-	if(__builtin_expect(idx>=this->size,0)){
-		register shinsei_string_t*const res=(shinsei_string_t*const)__builtin_malloc(sizeof(shinsei_string_t));
-		if(__builtin_expect(res==nullptr,0)) return nullptr;
-		if(__builtin_expect(!str_as(res,this->char_size),0)){
-			__builtin_free(res);
-			return nullptr;
-		}
-		res->code_page=this->code_page;
-		res->ctrl=(this->ctrl&_SHINSEI_CTRL_CODE_PAGE)|(res->ctrl&~_SHINSEI_CTRL_CODE_PAGE);
-		return res;
-	}
-	register const size_t real_len=(idx+len>this->size)*(this->size-idx)+(idx+len<=this->size)*len;
-	register shinsei_string_t* res=str_conCapacity(real_len,this->char_size);
-	if(__builtin_expect(!res,0)) return nullptr;
-	str_assignRaw(res,str_data(this)+idx*this->char_size,real_len);
-	res->code_page=this->code_page;
-	res->ctrl=(this->ctrl&_SHINSEI_CTRL_CODE_PAGE)|(res->ctrl&~_SHINSEI_CTRL_CODE_PAGE);
-	return res;
+_SHINSEI_OS_INLINE static bool str_asElement(shinsei_string_t*const restrict this,const void*const restrict val,const size_t cnt,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
+	this->ctrl=0;
+	this->code_page=0;
+	this->size=cnt;
+	this->cap=cnt+!cnt*shinsei_string_t_DEF_CAP;
+	this->char_size=char_size;
+	this->data=(char*)__builtin_malloc((this->cap+1)*this->char_size);
+	if(__builtin_expect(this->data==nullptr,0)) return false;
+	register char*const dst=str_data(this);
+	for(register size_t i=0;i<cnt;++i) __builtin_memcpy(dst+i*char_size,val,char_size);
+	str_setNull(this);
+	return true;
 }
 
-// Default constructor
+_SHINSEI_OS_INLINE static void str_inl(shinsei_string_t*const restrict this,const size_t cap,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
+	this->ctrl=_SHINSEI_CTRL_INLINED;
+	this->code_page=0;
+	this->size=0;
+	this->cap=cap;
+	this->char_size=char_size;
+	str_setNull(this);
+	return;
+}
+
+_SHINSEI_OS_INLINE static bool str_asArray(shinsei_string_t*const restrict this,const void*const restrict arr,const size_t len,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
+	this->ctrl=0;
+	this->code_page=0;
+	this->size=len;
+	this->cap=len+!len*shinsei_string_t_DEF_CAP;
+	this->char_size=char_size;
+	this->data=(char*)__builtin_malloc((this->cap+1)*this->char_size);
+	if(__builtin_expect(this->data==nullptr,0)) return false;
+	__builtin_memcpy(str_data(this),arr,len*char_size);
+	str_setNull(this);
+	return true;
+}
+
+// Exports
 shinsei_string_t* shinsei_string_t_con(const size_t char_size)_SHINSEI_OS_NOEXCEPT{
 	register shinsei_string_t*const this=(shinsei_string_t*const)__builtin_malloc(sizeof(shinsei_string_t));
 	if(__builtin_expect(this==nullptr,0)) return nullptr;
-	if(__builtin_expect(!str_as(this,char_size),0)){
+	if(__builtin_expect(!str_con(this,char_size),0)){
 		__builtin_free(this);
 		return nullptr;
 	}
 	return this;
 }
 
-// Capacity constructor
 shinsei_string_t* shinsei_string_t_conCapacity(const size_t cap,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
-	return str_conCapacity(cap,char_size);
-}
-
-// Copy constructor
-shinsei_string_t* shinsei_string_t_conCopy(const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
 	register shinsei_string_t*const this=(shinsei_string_t*const)__builtin_malloc(sizeof(shinsei_string_t));
 	if(__builtin_expect(this==nullptr,0)) return nullptr;
-	if(__builtin_expect(!str_asCopy(this,src),0)){
+	if(__builtin_expect(!str_conCapacity(this,cap,char_size),0)){
 		__builtin_free(this);
 		return nullptr;
 	}
 	return this;
 }
 
-// Move constructor
-shinsei_string_t* shinsei_string_t_conMove(shinsei_string_t* const restrict src)_SHINSEI_OS_NOEXCEPT{
+shinsei_string_t* shinsei_string_t_conAssign(const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
+	register shinsei_string_t*const this=(shinsei_string_t*const)__builtin_malloc(sizeof(shinsei_string_t));
+	if(__builtin_expect(this==nullptr,0)) return nullptr;
+	if(__builtin_expect(!str_asAssign(this,src),0)){
+		__builtin_free(this);
+		return nullptr;
+	}
+	return this;
+}
+
+shinsei_string_t* shinsei_string_t_conMove(shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
 	register shinsei_string_t*const this=(shinsei_string_t*const)__builtin_malloc(sizeof(shinsei_string_t));
 	if(__builtin_expect(this==nullptr,0)) return nullptr;
 	str_asMove(this,src);
 	return this;
 }
 
-// Char fill constructor
 shinsei_string_t* shinsei_string_t_conChar(const void*const restrict ch,const size_t repeat_cnt,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
 	register shinsei_string_t*const this=(shinsei_string_t*const)__builtin_malloc(sizeof(shinsei_string_t));
 	if(__builtin_expect(this==nullptr,0)) return nullptr;
-	this->ctrl=0;
-	this->code_page=0;
-	this->size=repeat_cnt;
-	this->cap=repeat_cnt+!repeat_cnt*shinsei_string_t_DEF_CAP;
-	this->char_size=char_size;
-	this->data=(char*)__builtin_malloc((this->cap+1)*this->char_size);
-	if(__builtin_expect(this->data==nullptr,0)){
+	if(__builtin_expect(!str_asElement(this,ch,repeat_cnt,char_size),0)){
 		__builtin_free(this);
 		return nullptr;
 	}
-	register char*const dst=str_data(this);
-	for(register size_t i=0;i<repeat_cnt;++i) __builtin_memcpy(dst+i*char_size,ch,char_size);
-	str_setNull(this);
 	return this;
 }
 
-// Array constructor
-shinsei_string_t* shinsei_string_t_conArray(const void*const restrict arr,const size_t len,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
+shinsei_string_t* shinsei_string_t_conSubstr(const shinsei_string_t*const restrict src,const size_t idx,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	register const size_t safe_idx=(idx>src->size)*src->size+(idx<=src->size)*idx;
+	register const size_t real_len=(safe_idx+len>src->size)*(src->size-safe_idx)+(safe_idx+len<=src->size)*len;
 	register shinsei_string_t*const this=(shinsei_string_t*const)__builtin_malloc(sizeof(shinsei_string_t));
 	if(__builtin_expect(this==nullptr,0)) return nullptr;
-	if(__builtin_expect(!str_asArray(this,arr,len,char_size),0)){
+	if(__builtin_expect(!str_conCapacity(this,real_len,src->char_size),0)){
 		__builtin_free(this);
 		return nullptr;
 	}
+	str_pushBackArray(this,str_data(src)+safe_idx*src->char_size,real_len);
+	this->code_page=src->code_page;
+	this->ctrl=(src->ctrl&_SHINSEI_CTRL_CODE_PAGE)|(this->ctrl&~_SHINSEI_CTRL_CODE_PAGE);
 	return this;
 }
 
-// Substring constructor
-shinsei_string_t* shinsei_string_t_conSubstr(const shinsei_string_t*const restrict src,const size_t idx,const size_t len)_SHINSEI_OS_NOEXCEPT{
-	return str_substr(src,idx,len);
-}
-
-// Free the data
 void shinsei_string_t_freeData(shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	str_freeData(this);
 	return;
 }
 
-// Destructor
 void shinsei_string_t_dec(shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
-	if(!str_inlined(this)) str_freeData(this);
+	if(!str_inlined(this)&&this->data!=nullptr) str_freeData(this);
 	__builtin_free(this);
 	return;
 }
 
-// Expand capacity by more_cap
 bool shinsei_string_t_expand(shinsei_string_t*const restrict this,const size_t more_cap)_SHINSEI_OS_NOEXCEPT{
 	return str_expand(this,more_cap);
 }
 
-// Shrink capacity by less_cap
 bool shinsei_string_t_shrink(shinsei_string_t*const restrict this,const size_t less_cap)_SHINSEI_OS_NOEXCEPT{
 	return str_shrink(this,less_cap);
 }
 
-// Reserve capacity
-bool shinsei_string_t_reserve(shinsei_string_t* const restrict this,const size_t cap)_SHINSEI_OS_NOEXCEPT{
-	return str_reserve(this,cap);
+bool shinsei_string_t_reserve(shinsei_string_t*const restrict this,const size_t cap)_SHINSEI_OS_NOEXCEPT{
+	if(str_inlined(this)){
+		this->cap=cap;
+		return true;
+	}
+	register char*const ptr=(char*)__builtin_realloc(this->data,(cap+1)*this->char_size);
+	if(__builtin_expect(ptr==nullptr,0)) return false;
+	this->cap=cap;
+	this->data=ptr;
+	return true;
 }
 
-// Shrink capacity to fit size
-bool shinsei_string_t_shrinkToFit(shinsei_string_t* const restrict this)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_string_t_shrinkToFit(shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	if(str_inlined(this)){
 		this->cap=this->size;
 		return true;
@@ -4869,102 +4786,142 @@ bool shinsei_string_t_shrinkToFit(shinsei_string_t* const restrict this)_SHINSEI
 	return true;
 }
 
-// Access Info
 bool shinsei_string_t_empty(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	return !this->size;
 }
+
 size_t shinsei_string_t_size(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	return this->size;
 }
+
 size_t shinsei_string_t_length(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	return this->size;
 }
+
 size_t shinsei_string_t_capacity(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	return this->cap;
 }
 
-// Data Access
 void* shinsei_string_t_at(const shinsei_string_t*const restrict this,const size_t idx)_SHINSEI_OS_NOEXCEPT{
 	return str_data(this)+idx*this->char_size;
 }
+
 void* shinsei_string_t_front(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	return str_data(this);
 }
+
 void* shinsei_string_t_back(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	return str_data(this)+(this->size-1)*this->char_size;
 }
+
 void* shinsei_string_t_data(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	return str_data(this);
 }
+
 void* shinsei_string_t_cStr(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	return str_data(this);
 }
 
-// Assign operations
 bool shinsei_string_t_assign(shinsei_string_t*const restrict this,const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
-	return str_assign(this,src);
+	if(!str_inlined(this)&&str_inlined(src)){
+		if(this->data!=nullptr) str_freeData(this);
+	}
+	else if(!str_inlined(this)&&!str_inlined(src)){
+		if(this->cap!=src->cap){
+			register char* ptr=(char*)__builtin_realloc(this->data,(src->cap+1)*this->char_size);
+			if(__builtin_expect(ptr==nullptr,0)) return false;
+			this->data=ptr;
+		}
+	}
+	else if(str_inlined(this)&&!str_inlined(src)){
+		this->data=(char*)__builtin_malloc((src->cap+1)*this->char_size);
+		if(__builtin_expect(this->data==nullptr,0)) return false;
+	}
+	this->ctrl=src->ctrl;
+	this->code_page=src->code_page;
+	this->size=src->size;
+	this->cap=src->cap;
+	__builtin_memcpy(str_data(this),str_data(src),(this->size+1)*this->char_size);
+	return true;
 }
-bool shinsei_string_t_copy(shinsei_string_t*const restrict this,const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
-	return str_assign(this,src);
-}
+
 bool shinsei_string_t_assignRaw(shinsei_string_t*const restrict this,const void*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-	return str_assignRaw(this,src,len);
+	if(this->cap<len){
+		if(!shinsei_string_t_reserve(this,len)) return false;
+	}
+	this->size=len;
+	__builtin_memcpy(str_data(this),src,len*this->char_size);
+	str_setNull(this);
+	return true;
 }
+
 bool shinsei_string_t_assignChar(shinsei_string_t*const restrict this,const void*const restrict ch,const size_t len)_SHINSEI_OS_NOEXCEPT{
-	return str_assignChar(this,ch,len);
+	if(this->cap<len){
+		if(!shinsei_string_t_reserve(this,len)) return false;
+	}
+	this->size=len;
+	register char*const dst=str_data(this);
+	for(register size_t i=0;i<len;++i) __builtin_memcpy(dst+i*this->char_size,ch,this->char_size);
+	str_setNull(this);
+	return true;
 }
 
-// Append Operations
 bool shinsei_string_t_append(shinsei_string_t*const restrict this,const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
-	return str_appendRaw(this,str_data(src),src->size);
+	return str_pushBackArray(this,str_data(src),src->size);
 }
+
 bool shinsei_string_t_appendRaw(shinsei_string_t*const restrict this,const void*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-	return str_appendRaw(this,src,len);
+	return str_pushBackArray(this,src,len);
 }
+
 bool shinsei_string_t_appendChar(shinsei_string_t*const restrict this,const void*const restrict ch,const size_t len)_SHINSEI_OS_NOEXCEPT{
-	return str_appendChar(this,ch,len);
+	return str_pushBackChar(this,ch,len);
 }
 
-// Push/Pop Array Operations
 bool shinsei_string_t_pushBack(shinsei_string_t*const restrict this,const void*const restrict ch)_SHINSEI_OS_NOEXCEPT{
-	return str_appendChar(this,ch,1);
+	return str_pushBackChar(this,ch,1);
 }
+
 bool shinsei_string_t_pushBackArray(shinsei_string_t*const restrict this,const void*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-	return str_appendRaw(this,src,len);
+	return str_pushBackArray(this,src,len);
 }
+
 bool shinsei_string_t_pushBackChar(shinsei_string_t*const restrict this,const void*const restrict ch,const size_t repeat_cnt)_SHINSEI_OS_NOEXCEPT{
-	return str_appendChar(this,ch,repeat_cnt);
+	return str_pushBackChar(this,ch,repeat_cnt);
 }
+
 void shinsei_string_t_popBack(shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
-	str_eraseArray(this,this->size-1,1);
-	return;
-}
-void shinsei_string_t_popBackArray(shinsei_string_t*const restrict this,const size_t cnt)_SHINSEI_OS_NOEXCEPT{
-	register const size_t safe_cnt=(cnt>this->size)*this->size+(cnt<=this->size)*cnt;
-	str_eraseArray(this,this->size-safe_cnt,safe_cnt);
+	str_popBackArray(this,1);
 	return;
 }
 
-// Insert/Erase Operations
+void shinsei_string_t_popBackArray(shinsei_string_t*const restrict this,const size_t cnt)_SHINSEI_OS_NOEXCEPT{
+	str_popBackArray(this,cnt);
+	return;
+}
+
 bool shinsei_string_t_insert(shinsei_string_t*const restrict this,const size_t idx,const void*const restrict ch)_SHINSEI_OS_NOEXCEPT{
 	return str_insertChar(this,idx,ch,1);
 }
+
 bool shinsei_string_t_insertArray(shinsei_string_t*const restrict this,const size_t idx,const void*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	return str_insertArray(this,idx,src,len);
 }
+
 bool shinsei_string_t_insertChar(shinsei_string_t*const restrict this,const size_t idx,const void*const restrict ch,const size_t repeat_cnt)_SHINSEI_OS_NOEXCEPT{
 	return str_insertChar(this,idx,ch,repeat_cnt);
 }
+
 void shinsei_string_t_erase(shinsei_string_t*const restrict this,const size_t idx)_SHINSEI_OS_NOEXCEPT{
 	str_eraseArray(this,idx,1);
 	return;
 }
+
 void shinsei_string_t_eraseArray(shinsei_string_t*const restrict this,const size_t idx,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	str_eraseArray(this,idx,len);
 	return;
 }
 
-// Search & Compare
 size_t shinsei_string_t_find(const shinsei_string_t*const restrict this,const void*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!src_len,0)) return 0;
 	if(__builtin_expect(this->size<src_len,0)) return SIZE_MAX;
@@ -4975,6 +4932,7 @@ size_t shinsei_string_t_find(const shinsei_string_t*const restrict this,const vo
 	}
 	return SIZE_MAX;
 }
+
 size_t shinsei_string_t_findChar(const shinsei_string_t*const restrict this,const void*const restrict ch)_SHINSEI_OS_NOEXCEPT{
 	register const char*const ptr=str_data(this);
 	for(register size_t i=0;i<this->size;++i){
@@ -4982,6 +4940,7 @@ size_t shinsei_string_t_findChar(const shinsei_string_t*const restrict this,cons
 	}
 	return SIZE_MAX;
 }
+
 size_t shinsei_string_t_kMP(const shinsei_string_t*const restrict this,const void*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!src_len,0)) return 0;
 	if(__builtin_expect(this->size<src_len,0)) return SIZE_MAX;
@@ -5009,15 +4968,26 @@ size_t shinsei_string_t_kMP(const shinsei_string_t*const restrict this,const voi
 	}
 	return SIZE_MAX;
 }
+
 int shinsei_string_t_compare(const shinsei_string_t*const restrict this,const void*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
 	register const size_t min_len=(this->size<src_len)*this->size+(this->size>=src_len)*src_len;
 	register const int res=__builtin_memcmp(str_data(this),src,min_len*this->char_size);
 	return (res>0)-(res<0)+!res*((this->size>src_len)-(this->size<src_len));
 }
 
-// Substring & Misc
 shinsei_string_t* shinsei_string_t_substr(const shinsei_string_t*const restrict this,const size_t idx,const size_t len)_SHINSEI_OS_NOEXCEPT{
-	return str_substr(this,idx,len);
+	register const size_t safe_idx=(idx>this->size)*this->size+(idx<=this->size)*idx;
+	register const size_t real_len=(safe_idx+len>this->size)*(this->size-safe_idx)+(safe_idx+len<=this->size)*len;
+	register shinsei_string_t*const res=(shinsei_string_t*const)__builtin_malloc(sizeof(shinsei_string_t));
+	if(__builtin_expect(res==nullptr,0)) return nullptr;
+	if(__builtin_expect(!str_conCapacity(res,real_len,this->char_size),0)){
+		__builtin_free(res);
+		return nullptr;
+	}
+	str_pushBackArray(res,str_data(this)+safe_idx*this->char_size,real_len);
+	res->code_page=this->code_page;
+	res->ctrl=(this->ctrl&_SHINSEI_CTRL_CODE_PAGE)|(res->ctrl&~_SHINSEI_CTRL_CODE_PAGE);
+	return res;
 }
 
 void shinsei_string_t_swap(shinsei_string_t*const restrict this,shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
@@ -5030,98 +5000,112 @@ void shinsei_string_t_swap(shinsei_string_t*const restrict this,shinsei_string_t
 
 bool shinsei_string_t_clear(shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	this->size=0;
+	str_setNull(this);
 	if(!str_inlined(this)){
 		register char*const new_ptr=(char*)__builtin_realloc(this->data,(shinsei_string_t_DEF_CAP+1)*this->char_size);
 		if(__builtin_expect(new_ptr==nullptr,0)) return false;
 		this->cap=shinsei_string_t_DEF_CAP;
 		this->data=new_ptr;
 	}
-	str_setNull(this);
 	return true;
 }
 
 bool shinsei_string_t_setSize(shinsei_string_t*const restrict this,const size_t size)_SHINSEI_OS_NOEXCEPT{
 	if(size>this->cap){
-		if(!str_reserve(this,size)) return false;
+		if(!shinsei_string_t_reserve(this,size)) return false;
 	}
 	this->size=size;
 	str_setNull(this);
 	return true;
 }
 
-void shinsei_string_t_move(shinsei_string_t*const restrict this,shinsei_string_t* const restrict src)_SHINSEI_OS_NOEXCEPT{
-	if(!str_inlined(this)) str_freeData(this);
+void shinsei_string_t_move(shinsei_string_t*const restrict this,shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
+	if(!str_inlined(this)&&this->data!=nullptr) str_freeData(this);
 	str_asMove(this,src);
 	return;
 }
 
+// Attach the string from another one
 bool shinsei_string_t_attach(shinsei_string_t*const restrict this,const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
-	return str_attach(this,src);
+	register const bool des_inlined=str_inlined(this);
+	if(!des_inlined){
+		if(this->cap<src->cap){
+			register char* ptr=(char*)__builtin_realloc(this->data,(src->cap+1)*this->char_size);
+			if(__builtin_expect(ptr==nullptr,0)) return false;
+			this->data=ptr;
+			this->cap=src->cap;
+		}
+	}
+	this->ctrl=(src->ctrl&~_SHINSEI_CTRL_INLINED)|(this->ctrl&_SHINSEI_CTRL_INLINED);
+	this->code_page=src->code_page;
+	this->size=src->size;
+	__builtin_memcpy(str_data(this),str_data(src),(this->size+1)*this->char_size);
+	return true;
 }
 
+// Attach the string from values
 bool shinsei_string_t_attachValue(shinsei_string_t*const restrict this,const int_fast32_t ctrl,const unsigned int code_page,const size_t size,const size_t cap,void*const ptr,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
-	return str_attachValue(this,ctrl,code_page,size,cap,ptr,char_size);
+	register const bool des_inlined=str_inlined(this);
+	this->char_size=char_size;
+	if(!des_inlined){
+		if(this->cap<cap){
+			register char* new_ptr=(char*)__builtin_realloc(this->data,(cap+1)*this->char_size);
+			if(__builtin_expect(new_ptr==nullptr,0)) return false;
+			this->data=new_ptr;
+			this->cap=cap;
+		}
+	}
+	this->ctrl=(ctrl&~_SHINSEI_CTRL_INLINED)|(this->ctrl&_SHINSEI_CTRL_INLINED);
+	this->code_page=code_page;
+	this->size=size;
+	__builtin_memcpy(str_data(this),ptr,this->size*this->char_size);
+	str_setNull(this);
+	return true;
 }
 
-// Code Page Properties
 bool shinsei_string_t_isCodepage(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	return this->ctrl&_SHINSEI_CTRL_CODE_PAGE;
 }
+
 unsigned int shinsei_string_t_getCodePage(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	return this->code_page;
 }
+
 void shinsei_string_t_enableCodePage(shinsei_string_t*const restrict this,const bool enabled)_SHINSEI_OS_NOEXCEPT{
 	this->ctrl=(this->ctrl&~_SHINSEI_CTRL_CODE_PAGE)|(enabled*_SHINSEI_CTRL_CODE_PAGE);
 	return;
 }
+
 void shinsei_string_t_setCodePage(shinsei_string_t*const restrict this,const unsigned int code_page)_SHINSEI_OS_NOEXCEPT{
 	this->code_page=code_page;
 	return;
 }
+
 void shinsei_string_t_codePage(shinsei_string_t*const restrict this,const bool enabled,const unsigned int code_page)_SHINSEI_OS_NOEXCEPT{
 	this->ctrl=(this->ctrl&~_SHINSEI_CTRL_CODE_PAGE)|(enabled*_SHINSEI_CTRL_CODE_PAGE);
 	this->code_page=code_page;
 	return;
 }
 
-// Static Constructors and Inlines
 bool shinsei_string_t_as(shinsei_string_t*const restrict this,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
-	return str_as(this,char_size);
+	return str_con(this,char_size);
 }
 
 bool shinsei_string_t_asCapacity(shinsei_string_t*const restrict this,const size_t cap,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
-	this->ctrl=0;
-	this->code_page=0;
-	this->size=0;
-	this->cap=cap;
-	this->char_size=char_size;
-	this->data=(char*)__builtin_malloc((this->cap+1)*this->char_size);
-	if(__builtin_expect(this->data==nullptr,0)) return false;
-	str_setNull(this);
-	return true;
+	return str_conCapacity(this,cap,char_size);
 }
 
-bool shinsei_string_t_asCopy(shinsei_string_t*const restrict this,const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
-	return str_asCopy(this,src);
+bool shinsei_string_t_asAssign(shinsei_string_t*const restrict this,const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
+	return str_asAssign(this,src);
 }
 
-void shinsei_string_t_asMove(shinsei_string_t*const restrict this,shinsei_string_t* const restrict src)_SHINSEI_OS_NOEXCEPT{
+void shinsei_string_t_asMove(shinsei_string_t*const restrict this,shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
 	str_asMove(this,src);
 	return;
 }
 
 bool shinsei_string_t_asChar(shinsei_string_t*const restrict this,const void*const restrict ch,const size_t repeat_cnt,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
-	this->ctrl=0;
-	this->code_page=0;
-	this->size=repeat_cnt;
-	this->cap=repeat_cnt+!repeat_cnt*shinsei_string_t_DEF_CAP;
-	this->char_size=char_size;
-	this->data=(char*)__builtin_malloc((this->cap+1)*this->char_size);
-	if(__builtin_expect(this->data==nullptr,0)) return false;
-	register char*const dst=str_data(this);
-	for(register size_t i=0;i<repeat_cnt;++i) __builtin_memcpy(dst+i*char_size,ch,char_size);
-	str_setNull(this);
-	return true;
+	return str_asElement(this,ch,repeat_cnt,char_size);
 }
 
 bool shinsei_string_t_asArray(shinsei_string_t*const restrict this,const void*const restrict arr,const size_t len,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
@@ -5132,28 +5116,23 @@ bool shinsei_string_t_asSubstr(shinsei_string_t*const restrict this,const shinse
 	register const size_t safe_idx=(idx>src->size)*src->size+(idx<=src->size)*idx;
 	register const size_t real_len=(safe_idx+len>src->size)*(src->size-safe_idx)+(safe_idx+len<=src->size)*len;
 	if(!shinsei_string_t_asCapacity(this,real_len,src->char_size)) return false;
-	str_assignRaw(this,str_data(src)+safe_idx*src->char_size,real_len);
+	str_pushBackArray(this,str_data(src)+safe_idx*src->char_size,real_len);
 	this->code_page=src->code_page;
 	this->ctrl=(src->ctrl&_SHINSEI_CTRL_CODE_PAGE)|(this->ctrl&~_SHINSEI_CTRL_CODE_PAGE);
 	return true;
 }
 
 void shinsei_string_t_inl(shinsei_string_t*const restrict this,const size_t cap,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
-	this->ctrl=_SHINSEI_CTRL_INLINED;
-	this->code_page=0;
-	this->size=0;
-	this->cap=cap;
-	this->char_size=char_size;
-	str_setNull(this);
+	str_inl(this,cap,char_size);
 	return;
 }
 
 void shinsei_string_t_inlCapacity(shinsei_string_t*const restrict this,const size_t cap,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
-	shinsei_string_t_inl(this,cap,char_size);
+	str_inl(this,cap,char_size);
 	return;
 }
 
-void shinsei_string_t_inlCopy(shinsei_string_t*const restrict this,const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
+void shinsei_string_t_inlAssign(shinsei_string_t*const restrict this,const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
 	this->ctrl=src->ctrl|_SHINSEI_CTRL_INLINED;
 	this->code_page=src->code_page;
 	this->size=src->size;
@@ -5163,15 +5142,16 @@ void shinsei_string_t_inlCopy(shinsei_string_t*const restrict this,const shinsei
 	return;
 }
 
-void shinsei_string_t_inlMove(shinsei_string_t*const restrict this,shinsei_string_t* const restrict src)_SHINSEI_OS_NOEXCEPT{
+void shinsei_string_t_inlMove(shinsei_string_t*const restrict this,shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
 	this->ctrl=src->ctrl|_SHINSEI_CTRL_INLINED;
 	this->code_page=src->code_page;
 	this->size=src->size;
 	this->cap=src->cap;
 	this->char_size=src->char_size;
 	__builtin_memcpy(str_data(this),str_data(src),(this->size+1)*this->char_size);
-	if(!str_inlined(src)) __builtin_free(src->data);
+	if(!str_inlined(src)&&src->data!=nullptr) str_freeData(src);
 	src->ctrl=0;
+	src->code_page=0;
 	src->size=0;
 	src->cap=0;
 	src->data=nullptr;
@@ -5214,17 +5194,14 @@ void shinsei_string_t_inlSubstr(shinsei_string_t*const restrict this,const shins
 	return;
 }
 
-// [const] Check if elements are inlined
 bool shinsei_string_t_inlined(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	return str_inlined(this);
 }
 
-// [Const] Get the ctrl code
 int_fast32_t shinsei_string_t_getCtrl(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	return this->ctrl;
 }
 
-// Set the ctrl code
 void shinsei_string_t_setCtrl(shinsei_string_t*const restrict this,const int_fast32_t ctrl)_SHINSEI_OS_NOEXCEPT{
 	this->ctrl=ctrl;
 	return;
@@ -5565,3 +5542,7 @@ size_t shinsei_escapedLineToStringsW(size_t*restrict idx_buf,size_t idx_buf_len,
 	return res+1;
 }
 
+#ifdef _SHINSEI_OS_CPP
+}
+#undef this
+#endif

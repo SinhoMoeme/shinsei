@@ -4,7 +4,8 @@
 #include"shinsei/.internal/std.h"
 
 #ifdef _SHINSEI_OS_CPP
-extern "C" {
+#define this _this
+extern "C"{
 #endif
 
 #ifdef _SHINSEI_OS_CONSTEXPR
@@ -529,4 +530,5 @@ _SHINSEI_LIB_API size_t shinsei_splitStringToNativePathA(char*const restrict des
 
 #ifdef _SHINSEI_OS_CPP
 }
+#undef this
 #endif

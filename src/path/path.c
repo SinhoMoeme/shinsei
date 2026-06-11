@@ -1,5 +1,10 @@
 #include"shinsei/minimal/path.h"
 
+#ifdef _SHINSEI_OS_CPP
+#define this _this
+extern "C"{
+#endif
+
 #ifdef _SHINSEI_OS_CONSTEXPR
 	// Copy from minimal/str.h
 	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_AUTO=0;
@@ -13599,3 +13604,8 @@ size_t shinsei_splitStringToURLPathU32(char32_t*const restrict des_buf,const siz
 	// src_len: The char count of the source string.
 	return splitStringToPartsU32(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt,SHINSEI_PATH_URL_DELIMITER_U32);
 }
+
+#ifdef _SHINSEI_OS_CPP
+}
+#undef this
+#endif

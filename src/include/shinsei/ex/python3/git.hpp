@@ -48,7 +48,7 @@ namespace shinsei{
 			}
 			
 			// In-place tag dispatcher
-			explicit gil_guard_t(shinsei::inplace_t,const bool instant_alloc=true)_SHINSEI_OS_NOEXCEPT{
+			explicit gil_guard_t(shinsei::in_place_t,const bool instant_alloc=true)_SHINSEI_OS_NOEXCEPT{
 				::shinsei_ex_gil_guard_t_as(&obj,instant_alloc);
 				return;
 			}

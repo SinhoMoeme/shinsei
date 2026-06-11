@@ -1,5 +1,10 @@
 #include"shinsei/io.h"
 
+#ifdef _SHINSEI_OS_CPP
+#define this _this
+extern "C"{
+#endif
+
 // Copy from minimal/str.c
 _SHINSEI_OS_INLINE static int uTF32CharToUTF8Char(char8_t*const restrict des,const char32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(src<=0x7F){
@@ -127,9 +132,8 @@ _SHINSEI_OS_INLINE static void printInt64NativeDec(int64_t val)_SHINSEI_OS_NOEXC
 		register const char8_t minus=u8'-';
 		printU8Native(&minus,1);
 		printUInt64NativeDec((uint64_t)(-(uint64_t)val));
-	}else{
-		printUInt64NativeDec((uint64_t)val);
 	}
+	else printUInt64NativeDec((uint64_t)val);
 	return;
 }
 
@@ -540,3 +544,8 @@ void shinsei_printBoolCustomN(const bool val,const char8_t*const restrict true_t
 	printU8Native((const char8_t*)(val*(uintptr_t)true_text+(!val)*(uintptr_t)false_text),val*true_len+(!val)*false_len);
 	return;
 }
+
+#ifdef _SHINSEI_OS_CPP
+}
+#undef this
+#endif

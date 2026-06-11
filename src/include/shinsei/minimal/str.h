@@ -9,7 +9,7 @@
 
 #ifdef _SHINSEI_OS_CPP
 #define this _this
-extern "C" {
+extern "C"{
 #endif
 
 static _SHINSEI_OS_CONSTEXPR const char SHINSEI_DIGITS_ASCII[]="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -771,6 +771,7 @@ _SHINSEI_LIB_API size_t shinsei_readEscapedLineW(wchar_t*const restrict str,cons
 _SHINSEI_LIB_API size_t shinsei_escapedLineToStringsA(size_t*restrict ptr_buf,size_t ptr_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_escapedLineToStringsW(size_t*restrict ptr_buf,size_t ptr_buf_len,wchar_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
 
+// string_t
 _SHINSEI_LIB_API shinsei_string_t* shinsei_string_t_con(const size_t char_size)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API shinsei_string_t* shinsei_string_t_conCapacity(const size_t cap,const size_t char_size)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API shinsei_string_t* shinsei_string_t_conCopy(const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT;

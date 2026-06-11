@@ -1,5 +1,10 @@
 #include"shinsei/sys.h"
 
+#ifdef _SHINSEI_OS_CPP
+#define this _this
+extern "C"{
+#endif
+
 int_fast64_t shinsei_currentTime()_SHINSEI_OS_NOEXCEPT{
 	struct timespec ts;
 	clock_gettime(CLOCK_REALTIME,&ts);
@@ -53,7 +58,7 @@ _SHINSEI_OS_INLINE static bool slp_blockingUS(const uint_fast64_t us)_SHINSEI_OS
 // [Internal] Start (Busy, MS Mode)
 _SHINSEI_OS_INLINE static bool slp_busyMS(const uint_fast64_t ms)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast64_t remain=ms;
-	struct timespec start, current;
+	struct timespec start,current;
 	while(remain){
 		register uint_fast64_t cur=(remain>10000000000000ULL)*10000000000000ULL+(remain<=10000000000000ULL)*remain;
 		register const uint_fast64_t total_ns=cur*1000000ULL;
@@ -69,7 +74,7 @@ _SHINSEI_OS_INLINE static bool slp_busyMS(const uint_fast64_t ms)_SHINSEI_OS_NOE
 // [Internal] Start (Busy, US Mode)
 _SHINSEI_OS_INLINE static bool slp_busyUS(const uint_fast64_t us)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast64_t remain=us;
-	struct timespec start, current;
+	struct timespec start,current;
 	while(remain){
 		register uint_fast64_t cur=(remain>10000000000000000ULL)*10000000000000000ULL+(remain<=10000000000000000ULL)*remain;
 		register const uint_fast64_t total_ns=cur*1000ULL;
@@ -89,6 +94,12 @@ shinsei_sleeper_t* shinsei_sleeper_t_con()_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(this==nullptr,0)) return nullptr;
 	slp_as(this);
 	return this;
+}
+
+// Free data (For C++ Destructor safe resource releasing without deallocating object memory)
+void shinsei_sleeper_t_freeData(shinsei_sleeper_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
+	(void)this;
+	return;
 }
 
 // Destructor
@@ -172,8 +183,7 @@ _SHINSEI_OS_INLINE static bool clk_as(shinsei_clock_t*const restrict this,const 
 	this->cycle=cycle;
 	this->us_mode=us_mode;
 	this->busy_mode=false;
-	this->ptr=__builtin_malloc(sizeof(pthread_t));
-	if(__builtin_expect(this->ptr==nullptr,0)) return false;
+	this->ptr=nullptr;
 	this->internal_ptr=nullptr;
 	return true;
 }
@@ -202,10 +212,15 @@ shinsei_clock_t* shinsei_clock_t_con(const uint_fast64_t cycle,const bool us_mod
 	return this;
 }
 
+// Free data (For C++ Destructor safe resource releasing without deallocating object memory)
+void shinsei_clock_t_freeData(shinsei_clock_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
+	shinsei_clock_t_stop(this);
+	return;
+}
+
 // Destructor
 void shinsei_clock_t_dec(shinsei_clock_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
-	if(this->ctrl&_SHINSEI_CTRL_RUNNING) clk_stop(this);
-	if(__builtin_expect(this->ptr!=nullptr,1)) __builtin_free(this->ptr);
+	shinsei_clock_t_freeData(this);
 	__builtin_free(this);
 	return;
 }
@@ -234,11 +249,18 @@ void shinsei_clock_t_setCtrl(shinsei_clock_t*const restrict this,const int_fast3
 
 // Start (Blocking Mode)
 bool shinsei_clock_t_startBlocking(shinsei_clock_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
-	if(__builtin_expect(this->ctrl&_SHINSEI_CTRL_RUNNING,0)) return false;
+	if(__builtin_expect(this->ptr!=nullptr,0)) return false;
 	this->ctrl|=_SHINSEI_CTRL_RUNNING;
 	this->busy_mode=false;
+	this->ptr=__builtin_malloc(sizeof(pthread_t));
+	if(__builtin_expect(this->ptr==nullptr,0)){
+		this->ctrl&=~_SHINSEI_CTRL_RUNNING;
+		return false;
+	}
 	if(__builtin_expect(pthread_create((pthread_t*)this->ptr,nullptr,clk_loop,this)!=0,0)){
 		this->ctrl&=~_SHINSEI_CTRL_RUNNING;
+		__builtin_free(this->ptr);
+		this->ptr=nullptr;
 		return false;
 	}
 	return true;
@@ -246,11 +268,18 @@ bool shinsei_clock_t_startBlocking(shinsei_clock_t*const restrict this)_SHINSEI_
 
 // Start (Busy Mode)
 bool shinsei_clock_t_startBusy(shinsei_clock_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
-	if(__builtin_expect(this->ctrl&_SHINSEI_CTRL_RUNNING,0)) return false;
+	if(__builtin_expect(this->ptr!=nullptr,0)) return false;
 	this->ctrl|=_SHINSEI_CTRL_RUNNING;
 	this->busy_mode=true;
+	this->ptr=__builtin_malloc(sizeof(pthread_t));
+	if(__builtin_expect(this->ptr==nullptr,0)){
+		this->ctrl&=~_SHINSEI_CTRL_RUNNING;
+		return false;
+	}
 	if(__builtin_expect(pthread_create((pthread_t*)this->ptr,nullptr,clk_loop,this)!=0,0)){
 		this->ctrl&=~_SHINSEI_CTRL_RUNNING;
+		__builtin_free(this->ptr);
+		this->ptr=nullptr;
 		return false;
 	}
 	return true;
@@ -258,9 +287,11 @@ bool shinsei_clock_t_startBusy(shinsei_clock_t*const restrict this)_SHINSEI_OS_N
 
 // Stop
 void shinsei_clock_t_stop(shinsei_clock_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
-	if(__builtin_expect(!(this->ctrl&_SHINSEI_CTRL_RUNNING),0)) return;
-	clk_stop(this);
-	this->ctrl&=~_SHINSEI_CTRL_RUNNING;
+	if(__builtin_expect(this->ptr==nullptr,0)) return;
+	this->ctrl&=~_SHINSEI_CTRL_RUNNING; // Flag cleared FIRST to safely abort loop
+	clk_stop(this); // Then Join to guarantee sync
+	__builtin_free(this->ptr); // Then safely free metadata memory
+	this->ptr=nullptr;
 	return;
 }
 
@@ -319,8 +350,7 @@ _SHINSEI_OS_INLINE static bool thd_as(shinsei_thread_t*const restrict this,shins
 	this->callback=cb;
 	this->arg=arg;
 	this->ret=ret;
-	this->ptr=__builtin_malloc(sizeof(pthread_t));
-	if(__builtin_expect(this->ptr==nullptr,0)) return false;
+	this->ptr=nullptr;
 	return true;
 }
 
@@ -348,10 +378,15 @@ shinsei_thread_t* shinsei_thread_t_con(shinsei_thread_callback_t*const cb,void*c
 	return this;
 }
 
+// Free data (For C++ Destructor safe resource releasing without deallocating object memory)
+void shinsei_thread_t_freeData(shinsei_thread_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
+	shinsei_thread_t_stop(this);
+	return;
+}
+
 // Destructor
 void shinsei_thread_t_dec(shinsei_thread_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
-	if(this->ctrl&_SHINSEI_CTRL_RUNNING) thd_stop(this);
-	if(__builtin_expect(this->ptr!=nullptr,1)) __builtin_free(this->ptr);
+	shinsei_thread_t_freeData(this);
 	__builtin_free(this);
 	return;
 }
@@ -380,10 +415,17 @@ void shinsei_thread_t_setCtrl(shinsei_thread_t*const restrict this,const int_fas
 
 // Start
 bool shinsei_thread_t_start(shinsei_thread_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
-	if(__builtin_expect(this->ctrl&_SHINSEI_CTRL_RUNNING,0)) return false;
+	if(__builtin_expect(this->ptr!=nullptr,0)) return false;
 	this->ctrl|=_SHINSEI_CTRL_RUNNING;
+	this->ptr=__builtin_malloc(sizeof(pthread_t));
+	if(__builtin_expect(this->ptr==nullptr,0)){
+		this->ctrl&=~_SHINSEI_CTRL_RUNNING;
+		return false;
+	}
 	if(__builtin_expect(pthread_create((pthread_t*)this->ptr,nullptr,thd_loop,this)!=0,0)){
 		this->ctrl&=~_SHINSEI_CTRL_RUNNING;
+		__builtin_free(this->ptr);
+		this->ptr=nullptr;
 		return false;
 	}
 	return true;
@@ -391,9 +433,11 @@ bool shinsei_thread_t_start(shinsei_thread_t*const restrict this)_SHINSEI_OS_NOE
 
 // Stop
 void shinsei_thread_t_stop(shinsei_thread_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
-	if(__builtin_expect(!(this->ctrl&_SHINSEI_CTRL_RUNNING),0)) return;
-	thd_stop(this);
-	this->ctrl&=~_SHINSEI_CTRL_RUNNING;
+	if(__builtin_expect(this->ptr==nullptr,0)) return;
+	this->ctrl&=~_SHINSEI_CTRL_RUNNING; // Not strictly needed to stop a thread, but safe tracking
+	thd_stop(this); // Join guarantees no zombie leak
+	__builtin_free(this->ptr); // Prevent Malloc leak
+	this->ptr=nullptr;
 	return;
 }
 
@@ -404,15 +448,18 @@ bool shinsei_thread_t_running(const shinsei_thread_t*const restrict this)_SHINSE
 
 // Join
 void* shinsei_thread_t_join(shinsei_thread_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
-	if(this->ctrl&_SHINSEI_CTRL_RUNNING) shinsei_thread_t_stop(this);
+	shinsei_thread_t_stop(this);
 	return this->ret;
 }
 
 // Force Terminate
 void shinsei_thread_t_forceTerminate(shinsei_thread_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
-	if(__builtin_expect(!(this->ctrl&_SHINSEI_CTRL_RUNNING),0)) return;
+	if(__builtin_expect(this->ptr==nullptr,0)) return;
 	pthread_cancel(*(pthread_t*)this->ptr);
 	this->ctrl&=~_SHINSEI_CTRL_RUNNING;
+	thd_stop(this); // Must join after cancel to reap internal resources
+	__builtin_free(this->ptr);
+	this->ptr=nullptr;
 	return;
 }
 
@@ -439,3 +486,8 @@ void shinsei_thread_t_setCallback(shinsei_thread_t*const restrict this,shinsei_t
 	this->arg=arg;
 	return;
 }
+
+#ifdef _SHINSEI_OS_CPP
+}
+#undef this
+#endif

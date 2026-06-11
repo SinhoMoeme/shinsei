@@ -1,5 +1,10 @@
 #include"shinsei/minimal/sys.h"
 
+#ifdef _SHINSEI_OS_CPP
+#define this _this
+extern "C"{
+#endif
+
 // [Internal] CPU pause hint
 _SHINSEI_OS_INLINE static bool cPUPause()_SHINSEI_OS_NOEXCEPT{
 	#if(defined(_SHINSEI_OS_GNUC)||defined(_SHINSEI_OS_CLANG))
@@ -44,8 +49,8 @@ _SHINSEI_OS_INLINE static bool arn_meta_inlined(const shinsei_arena_meta_t*const
 	return this->ctrl&_SHINSEI_CTRL_INLINED;
 }
 
-// [Internal] Static copy
-_SHINSEI_OS_INLINE static void arn_meta_asCopy(shinsei_arena_meta_t*const restrict this,const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
+// [Internal] Static assign
+_SHINSEI_OS_INLINE static void arn_meta_asAssign(shinsei_arena_meta_t*const restrict this,const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
 	this->ctrl=src->ctrl;
 	this->size_and_used=src->size_and_used;
 	return;
@@ -68,10 +73,10 @@ shinsei_arena_meta_t* shinsei_arena_meta_t_con(const size_t size,const bool used
 	return this;
 }
 
-shinsei_arena_meta_t* shinsei_arena_meta_t_conCopy(const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
+shinsei_arena_meta_t* shinsei_arena_meta_t_conAssign(const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
 	register shinsei_arena_meta_t*const this=(shinsei_arena_meta_t*const)__builtin_malloc(sizeof(shinsei_arena_meta_t));
 	if(__builtin_expect(this==nullptr,0)) return nullptr;
-	arn_meta_asCopy(this,src);
+	arn_meta_asAssign(this,src);
 	return this;
 }
 
@@ -88,11 +93,11 @@ void shinsei_arena_meta_t_dec(shinsei_arena_meta_t*const restrict this)_SHINSEI_
 }
 
 void shinsei_arena_meta_t_assign(shinsei_arena_meta_t*const restrict this,const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
-	arn_meta_asCopy(this,src);
+	arn_meta_asAssign(this,src);
 	return;
 }
 
-void shinsei_arena_meta_t_move(shinsei_arena_meta_t*const restrict this,shinsei_arena_meta_t*const restrict src){
+void shinsei_arena_meta_t_move(shinsei_arena_meta_t*const restrict this,shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
 	arn_meta_asMove(this,src);
 	return;
 }
@@ -115,8 +120,8 @@ void shinsei_arena_meta_t_as(shinsei_arena_meta_t*const restrict this,const size
 	return;
 }
 
-void shinsei_arena_meta_t_asCopy(shinsei_arena_meta_t*const restrict this,const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
-	arn_meta_asCopy(this,src);
+void shinsei_arena_meta_t_asAssign(shinsei_arena_meta_t*const restrict this,const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
+	arn_meta_asAssign(this,src);
 	return;
 }
 
@@ -131,7 +136,7 @@ void shinsei_arena_meta_t_inl(shinsei_arena_meta_t*const restrict this,const siz
 	return;
 }
 
-void shinsei_arena_meta_t_inlCopy(shinsei_arena_meta_t*const restrict this,const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
+void shinsei_arena_meta_t_inlAssign(shinsei_arena_meta_t*const restrict this,const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT{
 	this->ctrl=src->ctrl|_SHINSEI_CTRL_INLINED;
 	this->size_and_used=src->size_and_used;
 	return;
@@ -215,7 +220,7 @@ _SHINSEI_OS_INLINE static void arn_initBlock(shinsei_arena_t*const restrict this
 	
 	register shinsei_arena_meta_t* meta=(shinsei_arena_meta_t*)arn_data(this);
 	meta->ctrl=0;
-	meta->size_and_used=cap; // Used bit defaults to 0
+	meta->size_and_used=cap; 
 	return;
 }
 
@@ -224,7 +229,7 @@ _SHINSEI_OS_INLINE static shinsei_arena_t* arn_expandPart(shinsei_arena_t*const 
 	register size_t next_cap=this->last_part->cap;
 	while(next_cap<target_sz){
 		register size_t proposed=next_cap<<1;
-		if(__builtin_expect(proposed<next_cap,0)) proposed=target_sz; // Check safe shift
+		if(__builtin_expect(proposed<next_cap,0)) proposed=target_sz; 
 		next_cap=proposed;
 	}
 	register shinsei_arena_t*const new_part=(shinsei_arena_t*)__builtin_malloc(sizeof(shinsei_arena_t));
@@ -286,21 +291,18 @@ void shinsei_arena_t_inl(shinsei_arena_t*const restrict this,const size_t cap)_S
 
 // Allocate from First available spot
 void* shinsei_arena_t_allocFront(shinsei_arena_t*const restrict this,const size_t needed_cap)_SHINSEI_OS_NOEXCEPT{
-	// shinsei_arena_t_BYTE_ALIGNMENT-byte padding
 	register const size_t real_cost=(sizeof(shinsei_arena_meta_t)+needed_cap+(shinsei_arena_t_BYTE_ALIGNMENT-1))&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1);
 	register shinsei_arena_t* part=this;
 	register shinsei_arena_meta_t* meta=nullptr;
 	register size_t offset=0;
 	register size_t m_size=0;
 	
-	// O(1) fast path
 	meta=(shinsei_arena_meta_t*)arn_data(this);
 	m_size=meta->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1);
 	if(!(meta->size_and_used&1)&&m_size>=real_cost){
 		goto allocate_block;
 	}
 
-	// O(n) scan
 	while(part!=nullptr){
 		offset=0;
 		register char*const buffer=arn_data(part);
@@ -313,7 +315,6 @@ void* shinsei_arena_t_allocFront(shinsei_arena_t*const restrict this,const size_
 		part=part->next;
 	}
 	
-	// If failed, auto expand
 	if(arn_inlined(this)) return nullptr;
 	part=arn_expandPart(this,real_cost);
 	if(__builtin_expect(part==nullptr,0)) return nullptr;
@@ -325,10 +326,10 @@ allocate_block:
 	if(m_size>=real_cost+sizeof(shinsei_arena_meta_t)+shinsei_arena_t_BYTE_ALIGNMENT){
 		register shinsei_arena_meta_t*const next_meta=(shinsei_arena_meta_t*)((char*)meta+real_cost);
 		next_meta->ctrl=0;
-		next_meta->size_and_used=m_size-real_cost; // Used bit is 0
-		meta->size_and_used=real_cost|1; // Mark used
+		next_meta->size_and_used=m_size-real_cost;
+		meta->size_and_used=real_cost|1;
 	} else {
-		meta->size_and_used|=1; // Mark used without splitting
+		meta->size_and_used|=1;
 	}
 	
 	++this->ref_count;
@@ -348,7 +349,6 @@ void* shinsei_arena_t_allocBack(shinsei_arena_t*const restrict this,const size_t
 	register size_t offset=0,last_offset=0;
 	register size_t m_size=0;
 	
-	// O(1) fast path
 	if(this->ref_count){
 		shinsei_arena_meta_t* last_used=(shinsei_arena_meta_t*)(arn_data(part)+this->tail);
 		size_t after_offset=this->tail+(last_used->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1));
@@ -370,7 +370,6 @@ void* shinsei_arena_t_allocBack(shinsei_arena_t*const restrict this,const size_t
 		}
 	}
 	
-	// O(n) scan
 	if(!last_valid){
 		part=this;
 		register shinsei_arena_t* found_part=nullptr;
@@ -403,23 +402,20 @@ void* shinsei_arena_t_allocBack(shinsei_arena_t*const restrict this,const size_t
 	
 	m_size=meta->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1);
 	if(m_size>=real_cost+sizeof(shinsei_arena_meta_t)+shinsei_arena_t_BYTE_ALIGNMENT){
-		// Use tail space first
 		register shinsei_arena_meta_t*const next_meta=(shinsei_arena_meta_t*)((char*)meta+m_size-real_cost);
 		next_meta->ctrl=0;
-		next_meta->size_and_used=real_cost|1; // Mark used
-		
-		// Front part remains __builtin_free (fix from previous logic bug)
-		meta->size_and_used=m_size-real_cost; // Used bit is 0
-		meta=next_meta; // allocated item
+		next_meta->size_and_used=real_cost|1; 
+		meta->size_and_used=m_size-real_cost; 
+		meta=next_meta; 
 		last_offset+=m_size-real_cost;
 	}
 	else{
-		meta->size_and_used|=1; // Mark used without splitting
+		meta->size_and_used|=1;
 	}
 	
 	++this->ref_count;
 	if(this->ref_count==1) this->head=last_offset;
-	if(part==this->last_part) this->tail=last_offset; // Update tail index
+	if(part==this->last_part) this->tail=last_offset;
 	
 	return (void*)((char*)meta+sizeof(shinsei_arena_meta_t));
 }
@@ -434,7 +430,6 @@ void shinsei_arena_t_freeFront(shinsei_arena_t*const restrict this)_SHINSEI_OS_N
 	register shinsei_arena_meta_t* meta=nullptr;
 	register size_t offset=0;
 
-	// O(1) fast path
 	buffer=arn_data(part);
 	meta=(shinsei_arena_meta_t*)(buffer+this->head);
 	if(meta->size_and_used & 1){
@@ -446,7 +441,6 @@ void shinsei_arena_t_freeFront(shinsei_arena_t*const restrict this)_SHINSEI_OS_N
 		goto do_free;
 	}
 	
-	// O(n) scan
 	while(part!=nullptr){
 		offset=0;
 		buffer=arn_data(part);
@@ -462,16 +456,14 @@ void shinsei_arena_t_freeFront(shinsei_arena_t*const restrict this)_SHINSEI_OS_N
 	return;
 
 do_free:
-	meta->size_and_used&=~(size_t)1; // used = false
+	meta->size_and_used&=~(size_t)1;
 	--this->ref_count;
 	
-	// Merge left
 	if(prev&&!(prev->size_and_used&1)){
 		prev->size_and_used+=(meta->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1));
 		meta=prev;
 		offset=(size_t)((char*)meta-buffer);
 	}
-	// Merge right
 	register size_t m_size=meta->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1);
 	register size_t next_off=offset+m_size;
 	if(next_off<part->cap){
@@ -479,33 +471,45 @@ do_free:
 		if(!(next->size_and_used&1)) meta->size_and_used+=(next->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1));
 	}
 	
-	// Free empty block
-	m_size=meta->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1);
 	if(m_size==part->cap){
 		if(part==this&&this->next!=nullptr&&!arn_inlined(this)){
 			shinsei_arena_t* next_part=this->next;
-			__builtin_free(this->data);  // Free old data
+			__builtin_free(this->data); 
 			this->cap=next_part->cap;
-			this->data=next_part->data; // Take the place of next block
+			this->data=next_part->data; 
 			this->next=next_part->next;
 			if(this->last_part==next_part) this->last_part=this;
 			__builtin_free(next_part);
 			this->head=0;
 		}
 		else if(part!=this){
-			// Free empty block
 			shinsei_arena_t* p=this;
 			while(p->next!=part&&p->next!=nullptr) p=p->next;
 			if(p->next==part){
 				p->next=part->next;
-				if(this->last_part==part) this->last_part=p;
+				if(this->last_part==part){
+					this->last_part=p;
+					if(this->ref_count>0){
+						size_t scan_off=0,new_tail=0;
+						char* buf=arn_data(p);
+						while(scan_off<p->cap){
+							shinsei_arena_meta_t* m=(shinsei_arena_meta_t*)(buf+scan_off);
+							if(m->size_and_used&1) new_tail=scan_off;
+							scan_off+=(m->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1));
+						}
+						this->tail=new_tail;
+					}else{
+						this->tail=0;
+						this->head=0;
+					}
+				}
 				__builtin_free(part->data);
 				__builtin_free(part);
 			}
 		}
 	}
 	else if(part==this&&this->ref_count&&next_off<part->cap){
-		this->head=next_off; // Update head index
+		this->head=next_off;
 	}
 }
 
@@ -519,7 +523,6 @@ void shinsei_arena_t_freeBack(shinsei_arena_t*const restrict this)_SHINSEI_OS_NO
 	register shinsei_arena_meta_t* target_prev=nullptr;
 	register size_t offset=0;
 	
-	// O(1) Fast path
 	register char* buffer=arn_data(part);
 	register shinsei_arena_meta_t* prev=nullptr;
 	while(offset<part->cap){
@@ -534,7 +537,6 @@ void shinsei_arena_t_freeBack(shinsei_arena_t*const restrict this)_SHINSEI_OS_NO
 		offset+=(m->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1));
 	}
 	
-	// O(n) scan
 	if(!target_meta){
 		part=this;
 		while(part!=nullptr){
@@ -556,30 +558,26 @@ void shinsei_arena_t_freeBack(shinsei_arena_t*const restrict this)_SHINSEI_OS_NO
 	}
 	
 	if(target_meta){
-		target_meta->size_and_used&=~(size_t)1; // used = false
+		target_meta->size_and_used&=~(size_t)1;
 		--this->ref_count;
 		offset=(size_t)((char*)target_meta-arn_data(target_part));
-		
-		// Merge left
+ 
 		if(target_prev&&!(target_prev->size_and_used&1)){
 			target_prev->size_and_used+=(target_meta->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1));
 			target_meta=target_prev;
 			offset=(size_t)((char*)target_meta-arn_data(target_part));
 		}
-		// Merge right
 		register size_t m_size=target_meta->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1);
 		register size_t next_off=offset+m_size;
 		if(next_off<target_part->cap){
 			register shinsei_arena_meta_t* next=(shinsei_arena_meta_t*)(arn_data(target_part)+next_off);
 			if(!(next->size_and_used&1)) target_meta->size_and_used+=(next->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1));
 		}
-		
-		// Update tail index
+ 
 		if(this->ref_count&&target_part==this->last_part&&target_prev){
 			this->tail=(size_t)((char*)target_prev-arn_data(target_part));
 		}
-		
-		// Free empty block
+ 
 		m_size=target_meta->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1);
 		if(m_size==target_part->cap){
 			if(target_part==this&&this->next!=nullptr&&!arn_inlined(this)){
@@ -590,13 +588,29 @@ void shinsei_arena_t_freeBack(shinsei_arena_t*const restrict this)_SHINSEI_OS_NO
 				this->next=next_part->next;
 				if(this->last_part==next_part) this->last_part=this;
 				__builtin_free(next_part);
+				this->head=0;
 			}
 			else if(target_part!=this){
 				shinsei_arena_t* p=this;
 				while(p->next!=target_part&&p->next!=nullptr) p=p->next;
 				if(p->next==target_part){
 					p->next=target_part->next;
-					if(this->last_part==target_part) this->last_part=p;
+					if(this->last_part==target_part){
+						this->last_part=p;
+						if(this->ref_count>0){
+							size_t scan_off=0,new_tail=0;
+							char* buf=arn_data(p);
+							while(scan_off<p->cap){
+								shinsei_arena_meta_t* m=(shinsei_arena_meta_t*)(buf+scan_off);
+								if(m->size_and_used&1) new_tail=scan_off;
+								scan_off+=(m->size_and_used&~(size_t)(shinsei_arena_t_BYTE_ALIGNMENT-1));
+							}
+							this->tail=new_tail;
+						}else{
+							this->tail=0;
+							this->head=0;
+						}
+					}
 					__builtin_free(target_part->data);
 					__builtin_free(target_part);
 				}
@@ -687,7 +701,7 @@ _SHINSEI_OS_INLINE static void arn_custom_initBlock(shinsei_arena_custom_t*const
 	
 	register shinsei_arena_meta_t* meta=(shinsei_arena_meta_t*)arn_custom_data(this);
 	meta->ctrl=0;
-	meta->size_and_used=cap; // Used bit defaults to 0
+	meta->size_and_used=cap;
 	return;
 }
 
@@ -696,7 +710,7 @@ _SHINSEI_OS_INLINE static shinsei_arena_custom_t* arn_custom_expandPart(shinsei_
 	register size_t next_cap=this->last_part->cap;
 	while(next_cap<target_sz){
 		register size_t proposed=next_cap<<1;
-		if(__builtin_expect(proposed<next_cap,0)) proposed=target_sz; // Check safe shift
+		if(__builtin_expect(proposed<next_cap,0)) proposed=target_sz;
 		next_cap=proposed;
 	}
 	register shinsei_arena_custom_t*const new_part=(shinsei_arena_custom_t*)__builtin_malloc(sizeof(shinsei_arena_custom_t));
@@ -764,21 +778,18 @@ void shinsei_arena_custom_t_inl(shinsei_arena_custom_t*const restrict this,const
 
 // Allocate from First available spot
 void* shinsei_arena_custom_t_allocFront(shinsei_arena_custom_t*const restrict this,const size_t needed_cap)_SHINSEI_OS_NOEXCEPT{
-	// shinsei_arena_custom_t_BYTE_ALIGNMENT-byte padding
 	register const size_t real_cost=(sizeof(shinsei_arena_meta_t)+needed_cap+(shinsei_arena_custom_t_BYTE_ALIGNMENT-1))&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1);
 	register shinsei_arena_custom_t* part=this;
 	register shinsei_arena_meta_t* meta=nullptr;
 	register size_t offset=0;
 	register size_t m_size=0;
 	
-	// O(1) fast path
 	meta=(shinsei_arena_meta_t*)arn_custom_data(this);
 	m_size=meta->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1);
 	if(!(meta->size_and_used&1)&&m_size>=real_cost){
 		goto allocate_block;
 	}
 
-	// O(n) scan
 	while(part!=nullptr){
 		offset=0;
 		register char*const buffer=arn_custom_data(part);
@@ -791,7 +802,6 @@ void* shinsei_arena_custom_t_allocFront(shinsei_arena_custom_t*const restrict th
 		part=part->next;
 	}
 	
-	// If failed, auto expand
 	if(arn_custom_inlined(this)) return nullptr;
 	part=arn_custom_expandPart(this,real_cost);
 	if(__builtin_expect(part==nullptr,0)) return nullptr;
@@ -803,10 +813,10 @@ allocate_block:
 	if(m_size>=real_cost+sizeof(shinsei_arena_meta_t)+shinsei_arena_custom_t_BYTE_ALIGNMENT){
 		register shinsei_arena_meta_t*const next_meta=(shinsei_arena_meta_t*)((char*)meta+real_cost);
 		next_meta->ctrl=0;
-		next_meta->size_and_used=m_size-real_cost; // Used bit is 0
-		meta->size_and_used=real_cost|1; // Mark used
+		next_meta->size_and_used=m_size-real_cost;
+		meta->size_and_used=real_cost|1;
 	} else {
-		meta->size_and_used|=1; // Mark used without splitting
+		meta->size_and_used|=1;
 	}
 	
 	++this->ref_count;
@@ -826,7 +836,6 @@ void* shinsei_arena_custom_t_allocBack(shinsei_arena_custom_t*const restrict thi
 	register size_t offset=0,last_offset=0;
 	register size_t m_size=0;
 	
-	// O(1) fast path
 	if(this->ref_count){
 		shinsei_arena_meta_t* last_used=(shinsei_arena_meta_t*)(arn_custom_data(part)+this->tail);
 		size_t after_offset=this->tail+(last_used->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1));
@@ -848,7 +857,6 @@ void* shinsei_arena_custom_t_allocBack(shinsei_arena_custom_t*const restrict thi
 		}
 	}
 	
-	// O(n) scan
 	if(!last_valid){
 		part=this;
 		register shinsei_arena_custom_t* found_part=nullptr;
@@ -881,23 +889,20 @@ void* shinsei_arena_custom_t_allocBack(shinsei_arena_custom_t*const restrict thi
 	
 	m_size=meta->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1);
 	if(m_size>=real_cost+sizeof(shinsei_arena_meta_t)+shinsei_arena_custom_t_BYTE_ALIGNMENT){
-		// Use tail space first
 		register shinsei_arena_meta_t*const next_meta=(shinsei_arena_meta_t*)((char*)meta+m_size-real_cost);
 		next_meta->ctrl=0;
-		next_meta->size_and_used=real_cost|1; // Mark used
-		
-		// Front part remains __builtin_free (fix from previous logic bug)
-		meta->size_and_used=m_size-real_cost; // Used bit is 0
-		meta=next_meta; // allocated item
+		next_meta->size_and_used=real_cost|1; 
+		meta->size_and_used=m_size-real_cost;
+		meta=next_meta;
 		last_offset+=m_size-real_cost;
 	}
 	else{
-		meta->size_and_used|=1; // Mark used without splitting
+		meta->size_and_used|=1;
 	}
 	
 	++this->ref_count;
 	if(this->ref_count==1) this->head=last_offset;
-	if(part==this->last_part) this->tail=last_offset; // Update tail index
+	if(part==this->last_part) this->tail=last_offset;
 	
 	return (void*)((char*)meta+sizeof(shinsei_arena_meta_t));
 }
@@ -912,7 +917,6 @@ void shinsei_arena_custom_t_freeFront(shinsei_arena_custom_t*const restrict this
 	register shinsei_arena_meta_t* meta=nullptr;
 	register size_t offset=0;
 
-	// O(1) fast path
 	buffer=arn_custom_data(part);
 	meta=(shinsei_arena_meta_t*)(buffer+this->head);
 	if(meta->size_and_used & 1){
@@ -924,7 +928,6 @@ void shinsei_arena_custom_t_freeFront(shinsei_arena_custom_t*const restrict this
 		goto do_free;
 	}
 	
-	// O(n) scan
 	while(part!=nullptr){
 		offset=0;
 		buffer=arn_custom_data(part);
@@ -940,16 +943,14 @@ void shinsei_arena_custom_t_freeFront(shinsei_arena_custom_t*const restrict this
 	return;
 
 do_free:
-	meta->size_and_used&=~(size_t)1; // used = false
+	meta->size_and_used&=~(size_t)1;
 	--this->ref_count;
 	
-	// Merge left
 	if(prev&&!(prev->size_and_used&1)){
 		prev->size_and_used+=(meta->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1));
 		meta=prev;
 		offset=(size_t)((char*)meta-buffer);
 	}
-	// Merge right
 	register size_t m_size=meta->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1);
 	register size_t next_off=offset+m_size;
 	if(next_off<part->cap){
@@ -957,33 +958,45 @@ do_free:
 		if(!(next->size_and_used&1)) meta->size_and_used+=(next->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1));
 	}
 	
-	// Free empty block
-	m_size=meta->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1);
 	if(m_size==part->cap){
 		if(part==this&&this->next!=nullptr&&!arn_custom_inlined(this)){
 			shinsei_arena_custom_t* next_part=this->next;
-			this->free_callback(this->data);  // Free old data
+			this->free_callback(this->data);
 			this->cap=next_part->cap;
-			this->data=next_part->data; // Take the place of next block
+			this->data=next_part->data;
 			this->next=next_part->next;
 			if(this->last_part==next_part) this->last_part=this;
 			__builtin_free(next_part);
 			this->head=0;
 		}
 		else if(part!=this){
-			// Free empty block
 			shinsei_arena_custom_t* p=this;
 			while(p->next!=part&&p->next!=nullptr) p=p->next;
 			if(p->next==part){
 				p->next=part->next;
-				if(this->last_part==part) this->last_part=p;
+				if(this->last_part==part){
+					this->last_part=p;
+					if(this->ref_count>0){
+						size_t scan_off=0,new_tail=0;
+						char* buf=arn_custom_data(p);
+						while(scan_off<p->cap){
+							shinsei_arena_meta_t* m=(shinsei_arena_meta_t*)(buf+scan_off);
+							if(m->size_and_used&1) new_tail=scan_off;
+							scan_off+=(m->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1));
+						}
+						this->tail=new_tail;
+					}else{
+						this->tail=0;
+						this->head=0;
+					}
+				}
 				this->free_callback(part->data);
 				__builtin_free(part);
 			}
 		}
 	}
 	else if(part==this&&this->ref_count&&next_off<part->cap){
-		this->head=next_off; // Update head index
+		this->head=next_off;
 	}
 }
 
@@ -997,7 +1010,6 @@ void shinsei_arena_custom_t_freeBack(shinsei_arena_custom_t*const restrict this)
 	register shinsei_arena_meta_t* target_prev=nullptr;
 	register size_t offset=0;
 	
-	// O(1) Fast path
 	register char* buffer=arn_custom_data(part);
 	register shinsei_arena_meta_t* prev=nullptr;
 	while(offset<part->cap){
@@ -1012,7 +1024,6 @@ void shinsei_arena_custom_t_freeBack(shinsei_arena_custom_t*const restrict this)
 		offset+=(m->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1));
 	}
 	
-	// O(n) scan
 	if(!target_meta){
 		part=this;
 		while(part!=nullptr){
@@ -1034,30 +1045,26 @@ void shinsei_arena_custom_t_freeBack(shinsei_arena_custom_t*const restrict this)
 	}
 	
 	if(target_meta){
-		target_meta->size_and_used&=~(size_t)1; // used = false
+		target_meta->size_and_used&=~(size_t)1;
 		--this->ref_count;
 		offset=(size_t)((char*)target_meta-arn_custom_data(target_part));
-		
-		// Merge left
+ 
 		if(target_prev&&!(target_prev->size_and_used&1)){
 			target_prev->size_and_used+=(target_meta->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1));
 			target_meta=target_prev;
 			offset=(size_t)((char*)target_meta-arn_custom_data(target_part));
 		}
-		// Merge right
 		register size_t m_size=target_meta->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1);
 		register size_t next_off=offset+m_size;
 		if(next_off<target_part->cap){
 			register shinsei_arena_meta_t* next=(shinsei_arena_meta_t*)(arn_custom_data(target_part)+next_off);
 			if(!(next->size_and_used&1)) target_meta->size_and_used+=(next->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1));
 		}
-		
-		// Update tail index
+ 
 		if(this->ref_count&&target_part==this->last_part&&target_prev){
 			this->tail=(size_t)((char*)target_prev-arn_custom_data(target_part));
 		}
-		
-		// Free empty block
+ 
 		m_size=target_meta->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1);
 		if(m_size==target_part->cap){
 			if(target_part==this&&this->next!=nullptr&&!arn_custom_inlined(this)){
@@ -1068,13 +1075,29 @@ void shinsei_arena_custom_t_freeBack(shinsei_arena_custom_t*const restrict this)
 				this->next=next_part->next;
 				if(this->last_part==next_part) this->last_part=this;
 				__builtin_free(next_part);
+				this->head=0;
 			}
 			else if(target_part!=this){
 				shinsei_arena_custom_t* p=this;
 				while(p->next!=target_part&&p->next!=nullptr) p=p->next;
 				if(p->next==target_part){
 					p->next=target_part->next;
-					if(this->last_part==target_part) this->last_part=p;
+					if(this->last_part==target_part){
+						this->last_part=p;
+						if(this->ref_count>0){
+							size_t scan_off=0,new_tail=0;
+							char* buf=arn_custom_data(p);
+							while(scan_off<p->cap){
+								shinsei_arena_meta_t* m=(shinsei_arena_meta_t*)(buf+scan_off);
+								if(m->size_and_used&1) new_tail=scan_off;
+								scan_off+=(m->size_and_used&~(size_t)(shinsei_arena_custom_t_BYTE_ALIGNMENT-1));
+							}
+							this->tail=new_tail;
+						}else{
+							this->tail=0;
+							this->head=0;
+						}
+					}
 					this->free_callback(target_part->data);
 					__builtin_free(target_part);
 				}
@@ -1266,3 +1289,8 @@ void shinsei_spinlock_t_setCtrl(shinsei_spinlock_t*const restrict this,const int
 	this->ctrl=ctrl;
 	return;
 }
+
+#ifdef _SHINSEI_OS_CPP
+}
+#undef this
+#endif

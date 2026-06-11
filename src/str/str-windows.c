@@ -1,5 +1,10 @@
 #include"shinsei/str.h"
 
+#ifdef _SHINSEI_OS_CPP
+#define this _this
+extern "C"{
+#endif
+
 #ifdef _SHINSEI_OS_ATOMIC
 	static struct _SHINSEI_OS_ALIGN_BYTE{
 		volatile unsigned int code_page;
@@ -598,3 +603,8 @@ void shinsei_int64To62BaseStringN(wchar_t*const restrict des,const int_fast64_t 
 	shinsei_int64To62BaseStringW(des,src);
 	return;
 }
+
+#ifdef _SHINSEI_OS_CPP
+}
+#undef this
+#endif

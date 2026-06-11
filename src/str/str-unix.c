@@ -1,5 +1,10 @@
 #include"shinsei/str.h"
 
+#ifdef _SHINSEI_OS_CPP
+#define this _this
+extern "C"{
+#endif
+
 unsigned int shinsei_systemCP()_SHINSEI_OS_NOEXCEPT{
 	return SHINSEI_CODE_PAGE_UTF_8;
 }
@@ -314,7 +319,7 @@ int shinsei_isHexColorN(const char8_t*const restrict str,const size_t len)_SHINS
 size_t shinsei_stringLinesA(size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 	// idx_buf_len: Size of the index buffer. 0 or more.
 	// str_len: Size of the string buffer. The value is size of string + 2 for 2 terminator 0.
-	return shinsei_stringLinesU8((char8_t*)str,idx_buf_len,str,str_len);
+	return shinsei_stringLinesU8(idx_buf,idx_buf_len,(char8_t*)str,str_len);
 }
 size_t shinsei_stringLinesN(size_t*restrict idx_buf,size_t idx_buf_len,char8_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 	// idx_buf_len: Size of the index buffer. 0 or more.
@@ -325,7 +330,7 @@ size_t shinsei_stringLinesN(size_t*restrict idx_buf,size_t idx_buf_len,char8_t*r
 size_t shinsei_findStringsA(size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 	// idx_buf_len: Size of the index buffer. 0 or more.
 	// str_len: Size of the string buffer. The value is size of string + 2 for 2 terminator 0.
-	return shinsei_findStringsU8((char8_t*)str,idx_buf_len,str,str_len);
+	return shinsei_findStringsU8(idx_buf,idx_buf_len,(char8_t*)str,str_len);
 }
 size_t shinsei_findStringsN(size_t*restrict idx_buf,size_t idx_buf_len,char8_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 	// idx_buf_len: Size of the index buffer. 0 or more.
@@ -556,3 +561,8 @@ void shinsei_int64To62BaseStringN(char8_t*const restrict des,const int_fast64_t 
 	shinsei_int64To62BaseStringU8(des,src);
 	return;
 }
+
+#ifdef _SHINSEI_OS_CPP
+}
+#undef this
+#endif

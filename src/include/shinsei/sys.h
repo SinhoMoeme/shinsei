@@ -44,6 +44,7 @@ _SHINSEI_LIB_API int_fast64_t shinsei_currentTime()_SHINSEI_OS_NOEXCEPT;
 
 // sleeper_t
 _SHINSEI_LIB_API shinsei_sleeper_t* shinsei_sleeper_t_con()_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API void shinsei_sleeper_t_freeData(shinsei_sleeper_t*const restrict this)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_sleeper_t_dec(shinsei_sleeper_t*const restrict this)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_sleeper_t_as(shinsei_sleeper_t*const restrict this)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_sleeper_t_inl(shinsei_sleeper_t*const restrict this)_SHINSEI_OS_NOEXCEPT;
@@ -59,6 +60,7 @@ _SHINSEI_LIB_API bool shinsei_sleeper_t_busyUS(shinsei_sleeper_t*const restrict 
 
 // clock_t
 _SHINSEI_LIB_API shinsei_clock_t* shinsei_clock_t_con(const uint_fast64_t cycle,const bool us_mode,shinsei_clock_callback_t*const cb,void*const arg)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API void shinsei_clock_t_freeData(shinsei_clock_t*const restrict this)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_clock_t_dec(shinsei_clock_t*const restrict this)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_clock_t_as(shinsei_clock_t*const restrict this,const uint_fast64_t cycle,const bool us_mode,shinsei_clock_callback_t*const cb,void*const arg)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_clock_t_inl(shinsei_clock_t*const restrict this,const uint_fast64_t cycle,const bool us_mode,shinsei_clock_callback_t*const cb,void*const arg)_SHINSEI_OS_NOEXCEPT;
@@ -83,6 +85,7 @@ _SHINSEI_LIB_API void shinsei_clock_t_setCallback(shinsei_clock_t*const restrict
 
 // thread_t
 _SHINSEI_LIB_API shinsei_thread_t* shinsei_thread_t_con(shinsei_thread_callback_t*const cb,void*const arg,void*const ret)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API void shinsei_thread_t_freeData(shinsei_thread_t*const restrict this)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_thread_t_dec(shinsei_thread_t*const restrict this)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_thread_t_as(shinsei_thread_t*const restrict this,shinsei_thread_callback_t*const cb,void*const arg,void*const ret)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_thread_t_inl(shinsei_thread_t*const restrict this,shinsei_thread_callback_t*const cb,void*const arg,void*const ret)_SHINSEI_OS_NOEXCEPT;

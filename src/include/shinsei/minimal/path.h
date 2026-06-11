@@ -10,6 +10,7 @@
 #endif
 
 #ifdef _SHINSEI_OS_CPP
+#define this _this
 extern "C"{
 #endif
 
@@ -582,4 +583,5 @@ _SHINSEI_LIB_API size_t shinsei_splitStringToURLPathU32(char32_t*const restrict 
 
 #ifdef _SHINSEI_OS_CPP
 }
+#undef this
 #endif

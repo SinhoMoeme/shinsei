@@ -8,8 +8,8 @@
 #endif
 
 #ifdef _SHINSEI_OS_CPP
-extern "C"{
 #define this _this
+extern "C"{
 #endif
 
 #ifdef _SHINSEI_OS_CONSTEXPR
@@ -78,7 +78,7 @@ typedef struct _SHINSEI_OS_ALIGN_BYTE{
 
 // arena_meta_t
 _SHINSEI_LIB_API shinsei_arena_meta_t* shinsei_arena_meta_t_con(const size_t size,const bool used)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API shinsei_arena_meta_t* shinsei_arena_meta_t_conCopy(const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API shinsei_arena_meta_t* shinsei_arena_meta_t_conAssign(const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API shinsei_arena_meta_t* shinsei_arena_meta_t_conMove(shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT;
 
 _SHINSEI_LIB_API void shinsei_arena_meta_t_dec(shinsei_arena_meta_t*const restrict this)_SHINSEI_OS_NOEXCEPT;
@@ -90,11 +90,11 @@ _SHINSEI_LIB_API void shinsei_arena_meta_t_attach(shinsei_arena_meta_t*const res
 _SHINSEI_LIB_API void shinsei_arena_meta_t_attachValue(shinsei_arena_meta_t*const restrict this,const int_fast32_t ctrl,const size_t size,const bool used)_SHINSEI_OS_NOEXCEPT;
 
 _SHINSEI_LIB_API void shinsei_arena_meta_t_as(shinsei_arena_meta_t*const restrict this,const size_t size,const bool used)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API void shinsei_arena_meta_t_asCopy(shinsei_arena_meta_t*const restrict this,const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API void shinsei_arena_meta_t_asAssign(shinsei_arena_meta_t*const restrict this,const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_arena_meta_t_asMove(shinsei_arena_meta_t*const restrict this,shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT;
 
 _SHINSEI_LIB_API void shinsei_arena_meta_t_inl(shinsei_arena_meta_t*const restrict this,const size_t size,const bool used)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API void shinsei_arena_meta_t_inlCopy(shinsei_arena_meta_t*const restrict this,const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API void shinsei_arena_meta_t_inlAssign(shinsei_arena_meta_t*const restrict this,const shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_arena_meta_t_inlMove(shinsei_arena_meta_t*const restrict this,shinsei_arena_meta_t*const restrict src)_SHINSEI_OS_NOEXCEPT;
 
 _SHINSEI_LIB_API bool shinsei_arena_meta_t_inlined(const shinsei_arena_meta_t*const restrict this)_SHINSEI_OS_NOEXCEPT;

@@ -4,6 +4,7 @@
 #include"python3/Python.h"
 
 #ifdef _SHINSEI_OS_CPP
+#define this _this
 extern "C"{
 #endif
 
@@ -45,4 +46,5 @@ _SHINSEI_LIB_API void shinsei_ex_gil_guard_t_setCtrl(shinsei_ex_gil_guard_t*cons
 
 #ifdef _SHINSEI_OS_CPP
 }
+#undef this
 #endif

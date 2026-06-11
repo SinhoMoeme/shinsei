@@ -37,12 +37,12 @@
 // Generic type definitions
 #include<stddef.h>
 typedef void* (*shinsei_allocate_callback_t)(const size_t)_SHINSEI_OS_NOEXCEPT;
-typedef void* (*shinsei_allocate_copy_callback_t)(const void*)_SHINSEI_OS_NOEXCEPT;
+typedef void* (*shinsei_allocate_assign_callback_t)(const void*)_SHINSEI_OS_NOEXCEPT;
 typedef void (*shinsei_free_callback_t)(void*)_SHINSEI_OS_NOEXCEPT;
 #ifdef _SHINSEI_OS_CPP
 	namespace shinsei{
 		using allocate_callback_t=::shinsei_allocate_callback_t;
-		using allocate_copy_callback_t=::shinsei_allocate_copy_callback_t;
+		using allocate_assign_callback_t=::shinsei_allocate_assign_callback_t;
 		using free_callback_t=::shinsei_free_callback_t;
 	}
 #endif

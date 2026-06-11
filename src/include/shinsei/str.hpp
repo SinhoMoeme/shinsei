@@ -650,7 +650,7 @@ namespace shinsei{
 		_SHINSEI_OS_INLINE size_t strStrN(const char8_t*const restrict des,const size_t des_len,const char8_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_strStrN(des,des_len,src,src_len);
 		}
-		_SHINSEI_OS_INLINE size_t strKMPN(char8_t*const restrict des,const size_t des_len,const char8_t*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT{
+		_SHINSEI_OS_INLINE size_t strKMPN(const char8_t*const restrict des,const size_t des_len,const char8_t*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_strKMPN(des,des_len,src,src_len,buf,buf_len);
 		}
 		

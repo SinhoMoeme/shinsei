@@ -1,6 +1,11 @@
 #include"shinsei/.internal/usage.h"
 #include"shinsei/ex/python3/gil.h"
 
+#ifdef _SHINSEI_OS_CPP
+#define this _this
+extern "C"{
+#endif
+
 // [Internal, const] Check if elements are gil_inlined
 _SHINSEI_OS_INLINE static bool gil_inlined(const shinsei_ex_gil_guard_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	return this->ctrl&_SHINSEI_CTRL_INLINED;
@@ -31,7 +36,7 @@ _SHINSEI_OS_INLINE static void gil_as(shinsei_ex_gil_guard_t*const restrict this
 
 // Default constructor
 shinsei_ex_gil_guard_t* shinsei_ex_gil_guard_t_con(const bool instant_alloc)_SHINSEI_OS_NOEXCEPT{
-	shinsei_ex_gil_guard_t*const this=(shinsei_ex_gil_guard_t*)malloc(sizeof(shinsei_ex_gil_guard_t));
+	shinsei_ex_gil_guard_t*const this=(shinsei_ex_gil_guard_t*)__builtin_malloc(sizeof(shinsei_ex_gil_guard_t));
 	if(__builtin_expect(this==nullptr,0)) return nullptr;
 	gil_as(this,instant_alloc,0);
 	return this;
@@ -40,7 +45,7 @@ shinsei_ex_gil_guard_t* shinsei_ex_gil_guard_t_con(const bool instant_alloc)_SHI
 // Destructor
 void shinsei_ex_gil_guard_t_dec(shinsei_ex_gil_guard_t*const restrict this)_SHINSEI_OS_NOEXCEPT{
 	if(this->used) gil_free(this);
-	free(this);
+	__builtin_free(this);
 	return;
 }
 
@@ -89,3 +94,8 @@ void shinsei_ex_gil_guard_t_setCtrl(shinsei_ex_gil_guard_t*const restrict this,c
 	this->ctrl=ctrl;
 	return;
 }
+
+#ifdef _SHINSEI_OS_CPP
+}
+#undef this
+#endif
