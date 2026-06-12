@@ -205,6 +205,64 @@ static _SHINSEI_OS_CONSTEXPR const char SHINSEI_DIGITS_EBCDIC[]={
 	static _SHINSEI_OS_CONSTEXPR int SHINSEI_STATUS_ISCII_MALAYALAM=(char)0x49; // Malayalam
 	static _SHINSEI_OS_CONSTEXPR int SHINSEI_STATUS_ISCII_ROMAN=(char)0x4A; //Roman
 	
+	// Buffer size
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT8_STR_BUF=5;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT8_BIN_STR_BUF=10;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT8_OCT_STR_BUF=5;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT8_HEX_STR_BUF=4;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT8_36BASE_STR_BUF=4;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT8_62BASE_STR_BUF=4;
+	
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT8_STR_BUF=4;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT8_BIN_STR_BUF=9;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT8_OCT_STR_BUF=4;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT8_HEX_STR_BUF=3;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT8_36BASE_STR_BUF=3;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT8_62BASE_STR_BUF=3;
+	
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT16_STR_BUF=7;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT16_BIN_STR_BUF=18;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT16_OCT_STR_BUF=8;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT16_HEX_STR_BUF=6;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT16_36BASE_STR_BUF=5;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT16_62BASE_STR_BUF=5;
+	
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT16_STR_BUF=6;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT16_BIN_STR_BUF=17;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT16_OCT_STR_BUF=7;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT16_HEX_STR_BUF=5;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT16_36BASE_STR_BUF=5;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT16_62BASE_STR_BUF=4;
+	
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT32_STR_BUF=12;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT32_BIN_STR_BUF=34;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT32_OCT_STR_BUF=13;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT32_HEX_STR_BUF=10;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT32_36BASE_STR_BUF=8;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT32_62BASE_STR_BUF=8;
+	
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT32_STR_BUF=11;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT32_BIN_STR_BUF=33;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT32_OCT_STR_BUF=12;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT32_HEX_STR_BUF=9;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT32_36BASE_STR_BUF=8;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT32_62BASE_STR_BUF=7;
+	
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT64_STR_BUF=21;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT64_BIN_STR_BUF=66;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT64_OCT_STR_BUF=24;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT64_HEX_STR_BUF=18;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT64_36BASE_STR_BUF=15;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_INT64_62BASE_STR_BUF=13;
+	
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT64_STR_BUF=21;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT64_BIN_STR_BUF=65;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT64_OCT_STR_BUF=23;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT64_HEX_STR_BUF=17;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT64_36BASE_STR_BUF=14;
+	static _SHINSEI_OS_CONSTEXPR size_t SHINSEI_MAX_UINT64_62BASE_STR_BUF=12;
+	
+	// string_t
 	static _SHINSEI_OS_CONSTEXPR size_t shinsei_string_t_DEF_CAP=32;
 	
 #else
@@ -389,6 +447,64 @@ static _SHINSEI_OS_CONSTEXPR const char SHINSEI_DIGITS_EBCDIC[]={
 	#define SHINSEI_STATUS_ISCII_MALAYALAM (char)0x49 // Malayalam
 	#define SHINSEI_STATUS_ISCII_ROMAN (char)0x4A //Roman
 	
+	// Buffer size
+	#define SHINSEI_MAX_INT8_STR_BUF (size_t)5
+	#define SHINSEI_MAX_INT8_BIN_STR_BUF (size_t)10
+	#define SHINSEI_MAX_INT8_OCT_STR_BUF (size_t)5
+	#define SHINSEI_MAX_INT8_HEX_STR_BUF (size_t)4
+	#define SHINSEI_MAX_INT8_36BASE_STR_BUF (size_t)4
+	#define SHINSEI_MAX_INT8_62BASE_STR_BUF (size_t)4
+	
+	#define SHINSEI_MAX_UINT8_STR_BUF (size_t)4
+	#define SHINSEI_MAX_UINT8_BIN_STR_BUF (size_t)9
+	#define SHINSEI_MAX_UINT8_OCT_STR_BUF (size_t)4
+	#define SHINSEI_MAX_UINT8_HEX_STR_BUF (size_t)3
+	#define SHINSEI_MAX_UINT8_36BASE_STR_BUF (size_t)3
+	#define SHINSEI_MAX_UINT8_62BASE_STR_BUF (size_t)3
+	
+	#define SHINSEI_MAX_INT16_STR_BUF (size_t)7
+	#define SHINSEI_MAX_INT16_BIN_STR_BUF (size_t)18
+	#define SHINSEI_MAX_INT16_OCT_STR_BUF (size_t)8
+	#define SHINSEI_MAX_INT16_HEX_STR_BUF (size_t)6
+	#define SHINSEI_MAX_INT16_36BASE_STR_BUF (size_t)5
+	#define SHINSEI_MAX_INT16_62BASE_STR_BUF (size_t)5
+	
+	#define SHINSEI_MAX_UINT16_STR_BUF (size_t)6
+	#define SHINSEI_MAX_UINT16_BIN_STR_BUF (size_t)17
+	#define SHINSEI_MAX_UINT16_OCT_STR_BUF (size_t)7
+	#define SHINSEI_MAX_UINT16_HEX_STR_BUF (size_t)5
+	#define SHINSEI_MAX_UINT16_36BASE_STR_BUF (size_t)5
+	#define SHINSEI_MAX_UINT16_62BASE_STR_BUF (size_t)4
+	
+	#define SHINSEI_MAX_INT32_STR_BUF (size_t)12
+	#define SHINSEI_MAX_INT32_BIN_STR_BUF (size_t)34
+	#define SHINSEI_MAX_INT32_OCT_STR_BUF (size_t)13
+	#define SHINSEI_MAX_INT32_HEX_STR_BUF (size_t)10
+	#define SHINSEI_MAX_INT32_36BASE_STR_BUF (size_t)8
+	#define SHINSEI_MAX_INT32_62BASE_STR_BUF (size_t)8
+	
+	#define SHINSEI_MAX_UINT32_STR_BUF (size_t)11
+	#define SHINSEI_MAX_UINT32_BIN_STR_BUF (size_t)33
+	#define SHINSEI_MAX_UINT32_OCT_STR_BUF (size_t)12
+	#define SHINSEI_MAX_UINT32_HEX_STR_BUF (size_t)9
+	#define SHINSEI_MAX_UINT32_36BASE_STR_BUF (size_t)8
+	#define SHINSEI_MAX_UINT32_62BASE_STR_BUF (size_t)7
+	
+	#define SHINSEI_MAX_INT64_STR_BUF (size_t)21
+	#define SHINSEI_MAX_INT64_BIN_STR_BUF (size_t)66
+	#define SHINSEI_MAX_INT64_OCT_STR_BUF (size_t)24
+	#define SHINSEI_MAX_INT64_HEX_STR_BUF (size_t)18
+	#define SHINSEI_MAX_INT64_36BASE_STR_BUF (size_t)15
+	#define SHINSEI_MAX_INT64_62BASE_STR_BUF (size_t)13
+	
+	#define SHINSEI_MAX_UINT64_STR_BUF (size_t)21
+	#define SHINSEI_MAX_UINT64_BIN_STR_BUF (size_t)65
+	#define SHINSEI_MAX_UINT64_OCT_STR_BUF (size_t)23
+	#define SHINSEI_MAX_UINT64_HEX_STR_BUF (size_t)17
+	#define SHINSEI_MAX_UINT64_36BASE_STR_BUF (size_t)14
+	#define SHINSEI_MAX_UINT64_62BASE_STR_BUF (size_t)12
+	
+	// string_t
 	#define shinsei_string_t_DEF_CAP (size_t)32
 	
 #endif
@@ -685,7 +801,7 @@ _SHINSEI_LIB_API size_t shinsei_strKMPU8(const char8_t*const restrict des,const 
 _SHINSEI_LIB_API size_t shinsei_strKMPU16(const char16_t*const restrict des,const size_t des_len,const char16_t*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strKMPU32(const char32_t*const restrict des,const size_t des_len,const char32_t*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT;
 
-// Int64/UInt64 String Converters (W)
+// Int64/UInt64 string converters (W)
 _SHINSEI_LIB_API void shinsei_uInt64ToStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_uInt64ToBinStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_uInt64ToOctStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
@@ -700,7 +816,7 @@ _SHINSEI_LIB_API void shinsei_int64ToHexStringW(wchar_t*const restrict des,const
 _SHINSEI_LIB_API void shinsei_int64To36BaseStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_int64To62BaseStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 
-// Int64/UInt64 String Converters (U8)
+// Int64/UInt64 string converters (U8)
 _SHINSEI_LIB_API void shinsei_uInt64ToStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_uInt64ToBinStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_uInt64ToOctStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
@@ -715,7 +831,7 @@ _SHINSEI_LIB_API void shinsei_int64ToHexStringU8(char8_t*const restrict des,cons
 _SHINSEI_LIB_API void shinsei_int64To36BaseStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_int64To62BaseStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 
-// Int64/UInt64 String Converters (U16)
+// Int64/UInt64 string converters (U16)
 _SHINSEI_LIB_API void shinsei_uInt64ToStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_uInt64ToBinStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_uInt64ToOctStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
@@ -730,7 +846,7 @@ _SHINSEI_LIB_API void shinsei_int64ToHexStringU16(char16_t*const restrict des,co
 _SHINSEI_LIB_API void shinsei_int64To36BaseStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_int64To62BaseStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 
-// Int64/UInt64 String Converters (U32)
+// Int64/UInt64 string converters (U32)
 _SHINSEI_LIB_API void shinsei_uInt64ToStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_uInt64ToBinStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_uInt64ToOctStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
@@ -745,7 +861,7 @@ _SHINSEI_LIB_API void shinsei_int64ToHexStringU32(char32_t*const restrict des,co
 _SHINSEI_LIB_API void shinsei_int64To36BaseStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_int64To62BaseStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 
-// Int64/UInt64 String Converters (CP)
+// Int64/UInt64 string converters (CP)
 _SHINSEI_LIB_API void shinsei_uInt64ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_uInt64ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_uInt64ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
