@@ -328,9 +328,8 @@ allocate_block:
 		next_meta->ctrl=0;
 		next_meta->size_and_used=m_size-real_cost;
 		meta->size_and_used=real_cost|1;
-	} else {
-		meta->size_and_used|=1;
 	}
+	else meta->size_and_used|=1;
 	
 	++this->ref_count;
 	if(this->ref_count==1){
@@ -409,9 +408,7 @@ void* shinsei_arena_t_allocBack(shinsei_arena_t*const restrict this,const size_t
 		meta=next_meta; 
 		last_offset+=m_size-real_cost;
 	}
-	else{
-		meta->size_and_used|=1;
-	}
+	else meta->size_and_used|=1;
 	
 	++this->ref_count;
 	if(this->ref_count==1) this->head=last_offset;

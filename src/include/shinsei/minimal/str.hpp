@@ -2,6 +2,7 @@
 
 #include"shinsei/minimal/str.h"
 #include"shinsei/.internal/tag.hpp"
+#include<new>
 
 namespace shinsei{
 	// Size

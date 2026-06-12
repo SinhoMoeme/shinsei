@@ -9,7 +9,7 @@ namespace shinsei{
 		::shinsei_object_definition_t obj;
 	public:
 		// Default constructor
-		object_definition_t(allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
+		object_definition_t(allocate_assign_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_as(&obj,allocate_callback,free_callback);
 			return;
 		}
@@ -33,7 +33,7 @@ namespace shinsei{
 		}
 		
 		// In-place constructors
-		explicit object_definition_t(shinsei::in_place_t,allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
+		explicit object_definition_t(shinsei::in_place_t,allocate_assign_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_as(&obj,allocate_callback,free_callback);
 			return;
 		}
@@ -55,7 +55,7 @@ namespace shinsei{
 		}
 		
 		// Inlined constructors
-		explicit object_definition_t(shinsei::inlined_t,allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
+		explicit object_definition_t(shinsei::inlined_t,allocate_assign_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_inl(&obj,allocate_callback,free_callback);
 			return;
 		}
@@ -145,17 +145,17 @@ namespace shinsei{
 			::shinsei_object_definition_t_attach(&obj,&src);
 			return;
 		}
-		void attach(const int_fast32_t ctrl,allocate_copy_callback_t allocate_callback,free_callback_t free_callback)_SHINSEI_OS_NOEXCEPT{
+		void attach(const int_fast32_t ctrl,allocate_assign_callback_t allocate_callback,free_callback_t free_callback)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_attachValue(&obj,ctrl,allocate_callback,free_callback);
 			return;
 		}
 		
 		// Static helpers (for explicit C-struct manipulation in user code)
-		static void as(object_definition_t*const restrict ptr,allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
+		static void as(object_definition_t*const restrict ptr,allocate_assign_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_as(ptr->cObj(),allocate_callback,free_callback);
 			return;
 		}
-		static void as(::shinsei_object_definition_t*const restrict ptr,allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
+		static void as(::shinsei_object_definition_t*const restrict ptr,allocate_assign_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_as(ptr,allocate_callback,free_callback);
 			return;
 		}
@@ -176,11 +176,11 @@ namespace shinsei{
 			return;
 		}
 		
-		static void inl(object_definition_t*const restrict ptr,allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
+		static void inl(object_definition_t*const restrict ptr,allocate_assign_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_inl(ptr->cObj(),allocate_callback,free_callback);
 			return;
 		}
-		static void inl(::shinsei_object_definition_t*const restrict ptr,allocate_copy_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
+		static void inl(::shinsei_object_definition_t*const restrict ptr,allocate_assign_callback_t allocate_callback=nullptr,free_callback_t free_callback=nullptr)_SHINSEI_OS_NOEXCEPT{
 			::shinsei_object_definition_t_inl(ptr,allocate_callback,free_callback);
 			return;
 		}
