@@ -2824,6 +2824,3889 @@ size_t shinsei_splitStringToPartsU32(char32_t*const restrict des_buf,const size_
 	return splitStringToPartsU32(des_buf,des_buf_len,src,src_len,part_len,max_part_cnt,delimiter);
 }
 
+// Int8/UInt8 string converters (W)
+void shinsei_uInt8ToStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt8ToBinStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt8ToOctStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt8ToHexStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt8To36BaseStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt8To62BaseStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int8ToStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int8ToBinStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int8ToOctStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int8ToHexStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int8To36BaseStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int8To62BaseStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+
+// Int8/UInt8 string converters (U8)
+void shinsei_uInt8ToStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt8ToBinStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt8ToOctStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt8ToHexStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt8To36BaseStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt8To62BaseStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int8ToStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int8ToBinStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int8ToOctStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int8ToHexStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int8To36BaseStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int8To62BaseStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+
+// Int8/UInt8 string converters (U16)
+void shinsei_uInt8ToStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt8ToBinStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt8ToOctStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt8ToHexStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt8To36BaseStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt8To62BaseStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int8ToStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int8ToBinStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int8ToOctStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int8ToHexStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int8To36BaseStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int8To62BaseStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+
+// Int8/UInt8 string converters (U32)
+void shinsei_uInt8ToStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt8ToBinStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt8ToOctStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt8ToHexStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt8To36BaseStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt8To62BaseStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int8ToStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int8ToBinStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int8ToOctStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int8ToHexStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int8To36BaseStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int8To62BaseStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+
+// Int8/UInt8 string converters (CP)
+void shinsei_uInt8ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt8ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt8ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt8ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt8To36BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt8To62BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast8_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int8ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int8ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int8ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int8ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int8To36BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int8To62BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast8_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+
+// Int16/UInt16 string converters (W)
+void shinsei_uInt16ToStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt16ToBinStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt16ToOctStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt16ToHexStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt16To36BaseStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt16To62BaseStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int16ToStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int16ToBinStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int16ToOctStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int16ToHexStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int16To36BaseStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int16To62BaseStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+
+// Int16/UInt16 string converters (U8)
+void shinsei_uInt16ToStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt16ToBinStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt16ToOctStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt16ToHexStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt16To36BaseStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt16To62BaseStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int16ToStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int16ToBinStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int16ToOctStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int16ToHexStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int16To36BaseStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int16To62BaseStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+
+// Int16/UInt16 string converters (U16)
+void shinsei_uInt16ToStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt16ToBinStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt16ToOctStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt16ToHexStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt16To36BaseStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt16To62BaseStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int16ToStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int16ToBinStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int16ToOctStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int16ToHexStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int16To36BaseStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int16To62BaseStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+
+// Int16/UInt16 string converters (U32)
+void shinsei_uInt16ToStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt16ToBinStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt16ToOctStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt16ToHexStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt16To36BaseStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt16To62BaseStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int16ToStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int16ToBinStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int16ToOctStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int16ToHexStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int16To36BaseStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int16To62BaseStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+
+// Int16/UInt16 string converters (CP)
+void shinsei_uInt16ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt16ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt16ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt16ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt16To36BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt16To62BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast16_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int16ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int16ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int16ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int16ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int16To36BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int16To62BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast16_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+
+// Int32/UInt32 string converters (W)
+void shinsei_uInt32ToStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt32ToBinStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt32ToOctStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt32ToHexStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt32To36BaseStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt32To62BaseStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]=L'\0';
+	v=src;
+	while(len--){
+		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int32ToStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int32ToBinStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int32ToOctStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int32ToHexStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int32To36BaseStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+void shinsei_int32To62BaseStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=L'0';
+		des[1]=L'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]=L'\0';
+	while(v){
+		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=L'-';
+	return;
+}
+
+// Int32/UInt32 string converters (U8)
+void shinsei_uInt32ToStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt32ToBinStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt32ToOctStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt32ToHexStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt32To36BaseStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt32To62BaseStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]=u8'\0';
+	v=src;
+	while(len--){
+		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int32ToStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int32ToBinStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int32ToOctStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int32ToHexStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int32To36BaseStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+void shinsei_int32To62BaseStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u8'0';
+		des[1]=u8'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]=u8'\0';
+	while(v){
+		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=u8'-';
+	return;
+}
+
+// Int32/UInt32 string converters (U16)
+void shinsei_uInt32ToStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt32ToBinStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt32ToOctStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt32ToHexStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt32To36BaseStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt32To62BaseStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]=u'\0';
+	v=src;
+	while(len--){
+		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int32ToStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int32ToBinStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int32ToOctStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int32ToHexStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int32To36BaseStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+void shinsei_int32To62BaseStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=u'0';
+		des[1]=u'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]=u'\0';
+	while(v){
+		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=u'-';
+	return;
+}
+
+// Int32/UInt32 string converters (U32)
+void shinsei_uInt32ToStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt32ToBinStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt32ToOctStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt32ToHexStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt32To36BaseStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt32To62BaseStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	if(!src){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]=U'\0';
+	v=src;
+	while(len--){
+		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int32ToStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int32ToBinStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int32ToOctStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int32ToHexStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int32To36BaseStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+void shinsei_int32To62BaseStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=U'0';
+		des[1]=U'\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]=U'\0';
+	while(v){
+		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=U'-';
+	return;
+}
+
+// Int32/UInt32 string converters (CP)
+void shinsei_uInt32ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=10;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v%10];
+		v/=10;
+	}
+	return;
+}
+void shinsei_uInt32ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=1;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v&1];
+		v>>=1;
+	}
+	return;
+}
+void shinsei_uInt32ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=3;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v&7];
+		v>>=3;
+	}
+	return;
+}
+void shinsei_uInt32ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v>>=4;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v&15];
+		v>>=4;
+	}
+	return;
+}
+void shinsei_uInt32To36BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=36;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v%36];
+		v/=36;
+	}
+	return;
+}
+void shinsei_uInt32To62BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	if(!src){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=0;
+	register uint_fast32_t v=src;
+	while(v){
+		++len;
+		v/=62;
+	}
+	des[len]='\0';
+	v=src;
+	while(len--){
+		des[len]=(char)digits[v%62];
+		v/=62;
+	}
+	return;
+}
+void shinsei_int32ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=10;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v%10];
+		v/=10;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int32ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=1;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v&1];
+		v>>=1;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int32ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=3;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v&7];
+		v>>=3;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int32ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t>>=4;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v&15];
+		v>>=4;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int32To36BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=36;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v%36];
+		v/=36;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+void shinsei_int32To62BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
+	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
+	register const bool neg=src<0;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	if(!v){
+		des[0]=(char)digits[0];
+		des[1]='\0';
+		return;
+	}
+	register size_t len=neg;
+	register uint_fast32_t t=v;
+	while(t){
+		++len;
+		t/=62;
+	}
+	des[len]='\0';
+	while(v){
+		des[--len]=(char)digits[v%62];
+		v/=62;
+	}
+	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
+	return;
+}
+
+// Int64/UInt64 string converters (W)
 void shinsei_uInt64ToStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
@@ -2946,7 +6829,7 @@ void shinsei_uInt64To62BaseStringW(wchar_t*const restrict des,const uint_fast64_
 }
 void shinsei_int64ToStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
@@ -2968,7 +6851,7 @@ void shinsei_int64ToStringW(wchar_t*const restrict des,const int_fast64_t src)_S
 }
 void shinsei_int64ToBinStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
@@ -2990,7 +6873,7 @@ void shinsei_int64ToBinStringW(wchar_t*const restrict des,const int_fast64_t src
 }
 void shinsei_int64ToOctStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
@@ -3012,7 +6895,7 @@ void shinsei_int64ToOctStringW(wchar_t*const restrict des,const int_fast64_t src
 }
 void shinsei_int64ToHexStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
@@ -3034,7 +6917,7 @@ void shinsei_int64ToHexStringW(wchar_t*const restrict des,const int_fast64_t src
 }
 void shinsei_int64To36BaseStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
@@ -3056,7 +6939,7 @@ void shinsei_int64To36BaseStringW(wchar_t*const restrict des,const int_fast64_t 
 }
 void shinsei_int64To62BaseStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
@@ -3077,6 +6960,7 @@ void shinsei_int64To62BaseStringW(wchar_t*const restrict des,const int_fast64_t 
 	return;
 }
 
+// Int64/UInt64 string converters (U8)
 void shinsei_uInt64ToStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
@@ -3199,7 +7083,7 @@ void shinsei_uInt64To62BaseStringU8(char8_t*const restrict des,const uint_fast64
 }
 void shinsei_int64ToStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
@@ -3221,7 +7105,7 @@ void shinsei_int64ToStringU8(char8_t*const restrict des,const int_fast64_t src)_
 }
 void shinsei_int64ToBinStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
@@ -3243,7 +7127,7 @@ void shinsei_int64ToBinStringU8(char8_t*const restrict des,const int_fast64_t sr
 }
 void shinsei_int64ToOctStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
@@ -3265,7 +7149,7 @@ void shinsei_int64ToOctStringU8(char8_t*const restrict des,const int_fast64_t sr
 }
 void shinsei_int64ToHexStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
@@ -3287,7 +7171,7 @@ void shinsei_int64ToHexStringU8(char8_t*const restrict des,const int_fast64_t sr
 }
 void shinsei_int64To36BaseStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
@@ -3309,7 +7193,7 @@ void shinsei_int64To36BaseStringU8(char8_t*const restrict des,const int_fast64_t
 }
 void shinsei_int64To62BaseStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
@@ -3330,6 +7214,7 @@ void shinsei_int64To62BaseStringU8(char8_t*const restrict des,const int_fast64_t
 	return;
 }
 
+// Int64/UInt64 string converters (U16)
 void shinsei_uInt64ToStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
@@ -3452,7 +7337,7 @@ void shinsei_uInt64To62BaseStringU16(char16_t*const restrict des,const uint_fast
 }
 void shinsei_int64ToStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
@@ -3474,7 +7359,7 @@ void shinsei_int64ToStringU16(char16_t*const restrict des,const int_fast64_t src
 }
 void shinsei_int64ToBinStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
@@ -3496,7 +7381,7 @@ void shinsei_int64ToBinStringU16(char16_t*const restrict des,const int_fast64_t 
 }
 void shinsei_int64ToOctStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
@@ -3518,7 +7403,7 @@ void shinsei_int64ToOctStringU16(char16_t*const restrict des,const int_fast64_t 
 }
 void shinsei_int64ToHexStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
@@ -3540,7 +7425,7 @@ void shinsei_int64ToHexStringU16(char16_t*const restrict des,const int_fast64_t 
 }
 void shinsei_int64To36BaseStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
@@ -3562,7 +7447,7 @@ void shinsei_int64To36BaseStringU16(char16_t*const restrict des,const int_fast64
 }
 void shinsei_int64To62BaseStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
@@ -3583,6 +7468,7 @@ void shinsei_int64To62BaseStringU16(char16_t*const restrict des,const int_fast64
 	return;
 }
 
+// Int64/UInt64 string converters (U32)
 void shinsei_uInt64ToStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
@@ -3705,7 +7591,7 @@ void shinsei_uInt64To62BaseStringU32(char32_t*const restrict des,const uint_fast
 }
 void shinsei_int64ToStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
@@ -3727,7 +7613,7 @@ void shinsei_int64ToStringU32(char32_t*const restrict des,const int_fast64_t src
 }
 void shinsei_int64ToBinStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
@@ -3749,7 +7635,7 @@ void shinsei_int64ToBinStringU32(char32_t*const restrict des,const int_fast64_t 
 }
 void shinsei_int64ToOctStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
@@ -3771,7 +7657,7 @@ void shinsei_int64ToOctStringU32(char32_t*const restrict des,const int_fast64_t 
 }
 void shinsei_int64ToHexStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
@@ -3793,7 +7679,7 @@ void shinsei_int64ToHexStringU32(char32_t*const restrict des,const int_fast64_t 
 }
 void shinsei_int64To36BaseStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
@@ -3815,7 +7701,7 @@ void shinsei_int64To36BaseStringU32(char32_t*const restrict des,const int_fast64
 }
 void shinsei_int64To62BaseStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
@@ -3836,6 +7722,7 @@ void shinsei_int64To62BaseStringU32(char32_t*const restrict des,const int_fast64
 	return;
 }
 
+// Int64/UInt64 string converters (CP)
 void shinsei_uInt64ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
@@ -3972,7 +7859,7 @@ void shinsei_int64ToStringCP(const unsigned int code_page,char*const restrict de
 	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
@@ -3996,7 +7883,7 @@ void shinsei_int64ToBinStringCP(const unsigned int code_page,char*const restrict
 	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
@@ -4020,7 +7907,7 @@ void shinsei_int64ToOctStringCP(const unsigned int code_page,char*const restrict
 	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
@@ -4044,7 +7931,7 @@ void shinsei_int64ToHexStringCP(const unsigned int code_page,char*const restrict
 	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
@@ -4068,7 +7955,7 @@ void shinsei_int64To36BaseStringCP(const unsigned int code_page,char*const restr
 	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
@@ -4092,7 +7979,7 @@ void shinsei_int64To62BaseStringCP(const unsigned int code_page,char*const restr
 	register const bool ebcdic=shinsei_isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast64_t v=neg*(uint_fast64_t)(-(uint_fast64_t)src)+!neg*(uint_fast64_t)src;
+	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
@@ -4113,6 +8000,7 @@ void shinsei_int64To62BaseStringCP(const unsigned int code_page,char*const restr
 	return;
 }
 
+// strLen
 size_t shinsei_strLenW(const wchar_t*const restrict str)_SHINSEI_OS_NOEXCEPT{
 	return wcslen(str);
 }

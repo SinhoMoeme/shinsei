@@ -506,6 +506,307 @@ size_t shinsei_strKMPN(const wchar_t*const restrict des,const size_t des_len,con
 	return SIZE_MAX;
 }
 
+// Int8/UInt8 string converters (A)
+void shinsei_uInt8ToStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt8ToBinStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToBinStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt8ToOctStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToOctStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt8ToHexStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToHexStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt8To36BaseStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8To36BaseStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt8To62BaseStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8To62BaseStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int8ToStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int8ToBinStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToBinStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int8ToOctStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToOctStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int8ToHexStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToHexStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int8To36BaseStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8To36BaseStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int8To62BaseStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8To62BaseStringCP(systemCP(),des,src);
+	return;
+}
+
+// Int8/UInt8 string converters (N)
+void shinsei_uInt8ToStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToStringW(des,src);
+	return;
+}
+void shinsei_uInt8ToBinStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToBinStringW(des,src);
+	return;
+}
+void shinsei_uInt8ToOctStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToOctStringW(des,src);
+	return;
+}
+void shinsei_uInt8ToHexStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToHexStringW(des,src);
+	return;
+}
+void shinsei_uInt8To36BaseStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8To36BaseStringW(des,src);
+	return;
+}
+void shinsei_uInt8To62BaseStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8To62BaseStringW(des,src);
+	return;
+}
+void shinsei_int8ToStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToStringW(des,src);
+	return;
+}
+void shinsei_int8ToBinStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToBinStringW(des,src);
+	return;
+}
+void shinsei_int8ToOctStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToOctStringW(des,src);
+	return;
+}
+void shinsei_int8ToHexStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToHexStringW(des,src);
+	return;
+}
+void shinsei_int8To36BaseStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8To36BaseStringW(des,src);
+	return;
+}
+void shinsei_int8To62BaseStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8To62BaseStringW(des,src);
+	return;
+}
+
+// Int16/UInt16 string converters (A)
+void shinsei_uInt16ToStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt16ToBinStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToBinStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt16ToOctStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToOctStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt16ToHexStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToHexStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt16To36BaseStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16To36BaseStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt16To62BaseStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16To62BaseStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int16ToStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int16ToBinStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToBinStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int16ToOctStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToOctStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int16ToHexStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToHexStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int16To36BaseStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16To36BaseStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int16To62BaseStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16To62BaseStringCP(systemCP(),des,src);
+	return;
+}
+
+// Int16/UInt16 string converters (N)
+void shinsei_uInt16ToStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToStringW(des,src);
+	return;
+}
+void shinsei_uInt16ToBinStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToBinStringW(des,src);
+	return;
+}
+void shinsei_uInt16ToOctStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToOctStringW(des,src);
+	return;
+}
+void shinsei_uInt16ToHexStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToHexStringW(des,src);
+	return;
+}
+void shinsei_uInt16To36BaseStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16To36BaseStringW(des,src);
+	return;
+}
+void shinsei_uInt16To62BaseStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16To62BaseStringW(des,src);
+	return;
+}
+void shinsei_int16ToStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToStringW(des,src);
+	return;
+}
+void shinsei_int16ToBinStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToBinStringW(des,src);
+	return;
+}
+void shinsei_int16ToOctStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToOctStringW(des,src);
+	return;
+}
+void shinsei_int16ToHexStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToHexStringW(des,src);
+	return;
+}
+void shinsei_int16To36BaseStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16To36BaseStringW(des,src);
+	return;
+}
+void shinsei_int16To62BaseStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16To62BaseStringW(des,src);
+	return;
+}
+
+// Int32/UInt32 string converters (A)
+void shinsei_uInt32ToStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt32ToBinStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToBinStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt32ToOctStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToOctStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt32ToHexStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToHexStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt32To36BaseStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32To36BaseStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_uInt32To62BaseStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32To62BaseStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int32ToStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int32ToBinStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToBinStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int32ToOctStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToOctStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int32ToHexStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToHexStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int32To36BaseStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32To36BaseStringCP(systemCP(),des,src);
+	return;
+}
+void shinsei_int32To62BaseStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32To62BaseStringCP(systemCP(),des,src);
+	return;
+}
+
+// Int32/UInt32 string converters (N)
+void shinsei_uInt32ToStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToStringW(des,src);
+	return;
+}
+void shinsei_uInt32ToBinStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToBinStringW(des,src);
+	return;
+}
+void shinsei_uInt32ToOctStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToOctStringW(des,src);
+	return;
+}
+void shinsei_uInt32ToHexStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToHexStringW(des,src);
+	return;
+}
+void shinsei_uInt32To36BaseStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32To36BaseStringW(des,src);
+	return;
+}
+void shinsei_uInt32To62BaseStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32To62BaseStringW(des,src);
+	return;
+}
+void shinsei_int32ToStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToStringW(des,src);
+	return;
+}
+void shinsei_int32ToBinStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToBinStringW(des,src);
+	return;
+}
+void shinsei_int32ToOctStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToOctStringW(des,src);
+	return;
+}
+void shinsei_int32ToHexStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToHexStringW(des,src);
+	return;
+}
+void shinsei_int32To36BaseStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32To36BaseStringW(des,src);
+	return;
+}
+void shinsei_int32To62BaseStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32To62BaseStringW(des,src);
+	return;
+}
+
+// Int64/UInt64 string converters (A)
 void shinsei_uInt64ToStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	shinsei_uInt64ToStringCP(systemCP(),des,src);
 	return;
@@ -555,6 +856,7 @@ void shinsei_int64To62BaseStringA(char*const restrict des,const int_fast64_t src
 	return;
 }
 
+// Int64/UInt64 string converters (N)
 void shinsei_uInt64ToStringN(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	shinsei_uInt64ToStringW(des,src);
 	return;
