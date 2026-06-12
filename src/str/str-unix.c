@@ -862,6 +862,716 @@ void shinsei_int64To36BaseStringN(char8_t*const restrict des,const int_fast64_t 
 void shinsei_int64To62BaseStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	shinsei_int64To62BaseStringU8(des,src);
 	return;
+}// Int8/UInt8 string converters (A)
+void shinsei_uInt8ToStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt8ToBinStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToBinStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt8ToOctStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToOctStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt8ToHexStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToHexStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt8To36BaseStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8To36BaseStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt8To62BaseStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8To62BaseStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int8ToStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int8ToBinStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToBinStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int8ToOctStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToOctStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int8ToHexStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToHexStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int8To36BaseStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8To36BaseStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int8To62BaseStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8To62BaseStringU8((char8_t*)des,src);
+	return;
+}
+
+// Int8/UInt8 string converters (N)
+void shinsei_uInt8ToStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToStringU8(des,src);
+	return;
+}
+void shinsei_uInt8ToBinStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToBinStringU8(des,src);
+	return;
+}
+void shinsei_uInt8ToOctStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToOctStringU8(des,src);
+	return;
+}
+void shinsei_uInt8ToHexStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8ToHexStringU8(des,src);
+	return;
+}
+void shinsei_uInt8To36BaseStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8To36BaseStringU8(des,src);
+	return;
+}
+void shinsei_uInt8To62BaseStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt8To62BaseStringU8(des,src);
+	return;
+}
+void shinsei_int8ToStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToStringU8(des,src);
+	return;
+}
+void shinsei_int8ToBinStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToBinStringU8(des,src);
+	return;
+}
+void shinsei_int8ToOctStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToOctStringU8(des,src);
+	return;
+}
+void shinsei_int8ToHexStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8ToHexStringU8(des,src);
+	return;
+}
+void shinsei_int8To36BaseStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8To36BaseStringU8(des,src);
+	return;
+}
+void shinsei_int8To62BaseStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int8To62BaseStringU8(des,src);
+	return;
+}
+
+// Int16/UInt16 string converters (A)
+void shinsei_uInt16ToStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt16ToBinStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToBinStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt16ToOctStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToOctStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt16ToHexStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToHexStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt16To36BaseStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16To36BaseStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt16To62BaseStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16To62BaseStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int16ToStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int16ToBinStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToBinStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int16ToOctStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToOctStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int16ToHexStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToHexStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int16To36BaseStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16To36BaseStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int16To62BaseStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16To62BaseStringU8((char8_t*)des,src);
+	return;
+}
+
+// Int16/UInt16 string converters (N)
+void shinsei_uInt16ToStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToStringU8(des,src);
+	return;
+}
+void shinsei_uInt16ToBinStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToBinStringU8(des,src);
+	return;
+}
+void shinsei_uInt16ToOctStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToOctStringU8(des,src);
+	return;
+}
+void shinsei_uInt16ToHexStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16ToHexStringU8(des,src);
+	return;
+}
+void shinsei_uInt16To36BaseStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16To36BaseStringU8(des,src);
+	return;
+}
+void shinsei_uInt16To62BaseStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt16To62BaseStringU8(des,src);
+	return;
+}
+void shinsei_int16ToStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToStringU8(des,src);
+	return;
+}
+void shinsei_int16ToBinStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToBinStringU8(des,src);
+	return;
+}
+void shinsei_int16ToOctStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToOctStringU8(des,src);
+	return;
+}
+void shinsei_int16ToHexStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16ToHexStringU8(des,src);
+	return;
+}
+void shinsei_int16To36BaseStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16To36BaseStringU8(des,src);
+	return;
+}
+void shinsei_int16To62BaseStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int16To62BaseStringU8(des,src);
+	return;
+}
+
+// Int32/UInt32 string converters (A)
+void shinsei_uInt32ToStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt32ToBinStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToBinStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt32ToOctStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToOctStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt32ToHexStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToHexStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt32To36BaseStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32To36BaseStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt32To62BaseStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32To62BaseStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int32ToStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int32ToBinStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToBinStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int32ToOctStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToOctStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int32ToHexStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToHexStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int32To36BaseStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32To36BaseStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int32To62BaseStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32To62BaseStringU8((char8_t*)des,src);
+	return;
+}
+
+// Int32/UInt32 string converters (N)
+void shinsei_uInt32ToStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToStringU8(des,src);
+	return;
+}
+void shinsei_uInt32ToBinStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToBinStringU8(des,src);
+	return;
+}
+void shinsei_uInt32ToOctStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToOctStringU8(des,src);
+	return;
+}
+void shinsei_uInt32ToHexStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32ToHexStringU8(des,src);
+	return;
+}
+void shinsei_uInt32To36BaseStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32To36BaseStringU8(des,src);
+	return;
+}
+void shinsei_uInt32To62BaseStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt32To62BaseStringU8(des,src);
+	return;
+}
+void shinsei_int32ToStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToStringU8(des,src);
+	return;
+}
+void shinsei_int32ToBinStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToBinStringU8(des,src);
+	return;
+}
+void shinsei_int32ToOctStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToOctStringU8(des,src);
+	return;
+}
+void shinsei_int32ToHexStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32ToHexStringU8(des,src);
+	return;
+}
+void shinsei_int32To36BaseStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32To36BaseStringU8(des,src);
+	return;
+}
+void shinsei_int32To62BaseStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int32To62BaseStringU8(des,src);
+	return;
+}
+
+// Int64/UInt64 string converters (A)
+void shinsei_uInt64ToStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt64ToStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt64ToBinStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt64ToBinStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt64ToOctStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt64ToOctStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt64ToHexStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt64ToHexStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt64To36BaseStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt64To36BaseStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_uInt64To62BaseStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt64To62BaseStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int64ToStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int64ToStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int64ToBinStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int64ToBinStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int64ToOctStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int64ToOctStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int64ToHexStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int64ToHexStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int64To36BaseStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int64To36BaseStringU8((char8_t*)des,src);
+	return;
+}
+void shinsei_int64To62BaseStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int64To62BaseStringU8((char8_t*)des,src);
+	return;
+}
+
+// Int64/UInt64 string converters (N)
+void shinsei_uInt64ToStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt64ToStringU8(des,src);
+	return;
+}
+void shinsei_uInt64ToBinStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt64ToBinStringU8(des,src);
+	return;
+}
+void shinsei_uInt64ToOctStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt64ToOctStringU8(des,src);
+	return;
+}
+void shinsei_uInt64ToHexStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt64ToHexStringU8(des,src);
+	return;
+}
+void shinsei_uInt64To36BaseStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt64To36BaseStringU8(des,src);
+	return;
+}
+void shinsei_uInt64To62BaseStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_uInt64To62BaseStringU8(des,src);
+	return;
+}
+void shinsei_int64ToStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int64ToStringU8(des,src);
+	return;
+}
+void shinsei_int64ToBinStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int64ToBinStringU8(des,src);
+	return;
+}
+void shinsei_int64ToOctStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int64ToOctStringU8(des,src);
+	return;
+}
+void shinsei_int64ToHexStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int64ToHexStringU8(des,src);
+	return;
+}
+void shinsei_int64To36BaseStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int64To36BaseStringU8(des,src);
+	return;
+}
+void shinsei_int64To62BaseStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	shinsei_int64To62BaseStringU8(des,src);
+	return;
+}
+
+// String to int8/uint8 converters (A)
+uint_fast8_t shinsei_stringToUInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToUInt8U8((const char8_t*)src,len);
+}
+uint_fast8_t shinsei_binStringToUInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToUInt8U8((const char8_t*)src,len);
+}
+uint_fast8_t shinsei_octStringToUInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToUInt8U8((const char8_t*)src,len);
+}
+uint_fast8_t shinsei_hexStringToUInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToUInt8U8((const char8_t*)src,len);
+}
+uint_fast8_t shinsei_36BaseStringToUInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToUInt8U8((const char8_t*)src,len);
+}
+uint_fast8_t shinsei_62BaseStringToUInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToUInt8U8((const char8_t*)src,len);
+}
+
+int_fast8_t shinsei_stringToInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToInt8U8((const char8_t*)src,len);
+}
+int_fast8_t shinsei_binStringToInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToInt8U8((const char8_t*)src,len);
+}
+int_fast8_t shinsei_octStringToInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToInt8U8((const char8_t*)src,len);
+}
+int_fast8_t shinsei_hexStringToInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToInt8U8((const char8_t*)src,len);
+}
+int_fast8_t shinsei_36BaseStringToInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToInt8U8((const char8_t*)src,len);
+}
+int_fast8_t shinsei_62BaseStringToInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToInt8U8((const char8_t*)src,len);
+}
+
+// String to int8/uint8 converters (N)
+uint_fast8_t shinsei_stringToUInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToUInt8U8(src,len);
+}
+uint_fast8_t shinsei_binStringToUInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToUInt8U8(src,len);
+}
+uint_fast8_t shinsei_octStringToUInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToUInt8U8(src,len);
+}
+uint_fast8_t shinsei_hexStringToUInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToUInt8U8(src,len);
+}
+uint_fast8_t shinsei_36BaseStringToUInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToUInt8U8(src,len);
+}
+uint_fast8_t shinsei_62BaseStringToUInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToUInt8U8(src,len);
+}
+
+int_fast8_t shinsei_stringToInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToInt8U8(src,len);
+}
+int_fast8_t shinsei_binStringToInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToInt8U8(src,len);
+}
+int_fast8_t shinsei_octStringToInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToInt8U8(src,len);
+}
+int_fast8_t shinsei_hexStringToInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToInt8U8(src,len);
+}
+int_fast8_t shinsei_36BaseStringToInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToInt8U8(src,len);
+}
+int_fast8_t shinsei_62BaseStringToInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToInt8U8(src,len);
+}
+
+// Int16/UInt16 string converters (A)
+uint_fast16_t shinsei_stringToUInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToUInt16U8((const char8_t*)src,len);
+}
+uint_fast16_t shinsei_binStringToUInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToUInt16U8((const char8_t*)src,len);
+}
+uint_fast16_t shinsei_octStringToUInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToUInt16U8((const char8_t*)src,len);
+}
+uint_fast16_t shinsei_hexStringToUInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToUInt16U8((const char8_t*)src,len);
+}
+uint_fast16_t shinsei_36BaseStringToUInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToUInt16U8((const char8_t*)src,len);
+}
+uint_fast16_t shinsei_62BaseStringToUInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToUInt16U8((const char8_t*)src,len);
+}
+
+int_fast16_t shinsei_stringToInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToInt16U8((const char8_t*)src,len);
+}
+int_fast16_t shinsei_binStringToInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToInt16U8((const char8_t*)src,len);
+}
+int_fast16_t shinsei_octStringToInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToInt16U8((const char8_t*)src,len);
+}
+int_fast16_t shinsei_hexStringToInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToInt16U8((const char8_t*)src,len);
+}
+int_fast16_t shinsei_36BaseStringToInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToInt16U8((const char8_t*)src,len);
+}
+int_fast16_t shinsei_62BaseStringToInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToInt16U8((const char8_t*)src,len);
+}
+
+// Int16/UInt16 string converters (N)
+uint_fast16_t shinsei_stringToUInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToUInt16U8(src,len);
+}
+uint_fast16_t shinsei_binStringToUInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToUInt16U8(src,len);
+}
+uint_fast16_t shinsei_octStringToUInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToUInt16U8(src,len);
+}
+uint_fast16_t shinsei_hexStringToUInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToUInt16U8(src,len);
+}
+uint_fast16_t shinsei_36BaseStringToUInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToUInt16U8(src,len);
+}
+uint_fast16_t shinsei_62BaseStringToUInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToUInt16U8(src,len);
+}
+
+int_fast16_t shinsei_stringToInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToInt16U8(src,len);
+}
+int_fast16_t shinsei_binStringToInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToInt16U8(src,len);
+}
+int_fast16_t shinsei_octStringToInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToInt16U8(src,len);
+}
+int_fast16_t shinsei_hexStringToInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToInt16U8(src,len);
+}
+int_fast16_t shinsei_36BaseStringToInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToInt16U8(src,len);
+}
+int_fast16_t shinsei_62BaseStringToInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToInt16U8(src,len);
+}
+
+// Int32/UInt32 string converters (A)
+uint_fast32_t shinsei_stringToUInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToUInt32U8((const char8_t*)src,len);
+}
+uint_fast32_t shinsei_binStringToUInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToUInt32U8((const char8_t*)src,len);
+}
+uint_fast32_t shinsei_octStringToUInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToUInt32U8((const char8_t*)src,len);
+}
+uint_fast32_t shinsei_hexStringToUInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToUInt32U8((const char8_t*)src,len);
+}
+uint_fast32_t shinsei_36BaseStringToUInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToUInt32U8((const char8_t*)src,len);
+}
+uint_fast32_t shinsei_62BaseStringToUInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToUInt32U8((const char8_t*)src,len);
+}
+
+int_fast32_t shinsei_stringToInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToInt32U8((const char8_t*)src,len);
+}
+int_fast32_t shinsei_binStringToInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToInt32U8((const char8_t*)src,len);
+}
+int_fast32_t shinsei_octStringToInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToInt32U8((const char8_t*)src,len);
+}
+int_fast32_t shinsei_hexStringToInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToInt32U8((const char8_t*)src,len);
+}
+int_fast32_t shinsei_36BaseStringToInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToInt32U8((const char8_t*)src,len);
+}
+int_fast32_t shinsei_62BaseStringToInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToInt32U8((const char8_t*)src,len);
+}
+
+// Int32/UInt32 string converters (N)
+uint_fast32_t shinsei_stringToUInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToUInt32U8(src,len);
+}
+uint_fast32_t shinsei_binStringToUInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToUInt32U8(src,len);
+}
+uint_fast32_t shinsei_octStringToUInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToUInt32U8(src,len);
+}
+uint_fast32_t shinsei_hexStringToUInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToUInt32U8(src,len);
+}
+uint_fast32_t shinsei_36BaseStringToUInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToUInt32U8(src,len);
+}
+uint_fast32_t shinsei_62BaseStringToUInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToUInt32U8(src,len);
+}
+
+int_fast32_t shinsei_stringToInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToInt32U8(src,len);
+}
+int_fast32_t shinsei_binStringToInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToInt32U8(src,len);
+}
+int_fast32_t shinsei_octStringToInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToInt32U8(src,len);
+}
+int_fast32_t shinsei_hexStringToInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToInt32U8(src,len);
+}
+int_fast32_t shinsei_36BaseStringToInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToInt32U8(src,len);
+}
+int_fast32_t shinsei_62BaseStringToInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToInt32U8(src,len);
+}
+
+// Int64/UInt64 string converters (A)
+uint_fast64_t shinsei_stringToUInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToUInt64U8((const char8_t*)src,len);
+}
+uint_fast64_t shinsei_binStringToUInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToUInt64U8((const char8_t*)src,len);
+}
+uint_fast64_t shinsei_octStringToUInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToUInt64U8((const char8_t*)src,len);
+}
+uint_fast64_t shinsei_hexStringToUInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToUInt64U8((const char8_t*)src,len);
+}
+uint_fast64_t shinsei_36BaseStringToUInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToUInt64U8((const char8_t*)src,len);
+}
+uint_fast64_t shinsei_62BaseStringToUInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToUInt64U8((const char8_t*)src,len);
+}
+
+int_fast64_t shinsei_stringToInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToInt64U8((const char8_t*)src,len);
+}
+int_fast64_t shinsei_binStringToInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToInt64U8((const char8_t*)src,len);
+}
+int_fast64_t shinsei_octStringToInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToInt64U8((const char8_t*)src,len);
+}
+int_fast64_t shinsei_hexStringToInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToInt64U8((const char8_t*)src,len);
+}
+int_fast64_t shinsei_36BaseStringToInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToInt64U8((const char8_t*)src,len);
+}
+int_fast64_t shinsei_62BaseStringToInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToInt64U8((const char8_t*)src,len);
+}
+
+// Int64/UInt64 string converters (N)
+uint_fast64_t shinsei_stringToUInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToUInt64U8(src,len);
+}
+uint_fast64_t shinsei_binStringToUInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToUInt64U8(src,len);
+}
+uint_fast64_t shinsei_octStringToUInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToUInt64U8(src,len);
+}
+uint_fast64_t shinsei_hexStringToUInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToUInt64U8(src,len);
+}
+uint_fast64_t shinsei_36BaseStringToUInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToUInt64U8(src,len);
+}
+uint_fast64_t shinsei_62BaseStringToUInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToUInt64U8(src,len);
+}
+
+int_fast64_t shinsei_stringToInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_stringToInt64U8(src,len);
+}
+int_fast64_t shinsei_binStringToInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_binStringToInt64U8(src,len);
+}
+int_fast64_t shinsei_octStringToInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_octStringToInt64U8(src,len);
+}
+int_fast64_t shinsei_hexStringToInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_hexStringToInt64U8(src,len);
+}
+int_fast64_t shinsei_36BaseStringToInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_36BaseStringToInt64U8(src,len);
+}
+int_fast64_t shinsei_62BaseStringToInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+	return shinsei_62BaseStringToInt64U8(src,len);
 }
 
 #ifdef _SHINSEI_OS_CPP

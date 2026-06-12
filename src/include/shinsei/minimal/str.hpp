@@ -253,8 +253,8 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE int charSizeW(const wint_t starter_ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_charSizeW(starter_ch);
 	}
-	_SHINSEI_OS_INLINE int charSizeCP(const unsigned int code_page,const int starter_ch,const int second_ch=0,const int third_ch=0,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_charSizeCP(code_page,starter_ch,second_ch,third_ch,status);
+	_SHINSEI_OS_INLINE int charSizeCP(const unsigned int cp,const int starter_ch,const int second_ch=0,const int third_ch=0,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_charSizeCP(cp,starter_ch,second_ch,third_ch,status);
 	}
 	_SHINSEI_OS_INLINE int charSizeU8(const char8_t starter_ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_charSizeU8(starter_ch);
@@ -268,8 +268,8 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE int charSize(const wint_t starter_ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_charSizeW(starter_ch);
 	}
-	_SHINSEI_OS_INLINE int charSize(const unsigned int code_page,const int starter_ch,const int second_ch=0,const int third_ch=0,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_charSizeCP(code_page,starter_ch,second_ch,third_ch,status);
+	_SHINSEI_OS_INLINE int charSize(const unsigned int cp,const int starter_ch,const int second_ch=0,const int third_ch=0,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_charSizeCP(cp,starter_ch,second_ch,third_ch,status);
 	}
 	_SHINSEI_OS_INLINE int charSize(const char8_t starter_ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_charSizeU8(starter_ch);
@@ -287,11 +287,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isBDigitWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isBDigitWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isBDigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isBDigitCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isBDigitCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isBDigitCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isBDigitCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isBDigitCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isBDigitCPM(const unsigned int cp,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isBDigitCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isBDigitU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isBDigitU8(ch);
@@ -317,11 +317,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isBDigitM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isBDigitWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isBDigit(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isBDigitCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isBDigit(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isBDigitCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isBDigitM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isBDigitCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isBDigitM(const unsigned int cp,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isBDigitCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isBDigit(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isBDigitU8(ch);
@@ -348,11 +348,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isODigitWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isODigitWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isODigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isODigitCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isODigitCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isODigitCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isODigitCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isODigitCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isODigitCPM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isODigitCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isODigitU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isODigitU8(ch);
@@ -378,11 +378,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isODigitM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isODigitWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isODigit(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isODigitCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isODigit(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isODigitCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isODigitM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isODigitCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isODigitM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isODigitCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isODigit(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isODigitU8(ch);
@@ -409,11 +409,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isDigitWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isDigitWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isDigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isDigitCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isDigitCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isDigitCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isDigitCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isDigitCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isDigitCPM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isDigitCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isDigitU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isDigitU8(ch);
@@ -439,11 +439,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isDigitM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isDigitWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isDigit(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isDigitCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isDigit(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isDigitCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isDigitM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isDigitCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isDigitM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isDigitCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isDigit(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isDigitU8(ch);
@@ -470,11 +470,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isXDigitWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isXDigitWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isXDigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isXDigitCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isXDigitCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isXDigitCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isXDigitCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isXDigitCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isXDigitCPM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isXDigitCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isXDigitU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isXDigitU8(ch);
@@ -500,11 +500,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isXDigitM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isXDigitWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isXDigit(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isXDigitCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isXDigit(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isXDigitCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isXDigitM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isXDigitCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isXDigitM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isXDigitCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isXDigit(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isXDigitU8(ch);
@@ -531,11 +531,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isUpperWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isUpperWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isUpperCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isUpperCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isUpperCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isUpperCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isUpperCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isUpperCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isUpperCPM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isUpperCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isUpperU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isUpperU8(ch);
@@ -561,11 +561,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isUpperM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isUpperWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isUpper(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isUpperCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isUpper(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isUpperCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isUpperM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isUpperCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isUpperM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isUpperCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isUpper(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isUpperU8(ch);
@@ -592,11 +592,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isLowerWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isLowerWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isLowerCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isLowerCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isLowerCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isLowerCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isLowerCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isLowerCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isLowerCPM(const unsigned int cp,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isLowerCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isLowerU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isLowerU8(ch);
@@ -622,11 +622,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isLowerM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isLowerWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isLower(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isLowerCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isLower(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isLowerCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isLowerM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isLowerCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isLowerM(const unsigned int cp,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isLowerCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isLower(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isLowerU8(ch);
@@ -653,11 +653,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isAlphaWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isAlphaWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isAlphaCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isAlphaCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isAlphaCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isAlphaCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isAlphaCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isAlphaCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isAlphaCPM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isAlphaCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isAlphaU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isAlphaU8(ch);
@@ -683,11 +683,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isAlphaM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isAlphaWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isAlpha(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isAlphaCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isAlpha(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isAlphaCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isAlphaM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isAlphaCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isAlphaM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isAlphaCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isAlpha(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isAlphaU8(ch);
@@ -714,11 +714,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isAlnumWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isAlnumWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isAlnumCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isAlnumCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isAlnumCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isAlnumCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isAlnumCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isAlnumCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isAlnumCPM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isAlnumCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isAlnumU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isAlnumU8(ch);
@@ -744,11 +744,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isAlnumM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isAlnumWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isAlnum(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isAlnumCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isAlnum(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isAlnumCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isAlnumM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isAlnumCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isAlnumM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isAlnumCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isAlnum(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isAlnumU8(ch);
@@ -775,11 +775,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isBlankWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isBlankWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isBlankCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isBlankCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isBlankCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isBlankCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isBlankCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isBlankCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isBlankCPM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isBlankCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isBlankU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isBlankU8(ch);
@@ -805,11 +805,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isBlankM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isBlankWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isBlank(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isBlankCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isBlank(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isBlankCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isBlankM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isBlankCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isBlankM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isBlankCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isBlank(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isBlankU8(ch);
@@ -836,11 +836,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isCntrlWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isCntrlWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isCntrlCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isCntrlCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isCntrlCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isCntrlCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isCntrlCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isCntrlCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isCntrlCPM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isCntrlCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isCntrlU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isCntrlU8(ch);
@@ -866,11 +866,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isCntrlM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isCntrlWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isCntrl(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isCntrlCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isCntrl(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isCntrlCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isCntrlM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isCntrlCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isCntrlM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isCntrlCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isCntrl(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isCntrlU8(ch);
@@ -897,11 +897,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isPrintWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isPrintWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isPrintCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isPrintCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isPrintCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isPrintCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isPrintCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isPrintCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isPrintCPM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isPrintCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isPrintU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isPrintU8(ch);
@@ -927,11 +927,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isPrintM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isPrintWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isPrint(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isPrintCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isPrint(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isPrintCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isPrintM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isPrintCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isPrintM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isPrintCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isPrint(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isPrintU8(ch);
@@ -958,11 +958,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isGraphWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isGraphWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isGraphCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isGraphCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isGraphCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isGraphCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isGraphCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isGraphCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isGraphCPM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isGraphCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isGraphU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isGraphU8(ch);
@@ -988,11 +988,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isGraphM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isGraphWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isGraph(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isGraphCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isGraph(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isGraphCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isGraphM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isGraphCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isGraphM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isGraphCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isGraph(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isGraphU8(ch);
@@ -1019,11 +1019,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isPunctWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isPunctWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isPunctCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isPunctCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isPunctCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isPunctCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isPunctCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isPunctCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isPunctCPM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isPunctCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isPunctU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isPunctU8(ch);
@@ -1049,11 +1049,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isPunctM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isPunctWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isPunct(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isPunctCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isPunct(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isPunctCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isPunctM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isPunctCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isPunctM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isPunctCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isPunct(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isPunctU8(ch);
@@ -1080,11 +1080,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isSpaceWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isSpaceWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isSpaceCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isSpaceCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isSpaceCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isSpaceCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isSpaceCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isSpaceCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isSpaceCPM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isSpaceCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isSpaceU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isSpaceU8(ch);
@@ -1110,11 +1110,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isSpaceM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isSpaceWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isSpace(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isSpaceCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isSpace(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isSpaceCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isSpaceM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isSpaceCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isSpaceM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isSpaceCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isSpace(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isSpaceU8(ch);
@@ -1141,11 +1141,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isJSONWhitespaceWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isJSONWhitespaceWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isJSONWhitespaceCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isJSONWhitespaceCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isJSONWhitespaceCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isJSONWhitespaceCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isJSONWhitespaceCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isJSONWhitespaceCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isJSONWhitespaceCPM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isJSONWhitespaceCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isJSONWhitespaceU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isJSONWhitespaceU8(ch);
@@ -1171,11 +1171,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool isJSONWhitespaceM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isJSONWhitespaceWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE bool isJSONWhitespace(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isJSONWhitespaceCP(code_page,ch);
+	_SHINSEI_OS_INLINE bool isJSONWhitespace(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isJSONWhitespaceCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE bool isJSONWhitespaceM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isJSONWhitespaceCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE bool isJSONWhitespaceM(const unsigned int cp,const char**const restrict str_ptr,const size_t len,int*const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isJSONWhitespaceCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE bool isJSONWhitespace(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isJSONWhitespaceU8(ch);
@@ -1202,11 +1202,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE wint_t toUpperWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_toUpperWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE int toUpperCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_toUpperCP(code_page,ch);
+	_SHINSEI_OS_INLINE int toUpperCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_toUpperCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE int toUpperCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_toUpperCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE int toUpperCPM(const unsigned int cp,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_toUpperCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE char8_t toUpperU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_toUpperU8(ch);
@@ -1232,11 +1232,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE wint_t toUpperM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_toUpperWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE int toUpper(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_toUpperCP(code_page,ch);
+	_SHINSEI_OS_INLINE int toUpper(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_toUpperCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE int toUpperM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_toUpperCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE int toUpperM(const unsigned int cp,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_toUpperCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE char8_t toUpper(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_toUpperU8(ch);
@@ -1263,11 +1263,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE wint_t toLowerWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_toLowerWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE int toLowerCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_toLowerCP(code_page,ch);
+	_SHINSEI_OS_INLINE int toLowerCP(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_toLowerCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE int toLowerCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_toLowerCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE int toLowerCPM(const unsigned int cp,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_toLowerCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE char8_t toLowerU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_toLowerU8(ch);
@@ -1293,11 +1293,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE wint_t toLowerM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_toLowerWM(str_ptr,len);
 	}
-	_SHINSEI_OS_INLINE int toLower(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_toLowerCP(code_page,ch);
+	_SHINSEI_OS_INLINE int toLower(const unsigned int cp,const int ch)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_toLowerCP(cp,ch);
 	}
-	_SHINSEI_OS_INLINE int toLowerM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_toLowerCPM(code_page,str_ptr,len,status);
+	_SHINSEI_OS_INLINE int toLowerM(const unsigned int cp,const char** const restrict str_ptr,const size_t len,int* const restrict status=nullptr)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_toLowerCPM(cp,str_ptr,len,status);
 	}
 	_SHINSEI_OS_INLINE char8_t toLower(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_toLowerU8(ch);
@@ -1321,8 +1321,8 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE int isHexColorW(const wchar_t*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isHexColorW(str,len);
 	}
-	_SHINSEI_OS_INLINE int isHexColorCP(const unsigned int code_page,const char*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isHexColorCP(code_page,str,len);
+	_SHINSEI_OS_INLINE int isHexColorCP(const unsigned int cp,const char*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isHexColorCP(cp,str,len);
 	}
 	_SHINSEI_OS_INLINE int isHexColorU8(const char8_t*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isHexColorU8(str,len);
@@ -1336,8 +1336,8 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE int isHexColor(const wchar_t*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isHexColorW(str,len);
 	}
-	_SHINSEI_OS_INLINE int isHexColor(const unsigned int code_page,const char*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_isHexColorCP(code_page,str,len);
+	_SHINSEI_OS_INLINE int isHexColor(const unsigned int cp,const char*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_isHexColorCP(cp,str,len);
 	}
 	_SHINSEI_OS_INLINE int isHexColor(const char8_t*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_isHexColorU8(str,len);
@@ -1390,8 +1390,8 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE size_t stringLinesW(size_t*restrict idx_buf,size_t idx_buf_len,wchar_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_stringLinesW(idx_buf,idx_buf_len,str,str_len);
 	}
-	_SHINSEI_OS_INLINE size_t stringLinesCP(const unsigned int code_page,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_stringLinesCP(code_page,idx_buf,idx_buf_len,str,str_len);
+	_SHINSEI_OS_INLINE size_t stringLinesCP(const unsigned int cp,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringLinesCP(cp,idx_buf,idx_buf_len,str,str_len);
 	}
 	_SHINSEI_OS_INLINE size_t stringLinesU8(size_t*restrict idx_buf,size_t idx_buf_len,char8_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_stringLinesU8(idx_buf,idx_buf_len,str,str_len);
@@ -1405,8 +1405,8 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE size_t stringLines(size_t*restrict idx_buf,size_t idx_buf_len,wchar_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_stringLinesW(idx_buf,idx_buf_len,str,str_len);
 	}
-	_SHINSEI_OS_INLINE size_t stringLines(const unsigned int code_page,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_stringLinesCP(code_page,idx_buf,idx_buf_len,str,str_len);
+	_SHINSEI_OS_INLINE size_t stringLines(const unsigned int cp,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringLinesCP(cp,idx_buf,idx_buf_len,str,str_len);
 	}
 	_SHINSEI_OS_INLINE size_t stringLines(size_t*restrict idx_buf,size_t idx_buf_len,char8_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_stringLinesU8(idx_buf,idx_buf_len,str,str_len);
@@ -1421,8 +1421,8 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE size_t findStringsW(size_t*restrict idx_buf,size_t idx_buf_len,wchar_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_findStringsW(idx_buf,idx_buf_len,str,str_len);
 	}
-	_SHINSEI_OS_INLINE size_t findStringsCP(const unsigned int code_page,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_findStringsCP(code_page,idx_buf,idx_buf_len,str,str_len);
+	_SHINSEI_OS_INLINE size_t findStringsCP(const unsigned int cp,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_findStringsCP(cp,idx_buf,idx_buf_len,str,str_len);
 	}
 	_SHINSEI_OS_INLINE size_t findStringsU8(size_t*restrict idx_buf,size_t idx_buf_len,char8_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_findStringsU8(idx_buf,idx_buf_len,str,str_len);
@@ -1436,8 +1436,8 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE size_t findStrings(size_t*restrict idx_buf,size_t idx_buf_len,wchar_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_findStringsW(idx_buf,idx_buf_len,str,str_len);
 	}
-	_SHINSEI_OS_INLINE size_t findStrings(const unsigned int code_page,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_findStringsCP(code_page,idx_buf,idx_buf_len,str,str_len);
+	_SHINSEI_OS_INLINE size_t findStrings(const unsigned int cp,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_findStringsCP(cp,idx_buf,idx_buf_len,str,str_len);
 	}
 	_SHINSEI_OS_INLINE size_t findStrings(size_t*restrict idx_buf,size_t idx_buf_len,char8_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_findStringsU8(idx_buf,idx_buf_len,str,str_len);
@@ -1455,11 +1455,11 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE size_t splitStringToParts(wchar_t*const restrict des_buf,const size_t des_buf_len,const wchar_t*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const wchar_t delimiter)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_splitStringToPartsW(des_buf,des_buf_len,src,src_len,part_len,max_part_cnt,delimiter);
 	}
-	_SHINSEI_OS_INLINE size_t splitStringToPartsCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char delimiter)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_splitStringToPartsCP(code_page,des_buf,des_buf_len,src,src_len,part_len,max_part_cnt,delimiter);
+	_SHINSEI_OS_INLINE size_t splitStringToPartsCP(const unsigned int cp,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char delimiter)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_splitStringToPartsCP(cp,des_buf,des_buf_len,src,src_len,part_len,max_part_cnt,delimiter);
 	}
-	_SHINSEI_OS_INLINE size_t splitStringToParts(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char delimiter)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_splitStringToPartsCP(code_page,des_buf,des_buf_len,src,src_len,part_len,max_part_cnt,delimiter);
+	_SHINSEI_OS_INLINE size_t splitStringToParts(const unsigned int cp,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char delimiter)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_splitStringToPartsCP(cp,des_buf,des_buf_len,src,src_len,part_len,max_part_cnt,delimiter);
 	}
 	_SHINSEI_OS_INLINE size_t splitStringToPartsU8(char8_t*const restrict des_buf,const size_t des_buf_len,const char8_t*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char8_t delimiter)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_splitStringToPartsU8(des_buf,des_buf_len,src,src_len,part_len,max_part_cnt,delimiter);
@@ -1487,11 +1487,11 @@ namespace shinsei{
 	inline size_t strLen(const wchar_t*const restrict str)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_strLenW(str);
 	}
-	inline size_t strLenCP(const unsigned int code_page,const char*const restrict str)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_strLenCP(code_page,str);
+	inline size_t strLenCP(const unsigned int cp,const char*const restrict str)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_strLenCP(cp,str);
 	}
-	inline size_t strLen(const unsigned int code_page,const char*const restrict str)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_strLenCP(code_page,str);
+	inline size_t strLen(const unsigned int cp,const char*const restrict str)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_strLenCP(cp,str);
 	}
 	inline size_t strLenU8(const wchar_t*const restrict str)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_strLenW(str);
@@ -1519,11 +1519,11 @@ namespace shinsei{
 	inline void strCpy(wchar_t*const restrict des,const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		::shinsei_strCpyW(des,src,len);
 	}
-	inline void strCpyCP(const unsigned int code_page,char*const restrict des,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		::shinsei_strCpyCP(code_page,des,src,len);
+	inline void strCpyCP(const unsigned int cp,char*const restrict des,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		::shinsei_strCpyCP(cp,des,src,len);
 	}
-	inline void strCpy(const unsigned int code_page,char*const restrict des,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		::shinsei_strCpyCP(code_page,des,src,len);
+	inline void strCpy(const unsigned int cp,char*const restrict des,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		::shinsei_strCpyCP(cp,des,src,len);
 	}
 	inline void strCpyU8(char8_t*const restrict des,const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		::shinsei_strCpyU8(des,src,len);
@@ -1551,11 +1551,11 @@ namespace shinsei{
 	inline size_t strCat(wchar_t*const restrict des,const size_t des_len,const wchar_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_strCatW(des,des_len,src,src_len);
 	}
-	inline size_t strCatCP(const unsigned int code_page,char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_strCatCP(code_page,des,des_len,src,src_len);
+	inline size_t strCatCP(const unsigned int cp,char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_strCatCP(cp,des,des_len,src,src_len);
 	}
-	inline size_t strCat(const unsigned int code_page,char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_strCatCP(code_page,des,des_len,src,src_len);
+	inline size_t strCat(const unsigned int cp,char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_strCatCP(cp,des,des_len,src,src_len);
 	}
 	inline size_t strCatU8(char8_t*const restrict des,const size_t des_len,const char8_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_strCatU8(des,des_len,src,src_len);
@@ -1583,11 +1583,11 @@ namespace shinsei{
 	inline int strCmp(const wchar_t*const restrict des,const size_t des_len,const wchar_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_strCmpW(des,des_len,src,src_len);
 	}
-	inline int strCmpCP(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_strCmpCP(code_page,des,des_len,src,src_len);
+	inline int strCmpCP(const unsigned int cp,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_strCmpCP(cp,des,des_len,src,src_len);
 	}
-	inline int strCmp(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_strCmpCP(code_page,des,des_len,src,src_len);
+	inline int strCmp(const unsigned int cp,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_strCmpCP(cp,des,des_len,src,src_len);
 	}
 	inline int strCmpU8(const char8_t*const restrict des,const size_t des_len,const char8_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_strCmpU8(des,des_len,src,src_len);
@@ -1615,11 +1615,11 @@ namespace shinsei{
 	inline size_t strChr(const wchar_t*const restrict des,const size_t des_len,const wchar_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_strChrW(des,des_len,src);
 	}
-	inline size_t strChrCP(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_strChrCP(code_page,des,des_len,src);
+	inline size_t strChrCP(const unsigned int cp,const char*const restrict des,const size_t des_len,const char src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_strChrCP(cp,des,des_len,src);
 	}
-	inline size_t strChr(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_strChrCP(code_page,des,des_len,src);
+	inline size_t strChr(const unsigned int cp,const char*const restrict des,const size_t des_len,const char src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_strChrCP(cp,des,des_len,src);
 	}
 	inline size_t strChrU8(const char8_t*const restrict des,const size_t des_len,const char8_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_strChrU8(des,des_len,src);
@@ -1647,11 +1647,11 @@ namespace shinsei{
 	inline size_t strStr(const wchar_t*const restrict des,const size_t des_len,const wchar_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_strStrW(des,des_len,src,src_len);
 	}
-	inline size_t strStrCP(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_strStrCP(code_page,des,des_len,src,src_len);
+	inline size_t strStrCP(const unsigned int cp,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_strStrCP(cp,des,des_len,src,src_len);
 	}
-	inline size_t strStr(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_strStrCP(code_page,des,des_len,src,src_len);
+	inline size_t strStr(const unsigned int cp,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_strStrCP(cp,des,des_len,src,src_len);
 	}
 	inline size_t strStrU8(const char8_t*const restrict des,const size_t des_len,const char8_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_strStrU8(des,des_len,src,src_len);
@@ -1679,11 +1679,11 @@ namespace shinsei{
 	inline size_t strKMP(const wchar_t*const restrict des,const size_t des_len,const wchar_t*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_strKMPW(des,des_len,src,src_len,buf,buf_len);
 	}
-	inline size_t strKMPCP(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_strKMPCP(code_page,des,des_len,src,src_len,buf,buf_len);
+	inline size_t strKMPCP(const unsigned int cp,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_strKMPCP(cp,des,des_len,src,src_len,buf,buf_len);
 	}
-	inline size_t strKMP(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_strKMPCP(code_page,des,des_len,src,src_len,buf,buf_len);
+	inline size_t strKMP(const unsigned int cp,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_strKMPCP(cp,des,des_len,src,src_len,buf,buf_len);
 	}
 	inline size_t strKMPU8(const char8_t*const restrict des,const size_t des_len,const char8_t*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_strKMPU8(des,des_len,src,src_len,buf,buf_len);
@@ -1861,42 +1861,42 @@ namespace shinsei{
 	}
 
 	// Int8/UInt8 string converters (CP)
-	inline void uInt8ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt8ToStringCP(code_page,des,src);
+	inline void uInt8ToStringCP(const unsigned int cp,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt8ToStringCP(cp,des,src);
 	}
-	inline void uInt8ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt8ToBinStringCP(code_page,des,src);
+	inline void uInt8ToBinStringCP(const unsigned int cp,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt8ToBinStringCP(cp,des,src);
 	}
-	inline void uInt8ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt8ToOctStringCP(code_page,des,src);
+	inline void uInt8ToOctStringCP(const unsigned int cp,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt8ToOctStringCP(cp,des,src);
 	}
-	inline void uInt8ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt8ToHexStringCP(code_page,des,src);
+	inline void uInt8ToHexStringCP(const unsigned int cp,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt8ToHexStringCP(cp,des,src);
 	}
-	inline void uInt8To36BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt8To36BaseStringCP(code_page,des,src);
+	inline void uInt8To36BaseStringCP(const unsigned int cp,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt8To36BaseStringCP(cp,des,src);
 	}
-	inline void uInt8To62BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt8To62BaseStringCP(code_page,des,src);
+	inline void uInt8To62BaseStringCP(const unsigned int cp,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt8To62BaseStringCP(cp,des,src);
 	}
 
-	inline void int8ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int8ToStringCP(code_page,des,src);
+	inline void int8ToStringCP(const unsigned int cp,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int8ToStringCP(cp,des,src);
 	}
-	inline void int8ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int8ToBinStringCP(code_page,des,src);
+	inline void int8ToBinStringCP(const unsigned int cp,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int8ToBinStringCP(cp,des,src);
 	}
-	inline void int8ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int8ToOctStringCP(code_page,des,src);
+	inline void int8ToOctStringCP(const unsigned int cp,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int8ToOctStringCP(cp,des,src);
 	}
-	inline void int8ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int8ToHexStringCP(code_page,des,src);
+	inline void int8ToHexStringCP(const unsigned int cp,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int8ToHexStringCP(cp,des,src);
 	}
-	inline void int8To36BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int8To36BaseStringCP(code_page,des,src);
+	inline void int8To36BaseStringCP(const unsigned int cp,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int8To36BaseStringCP(cp,des,src);
 	}
-	inline void int8To62BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int8To62BaseStringCP(code_page,des,src);
+	inline void int8To62BaseStringCP(const unsigned int cp,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int8To62BaseStringCP(cp,des,src);
 	}
 	
 	// Int16/UInt16 string converters (W)
@@ -2056,42 +2056,42 @@ namespace shinsei{
 	}
 	
 	// Int16/UInt16 string converters (CP)
-	inline void uInt16ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt16ToStringCP(code_page,des,src);
+	inline void uInt16ToStringCP(const unsigned int cp,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt16ToStringCP(cp,des,src);
 	}
-	inline void uInt16ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt16ToBinStringCP(code_page,des,src);
+	inline void uInt16ToBinStringCP(const unsigned int cp,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt16ToBinStringCP(cp,des,src);
 	}
-	inline void uInt16ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt16ToOctStringCP(code_page,des,src);
+	inline void uInt16ToOctStringCP(const unsigned int cp,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt16ToOctStringCP(cp,des,src);
 	}
-	inline void uInt16ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt16ToHexStringCP(code_page,des,src);
+	inline void uInt16ToHexStringCP(const unsigned int cp,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt16ToHexStringCP(cp,des,src);
 	}
-	inline void uInt16To36BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt16To36BaseStringCP(code_page,des,src);
+	inline void uInt16To36BaseStringCP(const unsigned int cp,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt16To36BaseStringCP(cp,des,src);
 	}
-	inline void uInt16To62BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt16To62BaseStringCP(code_page,des,src);
+	inline void uInt16To62BaseStringCP(const unsigned int cp,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt16To62BaseStringCP(cp,des,src);
 	}
 	
-	inline void int16ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int16ToStringCP(code_page,des,src);
+	inline void int16ToStringCP(const unsigned int cp,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int16ToStringCP(cp,des,src);
 	}
-	inline void int16ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int16ToBinStringCP(code_page,des,src);
+	inline void int16ToBinStringCP(const unsigned int cp,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int16ToBinStringCP(cp,des,src);
 	}
-	inline void int16ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int16ToOctStringCP(code_page,des,src);
+	inline void int16ToOctStringCP(const unsigned int cp,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int16ToOctStringCP(cp,des,src);
 	}
-	inline void int16ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int16ToHexStringCP(code_page,des,src);
+	inline void int16ToHexStringCP(const unsigned int cp,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int16ToHexStringCP(cp,des,src);
 	}
-	inline void int16To36BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int16To36BaseStringCP(code_page,des,src);
+	inline void int16To36BaseStringCP(const unsigned int cp,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int16To36BaseStringCP(cp,des,src);
 	}
-	inline void int16To62BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int16To62BaseStringCP(code_page,des,src);
+	inline void int16To62BaseStringCP(const unsigned int cp,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int16To62BaseStringCP(cp,des,src);
 	}
 	
 	// Int32/UInt32 string converters (W)
@@ -2251,42 +2251,42 @@ namespace shinsei{
 	}
 	
 	// Int32/UInt32 string converters (CP)
-	inline void uInt32ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt32ToStringCP(code_page,des,src);
+	inline void uInt32ToStringCP(const unsigned int cp,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt32ToStringCP(cp,des,src);
 	}
-	inline void uInt32ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt32ToBinStringCP(code_page,des,src);
+	inline void uInt32ToBinStringCP(const unsigned int cp,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt32ToBinStringCP(cp,des,src);
 	}
-	inline void uInt32ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt32ToOctStringCP(code_page,des,src);
+	inline void uInt32ToOctStringCP(const unsigned int cp,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt32ToOctStringCP(cp,des,src);
 	}
-	inline void uInt32ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt32ToHexStringCP(code_page,des,src);
+	inline void uInt32ToHexStringCP(const unsigned int cp,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt32ToHexStringCP(cp,des,src);
 	}
-	inline void uInt32To36BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt32To36BaseStringCP(code_page,des,src);
+	inline void uInt32To36BaseStringCP(const unsigned int cp,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt32To36BaseStringCP(cp,des,src);
 	}
-	inline void uInt32To62BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt32To62BaseStringCP(code_page,des,src);
+	inline void uInt32To62BaseStringCP(const unsigned int cp,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt32To62BaseStringCP(cp,des,src);
 	}
 	
-	inline void int32ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int32ToStringCP(code_page,des,src);
+	inline void int32ToStringCP(const unsigned int cp,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int32ToStringCP(cp,des,src);
 	}
-	inline void int32ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int32ToBinStringCP(code_page,des,src);
+	inline void int32ToBinStringCP(const unsigned int cp,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int32ToBinStringCP(cp,des,src);
 	}
-	inline void int32ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int32ToOctStringCP(code_page,des,src);
+	inline void int32ToOctStringCP(const unsigned int cp,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int32ToOctStringCP(cp,des,src);
 	}
-	inline void int32ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int32ToHexStringCP(code_page,des,src);
+	inline void int32ToHexStringCP(const unsigned int cp,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int32ToHexStringCP(cp,des,src);
 	}
-	inline void int32To36BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int32To36BaseStringCP(code_page,des,src);
+	inline void int32To36BaseStringCP(const unsigned int cp,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int32To36BaseStringCP(cp,des,src);
 	}
-	inline void int32To62BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int32To62BaseStringCP(code_page,des,src);
+	inline void int32To62BaseStringCP(const unsigned int cp,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int32To62BaseStringCP(cp,des,src);
 	}
 	
 	// Int64/UInt64 string converters (W)
@@ -2443,42 +2443,825 @@ namespace shinsei{
 	}
 	
 	// Int64/UInt64 string converters (CP)
-	inline void uInt64ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt64ToStringCP(code_page,des,src);
+	inline void uInt64ToStringCP(const unsigned int cp,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt64ToStringCP(cp,des,src);
 	}
-	inline void uInt64ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt64ToBinStringCP(code_page,des,src);
+	inline void uInt64ToBinStringCP(const unsigned int cp,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt64ToBinStringCP(cp,des,src);
 	}
-	inline void uInt64ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt64ToOctStringCP(code_page,des,src);
+	inline void uInt64ToOctStringCP(const unsigned int cp,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt64ToOctStringCP(cp,des,src);
 	}
-	inline void uInt64ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt64ToHexStringCP(code_page,des,src);
+	inline void uInt64ToHexStringCP(const unsigned int cp,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt64ToHexStringCP(cp,des,src);
 	}
-	inline void uInt64To36BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt64To36BaseStringCP(code_page,des,src);
+	inline void uInt64To36BaseStringCP(const unsigned int cp,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt64To36BaseStringCP(cp,des,src);
 	}
-	inline void uInt64To62BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt64To62BaseStringCP(code_page,des,src);
+	inline void uInt64To62BaseStringCP(const unsigned int cp,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt64To62BaseStringCP(cp,des,src);
 	}
 	
-	inline void int64ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int64ToStringCP(code_page,des,src);
+	inline void int64ToStringCP(const unsigned int cp,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int64ToStringCP(cp,des,src);
 	}
-	inline void int64ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int64ToBinStringCP(code_page,des,src);
+	inline void int64ToBinStringCP(const unsigned int cp,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int64ToBinStringCP(cp,des,src);
 	}
-	inline void int64ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int64ToOctStringCP(code_page,des,src);
+	inline void int64ToOctStringCP(const unsigned int cp,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int64ToOctStringCP(cp,des,src);
 	}
-	inline void int64ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int64ToHexStringCP(code_page,des,src);
+	inline void int64ToHexStringCP(const unsigned int cp,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int64ToHexStringCP(cp,des,src);
 	}
-	inline void int64To36BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int64To36BaseStringCP(code_page,des,src);
+	inline void int64To36BaseStringCP(const unsigned int cp,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int64To36BaseStringCP(cp,des,src);
 	}
-	inline void int64To62BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int64To62BaseStringCP(code_page,des,src);
+	inline void int64To62BaseStringCP(const unsigned int cp,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int64To62BaseStringCP(cp,des,src);
+	}
+	
+	// String to int8/uint8 converters (W)
+	inline uint_fast8_t stringToUInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt8W(src,len);
+	}
+	inline uint_fast8_t binStringToUInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt8W(src,len);
+	}
+	inline uint_fast8_t octStringToUInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt8W(src,len);
+	}
+	inline uint_fast8_t hexStringToUInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt8W(src,len);
+	}
+	inline uint_fast8_t _36BaseStringToUInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt8W(src,len);
+	}
+	inline uint_fast8_t _62BaseStringToUInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt8W(src,len);
+	}
+	
+	inline int_fast8_t stringToInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt8W(src,len);
+	}
+	inline int_fast8_t binStringToInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt8W(src,len);
+	}
+	inline int_fast8_t octStringToInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt8W(src,len);
+	}
+	inline int_fast8_t hexStringToInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt8W(src,len);
+	}
+	inline int_fast8_t _36BaseStringToInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt8W(src,len);
+	}
+	inline int_fast8_t _62BaseStringToInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt8W(src,len);
+	}
+	
+	// String to int8/uint8 converters (U8)
+	inline uint_fast8_t stringToUInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt8U8(src,len);
+	}
+	inline uint_fast8_t binStringToUInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt8U8(src,len);
+	}
+	inline uint_fast8_t octStringToUInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt8U8(src,len);
+	}
+	inline uint_fast8_t hexStringToUInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt8U8(src,len);
+	}
+	inline uint_fast8_t _36BaseStringToUInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt8U8(src,len);
+	}
+	inline uint_fast8_t _62BaseStringToUInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt8U8(src,len);
+	}
+	
+	inline int_fast8_t stringToInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt8U8(src,len);
+	}
+	inline int_fast8_t binStringToInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt8U8(src,len);
+	}
+	inline int_fast8_t octStringToInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt8U8(src,len);
+	}
+	inline int_fast8_t hexStringToInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt8U8(src,len);
+	}
+	inline int_fast8_t _36BaseStringToInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt8U8(src,len);
+	}
+	inline int_fast8_t _62BaseStringToInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt8U8(src,len);
+	}
+	
+	// String to int8/uint8 converters (U16)
+	inline uint_fast8_t stringToUInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt8U16(src,len);
+	}
+	inline uint_fast8_t binStringToUInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt8U16(src,len);
+	}
+	inline uint_fast8_t octStringToUInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt8U16(src,len);
+	}
+	inline uint_fast8_t hexStringToUInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt8U16(src,len);
+	}
+	inline uint_fast8_t _36BaseStringToUInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt8U16(src,len);
+	}
+	inline uint_fast8_t _62BaseStringToUInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt8U16(src,len);
+	}
+	
+	inline int_fast8_t stringToInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt8U16(src,len);
+	}
+	inline int_fast8_t binStringToInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt8U16(src,len);
+	}
+	inline int_fast8_t octStringToInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt8U16(src,len);
+	}
+	inline int_fast8_t hexStringToInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt8U16(src,len);
+	}
+	inline int_fast8_t _36BaseStringToInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt8U16(src,len);
+	}
+	inline int_fast8_t _62BaseStringToInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt8U16(src,len);
+	}
+	
+	// String to int8/uint8 converters (U32)
+	inline uint_fast8_t stringToUInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt8U32(src,len);
+	}
+	inline uint_fast8_t binStringToUInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt8U32(src,len);
+	}
+	inline uint_fast8_t octStringToUInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt8U32(src,len);
+	}
+	inline uint_fast8_t hexStringToUInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt8U32(src,len);
+	}
+	inline uint_fast8_t _36BaseStringToUInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt8U32(src,len);
+	}
+	inline uint_fast8_t _62BaseStringToUInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt8U32(src,len);
+	}
+	
+	inline int_fast8_t stringToInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt8U32(src,len);
+	}
+	inline int_fast8_t binStringToInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt8U32(src,len);
+	}
+	inline int_fast8_t octStringToInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt8U32(src,len);
+	}
+	inline int_fast8_t hexStringToInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt8U32(src,len);
+	}
+	inline int_fast8_t _36BaseStringToInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt8U32(src,len);
+	}
+	inline int_fast8_t _62BaseStringToInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt8U32(src,len);
+	}
+	
+	// String to int8/uint8 converters (CP)
+	inline uint_fast8_t stringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt8CP(code_page,src,len);
+	}
+	inline uint_fast8_t binStringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt8CP(code_page,src,len);
+	}
+	inline uint_fast8_t octStringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt8CP(code_page,src,len);
+	}
+	inline uint_fast8_t hexStringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt8CP(code_page,src,len);
+	}
+	inline uint_fast8_t _36BaseStringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt8CP(code_page,src,len);
+	}
+	inline uint_fast8_t _62BaseStringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt8CP(code_page,src,len);
+	}
+	
+	inline int_fast8_t stringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt8CP(code_page,src,len);
+	}
+	inline int_fast8_t binStringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt8CP(code_page,src,len);
+	}
+	inline int_fast8_t octStringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt8CP(code_page,src,len);
+	}
+	inline int_fast8_t hexStringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt8CP(code_page,src,len);
+	}
+	inline int_fast8_t _36BaseStringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt8CP(code_page,src,len);
+	}
+	inline int_fast8_t _62BaseStringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt8CP(code_page,src,len);
+	}
+	
+	// String to int16/uint16 converters (W)
+	inline uint_fast16_t stringToUInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt16W(src,len);
+	}
+	inline uint_fast16_t binStringToUInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt16W(src,len);
+	}
+	inline uint_fast16_t octStringToUInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt16W(src,len);
+	}
+	inline uint_fast16_t hexStringToUInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt16W(src,len);
+	}
+	inline uint_fast16_t _36BaseStringToUInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt16W(src,len);
+	}
+	inline uint_fast16_t _62BaseStringToUInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt16W(src,len);
+	}
+	
+	inline int_fast16_t stringToInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt16W(src,len);
+	}
+	inline int_fast16_t binStringToInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt16W(src,len);
+	}
+	inline int_fast16_t octStringToInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt16W(src,len);
+	}
+	inline int_fast16_t hexStringToInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt16W(src,len);
+	}
+	inline int_fast16_t _36BaseStringToInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt16W(src,len);
+	}
+	inline int_fast16_t _62BaseStringToInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt16W(src,len);
+	}
+	
+	// String to int16/uint16 converters (U8)
+	inline uint_fast16_t stringToUInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt16U8(src,len);
+	}
+	inline uint_fast16_t binStringToUInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt16U8(src,len);
+	}
+	inline uint_fast16_t octStringToUInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt16U8(src,len);
+	}
+	inline uint_fast16_t hexStringToUInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt16U8(src,len);
+	}
+	inline uint_fast16_t _36BaseStringToUInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt16U8(src,len);
+	}
+	inline uint_fast16_t _62BaseStringToUInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt16U8(src,len);
+	}
+	
+	inline int_fast16_t stringToInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt16U8(src,len);
+	}
+	inline int_fast16_t binStringToInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt16U8(src,len);
+	}
+	inline int_fast16_t octStringToInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt16U8(src,len);
+	}
+	inline int_fast16_t hexStringToInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt16U8(src,len);
+	}
+	inline int_fast16_t _36BaseStringToInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt16U8(src,len);
+	}
+	inline int_fast16_t _62BaseStringToInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt16U8(src,len);
+	}
+	
+	// String to int16/uint16 converters (U16)
+	inline uint_fast16_t stringToUInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt16U16(src,len);
+	}
+	inline uint_fast16_t binStringToUInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt16U16(src,len);
+	}
+	inline uint_fast16_t octStringToUInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt16U16(src,len);
+	}
+	inline uint_fast16_t hexStringToUInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt16U16(src,len);
+	}
+	inline uint_fast16_t _36BaseStringToUInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt16U16(src,len);
+	}
+	inline uint_fast16_t _62BaseStringToUInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt16U16(src,len);
+	}
+	
+	inline int_fast16_t stringToInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt16U16(src,len);
+	}
+	inline int_fast16_t binStringToInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt16U16(src,len);
+	}
+	inline int_fast16_t octStringToInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt16U16(src,len);
+	}
+	inline int_fast16_t hexStringToInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt16U16(src,len);
+	}
+	inline int_fast16_t _36BaseStringToInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt16U16(src,len);
+	}
+	inline int_fast16_t _62BaseStringToInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt16U16(src,len);
+	}
+	
+	// String to int16/uint16 converters (U32)
+	inline uint_fast16_t stringToUInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt16U32(src,len);
+	}
+	inline uint_fast16_t binStringToUInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt16U32(src,len);
+	}
+	inline uint_fast16_t octStringToUInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt16U32(src,len);
+	}
+	inline uint_fast16_t hexStringToUInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt16U32(src,len);
+	}
+	inline uint_fast16_t _36BaseStringToUInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt16U32(src,len);
+	}
+	inline uint_fast16_t _62BaseStringToUInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt16U32(src,len);
+	}
+	
+	inline int_fast16_t stringToInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt16U32(src,len);
+	}
+	inline int_fast16_t binStringToInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt16U32(src,len);
+	}
+	inline int_fast16_t octStringToInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt16U32(src,len);
+	}
+	inline int_fast16_t hexStringToInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt16U32(src,len);
+	}
+	inline int_fast16_t _36BaseStringToInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt16U32(src,len);
+	}
+	inline int_fast16_t _62BaseStringToInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt16U32(src,len);
+	}
+	
+	// String to int16/uint16 converters (CP)
+	inline uint_fast16_t stringToUInt16CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt16CP(cp,src,len);
+	}
+	inline uint_fast16_t binStringToUInt16CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt16CP(cp,src,len);
+	}
+	inline uint_fast16_t octStringToUInt16CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt16CP(cp,src,len);
+	}
+	inline uint_fast16_t hexStringToUInt16CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt16CP(cp,src,len);
+	}
+	inline uint_fast16_t _36BaseStringToUInt16CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt16CP(cp,src,len);
+	}
+	inline uint_fast16_t _62BaseStringToUInt16CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt16CP(cp,src,len);
+	}
+	
+	inline int_fast16_t stringToInt16CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt16CP(cp,src,len);
+	}
+	inline int_fast16_t binStringToInt16CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt16CP(cp,src,len);
+	}
+	inline int_fast16_t octStringToInt16CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt16CP(cp,src,len);
+	}
+	inline int_fast16_t hexStringToInt16CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt16CP(cp,src,len);
+	}
+	inline int_fast16_t _36BaseStringToInt16CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt16CP(cp,src,len);
+	}
+	inline int_fast16_t _62BaseStringToInt16CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt16CP(cp,src,len);
+	}
+	
+	// String to int32/uint32 converters (W)
+	inline uint_fast32_t stringToUInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt32W(src,len);
+	}
+	inline uint_fast32_t binStringToUInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt32W(src,len);
+	}
+	inline uint_fast32_t octStringToUInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt32W(src,len);
+	}
+	inline uint_fast32_t hexStringToUInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt32W(src,len);
+	}
+	inline uint_fast32_t _36BaseStringToUInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt32W(src,len);
+	}
+	inline uint_fast32_t _62BaseStringToUInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt32W(src,len);
+	}
+	
+	inline int_fast32_t stringToInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt32W(src,len);
+	}
+	inline int_fast32_t binStringToInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt32W(src,len);
+	}
+	inline int_fast32_t octStringToInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt32W(src,len);
+	}
+	inline int_fast32_t hexStringToInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt32W(src,len);
+	}
+	inline int_fast32_t _36BaseStringToInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt32W(src,len);
+	}
+	inline int_fast32_t _62BaseStringToInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt32W(src,len);
+	}
+	
+	// String to int32/uint32 converters (U8)
+	inline uint_fast32_t stringToUInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt32U8(src,len);
+	}
+	inline uint_fast32_t binStringToUInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt32U8(src,len);
+	}
+	inline uint_fast32_t octStringToUInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt32U8(src,len);
+	}
+	inline uint_fast32_t hexStringToUInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt32U8(src,len);
+	}
+	inline uint_fast32_t _36BaseStringToUInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt32U8(src,len);
+	}
+	inline uint_fast32_t _62BaseStringToUInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt32U8(src,len);
+	}
+	
+	inline int_fast32_t stringToInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt32U8(src,len);
+	}
+	inline int_fast32_t binStringToInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt32U8(src,len);
+	}
+	inline int_fast32_t octStringToInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt32U8(src,len);
+	}
+	inline int_fast32_t hexStringToInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt32U8(src,len);
+	}
+	inline int_fast32_t _36BaseStringToInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt32U8(src,len);
+	}
+	inline int_fast32_t _62BaseStringToInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt32U8(src,len);
+	}
+	
+	// String to int32/uint32 converters (U16)
+	inline uint_fast32_t stringToUInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt32U16(src,len);
+	}
+	inline uint_fast32_t binStringToUInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt32U16(src,len);
+	}
+	inline uint_fast32_t octStringToUInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt32U16(src,len);
+	}
+	inline uint_fast32_t hexStringToUInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt32U16(src,len);
+	}
+	inline uint_fast32_t _36BaseStringToUInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt32U16(src,len);
+	}
+	inline uint_fast32_t _62BaseStringToUInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt32U16(src,len);
+	}
+	
+	inline int_fast32_t stringToInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt32U16(src,len);
+	}
+	inline int_fast32_t binStringToInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt32U16(src,len);
+	}
+	inline int_fast32_t octStringToInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt32U16(src,len);
+	}
+	inline int_fast32_t hexStringToInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt32U16(src,len);
+	}
+	inline int_fast32_t _36BaseStringToInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt32U16(src,len);
+	}
+	inline int_fast32_t _62BaseStringToInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt32U16(src,len);
+	}
+	
+	// String to int32/uint32 converters (U32)
+	inline uint_fast32_t stringToUInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt32U32(src,len);
+	}
+	inline uint_fast32_t binStringToUInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt32U32(src,len);
+	}
+	inline uint_fast32_t octStringToUInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt32U32(src,len);
+	}
+	inline uint_fast32_t hexStringToUInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt32U32(src,len);
+	}
+	inline uint_fast32_t _36BaseStringToUInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt32U32(src,len);
+	}
+	inline uint_fast32_t _62BaseStringToUInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt32U32(src,len);
+	}
+	
+	inline int_fast32_t stringToInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt32U32(src,len);
+	}
+	inline int_fast32_t binStringToInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt32U32(src,len);
+	}
+	inline int_fast32_t octStringToInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt32U32(src,len);
+	}
+	inline int_fast32_t hexStringToInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt32U32(src,len);
+	}
+	inline int_fast32_t _36BaseStringToInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt32U32(src,len);
+	}
+	inline int_fast32_t _62BaseStringToInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt32U32(src,len);
+	}
+	
+	// String to int32/uint32 converters (CP)
+	inline uint_fast32_t stringToUInt32CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt32CP(cp,src,len);
+	}
+	inline uint_fast32_t binStringToUInt32CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt32CP(cp,src,len);
+	}
+	inline uint_fast32_t octStringToUInt32CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt32CP(cp,src,len);
+	}
+	inline uint_fast32_t hexStringToUInt32CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt32CP(cp,src,len);
+	}
+	inline uint_fast32_t _36BaseStringToUInt32CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt32CP(cp,src,len);
+	}
+	inline uint_fast32_t _62BaseStringToUInt32CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt32CP(cp,src,len);
+	}
+	
+	inline int_fast32_t stringToInt32CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt32CP(cp,src,len);
+	}
+	inline int_fast32_t binStringToInt32CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt32CP(cp,src,len);
+	}
+	inline int_fast32_t octStringToInt32CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt32CP(cp,src,len);
+	}
+	inline int_fast32_t hexStringToInt32CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt32CP(cp,src,len);
+	}
+	inline int_fast32_t _36BaseStringToInt32CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt32CP(cp,src,len);
+	}
+	inline int_fast32_t _62BaseStringToInt32CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt32CP(cp,src,len);
+	}
+	
+	// String to int64/uint64 converters (W)
+	inline uint_fast64_t stringToUInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt64W(src,len);
+	}
+	inline uint_fast64_t binStringToUInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt64W(src,len);
+	}
+	inline uint_fast64_t octStringToUInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt64W(src,len);
+	}
+	inline uint_fast64_t hexStringToUInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt64W(src,len);
+	}
+	inline uint_fast64_t _36BaseStringToUInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt64W(src,len);
+	}
+	inline uint_fast64_t _62BaseStringToUInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt64W(src,len);
+	}
+	
+	inline int_fast64_t int64ToStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int64ToStringW(des,src);
+	}
+	inline int_fast64_t stringToInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt64W(src,len);
+	}
+	inline int_fast64_t binStringToInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt64W(src,len);
+	}
+	inline int_fast64_t octStringToInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt64W(src,len);
+	}
+	inline int_fast64_t hexStringToInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt64W(src,len);
+	}
+	inline int_fast64_t _36BaseStringToInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt64W(src,len);
+	}
+	inline int_fast64_t _62BaseStringToInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt64W(src,len);
+	}
+	
+	// String to int64/uint64 converters (U8)
+	inline uint_fast64_t stringToUInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt64U8(src,len);
+	}
+	inline uint_fast64_t binStringToUInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt64U8(src,len);
+	}
+	inline uint_fast64_t octStringToUInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt64U8(src,len);
+	}
+	inline uint_fast64_t hexStringToUInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt64U8(src,len);
+	}
+	inline uint_fast64_t _36BaseStringToUInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt64U8(src,len);
+	}
+	inline uint_fast64_t _62BaseStringToUInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt64U8(src,len);
+	}
+	
+	inline int_fast64_t stringToInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt64U8(src,len);
+	}
+	inline int_fast64_t binStringToInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt64U8(src,len);
+	}
+	inline int_fast64_t octStringToInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt64U8(src,len);
+	}
+	inline int_fast64_t hexStringToInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt64U8(src,len);
+	}
+	inline int_fast64_t _36BaseStringToInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt64U8(src,len);
+	}
+	inline int_fast64_t _62BaseStringToInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt64U8(src,len);
+	}
+	
+	// String to int64/uint64 converters (U16)
+	inline uint_fast64_t stringToUInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt64U16(src,len);
+	}
+	inline uint_fast64_t binStringToUInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt64U16(src,len);
+	}
+	inline uint_fast64_t octStringToUInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt64U16(src,len);
+	}
+	inline uint_fast64_t hexStringToUInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt64U16(src,len);
+	}
+	inline uint_fast64_t _36BaseStringToUInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt64U16(src,len);
+	}
+	inline uint_fast64_t _62BaseStringToUInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt64U16(src,len);
+	}
+	
+	inline int_fast64_t stringToInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt64U16(src,len);
+	}
+	inline int_fast64_t binStringToInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt64U16(src,len);
+	}
+	inline int_fast64_t octStringToInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt64U16(src,len);
+	}
+	inline int_fast64_t hexStringToInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt64U16(src,len);
+	}
+	inline int_fast64_t _36BaseStringToInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt64U16(src,len);
+	}
+	inline int_fast64_t _62BaseStringToInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt64U16(src,len);
+	}
+	
+	// String to int64/uint64 converters (U32)
+	inline uint_fast64_t stringToUInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt64U32(src,len);
+	}
+	inline uint_fast64_t binStringToUInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt64U32(src,len);
+	}
+	inline uint_fast64_t octStringToUInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt64U32(src,len);
+	}
+	inline uint_fast64_t hexStringToUInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt64U32(src,len);
+	}
+	inline uint_fast64_t _36BaseStringToUInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt64U32(src,len);
+	}
+	inline uint_fast64_t _62BaseStringToUInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt64U32(src,len);
+	}
+	
+	inline int_fast64_t stringToInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt64U32(src,len);
+	}
+	inline int_fast64_t binStringToInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt64U32(src,len);
+	}
+	inline int_fast64_t octStringToInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt64U32(src,len);
+	}
+	inline int_fast64_t hexStringToInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt64U32(src,len);
+	}
+	inline int_fast64_t _36BaseStringToInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt64U32(src,len);
+	}
+	inline int_fast64_t _62BaseStringToInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt64U32(src,len);
+	}
+	
+	// String to int64/uint64 converters (CP)
+	inline uint_fast64_t stringToUInt64CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToUInt64CP(cp,src,len);
+	}
+	inline uint_fast64_t binStringToUInt64CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToUInt64CP(cp,src,len);
+	}
+	inline uint_fast64_t octStringToUInt64CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToUInt64CP(cp,src,len);
+	}
+	inline uint_fast64_t hexStringToUInt64CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToUInt64CP(cp,src,len);
+	}
+	inline uint_fast64_t _36BaseStringToUInt64CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToUInt64CP(cp,src,len);
+	}
+	inline uint_fast64_t _62BaseStringToUInt64CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToUInt64CP(cp,src,len);
+	}
+	
+	inline int_fast64_t stringToInt64CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_stringToInt64CP(cp,src,len);
+	}
+	inline int_fast64_t binStringToInt64CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_binStringToInt64CP(cp,src,len);
+	}
+	inline int_fast64_t octStringToInt64CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_octStringToInt64CP(cp,src,len);
+	}
+	inline int_fast64_t hexStringToInt64CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_hexStringToInt64CP(cp,src,len);
+	}
+	inline int_fast64_t _36BaseStringToInt64CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_36BaseStringToInt64CP(cp,src,len);
+	}
+	inline int_fast64_t _62BaseStringToInt64CP(const unsigned int cp,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_62BaseStringToInt64CP(cp,src,len);
 	}
 	
 	template<typename T>
@@ -2776,8 +3559,8 @@ namespace shinsei{
 			if(!::shinsei_string_t_attach(&obj,src.cObj())) throw std::bad_alloc();
 			return;
 		}
-		void attach(const int_fast32_t ctrl,const unsigned int code_page,const size_t size,const size_t cap,T*const ptr){
-			if(!::shinsei_string_t_attachValue(&obj,ctrl,code_page,size,cap,ptr,sizeof(T))) throw std::bad_alloc();
+		void attach(const int_fast32_t ctrl,const unsigned int cp,const size_t size,const size_t cap,T*const ptr){
+			if(!::shinsei_string_t_attachValue(&obj,ctrl,cp,size,cap,ptr,sizeof(T))) throw std::bad_alloc();
 			return;
 		}
 		
