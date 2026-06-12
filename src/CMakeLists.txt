@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5...3.31)
-project(Shinsei_SinhoMoeme VERSION 0.3.5)
+project(Shinsei_SinhoMoeme VERSION 0.3.6)
 
 if(MINGW OR CYGWIN)
 	set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--exclude-all-symbols")
