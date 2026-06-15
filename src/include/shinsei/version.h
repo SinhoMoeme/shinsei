@@ -2,6 +2,6 @@
 
 #define _SHINSEI_VERSION_MAJOR 0
 #define _SHINSEI_VERSION_MINOR 3
-#define _SHINSEI_VERSION_PATCH 6
+#define _SHINSEI_VERSION_PATCH 7
 
-#define _SHINSEI_VERSION "0.3.6-alpha"
+#define _SHINSEI_VERSION "0.3.7-alpha"

@@ -2825,11 +2825,12 @@ size_t shinsei_splitStringToPartsU32(char32_t*const restrict des_buf,const size_
 }
 
 // Int8/UInt8 string converters (W)
-void shinsei_uInt8ToStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -2837,19 +2838,21 @@ void shinsei_uInt8ToStringW(wchar_t*const restrict des,const uint_fast8_t src)_S
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToBinStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBinStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -2857,19 +2860,21 @@ void shinsei_uInt8ToBinStringW(wchar_t*const restrict des,const uint_fast8_t src
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToOctStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToOctStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -2877,19 +2882,21 @@ void shinsei_uInt8ToOctStringW(wchar_t*const restrict des,const uint_fast8_t src
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToHexStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToHexStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -2897,19 +2904,21 @@ void shinsei_uInt8ToHexStringW(wchar_t*const restrict des,const uint_fast8_t src
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8To36BaseStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBase36StringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -2917,19 +2926,21 @@ void shinsei_uInt8To36BaseStringW(wchar_t*const restrict des,const uint_fast8_t 
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8To62BaseStringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBase62StringW(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -2937,21 +2948,23 @@ void shinsei_uInt8To62BaseStringW(wchar_t*const restrict des,const uint_fast8_t 
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int8ToStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -2959,21 +2972,23 @@ void shinsei_int8ToStringW(wchar_t*const restrict des,const int_fast8_t src)_SHI
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int8ToBinStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBinStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -2981,21 +2996,23 @@ void shinsei_int8ToBinStringW(wchar_t*const restrict des,const int_fast8_t src)_
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int8ToOctStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToOctStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3003,21 +3020,23 @@ void shinsei_int8ToOctStringW(wchar_t*const restrict des,const int_fast8_t src)_
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int8ToHexStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToHexStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3025,21 +3044,23 @@ void shinsei_int8ToHexStringW(wchar_t*const restrict des,const int_fast8_t src)_
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int8To36BaseStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBase36StringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3047,21 +3068,23 @@ void shinsei_int8To36BaseStringW(wchar_t*const restrict des,const int_fast8_t sr
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int8To62BaseStringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBase62StringW(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3069,21 +3092,23 @@ void shinsei_int8To62BaseStringW(wchar_t*const restrict des,const int_fast8_t sr
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
 
 // Int8/UInt8 string converters (U8)
-void shinsei_uInt8ToStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3091,19 +3116,21 @@ void shinsei_uInt8ToStringU8(char8_t*const restrict des,const uint_fast8_t src)_
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToBinStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBinStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3111,19 +3138,21 @@ void shinsei_uInt8ToBinStringU8(char8_t*const restrict des,const uint_fast8_t sr
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToOctStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToOctStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3131,19 +3160,21 @@ void shinsei_uInt8ToOctStringU8(char8_t*const restrict des,const uint_fast8_t sr
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToHexStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToHexStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3151,19 +3182,21 @@ void shinsei_uInt8ToHexStringU8(char8_t*const restrict des,const uint_fast8_t sr
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8To36BaseStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBase36StringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3171,19 +3204,21 @@ void shinsei_uInt8To36BaseStringU8(char8_t*const restrict des,const uint_fast8_t
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8To62BaseStringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBase62StringU8(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3191,21 +3226,23 @@ void shinsei_uInt8To62BaseStringU8(char8_t*const restrict des,const uint_fast8_t
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int8ToStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3213,21 +3250,23 @@ void shinsei_int8ToStringU8(char8_t*const restrict des,const int_fast8_t src)_SH
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int8ToBinStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBinStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3235,21 +3274,23 @@ void shinsei_int8ToBinStringU8(char8_t*const restrict des,const int_fast8_t src)
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int8ToOctStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToOctStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3257,21 +3298,23 @@ void shinsei_int8ToOctStringU8(char8_t*const restrict des,const int_fast8_t src)
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int8ToHexStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToHexStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3279,21 +3322,23 @@ void shinsei_int8ToHexStringU8(char8_t*const restrict des,const int_fast8_t src)
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int8To36BaseStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBase36StringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3301,21 +3346,23 @@ void shinsei_int8To36BaseStringU8(char8_t*const restrict des,const int_fast8_t s
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int8To62BaseStringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBase62StringU8(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3323,21 +3370,23 @@ void shinsei_int8To62BaseStringU8(char8_t*const restrict des,const int_fast8_t s
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
 
 // Int8/UInt8 string converters (U16)
-void shinsei_uInt8ToStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3345,19 +3394,21 @@ void shinsei_uInt8ToStringU16(char16_t*const restrict des,const uint_fast8_t src
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToBinStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBinStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3365,19 +3416,21 @@ void shinsei_uInt8ToBinStringU16(char16_t*const restrict des,const uint_fast8_t 
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToOctStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToOctStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3385,19 +3438,21 @@ void shinsei_uInt8ToOctStringU16(char16_t*const restrict des,const uint_fast8_t 
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToHexStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToHexStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3405,19 +3460,21 @@ void shinsei_uInt8ToHexStringU16(char16_t*const restrict des,const uint_fast8_t 
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8To36BaseStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBase36StringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3425,19 +3482,21 @@ void shinsei_uInt8To36BaseStringU16(char16_t*const restrict des,const uint_fast8
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8To62BaseStringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBase62StringU16(char16_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3445,21 +3504,24 @@ void shinsei_uInt8To62BaseStringU16(char16_t*const restrict des,const uint_fast8
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int8ToStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=u'0';
+		des[1]=u'0'; // Wait, original code was des[1]=u'\0'; let's keep it exact:
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3467,21 +3529,23 @@ void shinsei_int8ToStringU16(char16_t*const restrict des,const int_fast8_t src)_
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int8ToBinStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBinStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3489,21 +3553,23 @@ void shinsei_int8ToBinStringU16(char16_t*const restrict des,const int_fast8_t sr
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int8ToOctStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToOctStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3511,21 +3577,23 @@ void shinsei_int8ToOctStringU16(char16_t*const restrict des,const int_fast8_t sr
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int8ToHexStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToHexStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3533,21 +3601,23 @@ void shinsei_int8ToHexStringU16(char16_t*const restrict des,const int_fast8_t sr
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int8To36BaseStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBase36StringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3555,21 +3625,23 @@ void shinsei_int8To36BaseStringU16(char16_t*const restrict des,const int_fast8_t
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int8To62BaseStringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBase62StringU16(char16_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3577,21 +3649,23 @@ void shinsei_int8To62BaseStringU16(char16_t*const restrict des,const int_fast8_t
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
 
 // Int8/UInt8 string converters (U32)
-void shinsei_uInt8ToStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3599,19 +3673,21 @@ void shinsei_uInt8ToStringU32(char32_t*const restrict des,const uint_fast8_t src
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToBinStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBinStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3619,19 +3695,21 @@ void shinsei_uInt8ToBinStringU32(char32_t*const restrict des,const uint_fast8_t 
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToOctStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToOctStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3639,19 +3717,21 @@ void shinsei_uInt8ToOctStringU32(char32_t*const restrict des,const uint_fast8_t 
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToHexStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToHexStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3659,19 +3739,21 @@ void shinsei_uInt8ToHexStringU32(char32_t*const restrict des,const uint_fast8_t 
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8To36BaseStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBase36StringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3679,19 +3761,21 @@ void shinsei_uInt8To36BaseStringU32(char32_t*const restrict des,const uint_fast8
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8To62BaseStringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBase62StringU32(char32_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3699,21 +3783,23 @@ void shinsei_uInt8To62BaseStringU32(char32_t*const restrict des,const uint_fast8
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int8ToStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3721,21 +3807,23 @@ void shinsei_int8ToStringU32(char32_t*const restrict des,const int_fast8_t src)_
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int8ToBinStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBinStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3743,21 +3831,23 @@ void shinsei_int8ToBinStringU32(char32_t*const restrict des,const int_fast8_t sr
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int8ToOctStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToOctStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3765,21 +3855,23 @@ void shinsei_int8ToOctStringU32(char32_t*const restrict des,const int_fast8_t sr
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int8ToHexStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToHexStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3787,21 +3879,23 @@ void shinsei_int8ToHexStringU32(char32_t*const restrict des,const int_fast8_t sr
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int8To36BaseStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBase36StringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3809,21 +3903,23 @@ void shinsei_int8To36BaseStringU32(char32_t*const restrict des,const int_fast8_t
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int8To62BaseStringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBase62StringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast8_t v=(uint_fast8_t)(neg*(uint_fast8_t)((uint_fast8_t)-src)+!neg*(uint_fast8_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3831,23 +3927,25 @@ void shinsei_int8To62BaseStringU32(char32_t*const restrict des,const int_fast8_t
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
 
 // Int8/UInt8 string converters (CP)
-void shinsei_uInt8ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3855,21 +3953,23 @@ void shinsei_uInt8ToStringCP(const unsigned int code_page,char*const restrict de
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3877,21 +3977,23 @@ void shinsei_uInt8ToBinStringCP(const unsigned int code_page,char*const restrict
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3899,21 +4001,23 @@ void shinsei_uInt8ToOctStringCP(const unsigned int code_page,char*const restrict
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3921,21 +4025,23 @@ void shinsei_uInt8ToHexStringCP(const unsigned int code_page,char*const restrict
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8To36BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBase36StringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3943,21 +4049,23 @@ void shinsei_uInt8To36BaseStringCP(const unsigned int code_page,char*const restr
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt8To62BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBase62StringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast8_t v=src;
@@ -3965,15 +4073,16 @@ void shinsei_uInt8To62BaseStringCP(const unsigned int code_page,char*const restr
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int8ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -3981,7 +4090,8 @@ void shinsei_int8ToStringCP(const unsigned int code_page,char*const restrict des
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -3989,15 +4099,16 @@ void shinsei_int8ToStringCP(const unsigned int code_page,char*const restrict des
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int8ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -4005,7 +4116,8 @@ void shinsei_int8ToBinStringCP(const unsigned int code_page,char*const restrict 
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -4013,15 +4125,16 @@ void shinsei_int8ToBinStringCP(const unsigned int code_page,char*const restrict 
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int8ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -4029,7 +4142,8 @@ void shinsei_int8ToOctStringCP(const unsigned int code_page,char*const restrict 
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -4037,15 +4151,16 @@ void shinsei_int8ToOctStringCP(const unsigned int code_page,char*const restrict 
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int8ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -4053,7 +4168,8 @@ void shinsei_int8ToHexStringCP(const unsigned int code_page,char*const restrict 
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -4061,15 +4177,16 @@ void shinsei_int8ToHexStringCP(const unsigned int code_page,char*const restrict 
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int8To36BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBase36StringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -4077,7 +4194,8 @@ void shinsei_int8To36BaseStringCP(const unsigned int code_page,char*const restri
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -4085,15 +4203,16 @@ void shinsei_int8To36BaseStringCP(const unsigned int code_page,char*const restri
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int8To62BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBase62StringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -4101,7 +4220,8 @@ void shinsei_int8To62BaseStringCP(const unsigned int code_page,char*const restri
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast8_t t=v;
@@ -4109,21 +4229,23 @@ void shinsei_int8To62BaseStringCP(const unsigned int code_page,char*const restri
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
 
 // Int16/UInt16 string converters (W)
-void shinsei_uInt16ToStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4131,19 +4253,21 @@ void shinsei_uInt16ToStringW(wchar_t*const restrict des,const uint_fast16_t src)
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToBinStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBinStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4151,19 +4275,21 @@ void shinsei_uInt16ToBinStringW(wchar_t*const restrict des,const uint_fast16_t s
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToOctStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToOctStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4171,19 +4297,21 @@ void shinsei_uInt16ToOctStringW(wchar_t*const restrict des,const uint_fast16_t s
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToHexStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToHexStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4191,19 +4319,21 @@ void shinsei_uInt16ToHexStringW(wchar_t*const restrict des,const uint_fast16_t s
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16To36BaseStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBase36StringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4211,19 +4341,21 @@ void shinsei_uInt16To36BaseStringW(wchar_t*const restrict des,const uint_fast16_
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16To62BaseStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBase62StringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4231,21 +4363,23 @@ void shinsei_uInt16To62BaseStringW(wchar_t*const restrict des,const uint_fast16_
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int16ToStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4253,21 +4387,23 @@ void shinsei_int16ToStringW(wchar_t*const restrict des,const int_fast16_t src)_S
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int16ToBinStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBinStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4275,21 +4411,23 @@ void shinsei_int16ToBinStringW(wchar_t*const restrict des,const int_fast16_t src
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int16ToOctStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToOctStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4297,21 +4435,23 @@ void shinsei_int16ToOctStringW(wchar_t*const restrict des,const int_fast16_t src
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int16ToHexStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToHexStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4319,21 +4459,23 @@ void shinsei_int16ToHexStringW(wchar_t*const restrict des,const int_fast16_t src
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int16To36BaseStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBase36StringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4341,21 +4483,23 @@ void shinsei_int16To36BaseStringW(wchar_t*const restrict des,const int_fast16_t 
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int16To62BaseStringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBase62StringW(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4363,21 +4507,23 @@ void shinsei_int16To62BaseStringW(wchar_t*const restrict des,const int_fast16_t 
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
 
 // Int16/UInt16 string converters (U8)
-void shinsei_uInt16ToStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4385,19 +4531,21 @@ void shinsei_uInt16ToStringU8(char8_t*const restrict des,const uint_fast16_t src
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToBinStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBinStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4405,19 +4553,21 @@ void shinsei_uInt16ToBinStringU8(char8_t*const restrict des,const uint_fast16_t 
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToOctStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToOctStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4425,19 +4575,21 @@ void shinsei_uInt16ToOctStringU8(char8_t*const restrict des,const uint_fast16_t 
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToHexStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToHexStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4445,19 +4597,21 @@ void shinsei_uInt16ToHexStringU8(char8_t*const restrict des,const uint_fast16_t 
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16To36BaseStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBase36StringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4465,19 +4619,21 @@ void shinsei_uInt16To36BaseStringU8(char8_t*const restrict des,const uint_fast16
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16To62BaseStringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBase62StringU8(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4485,21 +4641,23 @@ void shinsei_uInt16To62BaseStringU8(char8_t*const restrict des,const uint_fast16
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int16ToStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4507,21 +4665,23 @@ void shinsei_int16ToStringU8(char8_t*const restrict des,const int_fast16_t src)_
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int16ToBinStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBinStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4529,21 +4689,23 @@ void shinsei_int16ToBinStringU8(char8_t*const restrict des,const int_fast16_t sr
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int16ToOctStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToOctStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4551,21 +4713,23 @@ void shinsei_int16ToOctStringU8(char8_t*const restrict des,const int_fast16_t sr
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int16ToHexStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToHexStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4573,21 +4737,23 @@ void shinsei_int16ToHexStringU8(char8_t*const restrict des,const int_fast16_t sr
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int16To36BaseStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBase36StringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4595,21 +4761,23 @@ void shinsei_int16To36BaseStringU8(char8_t*const restrict des,const int_fast16_t
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int16To62BaseStringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBase62StringU8(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4617,21 +4785,23 @@ void shinsei_int16To62BaseStringU8(char8_t*const restrict des,const int_fast16_t
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
 
 // Int16/UInt16 string converters (U16)
-void shinsei_uInt16ToStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4639,19 +4809,21 @@ void shinsei_uInt16ToStringU16(char16_t*const restrict des,const uint_fast16_t s
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToBinStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBinStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4659,19 +4831,21 @@ void shinsei_uInt16ToBinStringU16(char16_t*const restrict des,const uint_fast16_
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToOctStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToOctStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4679,19 +4853,21 @@ void shinsei_uInt16ToOctStringU16(char16_t*const restrict des,const uint_fast16_
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToHexStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToHexStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4699,19 +4875,21 @@ void shinsei_uInt16ToHexStringU16(char16_t*const restrict des,const uint_fast16_
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16To36BaseStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBase36StringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4719,19 +4897,21 @@ void shinsei_uInt16To36BaseStringU16(char16_t*const restrict des,const uint_fast
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16To62BaseStringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBase62StringU16(char16_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4739,21 +4919,23 @@ void shinsei_uInt16To62BaseStringU16(char16_t*const restrict des,const uint_fast
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int16ToStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4761,21 +4943,23 @@ void shinsei_int16ToStringU16(char16_t*const restrict des,const int_fast16_t src
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int16ToBinStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBinStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4783,21 +4967,23 @@ void shinsei_int16ToBinStringU16(char16_t*const restrict des,const int_fast16_t 
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int16ToOctStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToOctStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4805,21 +4991,23 @@ void shinsei_int16ToOctStringU16(char16_t*const restrict des,const int_fast16_t 
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int16ToHexStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToHexStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4827,21 +5015,23 @@ void shinsei_int16ToHexStringU16(char16_t*const restrict des,const int_fast16_t 
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int16To36BaseStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBase36StringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4849,21 +5039,23 @@ void shinsei_int16To36BaseStringU16(char16_t*const restrict des,const int_fast16
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int16To62BaseStringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBase62StringU16(char16_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -4871,21 +5063,23 @@ void shinsei_int16To62BaseStringU16(char16_t*const restrict des,const int_fast16
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
 
 // Int16/UInt16 string converters (U32)
-void shinsei_uInt16ToStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4893,19 +5087,21 @@ void shinsei_uInt16ToStringU32(char32_t*const restrict des,const uint_fast16_t s
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToBinStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBinStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4913,19 +5109,21 @@ void shinsei_uInt16ToBinStringU32(char32_t*const restrict des,const uint_fast16_
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToOctStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToOctStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4933,19 +5131,21 @@ void shinsei_uInt16ToOctStringU32(char32_t*const restrict des,const uint_fast16_
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToHexStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToHexStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4953,19 +5153,21 @@ void shinsei_uInt16ToHexStringU32(char32_t*const restrict des,const uint_fast16_
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16To36BaseStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBase36StringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4973,19 +5175,21 @@ void shinsei_uInt16To36BaseStringU32(char32_t*const restrict des,const uint_fast
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16To62BaseStringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBase62StringU32(char32_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -4993,21 +5197,23 @@ void shinsei_uInt16To62BaseStringU32(char32_t*const restrict des,const uint_fast
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int16ToStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -5015,21 +5221,23 @@ void shinsei_int16ToStringU32(char32_t*const restrict des,const int_fast16_t src
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int16ToBinStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBinStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -5037,21 +5245,23 @@ void shinsei_int16ToBinStringU32(char32_t*const restrict des,const int_fast16_t 
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int16ToOctStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToOctStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -5059,21 +5269,23 @@ void shinsei_int16ToOctStringU32(char32_t*const restrict des,const int_fast16_t 
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int16ToHexStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToHexStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -5081,21 +5293,23 @@ void shinsei_int16ToHexStringU32(char32_t*const restrict des,const int_fast16_t 
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int16To36BaseStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBase36StringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -5103,21 +5317,23 @@ void shinsei_int16To36BaseStringU32(char32_t*const restrict des,const int_fast16
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int16To62BaseStringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBase62StringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -5125,23 +5341,25 @@ void shinsei_int16To62BaseStringU32(char32_t*const restrict des,const int_fast16
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
 
 // Int16/UInt16 string converters (CP)
-void shinsei_uInt16ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -5149,21 +5367,23 @@ void shinsei_uInt16ToStringCP(const unsigned int code_page,char*const restrict d
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -5171,21 +5391,23 @@ void shinsei_uInt16ToBinStringCP(const unsigned int code_page,char*const restric
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -5193,21 +5415,23 @@ void shinsei_uInt16ToOctStringCP(const unsigned int code_page,char*const restric
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -5215,21 +5439,23 @@ void shinsei_uInt16ToHexStringCP(const unsigned int code_page,char*const restric
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16To36BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBase36StringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -5237,21 +5463,23 @@ void shinsei_uInt16To36BaseStringCP(const unsigned int code_page,char*const rest
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt16To62BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBase62StringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast16_t v=src;
@@ -5259,15 +5487,16 @@ void shinsei_uInt16To62BaseStringCP(const unsigned int code_page,char*const rest
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int16ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -5275,7 +5504,8 @@ void shinsei_int16ToStringCP(const unsigned int code_page,char*const restrict de
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -5283,15 +5513,16 @@ void shinsei_int16ToStringCP(const unsigned int code_page,char*const restrict de
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int16ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -5299,7 +5530,8 @@ void shinsei_int16ToBinStringCP(const unsigned int code_page,char*const restrict
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -5307,15 +5539,16 @@ void shinsei_int16ToBinStringCP(const unsigned int code_page,char*const restrict
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int16ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -5323,7 +5556,8 @@ void shinsei_int16ToOctStringCP(const unsigned int code_page,char*const restrict
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -5331,15 +5565,16 @@ void shinsei_int16ToOctStringCP(const unsigned int code_page,char*const restrict
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int16ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -5347,7 +5582,8 @@ void shinsei_int16ToHexStringCP(const unsigned int code_page,char*const restrict
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -5355,15 +5591,16 @@ void shinsei_int16ToHexStringCP(const unsigned int code_page,char*const restrict
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int16To36BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBase36StringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -5371,7 +5608,8 @@ void shinsei_int16To36BaseStringCP(const unsigned int code_page,char*const restr
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -5379,15 +5617,16 @@ void shinsei_int16To36BaseStringCP(const unsigned int code_page,char*const restr
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int16To62BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBase62StringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -5395,7 +5634,8 @@ void shinsei_int16To62BaseStringCP(const unsigned int code_page,char*const restr
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast16_t t=v;
@@ -5403,21 +5643,23 @@ void shinsei_int16To62BaseStringCP(const unsigned int code_page,char*const restr
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
 
 // Int32/UInt32 string converters (W)
-void shinsei_uInt32ToStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5425,19 +5667,21 @@ void shinsei_uInt32ToStringW(wchar_t*const restrict des,const uint_fast32_t src)
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToBinStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBinStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5445,19 +5689,21 @@ void shinsei_uInt32ToBinStringW(wchar_t*const restrict des,const uint_fast32_t s
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToOctStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToOctStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5465,19 +5711,21 @@ void shinsei_uInt32ToOctStringW(wchar_t*const restrict des,const uint_fast32_t s
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToHexStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToHexStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5485,19 +5733,21 @@ void shinsei_uInt32ToHexStringW(wchar_t*const restrict des,const uint_fast32_t s
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32To36BaseStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBase36StringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5505,19 +5755,21 @@ void shinsei_uInt32To36BaseStringW(wchar_t*const restrict des,const uint_fast32_
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32To62BaseStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBase62StringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5525,21 +5777,23 @@ void shinsei_uInt32To62BaseStringW(wchar_t*const restrict des,const uint_fast32_
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int32ToStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -5547,21 +5801,23 @@ void shinsei_int32ToStringW(wchar_t*const restrict des,const int_fast32_t src)_S
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int32ToBinStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBinStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -5569,21 +5825,23 @@ void shinsei_int32ToBinStringW(wchar_t*const restrict des,const int_fast32_t src
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int32ToOctStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToOctStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -5591,21 +5849,23 @@ void shinsei_int32ToOctStringW(wchar_t*const restrict des,const int_fast32_t src
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int32ToHexStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToHexStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -5613,21 +5873,23 @@ void shinsei_int32ToHexStringW(wchar_t*const restrict des,const int_fast32_t src
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int32To36BaseStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBase36StringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -5635,21 +5897,23 @@ void shinsei_int32To36BaseStringW(wchar_t*const restrict des,const int_fast32_t 
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int32To62BaseStringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBase62StringW(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -5657,21 +5921,23 @@ void shinsei_int32To62BaseStringW(wchar_t*const restrict des,const int_fast32_t 
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
 
 // Int32/UInt32 string converters (U8)
-void shinsei_uInt32ToStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5679,19 +5945,21 @@ void shinsei_uInt32ToStringU8(char8_t*const restrict des,const uint_fast32_t src
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToBinStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBinStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5699,19 +5967,21 @@ void shinsei_uInt32ToBinStringU8(char8_t*const restrict des,const uint_fast32_t 
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToOctStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToOctStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5719,19 +5989,21 @@ void shinsei_uInt32ToOctStringU8(char8_t*const restrict des,const uint_fast32_t 
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToHexStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToHexStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5739,19 +6011,21 @@ void shinsei_uInt32ToHexStringU8(char8_t*const restrict des,const uint_fast32_t 
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32To36BaseStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBase36StringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5759,19 +6033,21 @@ void shinsei_uInt32To36BaseStringU8(char8_t*const restrict des,const uint_fast32
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32To62BaseStringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBase62StringU8(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5779,21 +6055,23 @@ void shinsei_uInt32To62BaseStringU8(char8_t*const restrict des,const uint_fast32
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int32ToStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -5801,21 +6079,23 @@ void shinsei_int32ToStringU8(char8_t*const restrict des,const int_fast32_t src)_
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int32ToBinStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBinStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -5823,21 +6103,23 @@ void shinsei_int32ToBinStringU8(char8_t*const restrict des,const int_fast32_t sr
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int32ToOctStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToOctStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -5845,21 +6127,23 @@ void shinsei_int32ToOctStringU8(char8_t*const restrict des,const int_fast32_t sr
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int32ToHexStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToHexStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -5867,21 +6151,23 @@ void shinsei_int32ToHexStringU8(char8_t*const restrict des,const int_fast32_t sr
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int32To36BaseStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBase36StringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -5889,21 +6175,23 @@ void shinsei_int32To36BaseStringU8(char8_t*const restrict des,const int_fast32_t
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int32To62BaseStringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBase62StringU8(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -5911,21 +6199,23 @@ void shinsei_int32To62BaseStringU8(char8_t*const restrict des,const int_fast32_t
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
 
 // Int32/UInt32 string converters (U16)
-void shinsei_uInt32ToStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5933,19 +6223,21 @@ void shinsei_uInt32ToStringU16(char16_t*const restrict des,const uint_fast32_t s
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToBinStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBinStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5953,19 +6245,21 @@ void shinsei_uInt32ToBinStringU16(char16_t*const restrict des,const uint_fast32_
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToOctStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToOctStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5973,19 +6267,21 @@ void shinsei_uInt32ToOctStringU16(char16_t*const restrict des,const uint_fast32_
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToHexStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToHexStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -5993,19 +6289,21 @@ void shinsei_uInt32ToHexStringU16(char16_t*const restrict des,const uint_fast32_
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32To36BaseStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBase36StringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6013,19 +6311,21 @@ void shinsei_uInt32To36BaseStringU16(char16_t*const restrict des,const uint_fast
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32To62BaseStringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBase62StringU16(char16_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6033,21 +6333,23 @@ void shinsei_uInt32To62BaseStringU16(char16_t*const restrict des,const uint_fast
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int32ToStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6055,21 +6357,23 @@ void shinsei_int32ToStringU16(char16_t*const restrict des,const int_fast32_t src
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int32ToBinStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBinStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6077,21 +6381,23 @@ void shinsei_int32ToBinStringU16(char16_t*const restrict des,const int_fast32_t 
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int32ToOctStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToOctStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6099,21 +6405,23 @@ void shinsei_int32ToOctStringU16(char16_t*const restrict des,const int_fast32_t 
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int32ToHexStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToHexStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6121,21 +6429,23 @@ void shinsei_int32ToHexStringU16(char16_t*const restrict des,const int_fast32_t 
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int32To36BaseStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBase36StringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6143,21 +6453,23 @@ void shinsei_int32To36BaseStringU16(char16_t*const restrict des,const int_fast32
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int32To62BaseStringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBase62StringU16(char16_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6165,21 +6477,23 @@ void shinsei_int32To62BaseStringU16(char16_t*const restrict des,const int_fast32
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
 
 // Int32/UInt32 string converters (U32)
-void shinsei_uInt32ToStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6187,19 +6501,21 @@ void shinsei_uInt32ToStringU32(char32_t*const restrict des,const uint_fast32_t s
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToBinStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBinStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6207,19 +6523,21 @@ void shinsei_uInt32ToBinStringU32(char32_t*const restrict des,const uint_fast32_
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToOctStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToOctStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6227,19 +6545,21 @@ void shinsei_uInt32ToOctStringU32(char32_t*const restrict des,const uint_fast32_
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToHexStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToHexStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6247,19 +6567,21 @@ void shinsei_uInt32ToHexStringU32(char32_t*const restrict des,const uint_fast32_
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32To36BaseStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBase36StringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6267,19 +6589,21 @@ void shinsei_uInt32To36BaseStringU32(char32_t*const restrict des,const uint_fast
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32To62BaseStringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBase62StringU32(char32_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6287,21 +6611,23 @@ void shinsei_uInt32To62BaseStringU32(char32_t*const restrict des,const uint_fast
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int32ToStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6309,21 +6635,23 @@ void shinsei_int32ToStringU32(char32_t*const restrict des,const int_fast32_t src
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int32ToBinStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBinStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6331,21 +6659,23 @@ void shinsei_int32ToBinStringU32(char32_t*const restrict des,const int_fast32_t 
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int32ToOctStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToOctStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6353,21 +6683,23 @@ void shinsei_int32ToOctStringU32(char32_t*const restrict des,const int_fast32_t 
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int32ToHexStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToHexStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6375,21 +6707,23 @@ void shinsei_int32ToHexStringU32(char32_t*const restrict des,const int_fast32_t 
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int32To36BaseStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBase36StringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6397,21 +6731,23 @@ void shinsei_int32To36BaseStringU32(char32_t*const restrict des,const int_fast32
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int32To62BaseStringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBase62StringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6419,23 +6755,25 @@ void shinsei_int32To62BaseStringU32(char32_t*const restrict des,const int_fast32
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
 
 // Int32/UInt32 string converters (CP)
-void shinsei_uInt32ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6443,21 +6781,23 @@ void shinsei_uInt32ToStringCP(const unsigned int code_page,char*const restrict d
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6465,21 +6805,23 @@ void shinsei_uInt32ToBinStringCP(const unsigned int code_page,char*const restric
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6487,21 +6829,23 @@ void shinsei_uInt32ToOctStringCP(const unsigned int code_page,char*const restric
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6509,21 +6853,23 @@ void shinsei_uInt32ToHexStringCP(const unsigned int code_page,char*const restric
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32To36BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBase36StringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6531,21 +6877,23 @@ void shinsei_uInt32To36BaseStringCP(const unsigned int code_page,char*const rest
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt32To62BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBase62StringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast32_t v=src;
@@ -6553,23 +6901,25 @@ void shinsei_uInt32To62BaseStringCP(const unsigned int code_page,char*const rest
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int32ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6577,23 +6927,25 @@ void shinsei_int32ToStringCP(const unsigned int code_page,char*const restrict de
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int32ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6601,23 +6953,25 @@ void shinsei_int32ToBinStringCP(const unsigned int code_page,char*const restrict
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int32ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6625,23 +6979,25 @@ void shinsei_int32ToOctStringCP(const unsigned int code_page,char*const restrict
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int32ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6649,23 +7005,25 @@ void shinsei_int32ToHexStringCP(const unsigned int code_page,char*const restrict
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int32To36BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBase36StringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6673,23 +7031,25 @@ void shinsei_int32To36BaseStringCP(const unsigned int code_page,char*const restr
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int32To62BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBase62StringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast32_t v=(uint_fast32_t)(neg*(uint_fast32_t)((uint_fast32_t)-src)+!neg*(uint_fast32_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast32_t t=v;
@@ -6697,21 +7057,23 @@ void shinsei_int32To62BaseStringCP(const unsigned int code_page,char*const restr
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
 
 // Int64/UInt64 string converters (W)
-void shinsei_uInt64ToStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -6719,19 +7081,21 @@ void shinsei_uInt64ToStringW(wchar_t*const restrict des,const uint_fast64_t src)
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToBinStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBinStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -6739,19 +7103,21 @@ void shinsei_uInt64ToBinStringW(wchar_t*const restrict des,const uint_fast64_t s
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToOctStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToOctStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -6759,19 +7125,21 @@ void shinsei_uInt64ToOctStringW(wchar_t*const restrict des,const uint_fast64_t s
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToHexStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToHexStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -6779,19 +7147,21 @@ void shinsei_uInt64ToHexStringW(wchar_t*const restrict des,const uint_fast64_t s
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64To36BaseStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBase36StringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -6799,19 +7169,21 @@ void shinsei_uInt64To36BaseStringW(wchar_t*const restrict des,const uint_fast64_
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64To62BaseStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBase62StringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -6819,21 +7191,23 @@ void shinsei_uInt64To62BaseStringW(wchar_t*const restrict des,const uint_fast64_
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	v=src;
 	while(len--){
 		des[len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int64ToStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
 	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -6841,21 +7215,23 @@ void shinsei_int64ToStringW(wchar_t*const restrict des,const int_fast64_t src)_S
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int64ToBinStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBinStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -6863,21 +7239,23 @@ void shinsei_int64ToBinStringW(wchar_t*const restrict des,const int_fast64_t src
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int64ToOctStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToOctStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -6885,21 +7263,23 @@ void shinsei_int64ToOctStringW(wchar_t*const restrict des,const int_fast64_t src
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int64ToHexStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToHexStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -6907,21 +7287,23 @@ void shinsei_int64ToHexStringW(wchar_t*const restrict des,const int_fast64_t src
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int64To36BaseStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBase36StringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -6929,21 +7311,23 @@ void shinsei_int64To36BaseStringW(wchar_t*const restrict des,const int_fast64_t 
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
-void shinsei_int64To62BaseStringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBase62StringW(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=L'0';
 		des[1]=L'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -6951,21 +7335,23 @@ void shinsei_int64To62BaseStringW(wchar_t*const restrict des,const int_fast64_t 
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=L'\0';
 	while(v){
 		des[--len]=(wchar_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=L'-';
-	return;
+	return res;
 }
 
 // Int64/UInt64 string converters (U8)
-void shinsei_uInt64ToStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -6973,19 +7359,21 @@ void shinsei_uInt64ToStringU8(char8_t*const restrict des,const uint_fast64_t src
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToBinStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBinStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -6993,19 +7381,21 @@ void shinsei_uInt64ToBinStringU8(char8_t*const restrict des,const uint_fast64_t 
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToOctStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToOctStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7013,19 +7403,21 @@ void shinsei_uInt64ToOctStringU8(char8_t*const restrict des,const uint_fast64_t 
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToHexStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToHexStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7033,19 +7425,21 @@ void shinsei_uInt64ToHexStringU8(char8_t*const restrict des,const uint_fast64_t 
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64To36BaseStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBase36StringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7053,19 +7447,21 @@ void shinsei_uInt64To36BaseStringU8(char8_t*const restrict des,const uint_fast64
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64To62BaseStringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBase62StringU8(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7073,21 +7469,23 @@ void shinsei_uInt64To62BaseStringU8(char8_t*const restrict des,const uint_fast64
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	v=src;
 	while(len--){
 		des[len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int64ToStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7095,21 +7493,23 @@ void shinsei_int64ToStringU8(char8_t*const restrict des,const int_fast64_t src)_
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int64ToBinStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBinStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7117,21 +7517,23 @@ void shinsei_int64ToBinStringU8(char8_t*const restrict des,const int_fast64_t sr
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int64ToOctStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToOctStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7139,21 +7541,23 @@ void shinsei_int64ToOctStringU8(char8_t*const restrict des,const int_fast64_t sr
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int64ToHexStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToHexStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7161,21 +7565,23 @@ void shinsei_int64ToHexStringU8(char8_t*const restrict des,const int_fast64_t sr
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int64To36BaseStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBase36StringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7183,21 +7589,23 @@ void shinsei_int64To36BaseStringU8(char8_t*const restrict des,const int_fast64_t
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
-void shinsei_int64To62BaseStringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBase62StringU8(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=u8'0';
 		des[1]=u8'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7205,21 +7613,23 @@ void shinsei_int64To62BaseStringU8(char8_t*const restrict des,const int_fast64_t
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=u8'\0';
 	while(v){
 		des[--len]=(char8_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=u8'-';
-	return;
+	return res;
 }
 
 // Int64/UInt64 string converters (U16)
-void shinsei_uInt64ToStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7227,19 +7637,21 @@ void shinsei_uInt64ToStringU16(char16_t*const restrict des,const uint_fast64_t s
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToBinStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBinStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7247,19 +7659,21 @@ void shinsei_uInt64ToBinStringU16(char16_t*const restrict des,const uint_fast64_
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToOctStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToOctStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7267,19 +7681,21 @@ void shinsei_uInt64ToOctStringU16(char16_t*const restrict des,const uint_fast64_
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToHexStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToHexStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7287,19 +7703,21 @@ void shinsei_uInt64ToHexStringU16(char16_t*const restrict des,const uint_fast64_
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64To36BaseStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBase36StringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7307,19 +7725,21 @@ void shinsei_uInt64To36BaseStringU16(char16_t*const restrict des,const uint_fast
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64To62BaseStringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBase62StringU16(char16_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7327,21 +7747,23 @@ void shinsei_uInt64To62BaseStringU16(char16_t*const restrict des,const uint_fast
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	v=src;
 	while(len--){
 		des[len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int64ToStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7349,21 +7771,23 @@ void shinsei_int64ToStringU16(char16_t*const restrict des,const int_fast64_t src
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int64ToBinStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBinStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7371,21 +7795,23 @@ void shinsei_int64ToBinStringU16(char16_t*const restrict des,const int_fast64_t 
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int64ToOctStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToOctStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7393,21 +7819,23 @@ void shinsei_int64ToOctStringU16(char16_t*const restrict des,const int_fast64_t 
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int64ToHexStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToHexStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7415,21 +7843,23 @@ void shinsei_int64ToHexStringU16(char16_t*const restrict des,const int_fast64_t 
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int64To36BaseStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBase36StringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7437,21 +7867,23 @@ void shinsei_int64To36BaseStringU16(char16_t*const restrict des,const int_fast64
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
-void shinsei_int64To62BaseStringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBase62StringU16(char16_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=u'0';
 		des[1]=u'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7459,21 +7891,23 @@ void shinsei_int64To62BaseStringU16(char16_t*const restrict des,const int_fast64
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=u'\0';
 	while(v){
 		des[--len]=(char16_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=u'-';
-	return;
+	return res;
 }
 
 // Int64/UInt64 string converters (U32)
-void shinsei_uInt64ToStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7481,19 +7915,21 @@ void shinsei_uInt64ToStringU32(char32_t*const restrict des,const uint_fast64_t s
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToBinStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBinStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7501,19 +7937,21 @@ void shinsei_uInt64ToBinStringU32(char32_t*const restrict des,const uint_fast64_
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToOctStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToOctStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7521,19 +7959,21 @@ void shinsei_uInt64ToOctStringU32(char32_t*const restrict des,const uint_fast64_
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToHexStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToHexStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7541,19 +7981,21 @@ void shinsei_uInt64ToHexStringU32(char32_t*const restrict des,const uint_fast64_
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64To36BaseStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBase36StringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7561,19 +8003,21 @@ void shinsei_uInt64To36BaseStringU32(char32_t*const restrict des,const uint_fast
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64To62BaseStringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBase62StringU32(char32_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	if(!src){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7581,21 +8025,23 @@ void shinsei_uInt64To62BaseStringU32(char32_t*const restrict des,const uint_fast
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	v=src;
 	while(len--){
 		des[len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int64ToStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7603,21 +8049,23 @@ void shinsei_int64ToStringU32(char32_t*const restrict des,const int_fast64_t src
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int64ToBinStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBinStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7625,21 +8073,23 @@ void shinsei_int64ToBinStringU32(char32_t*const restrict des,const int_fast64_t 
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int64ToOctStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToOctStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7647,21 +8097,23 @@ void shinsei_int64ToOctStringU32(char32_t*const restrict des,const int_fast64_t 
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int64ToHexStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToHexStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7669,21 +8121,23 @@ void shinsei_int64ToHexStringU32(char32_t*const restrict des,const int_fast64_t 
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int64To36BaseStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBase36StringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7691,21 +8145,23 @@ void shinsei_int64To36BaseStringU32(char32_t*const restrict des,const int_fast64
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
-void shinsei_int64To62BaseStringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBase62StringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=U'0';
 		des[1]=U'\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7713,23 +8169,25 @@ void shinsei_int64To62BaseStringU32(char32_t*const restrict des,const int_fast64
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]=U'\0';
 	while(v){
 		des[--len]=(char32_t)SHINSEI_DIGITS_ASCII[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=U'-';
-	return;
+	return res;
 }
 
 // Int64/UInt64 string converters (CP)
-void shinsei_uInt64ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7737,21 +8195,23 @@ void shinsei_uInt64ToStringCP(const unsigned int code_page,char*const restrict d
 		++len;
 		v/=10;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v%10];
 		v/=10;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7759,21 +8219,23 @@ void shinsei_uInt64ToBinStringCP(const unsigned int code_page,char*const restric
 		++len;
 		v>>=1;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v&1];
 		v>>=1;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7781,21 +8243,23 @@ void shinsei_uInt64ToOctStringCP(const unsigned int code_page,char*const restric
 		++len;
 		v>>=3;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v&7];
 		v>>=3;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7803,21 +8267,23 @@ void shinsei_uInt64ToHexStringCP(const unsigned int code_page,char*const restric
 		++len;
 		v>>=4;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v&15];
 		v>>=4;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64To36BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBase36StringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7825,21 +8291,23 @@ void shinsei_uInt64To36BaseStringCP(const unsigned int code_page,char*const rest
 		++len;
 		v/=36;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v%36];
 		v/=36;
 	}
-	return;
+	return res;
 }
-void shinsei_uInt64To62BaseStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBase62StringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=0;
 	register uint_fast64_t v=src;
@@ -7847,23 +8315,25 @@ void shinsei_uInt64To62BaseStringCP(const unsigned int code_page,char*const rest
 		++len;
 		v/=62;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	v=src;
 	while(len--){
 		des[len]=(char)digits[v%62];
 		v/=62;
 	}
-	return;
+	return res;
 }
-void shinsei_int64ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7871,23 +8341,25 @@ void shinsei_int64ToStringCP(const unsigned int code_page,char*const restrict de
 		++len;
 		t/=10;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v%10];
 		v/=10;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int64ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7895,23 +8367,25 @@ void shinsei_int64ToBinStringCP(const unsigned int code_page,char*const restrict
 		++len;
 		t>>=1;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v&1];
 		v>>=1;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int64ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7919,23 +8393,25 @@ void shinsei_int64ToOctStringCP(const unsigned int code_page,char*const restrict
 		++len;
 		t>>=3;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v&7];
 		v>>=3;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int64ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7943,23 +8419,25 @@ void shinsei_int64ToHexStringCP(const unsigned int code_page,char*const restrict
 		++len;
 		t>>=4;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v&15];
 		v>>=4;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int64To36BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBase36StringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7967,23 +8445,25 @@ void shinsei_int64To36BaseStringCP(const unsigned int code_page,char*const restr
 		++len;
 		t/=36;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v%36];
 		v/=36;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
-void shinsei_int64To62BaseStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBase62StringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
-	register uint_fast16_t v=(uint_fast16_t)(neg*(uint_fast16_t)((uint_fast16_t)-src)+!neg*(uint_fast16_t)src);
+	register uint_fast64_t v=(uint_fast64_t)(neg*(uint_fast64_t)((uint_fast64_t)-src)+!neg*(uint_fast64_t)src);
 	if(!v){
 		des[0]=(char)digits[0];
 		des[1]='\0';
-		return;
+		register const size_t res=1;
+		return res;
 	}
 	register size_t len=neg;
 	register uint_fast64_t t=v;
@@ -7991,13 +8471,14 @@ void shinsei_int64To62BaseStringCP(const unsigned int code_page,char*const restr
 		++len;
 		t/=62;
 	}
+	register const size_t res=len;
 	des[len]='\0';
 	while(v){
 		des[--len]=(char)digits[v%62];
 		v/=62;
 	}
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
-	return;
+	return res;
 }
 
 // String to int8/uint8 converters (W)
@@ -8030,7 +8511,7 @@ uint_fast8_t shinsei_hexStringToUInt8W(const wchar_t*const restrict src,const si
 	}
 	return res;
 }
-uint_fast8_t shinsei_36BaseStringToUInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_base36StringToUInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast8_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const wchar_t c=src[i];
@@ -8038,7 +8519,7 @@ uint_fast8_t shinsei_36BaseStringToUInt8W(const wchar_t*const restrict src,const
 	}
 	return res;
 }
-uint_fast8_t shinsei_62BaseStringToUInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_base62StringToUInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast8_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const wchar_t c=src[i];
@@ -8088,7 +8569,7 @@ int_fast8_t shinsei_hexStringToInt8W(const wchar_t*const restrict src,const size
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_36BaseStringToInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_base36StringToInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==L'-';
 	register const wchar_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -8099,7 +8580,7 @@ int_fast8_t shinsei_36BaseStringToInt8W(const wchar_t*const restrict src,const s
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_62BaseStringToInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_base62StringToInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==L'-';
 	register const wchar_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -8141,7 +8622,7 @@ uint_fast8_t shinsei_hexStringToUInt8U8(const char8_t*const restrict src,const s
 	}
 	return res;
 }
-uint_fast8_t shinsei_36BaseStringToUInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_base36StringToUInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast8_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char8_t c=src[i];
@@ -8149,7 +8630,7 @@ uint_fast8_t shinsei_36BaseStringToUInt8U8(const char8_t*const restrict src,cons
 	}
 	return res;
 }
-uint_fast8_t shinsei_62BaseStringToUInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_base62StringToUInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast8_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char8_t c=src[i];
@@ -8199,7 +8680,7 @@ int_fast8_t shinsei_hexStringToInt8U8(const char8_t*const restrict src,const siz
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_36BaseStringToInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_base36StringToInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u8'-';
 	register const char8_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -8210,7 +8691,7 @@ int_fast8_t shinsei_36BaseStringToInt8U8(const char8_t*const restrict src,const 
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_62BaseStringToInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_base62StringToInt8U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u8'-';
 	register const char8_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -8252,7 +8733,7 @@ uint_fast8_t shinsei_hexStringToUInt8U16(const char16_t*const restrict src,const
 	}
 	return res;
 }
-uint_fast8_t shinsei_36BaseStringToUInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_base36StringToUInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast8_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char16_t c=src[i];
@@ -8260,7 +8741,7 @@ uint_fast8_t shinsei_36BaseStringToUInt8U16(const char16_t*const restrict src,co
 	}
 	return res;
 }
-uint_fast8_t shinsei_62BaseStringToUInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_base62StringToUInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast8_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char16_t c=src[i];
@@ -8310,7 +8791,7 @@ int_fast8_t shinsei_hexStringToInt8U16(const char16_t*const restrict src,const s
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_36BaseStringToInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_base36StringToInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u'-';
 	register const char16_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -8321,7 +8802,7 @@ int_fast8_t shinsei_36BaseStringToInt8U16(const char16_t*const restrict src,cons
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_62BaseStringToInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_base62StringToInt8U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u'-';
 	register const char16_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -8363,7 +8844,7 @@ uint_fast8_t shinsei_hexStringToUInt8U32(const char32_t*const restrict src,const
 	}
 	return res;
 }
-uint_fast8_t shinsei_36BaseStringToUInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_base36StringToUInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast8_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char32_t c=src[i];
@@ -8371,7 +8852,7 @@ uint_fast8_t shinsei_36BaseStringToUInt8U32(const char32_t*const restrict src,co
 	}
 	return res;
 }
-uint_fast8_t shinsei_62BaseStringToUInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_base62StringToUInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast8_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char32_t c=src[i];
@@ -8421,7 +8902,7 @@ int_fast8_t shinsei_hexStringToInt8U32(const char32_t*const restrict src,const s
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_36BaseStringToInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_base36StringToInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==U'-';
 	register const char32_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -8432,7 +8913,7 @@ int_fast8_t shinsei_36BaseStringToInt8U32(const char32_t*const restrict src,cons
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_62BaseStringToInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_base62StringToInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==U'-';
 	register const char32_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -8493,7 +8974,7 @@ uint_fast8_t shinsei_hexStringToUInt8CP(const unsigned int code_page,const char*
 	}
 	return res;
 }
-uint_fast8_t shinsei_36BaseStringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_base36StringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast8_t res=0;
@@ -8514,7 +8995,7 @@ uint_fast8_t shinsei_36BaseStringToUInt8CP(const unsigned int code_page,const ch
 	}
 	return res;
 }
-uint_fast8_t shinsei_62BaseStringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_base62StringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast8_t res=0;
@@ -8600,7 +9081,7 @@ int_fast8_t shinsei_hexStringToInt8CP(const unsigned int code_page,const char*co
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_36BaseStringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_base36StringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -8625,7 +9106,7 @@ int_fast8_t shinsei_36BaseStringToInt8CP(const unsigned int code_page,const char
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_62BaseStringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_base62StringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -8681,7 +9162,7 @@ uint_fast16_t shinsei_hexStringToUInt16W(const wchar_t*const restrict src,const 
 	}
 	return res;
 }
-uint_fast16_t shinsei_36BaseStringToUInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_base36StringToUInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast16_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const wchar_t c=src[i];
@@ -8689,7 +9170,7 @@ uint_fast16_t shinsei_36BaseStringToUInt16W(const wchar_t*const restrict src,con
 	}
 	return res;
 }
-uint_fast16_t shinsei_62BaseStringToUInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_base62StringToUInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast16_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const wchar_t c=src[i];
@@ -8739,7 +9220,7 @@ int_fast16_t shinsei_hexStringToInt16W(const wchar_t*const restrict src,const si
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_36BaseStringToInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_base36StringToInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==L'-';
 	register const wchar_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -8750,7 +9231,7 @@ int_fast16_t shinsei_36BaseStringToInt16W(const wchar_t*const restrict src,const
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_62BaseStringToInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_base62StringToInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==L'-';
 	register const wchar_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -8792,7 +9273,7 @@ uint_fast16_t shinsei_hexStringToUInt16U8(const char8_t*const restrict src,const
 	}
 	return res;
 }
-uint_fast16_t shinsei_36BaseStringToUInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_base36StringToUInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast16_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char8_t c=src[i];
@@ -8800,7 +9281,7 @@ uint_fast16_t shinsei_36BaseStringToUInt16U8(const char8_t*const restrict src,co
 	}
 	return res;
 }
-uint_fast16_t shinsei_62BaseStringToUInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_base62StringToUInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast16_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char8_t c=src[i];
@@ -8850,7 +9331,7 @@ int_fast16_t shinsei_hexStringToInt16U8(const char8_t*const restrict src,const s
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_36BaseStringToInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_base36StringToInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u8'-';
 	register const char8_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -8861,7 +9342,7 @@ int_fast16_t shinsei_36BaseStringToInt16U8(const char8_t*const restrict src,cons
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_62BaseStringToInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_base62StringToInt16U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u8'-';
 	register const char8_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -8903,7 +9384,7 @@ uint_fast16_t shinsei_hexStringToUInt16U16(const char16_t*const restrict src,con
 	}
 	return res;
 }
-uint_fast16_t shinsei_36BaseStringToUInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_base36StringToUInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast16_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char16_t c=src[i];
@@ -8911,7 +9392,7 @@ uint_fast16_t shinsei_36BaseStringToUInt16U16(const char16_t*const restrict src,
 	}
 	return res;
 }
-uint_fast16_t shinsei_62BaseStringToUInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_base62StringToUInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast16_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char16_t c=src[i];
@@ -8961,7 +9442,7 @@ int_fast16_t shinsei_hexStringToInt16U16(const char16_t*const restrict src,const
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_36BaseStringToInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_base36StringToInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u'-';
 	register const char16_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -8972,7 +9453,7 @@ int_fast16_t shinsei_36BaseStringToInt16U16(const char16_t*const restrict src,co
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_62BaseStringToInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_base62StringToInt16U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u'-';
 	register const char16_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -9014,7 +9495,7 @@ uint_fast16_t shinsei_hexStringToUInt16U32(const char32_t*const restrict src,con
 	}
 	return res;
 }
-uint_fast16_t shinsei_36BaseStringToUInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_base36StringToUInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast16_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char32_t c=src[i];
@@ -9022,7 +9503,7 @@ uint_fast16_t shinsei_36BaseStringToUInt16U32(const char32_t*const restrict src,
 	}
 	return res;
 }
-uint_fast16_t shinsei_62BaseStringToUInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_base62StringToUInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast16_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char32_t c=src[i];
@@ -9072,7 +9553,7 @@ int_fast16_t shinsei_hexStringToInt16U32(const char32_t*const restrict src,const
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_36BaseStringToInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_base36StringToInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==U'-';
 	register const char32_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -9083,7 +9564,7 @@ int_fast16_t shinsei_36BaseStringToInt16U32(const char32_t*const restrict src,co
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_62BaseStringToInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_base62StringToInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==U'-';
 	register const char32_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -9144,7 +9625,7 @@ uint_fast16_t shinsei_hexStringToUInt16CP(const unsigned int code_page,const cha
 	}
 	return res;
 }
-uint_fast16_t shinsei_36BaseStringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_base36StringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast16_t res=0;
@@ -9165,7 +9646,7 @@ uint_fast16_t shinsei_36BaseStringToUInt16CP(const unsigned int code_page,const 
 	}
 	return res;
 }
-uint_fast16_t shinsei_62BaseStringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_base62StringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast16_t res=0;
@@ -9251,7 +9732,7 @@ int_fast16_t shinsei_hexStringToInt16CP(const unsigned int code_page,const char*
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_36BaseStringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_base36StringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9276,7 +9757,7 @@ int_fast16_t shinsei_36BaseStringToInt16CP(const unsigned int code_page,const ch
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_62BaseStringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_base62StringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9332,7 +9813,7 @@ uint_fast32_t shinsei_hexStringToUInt32W(const wchar_t*const restrict src,const 
 	}
 	return res;
 }
-uint_fast32_t shinsei_36BaseStringToUInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_base36StringToUInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast32_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const wchar_t c=src[i];
@@ -9340,7 +9821,7 @@ uint_fast32_t shinsei_36BaseStringToUInt32W(const wchar_t*const restrict src,con
 	}
 	return res;
 }
-uint_fast32_t shinsei_62BaseStringToUInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_base62StringToUInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast32_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const wchar_t c=src[i];
@@ -9390,7 +9871,7 @@ int_fast32_t shinsei_hexStringToInt32W(const wchar_t*const restrict src,const si
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_36BaseStringToInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_base36StringToInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==L'-';
 	register const wchar_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -9401,7 +9882,7 @@ int_fast32_t shinsei_36BaseStringToInt32W(const wchar_t*const restrict src,const
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_62BaseStringToInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_base62StringToInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==L'-';
 	register const wchar_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -9443,7 +9924,7 @@ uint_fast32_t shinsei_hexStringToUInt32U8(const char8_t*const restrict src,const
 	}
 	return res;
 }
-uint_fast32_t shinsei_36BaseStringToUInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_base36StringToUInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast32_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char8_t c=src[i];
@@ -9451,7 +9932,7 @@ uint_fast32_t shinsei_36BaseStringToUInt32U8(const char8_t*const restrict src,co
 	}
 	return res;
 }
-uint_fast32_t shinsei_62BaseStringToUInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_base62StringToUInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast32_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char8_t c=src[i];
@@ -9501,7 +9982,7 @@ int_fast32_t shinsei_hexStringToInt32U8(const char8_t*const restrict src,const s
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_36BaseStringToInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_base36StringToInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u8'-';
 	register const char8_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -9512,7 +9993,7 @@ int_fast32_t shinsei_36BaseStringToInt32U8(const char8_t*const restrict src,cons
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_62BaseStringToInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_base62StringToInt32U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u8'-';
 	register const char8_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -9554,7 +10035,7 @@ uint_fast32_t shinsei_hexStringToUInt32U16(const char16_t*const restrict src,con
 	}
 	return res;
 }
-uint_fast32_t shinsei_36BaseStringToUInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_base36StringToUInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast32_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char16_t c=src[i];
@@ -9562,7 +10043,7 @@ uint_fast32_t shinsei_36BaseStringToUInt32U16(const char16_t*const restrict src,
 	}
 	return res;
 }
-uint_fast32_t shinsei_62BaseStringToUInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_base62StringToUInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast32_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char16_t c=src[i];
@@ -9612,7 +10093,7 @@ int_fast32_t shinsei_hexStringToInt32U16(const char16_t*const restrict src,const
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_36BaseStringToInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_base36StringToInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u'-';
 	register const char16_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -9623,7 +10104,7 @@ int_fast32_t shinsei_36BaseStringToInt32U16(const char16_t*const restrict src,co
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_62BaseStringToInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_base62StringToInt32U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u'-';
 	register const char16_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -9665,7 +10146,7 @@ uint_fast32_t shinsei_hexStringToUInt32U32(const char32_t*const restrict src,con
 	}
 	return res;
 }
-uint_fast32_t shinsei_36BaseStringToUInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_base36StringToUInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast32_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char32_t c=src[i];
@@ -9673,7 +10154,7 @@ uint_fast32_t shinsei_36BaseStringToUInt32U32(const char32_t*const restrict src,
 	}
 	return res;
 }
-uint_fast32_t shinsei_62BaseStringToUInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_base62StringToUInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast32_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char32_t c=src[i];
@@ -9723,7 +10204,7 @@ int_fast32_t shinsei_hexStringToInt32U32(const char32_t*const restrict src,const
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_36BaseStringToInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_base36StringToInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==U'-';
 	register const char32_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -9734,7 +10215,7 @@ int_fast32_t shinsei_36BaseStringToInt32U32(const char32_t*const restrict src,co
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_62BaseStringToInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_base62StringToInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==U'-';
 	register const char32_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -9795,7 +10276,7 @@ uint_fast32_t shinsei_hexStringToUInt32CP(const unsigned int code_page,const cha
 	}
 	return res;
 }
-uint_fast32_t shinsei_36BaseStringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_base36StringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast32_t res=0;
@@ -9816,7 +10297,7 @@ uint_fast32_t shinsei_36BaseStringToUInt32CP(const unsigned int code_page,const 
 	}
 	return res;
 }
-uint_fast32_t shinsei_62BaseStringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_base62StringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast32_t res=0;
@@ -9902,7 +10383,7 @@ int_fast32_t shinsei_hexStringToInt32CP(const unsigned int code_page,const char*
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_36BaseStringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_base36StringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9927,7 +10408,7 @@ int_fast32_t shinsei_36BaseStringToInt32CP(const unsigned int code_page,const ch
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_62BaseStringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_base62StringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9983,7 +10464,7 @@ uint_fast64_t shinsei_hexStringToUInt64W(const wchar_t*const restrict src,const 
 	}
 	return res;
 }
-uint_fast64_t shinsei_36BaseStringToUInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_base36StringToUInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast64_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const wchar_t c=src[i];
@@ -9991,7 +10472,7 @@ uint_fast64_t shinsei_36BaseStringToUInt64W(const wchar_t*const restrict src,con
 	}
 	return res;
 }
-uint_fast64_t shinsei_62BaseStringToUInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_base62StringToUInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast64_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const wchar_t c=src[i];
@@ -10041,7 +10522,7 @@ int_fast64_t shinsei_hexStringToInt64W(const wchar_t*const restrict src,const si
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_36BaseStringToInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_base36StringToInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==L'-';
 	register const wchar_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -10052,7 +10533,7 @@ int_fast64_t shinsei_36BaseStringToInt64W(const wchar_t*const restrict src,const
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_62BaseStringToInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_base62StringToInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==L'-';
 	register const wchar_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -10094,7 +10575,7 @@ uint_fast64_t shinsei_hexStringToUInt64U8(const char8_t*const restrict src,const
 	}
 	return res;
 }
-uint_fast64_t shinsei_36BaseStringToUInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_base36StringToUInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast64_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char8_t c=src[i];
@@ -10102,7 +10583,7 @@ uint_fast64_t shinsei_36BaseStringToUInt64U8(const char8_t*const restrict src,co
 	}
 	return res;
 }
-uint_fast64_t shinsei_62BaseStringToUInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_base62StringToUInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast64_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char8_t c=src[i];
@@ -10152,7 +10633,7 @@ int_fast64_t shinsei_hexStringToInt64U8(const char8_t*const restrict src,const s
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_36BaseStringToInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_base36StringToInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u8'-';
 	register const char8_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -10163,7 +10644,7 @@ int_fast64_t shinsei_36BaseStringToInt64U8(const char8_t*const restrict src,cons
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_62BaseStringToInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_base62StringToInt64U8(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u8'-';
 	register const char8_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -10205,7 +10686,7 @@ uint_fast64_t shinsei_hexStringToUInt64U16(const char16_t*const restrict src,con
 	}
 	return res;
 }
-uint_fast64_t shinsei_36BaseStringToUInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_base36StringToUInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast64_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char16_t c=src[i];
@@ -10213,7 +10694,7 @@ uint_fast64_t shinsei_36BaseStringToUInt64U16(const char16_t*const restrict src,
 	}
 	return res;
 }
-uint_fast64_t shinsei_62BaseStringToUInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_base62StringToUInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast64_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char16_t c=src[i];
@@ -10263,7 +10744,7 @@ int_fast64_t shinsei_hexStringToInt64U16(const char16_t*const restrict src,const
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_36BaseStringToInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_base36StringToInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u'-';
 	register const char16_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -10274,7 +10755,7 @@ int_fast64_t shinsei_36BaseStringToInt64U16(const char16_t*const restrict src,co
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_62BaseStringToInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_base62StringToInt64U16(const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==u'-';
 	register const char16_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -10316,7 +10797,7 @@ uint_fast64_t shinsei_hexStringToUInt64U32(const char32_t*const restrict src,con
 	}
 	return res;
 }
-uint_fast64_t shinsei_36BaseStringToUInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_base36StringToUInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast64_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char32_t c=src[i];
@@ -10324,7 +10805,7 @@ uint_fast64_t shinsei_36BaseStringToUInt64U32(const char32_t*const restrict src,
 	}
 	return res;
 }
-uint_fast64_t shinsei_62BaseStringToUInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_base62StringToUInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register uint_fast64_t res=0;
 	for(register size_t i=0;i<len;++i){
 		register const char32_t c=src[i];
@@ -10374,7 +10855,7 @@ int_fast64_t shinsei_hexStringToInt64U32(const char32_t*const restrict src,const
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_36BaseStringToInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_base36StringToInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==U'-';
 	register const char32_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -10385,7 +10866,7 @@ int_fast64_t shinsei_36BaseStringToInt64U32(const char32_t*const restrict src,co
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_62BaseStringToInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_base62StringToInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool neg=src[0]==U'-';
 	register const char32_t*const val=src+neg;
 	register const size_t l=len-neg;
@@ -10446,7 +10927,7 @@ uint_fast64_t shinsei_hexStringToUInt64CP(const unsigned int code_page,const cha
 	}
 	return res;
 }
-uint_fast64_t shinsei_36BaseStringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_base36StringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast64_t res=0;
@@ -10467,7 +10948,7 @@ uint_fast64_t shinsei_36BaseStringToUInt64CP(const unsigned int code_page,const 
 	}
 	return res;
 }
-uint_fast64_t shinsei_62BaseStringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_base62StringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast64_t res=0;
@@ -10553,7 +11034,7 @@ int_fast64_t shinsei_hexStringToInt64CP(const unsigned int code_page,const char*
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_36BaseStringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_base36StringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -10578,7 +11059,7 @@ int_fast64_t shinsei_36BaseStringToInt64CP(const unsigned int code_page,const ch
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_62BaseStringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_base62StringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');

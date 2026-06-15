@@ -323,159 +323,159 @@ namespace shinsei{
 	}
 	
 	// Int8/UInt8 string converters (A)
-	inline void uInt8ToStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt8ToStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt8ToStringA(des,src);
 	}
-	inline void uInt8ToBinStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt8ToBinStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt8ToBinStringA(des,src);
 	}
-	inline void uInt8ToOctStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt8ToOctStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt8ToOctStringA(des,src);
 	}
-	inline void uInt8ToHexStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt8ToHexStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt8ToHexStringA(des,src);
 	}
-	inline void uInt8To36BaseStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt8To36BaseStringA(des,src);
+	inline ::size_t uInt8ToBase36StringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt8ToBase36StringA(des,src);
 	}
-	inline void uInt8To62BaseStringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt8To62BaseStringA(des,src);
+	inline ::size_t uInt8ToBase62StringA(char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt8ToBase62StringA(des,src);
 	}
 	
-	inline void int8ToStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int8ToStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int8ToStringA(des,src);
 	}
-	inline void int8ToBinStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int8ToBinStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int8ToBinStringA(des,src);
 	}
-	inline void int8ToOctStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int8ToOctStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int8ToOctStringA(des,src);
 	}
-	inline void int8ToHexStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int8ToHexStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int8ToHexStringA(des,src);
 	}
-	inline void int8To36BaseStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int8To36BaseStringA(des,src);
+	inline ::size_t int8ToBase36StringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int8ToBase36StringA(des,src);
 	}
-	inline void int8To62BaseStringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int8To62BaseStringA(des,src);
+	inline ::size_t int8ToBase62StringA(char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int8ToBase62StringA(des,src);
 	}
 	
 	// Int16/UInt16 string converters (A)
-	inline void uInt16ToStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt16ToStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt16ToStringA(des,src);
 	}
-	inline void uInt16ToBinStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt16ToBinStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt16ToBinStringA(des,src);
 	}
-	inline void uInt16ToOctStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt16ToOctStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt16ToOctStringA(des,src);
 	}
-	inline void uInt16ToHexStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt16ToHexStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt16ToHexStringA(des,src);
 	}
-	inline void uInt16To36BaseStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt16To36BaseStringA(des,src);
+	inline ::size_t uInt16ToBase36StringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt16ToBase36StringA(des,src);
 	}
-	inline void uInt16To62BaseStringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt16To62BaseStringA(des,src);
+	inline ::size_t uInt16ToBase62StringA(char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt16ToBase62StringA(des,src);
 	}
 	
-	inline void int16ToStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int16ToStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int16ToStringA(des,src);
 	}
-	inline void int16ToBinStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int16ToBinStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int16ToBinStringA(des,src);
 	}
-	inline void int16ToOctStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int16ToOctStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int16ToOctStringA(des,src);
 	}
-	inline void int16ToHexStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int16ToHexStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int16ToHexStringA(des,src);
 	}
-	inline void int16To36BaseStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int16To36BaseStringA(des,src);
+	inline ::size_t int16ToBase36StringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int16ToBase36StringA(des,src);
 	}
-	inline void int16To62BaseStringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int16To62BaseStringA(des,src);
+	inline ::size_t int16ToBase62StringA(char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int16ToBase62StringA(des,src);
 	}
 	
 	// Int32/UInt32 string converters (A)
-	inline void uInt32ToStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt32ToStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt32ToStringA(des,src);
 	}
-	inline void uInt32ToBinStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt32ToBinStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt32ToBinStringA(des,src);
 	}
-	inline void uInt32ToOctStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt32ToOctStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt32ToOctStringA(des,src);
 	}
-	inline void uInt32ToHexStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt32ToHexStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt32ToHexStringA(des,src);
 	}
-	inline void uInt32To36BaseStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt32To36BaseStringA(des,src);
+	inline ::size_t uInt32ToBase36StringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt32ToBase36StringA(des,src);
 	}
-	inline void uInt32To62BaseStringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt32To62BaseStringA(des,src);
+	inline ::size_t uInt32ToBase62StringA(char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt32ToBase62StringA(des,src);
 	}
 	
-	inline void int32ToStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int32ToStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int32ToStringA(des,src);
 	}
-	inline void int32ToBinStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int32ToBinStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int32ToBinStringA(des,src);
 	}
-	inline void int32ToOctStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int32ToOctStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int32ToOctStringA(des,src);
 	}
-	inline void int32ToHexStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int32ToHexStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int32ToHexStringA(des,src);
 	}
-	inline void int32To36BaseStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int32To36BaseStringA(des,src);
+	inline ::size_t int32ToBase36StringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int32ToBase36StringA(des,src);
 	}
-	inline void int32To62BaseStringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int32To62BaseStringA(des,src);
+	inline ::size_t int32ToBase62StringA(char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int32ToBase62StringA(des,src);
 	}
 	
 	// Int64/UInt64 string converters (A)
-	inline void uInt64ToStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt64ToStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt64ToStringA(des,src);
 	}
-	inline void uInt64ToBinStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt64ToBinStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt64ToBinStringA(des,src);
 	}
-	inline void uInt64ToOctStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt64ToOctStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt64ToOctStringA(des,src);
 	}
-	inline void uInt64ToHexStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t uInt64ToHexStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_uInt64ToHexStringA(des,src);
 	}
-	inline void uInt64To36BaseStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt64To36BaseStringA(des,src);
+	inline ::size_t uInt64ToBase36StringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt64ToBase36StringA(des,src);
 	}
-	inline void uInt64To62BaseStringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_uInt64To62BaseStringA(des,src);
+	inline ::size_t uInt64ToBase62StringA(char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_uInt64ToBase62StringA(des,src);
 	}
 	
-	inline void int64ToStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int64ToStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int64ToStringA(des,src);
 	}
-	inline void int64ToBinStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int64ToBinStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int64ToBinStringA(des,src);
 	}
-	inline void int64ToOctStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int64ToOctStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int64ToOctStringA(des,src);
 	}
-	inline void int64ToHexStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+	inline ::size_t int64ToHexStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_int64ToHexStringA(des,src);
 	}
-	inline void int64To36BaseStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int64To36BaseStringA(des,src);
+	inline ::size_t int64ToBase36StringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int64ToBase36StringA(des,src);
 	}
-	inline void int64To62BaseStringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_int64To62BaseStringA(des,src);
+	inline ::size_t int64ToBase62StringA(char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_int64ToBase62StringA(des,src);
 	}
 	
 	// String to int8/uint8 converters (A)
@@ -491,11 +491,11 @@ namespace shinsei{
 	inline uint_fast8_t hexStringToUInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_hexStringToUInt8A(src,len);
 	}
-	inline uint_fast8_t _36BaseStringToUInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_36BaseStringToUInt8A(src,len);
+	inline uint_fast8_t base36StringToUInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base36StringToUInt8A(src,len);
 	}
-	inline uint_fast8_t _62BaseStringToUInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_62BaseStringToUInt8A(src,len);
+	inline uint_fast8_t base62StringToUInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base62StringToUInt8A(src,len);
 	}
 	
 	inline int_fast8_t stringToInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
@@ -510,11 +510,11 @@ namespace shinsei{
 	inline int_fast8_t hexStringToInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_hexStringToInt8A(src,len);
 	}
-	inline int_fast8_t _36BaseStringToInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_36BaseStringToInt8A(src,len);
+	inline int_fast8_t base36StringToInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base36StringToInt8A(src,len);
 	}
-	inline int_fast8_t _62BaseStringToInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_62BaseStringToInt8A(src,len);
+	inline int_fast8_t base62StringToInt8A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base62StringToInt8A(src,len);
 	}
 	
 	// String to int16/uint16 converters (A)
@@ -530,11 +530,11 @@ namespace shinsei{
 	inline uint_fast16_t hexStringToUInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_hexStringToUInt16A(src,len);
 	}
-	inline uint_fast16_t _36BaseStringToUInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_36BaseStringToUInt16A(src,len);
+	inline uint_fast16_t base36StringToUInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base36StringToUInt16A(src,len);
 	}
-	inline uint_fast16_t _62BaseStringToUInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_62BaseStringToUInt16A(src,len);
+	inline uint_fast16_t base62StringToUInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base62StringToUInt16A(src,len);
 	}
 	
 	inline int_fast16_t stringToInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
@@ -549,11 +549,11 @@ namespace shinsei{
 	inline int_fast16_t hexStringToInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_hexStringToInt16A(src,len);
 	}
-	inline int_fast16_t _36BaseStringToInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_36BaseStringToInt16A(src,len);
+	inline int_fast16_t base36StringToInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base36StringToInt16A(src,len);
 	}
-	inline int_fast16_t _62BaseStringToInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_62BaseStringToInt16A(src,len);
+	inline int_fast16_t base62StringToInt16A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base62StringToInt16A(src,len);
 	}
 	
 	// String to int32/uint32 converters (A)
@@ -569,11 +569,11 @@ namespace shinsei{
 	inline uint_fast32_t hexStringToUInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_hexStringToUInt32A(src,len);
 	}
-	inline uint_fast32_t _36BaseStringToUInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_36BaseStringToUInt32A(src,len);
+	inline uint_fast32_t base36StringToUInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base36StringToUInt32A(src,len);
 	}
-	inline uint_fast32_t _62BaseStringToUInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_62BaseStringToUInt32A(src,len);
+	inline uint_fast32_t base62StringToUInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base62StringToUInt32A(src,len);
 	}
 	
 	inline int_fast32_t stringToInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
@@ -588,11 +588,11 @@ namespace shinsei{
 	inline int_fast32_t hexStringToInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_hexStringToInt32A(src,len);
 	}
-	inline int_fast32_t _36BaseStringToInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_36BaseStringToInt32A(src,len);
+	inline int_fast32_t base36StringToInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base36StringToInt32A(src,len);
 	}
-	inline int_fast32_t _62BaseStringToInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_62BaseStringToInt32A(src,len);
+	inline int_fast32_t base62StringToInt32A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base62StringToInt32A(src,len);
 	}
 	
 	// String to int64/uint64 converters (A)
@@ -608,11 +608,11 @@ namespace shinsei{
 	inline uint_fast64_t hexStringToUInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_hexStringToUInt64A(src,len);
 	}
-	inline uint_fast64_t _36BaseStringToUInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_36BaseStringToUInt64A(src,len);
+	inline uint_fast64_t base36StringToUInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base36StringToUInt64A(src,len);
 	}
-	inline uint_fast64_t _62BaseStringToUInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_62BaseStringToUInt64A(src,len);
+	inline uint_fast64_t base62StringToUInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base62StringToUInt64A(src,len);
 	}
 	
 	inline int_fast64_t stringToInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
@@ -627,11 +627,11 @@ namespace shinsei{
 	inline int_fast64_t hexStringToInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 		return ::shinsei_hexStringToInt64A(src,len);
 	}
-	inline int_fast64_t _36BaseStringToInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_36BaseStringToInt64A(src,len);
+	inline int_fast64_t base36StringToInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base36StringToInt64A(src,len);
 	}
-	inline int_fast64_t _62BaseStringToInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-		return ::shinsei_62BaseStringToInt64A(src,len);
+	inline int_fast64_t base62StringToInt64A(const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+		return ::shinsei_base62StringToInt64A(src,len);
 	}
 	
 	using string_a_t=string_t<char>;
@@ -801,159 +801,159 @@ namespace shinsei{
 		}
 		
 		// Int8/UInt8 string converters (N)
-		inline void uInt8ToStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt8ToStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt8ToStringN(des,src);
 		}
-		inline void uInt8ToBinStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt8ToBinStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt8ToBinStringN(des,src);
 		}
-		inline void uInt8ToOctStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt8ToOctStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt8ToOctStringN(des,src);
 		}
-		inline void uInt8ToHexStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt8ToHexStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt8ToHexStringN(des,src);
 		}
-		inline void uInt8To36BaseStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt8To36BaseStringN(des,src);
+		inline ::size_t uInt8ToBase36StringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt8ToBase36StringN(des,src);
 		}
-		inline void uInt8To62BaseStringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt8To62BaseStringN(des,src);
+		inline ::size_t uInt8ToBase62StringN(wchar_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt8ToBase62StringN(des,src);
 		}
 		
-		inline void int8ToStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int8ToStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int8ToStringN(des,src);
 		}
-		inline void int8ToBinStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int8ToBinStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int8ToBinStringN(des,src);
 		}
-		inline void int8ToOctStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int8ToOctStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int8ToOctStringN(des,src);
 		}
-		inline void int8ToHexStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int8ToHexStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int8ToHexStringN(des,src);
 		}
-		inline void int8To36BaseStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int8To36BaseStringN(des,src);
+		inline ::size_t int8ToBase36StringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int8ToBase36StringN(des,src);
 		}
-		inline void int8To62BaseStringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int8To62BaseStringN(des,src);
+		inline ::size_t int8ToBase62StringN(wchar_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int8ToBase62StringN(des,src);
 		}
 		
 		// Int16/UInt16 string converters (N)
-		inline void uInt16ToStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt16ToStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt16ToStringN(des,src);
 		}
-		inline void uInt16ToBinStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt16ToBinStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt16ToBinStringN(des,src);
 		}
-		inline void uInt16ToOctStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt16ToOctStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt16ToOctStringN(des,src);
 		}
-		inline void uInt16ToHexStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt16ToHexStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt16ToHexStringN(des,src);
 		}
-		inline void uInt16To36BaseStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt16To36BaseStringN(des,src);
+		inline ::size_t uInt16ToBase36StringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt16ToBase36StringN(des,src);
 		}
-		inline void uInt16To62BaseStringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt16To62BaseStringN(des,src);
+		inline ::size_t uInt16ToBase62StringN(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt16ToBase62StringN(des,src);
 		}
 		
-		inline void int16ToStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int16ToStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int16ToStringN(des,src);
 		}
-		inline void int16ToBinStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int16ToBinStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int16ToBinStringN(des,src);
 		}
-		inline void int16ToOctStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int16ToOctStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int16ToOctStringN(des,src);
 		}
-		inline void int16ToHexStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int16ToHexStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int16ToHexStringN(des,src);
 		}
-		inline void int16To36BaseStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int16To36BaseStringN(des,src);
+		inline ::size_t int16ToBase36StringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int16ToBase36StringN(des,src);
 		}
-		inline void int16To62BaseStringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int16To62BaseStringN(des,src);
+		inline ::size_t int16ToBase62StringN(wchar_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int16ToBase62StringN(des,src);
 		}
 		
 		// Int32/UInt32 string converters (N)
-		inline void uInt32ToStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt32ToStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt32ToStringN(des,src);
 		}
-		inline void uInt32ToBinStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt32ToBinStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt32ToBinStringN(des,src);
 		}
-		inline void uInt32ToOctStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt32ToOctStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt32ToOctStringN(des,src);
 		}
-		inline void uInt32ToHexStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt32ToHexStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt32ToHexStringN(des,src);
 		}
-		inline void uInt32To36BaseStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt32To36BaseStringN(des,src);
+		inline ::size_t uInt32ToBase36StringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt32ToBase36StringN(des,src);
 		}
-		inline void uInt32To62BaseStringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt32To62BaseStringN(des,src);
+		inline ::size_t uInt32ToBase62StringN(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt32ToBase62StringN(des,src);
 		}
 		
-		inline void int32ToStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int32ToStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int32ToStringN(des,src);
 		}
-		inline void int32ToBinStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int32ToBinStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int32ToBinStringN(des,src);
 		}
-		inline void int32ToOctStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int32ToOctStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int32ToOctStringN(des,src);
 		}
-		inline void int32ToHexStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int32ToHexStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int32ToHexStringN(des,src);
 		}
-		inline void int32To36BaseStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int32To36BaseStringN(des,src);
+		inline ::size_t int32ToBase36StringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int32ToBase36StringN(des,src);
 		}
-		inline void int32To62BaseStringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int32To62BaseStringN(des,src);
+		inline ::size_t int32ToBase62StringN(wchar_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int32ToBase62StringN(des,src);
 		}
 		
 		// Int64/UInt64 string converters (N)
-		inline void uInt64ToStringN(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt64ToStringN(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt64ToStringN(des,src);
 		}
-		inline void uInt64ToBinStringN(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt64ToBinStringN(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt64ToBinStringN(des,src);
 		}
-		inline void uInt64ToOctStringN(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt64ToOctStringN(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt64ToOctStringN(des,src);
 		}
-		inline void uInt64ToHexStringN(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt64ToHexStringN(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt64ToHexStringN(des,src);
 		}
-		inline void uInt64To36BaseStringN(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt64To36BaseStringN(des,src);
+		inline ::size_t uInt64ToBase36StringN(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt64ToBase36StringN(des,src);
 		}
-		inline void uInt64To62BaseStringN(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt64To62BaseStringN(des,src);
+		inline ::size_t uInt64ToBase62StringN(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt64ToBase62StringN(des,src);
 		}
 		
-		inline void int64ToStringN(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int64ToStringN(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int64ToStringN(des,src);
 		}
-		inline void int64ToBinStringN(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int64ToBinStringN(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int64ToBinStringN(des,src);
 		}
-		inline void int64ToOctStringN(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int64ToOctStringN(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int64ToOctStringN(des,src);
 		}
-		inline void int64ToHexStringN(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int64ToHexStringN(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int64ToHexStringN(des,src);
 		}
-		inline void int64To36BaseStringN(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int64To36BaseStringN(des,src);
+		inline ::size_t int64ToBase36StringN(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int64ToBase36StringN(des,src);
 		}
-		inline void int64To62BaseStringN(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int64To62BaseStringN(des,src);
+		inline ::size_t int64ToBase62StringN(wchar_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int64ToBase62StringN(des,src);
 		}
 		
 		// String to int8/uint8 converters (N)
@@ -969,11 +969,11 @@ namespace shinsei{
 		inline uint_fast8_t hexStringToUInt8N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToUInt8N(src,len);
 		}
-		inline uint_fast8_t _36BaseStringToUInt8N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToUInt8N(src,len);
+		inline uint_fast8_t base36StringToUInt8N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToUInt8N(src,len);
 		}
-		inline uint_fast8_t _62BaseStringToUInt8N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToUInt8N(src,len);
+		inline uint_fast8_t base62StringToUInt8N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToUInt8N(src,len);
 		}
 		
 		inline int_fast8_t stringToInt8N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
@@ -988,11 +988,11 @@ namespace shinsei{
 		inline int_fast8_t hexStringToInt8N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToInt8N(src,len);
 		}
-		inline int_fast8_t _36BaseStringToInt8N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToInt8N(src,len);
+		inline int_fast8_t base36StringToInt8N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToInt8N(src,len);
 		}
-		inline int_fast8_t _62BaseStringToInt8N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToInt8N(src,len);
+		inline int_fast8_t base62StringToInt8N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToInt8N(src,len);
 		}
 		
 		// String to int16/uint16 converters (N)
@@ -1008,11 +1008,11 @@ namespace shinsei{
 		inline uint_fast16_t hexStringToUInt16N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToUInt16N(src,len);
 		}
-		inline uint_fast16_t _36BaseStringToUInt16N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToUInt16N(src,len);
+		inline uint_fast16_t base36StringToUInt16N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToUInt16N(src,len);
 		}
-		inline uint_fast16_t _62BaseStringToUInt16N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToUInt16N(src,len);
+		inline uint_fast16_t base62StringToUInt16N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToUInt16N(src,len);
 		}
 		
 		inline int_fast16_t stringToInt16N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
@@ -1027,11 +1027,11 @@ namespace shinsei{
 		inline int_fast16_t hexStringToInt16N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToInt16N(src,len);
 		}
-		inline int_fast16_t _36BaseStringToInt16N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToInt16N(src,len);
+		inline int_fast16_t base36StringToInt16N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToInt16N(src,len);
 		}
-		inline int_fast16_t _62BaseStringToInt16N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToInt16N(src,len);
+		inline int_fast16_t base62StringToInt16N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToInt16N(src,len);
 		}
 		
 		// String to int32/uint32 converters (N)
@@ -1047,11 +1047,11 @@ namespace shinsei{
 		inline uint_fast32_t hexStringToUInt32N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToUInt32N(src,len);
 		}
-		inline uint_fast32_t _36BaseStringToUInt32N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToUInt32N(src,len);
+		inline uint_fast32_t base36StringToUInt32N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToUInt32N(src,len);
 		}
-		inline uint_fast32_t _62BaseStringToUInt32N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToUInt32N(src,len);
+		inline uint_fast32_t base62StringToUInt32N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToUInt32N(src,len);
 		}
 		
 		inline int_fast32_t stringToInt32N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
@@ -1066,11 +1066,11 @@ namespace shinsei{
 		inline int_fast32_t hexStringToInt32N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToInt32W(src,len);
 		}
-		inline int_fast32_t _36BaseStringToInt32N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToInt32W(src,len);
+		inline int_fast32_t base36StringToInt32N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToInt32W(src,len);
 		}
-		inline int_fast32_t _62BaseStringToInt32N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToInt32W(src,len);
+		inline int_fast32_t base62StringToInt32N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToInt32W(src,len);
 		}
 		
 		// String to int64/uint64 converters (N)
@@ -1086,11 +1086,11 @@ namespace shinsei{
 		inline uint_fast64_t hexStringToUInt64N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToUInt64N(src,len);
 		}
-		inline uint_fast64_t _36BaseStringToUInt64N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToUInt64N(src,len);
+		inline uint_fast64_t base36StringToUInt64N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToUInt64N(src,len);
 		}
-		inline uint_fast64_t _62BaseStringToUInt64N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToUInt64W(src,len);
+		inline uint_fast64_t base62StringToUInt64N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToUInt64W(src,len);
 		}
 		
 		inline int_fast64_t stringToInt64N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
@@ -1105,11 +1105,11 @@ namespace shinsei{
 		inline int_fast64_t hexStringToInt64N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToInt64W(src,len);
 		}
-		inline int_fast64_t _36BaseStringToInt64N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToInt64W(src,len);
+		inline int_fast64_t base36StringToInt64N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToInt64W(src,len);
 		}
-		inline int_fast64_t _62BaseStringToInt64N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToInt64W(src,len);
+		inline int_fast64_t base62StringToInt64N(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToInt64W(src,len);
 		}
 		
 		using string_n_t=string_t<wchar_t>;
@@ -1279,159 +1279,159 @@ namespace shinsei{
 		}
 		
 		// Int8/UInt8 string converters (N)
-		inline void uInt8ToStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt8ToStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt8ToStringN(des,src);
 		}
-		inline void uInt8ToBinStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt8ToBinStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt8ToBinStringN(des,src);
 		}
-		inline void uInt8ToOctStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt8ToOctStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt8ToOctStringN(des,src);
 		}
-		inline void uInt8ToHexStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt8ToHexStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt8ToHexStringN(des,src);
 		}
-		inline void uInt8To36BaseStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt8To36BaseStringN(des,src);
+		inline ::size_t uInt8ToBase36StringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt8ToBase36StringN(des,src);
 		}
-		inline void uInt8To62BaseStringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt8To62BaseStringN(des,src);
+		inline ::size_t uInt8ToBase62StringN(char8_t*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt8ToBase62StringN(des,src);
 		}
 		
-		inline void int8ToStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int8ToStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int8ToStringN(des,src);
 		}
-		inline void int8ToBinStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int8ToBinStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int8ToBinStringN(des,src);
 		}
-		inline void int8ToOctStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int8ToOctStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int8ToOctStringN(des,src);
 		}
-		inline void int8ToHexStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int8ToHexStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int8ToHexStringN(des,src);
 		}
-		inline void int8To36BaseStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int8To36BaseStringN(des,src);
+		inline ::size_t int8ToBase36StringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int8ToBase36StringN(des,src);
 		}
-		inline void int8To62BaseStringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int8To62BaseStringN(des,src);
+		inline ::size_t int8ToBase62StringN(char8_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int8ToBase62StringN(des,src);
 		}
 		
 		// Int16/UInt16 string converters (N)
-		inline void uInt16ToStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt16ToStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt16ToStringN(des,src);
 		}
-		inline void uInt16ToBinStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt16ToBinStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt16ToBinStringN(des,src);
 		}
-		inline void uInt16ToOctStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt16ToOctStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt16ToOctStringN(des,src);
 		}
-		inline void uInt16ToHexStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt16ToHexStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt16ToHexStringN(des,src);
 		}
-		inline void uInt16To36BaseStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt16To36BaseStringN(des,src);
+		inline ::size_t uInt16ToBase36StringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt16ToBase36StringN(des,src);
 		}
-		inline void uInt16To62BaseStringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt16To62BaseStringN(des,src);
+		inline ::size_t uInt16ToBase62StringN(char8_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt16ToBase62StringN(des,src);
 		}
 		
-		inline void int16ToStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int16ToStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int16ToStringN(des,src);
 		}
-		inline void int16ToBinStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int16ToBinStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int16ToBinStringN(des,src);
 		}
-		inline void int16ToOctStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int16ToOctStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int16ToOctStringN(des,src);
 		}
-		inline void int16ToHexStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int16ToHexStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int16ToHexStringN(des,src);
 		}
-		inline void int16To36BaseStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int16To36BaseStringN(des,src);
+		inline ::size_t int16ToBase36StringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int16ToBase36StringN(des,src);
 		}
-		inline void int16To62BaseStringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int16To62BaseStringN(des,src);
+		inline ::size_t int16ToBase62StringN(char8_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int16ToBase62StringN(des,src);
 		}
 		
 		// Int32/UInt32 string converters (N)
-		inline void uInt32ToStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt32ToStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt32ToStringN(des,src);
 		}
-		inline void uInt32ToBinStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt32ToBinStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt32ToBinStringN(des,src);
 		}
-		inline void uInt32ToOctStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt32ToOctStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt32ToOctStringN(des,src);
 		}
-		inline void uInt32ToHexStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt32ToHexStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt32ToHexStringN(des,src);
 		}
-		inline void uInt32To36BaseStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt32To36BaseStringN(des,src);
+		inline ::size_t uInt32ToBase36StringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt32ToBase36StringN(des,src);
 		}
-		inline void uInt32To62BaseStringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt32To62BaseStringN(des,src);
+		inline ::size_t uInt32ToBase62StringN(char8_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt32ToBase62StringN(des,src);
 		}
 		
-		inline void int32ToStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int32ToStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int32ToStringN(des,src);
 		}
-		inline void int32ToBinStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int32ToBinStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int32ToBinStringN(des,src);
 		}
-		inline void int32ToOctStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int32ToOctStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int32ToOctStringN(des,src);
 		}
-		inline void int32ToHexStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int32ToHexStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int32ToHexStringN(des,src);
 		}
-		inline void int32To36BaseStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int32To36BaseStringN(des,src);
+		inline ::size_t int32ToBase36StringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int32ToBase36StringN(des,src);
 		}
-		inline void int32To62BaseStringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int32To62BaseStringN(des,src);
+		inline ::size_t int32ToBase62StringN(char8_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int32ToBase62StringN(des,src);
 		}
 		
 		// Int64/UInt64 string converters (N)
-		inline void uInt64ToStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt64ToStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt64ToStringN(des,src);
 		}
-		inline void uInt64ToBinStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt64ToBinStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt64ToBinStringN(des,src);
 		}
-		inline void uInt64ToOctStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt64ToOctStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt64ToOctStringN(des,src);
 		}
-		inline void uInt64ToHexStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t uInt64ToHexStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_uInt64ToHexStringN(des,src);
 		}
-		inline void uInt64To36BaseStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt64To36BaseStringN(des,src);
+		inline ::size_t uInt64ToBase36StringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt64ToBase36StringN(des,src);
 		}
-		inline void uInt64To62BaseStringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_uInt64To62BaseStringN(des,src);
+		inline ::size_t uInt64ToBase62StringN(char8_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_uInt64ToBase62StringN(des,src);
 		}
 		
-		inline void int64ToStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int64ToStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int64ToStringN(des,src);
 		}
-		inline void int64ToBinStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int64ToBinStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int64ToBinStringN(des,src);
 		}
-		inline void int64ToOctStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int64ToOctStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int64ToOctStringN(des,src);
 		}
-		inline void int64ToHexStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+		inline ::size_t int64ToHexStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_int64ToHexStringN(des,src);
 		}
-		inline void int64To36BaseStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int64To36BaseStringN(des,src);
+		inline ::size_t int64ToBase36StringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int64ToBase36StringN(des,src);
 		}
-		inline void int64To62BaseStringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_int64To62BaseStringN(des,src);
+		inline ::size_t int64ToBase62StringN(char8_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_int64ToBase62StringN(des,src);
 		}
 		
 		// String to int8/uint8 converters (N)
@@ -1447,11 +1447,11 @@ namespace shinsei{
 		inline uint_fast8_t hexStringToUInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToUInt8N(src,len);
 		}
-		inline uint_fast8_t _36BaseStringToUInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToUInt8N(src,len);
+		inline uint_fast8_t base36StringToUInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToUInt8N(src,len);
 		}
-		inline uint_fast8_t _62BaseStringToUInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToUInt8N(src,len);
+		inline uint_fast8_t base62StringToUInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToUInt8N(src,len);
 		}
 		
 		inline int_fast8_t stringToInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
@@ -1466,11 +1466,11 @@ namespace shinsei{
 		inline int_fast8_t hexStringToInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToInt8N(src,len);
 		}
-		inline int_fast8_t _36BaseStringToInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToInt8N(src,len);
+		inline int_fast8_t base36StringToInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToInt8N(src,len);
 		}
-		inline int_fast8_t _62BaseStringToInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToInt8N(src,len);
+		inline int_fast8_t base62StringToInt8N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToInt8N(src,len);
 		}
 		
 		// String to int16/uint16 converters (N)
@@ -1486,11 +1486,11 @@ namespace shinsei{
 		inline uint_fast16_t hexStringToUInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToUInt16N(src,len);
 		}
-		inline uint_fast16_t _36BaseStringToUInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToUInt16N(src,len);
+		inline uint_fast16_t base36StringToUInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToUInt16N(src,len);
 		}
-		inline uint_fast16_t _62BaseStringToUInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToUInt16N(src,len);
+		inline uint_fast16_t base62StringToUInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToUInt16N(src,len);
 		}
 		
 		inline int_fast16_t stringToInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
@@ -1505,11 +1505,11 @@ namespace shinsei{
 		inline int_fast16_t hexStringToInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToInt16N(src,len);
 		}
-		inline int_fast16_t _36BaseStringToInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToInt16N(src,len);
+		inline int_fast16_t base36StringToInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToInt16N(src,len);
 		}
-		inline int_fast16_t _62BaseStringToInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToInt16N(src,len);
+		inline int_fast16_t base62StringToInt16N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToInt16N(src,len);
 		}
 		
 		// String to int32/uint32 converters (N)
@@ -1525,11 +1525,11 @@ namespace shinsei{
 		inline uint_fast32_t hexStringToUInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToUInt32N(src,len);
 		}
-		inline uint_fast32_t _36BaseStringToUInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToUInt32N(src,len);
+		inline uint_fast32_t base36StringToUInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToUInt32N(src,len);
 		}
-		inline uint_fast32_t _62BaseStringToUInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToUInt32N(src,len);
+		inline uint_fast32_t base62StringToUInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToUInt32N(src,len);
 		}
 		
 		inline int_fast32_t stringToInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
@@ -1544,11 +1544,11 @@ namespace shinsei{
 		inline int_fast32_t hexStringToInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToInt32N(src,len);
 		}
-		inline int_fast32_t _36BaseStringToInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToInt32N(src,len);
+		inline int_fast32_t base36StringToInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToInt32N(src,len);
 		}
-		inline int_fast32_t _62BaseStringToInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToInt32N(src,len);
+		inline int_fast32_t base62StringToInt32N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToInt32N(src,len);
 		}
 		
 		// String to int64/uint64 converters (N)
@@ -1564,11 +1564,11 @@ namespace shinsei{
 		inline uint_fast64_t hexStringToUInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToUInt64N(src,len);
 		}
-		inline uint_fast64_t _36BaseStringToUInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToUInt64N(src,len);
+		inline uint_fast64_t base36StringToUInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToUInt64N(src,len);
 		}
-		inline uint_fast64_t _62BaseStringToUInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToUInt64N(src,len);
+		inline uint_fast64_t base62StringToUInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToUInt64N(src,len);
 		}
 		
 		inline int_fast64_t stringToInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
@@ -1583,11 +1583,11 @@ namespace shinsei{
 		inline int_fast64_t hexStringToInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_hexStringToInt64N(src,len);
 		}
-		inline int_fast64_t _36BaseStringToInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_36BaseStringToInt64N(src,len);
+		inline int_fast64_t base36StringToInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base36StringToInt64N(src,len);
 		}
-		inline int_fast64_t _62BaseStringToInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
-			return ::shinsei_62BaseStringToInt64N(src,len);
+		inline int_fast64_t base62StringToInt64N(const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+			return ::shinsei_base62StringToInt64N(src,len);
 		}
 		
 		using string_n_t=string_t<char8_t>;
