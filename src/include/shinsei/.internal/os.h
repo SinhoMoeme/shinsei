@@ -196,6 +196,10 @@
 	#define _SHINSEI_OS_MIPS32
 #elif(defined(__s390x__))
 	#define _SHINSEI_OS_S390X
+#elif(defined(__s390__))
+	#define _SHINSEI_OS_S390
+#elif(defined(__hpux))
+	#define _SHINSEI_OS_HPUX
 #elif(defined(__AVR__))
 	#define _SHINSEI_OS_AVR
 #elif(defined(__MSP430__))
@@ -211,7 +215,7 @@
 	#define _SHINSEI_OS_BITS 64
 #elif(defined(_SHINSEI_OS_X64)||defined(_SHINSEI_OS_ARM64)||defined(_SHINSEI_OS_RISCV64)||defined(_SHINSEI_OS_WASM64)||defined(_SHINSEI_OS_POWERPC64)||defined(_SHINSEI_OS_MIPS64)||defined(_SHINSEI_OS_S390X))
 	#define _SHINSEI_OS_BITS 64
-#elif(defined(_SHINSEI_OS_X86)||defined(_SHINSEI_OS_ARM)||defined(_SHINSEI_OS_RISCV32)||defined(_SHINSEI_OS_WASM32)||defined(_SHINSEI_OS_POWERPC32)||defined(_SHINSEI_OS_MIPS32)||defined(_WIN32))
+#elif(defined(_SHINSEI_OS_X86)||defined(_SHINSEI_OS_ARM)||defined(_SHINSEI_OS_RISCV32)||defined(_SHINSEI_OS_WASM32)||defined(_SHINSEI_OS_POWERPC32)||defined(_SHINSEI_OS_MIPS32)||defined(_SHINSEI_OS_S390)||defined(_SHINSEI_OS_ARX)||defined(_SHINSEI_OS_HPUX)||defined(_WIN32))
 	#define _SHINSEI_OS_BITS 32
 #elif(defined(_SHINSEI_OS_MSP430)||(defined(_SHINSEI_OS_AVR)&&!defined(__AVR_ARCH__)))
 	#define _SHINSEI_OS_BITS 16
@@ -262,6 +266,29 @@
 // Register
 #if(defined(_SHINSEI_OS_CPP)&&_SHINSEI_OS_CPP>=2011)
 	#define register
+#endif
+
+// Endian
+#if(defined(__BYTE_ORDER__)&&defined(__ORDER_BIG_ENDIAN__)&&defined(__ORDER_LITTLE_ENDIAN__))
+	#if(__BYTE_ORDER__==__ORDER_BIG_ENDIAN__)
+		#define _SHINSEI_OS_BIG_ENDIAN
+	#elif(__BYTE_ORDER__==__ORDER_LITTLE_ENDIAN__)
+		#define _SHINSEI_OS_LITTLE_ENDIAN
+	#endif
+#elif(defined(__BIG_ENDIAN__)||defined(_BIG_ENDIAN)||defined(__ARMEB__)||defined(__THUMBEB__)||defined(__AARCH64EB__)||defined(__MIPSEB__)||defined(_MIPSEB))
+	#define _SHINSEI_OS_BIG_ENDIAN
+#elif(defined(__LITTLE_ENDIAN__)||defined(_LITTLE_ENDIAN)||defined(__ARMEL__)||defined(__THUMBEL__)||defined(__AARCH64EL__)||defined(__MIPSEL__)||defined(_MIPSEL))
+	#define _SHINSEI_OS_LITTLE_ENDIAN
+#elif(defined(_SHINSEI_OS_MSVC))
+	#define _SHINSEI_OS_LITTLE_ENDIAN
+#else
+	#if(defined(_SHINSEI_OS_S390X)||defined(_SHINSEI_OS_S390)||defined(_SHINSEI_OS_ARX)||defined(_SHINSEI_OS_HPUX)||defined(_SHINSEI_OS_POWERPC32)||defined(_SHINSEI_OS_POWERPC64)||defined(_SHINSEI_OS_MIPS32)||defined(_SHINSEI_OS_MIPS64))
+		#define _SHINSEI_OS_BIG_ENDIAN
+	#elif(defined(_SHINSEI_OS_X86)||defined(_SHINSEI_OS_X64)||defined(_SHINSEI_OS_RISCV32)||defined(_SHINSEI_OS_RISCV64)||defined(_SHINSEI_OS_WASM32)||defined(_SHINSEI_OS_WASM64)||defined(_SHINSEI_OS_ARM)||defined(_SHINSEI_OS_ARM64)||defined(_SHINSEI_OS_AVR)||defined(_SHINSEI_OS_MSP430))
+		#define _SHINSEI_OS_LITTLE_ENDIAN
+	#else
+		#define _SHINSEI_OS_UNKNOWN_ENDIAN
+	#endif
 #endif
 
 // Compatibility macros
