@@ -3582,7 +3582,7 @@ namespace shinsei{
 		::size_t find(const T*const restrict src,const ::size_t src_len)const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_string_t_find(&obj,src,src_len);
 		}
-		::size_t findChar(const T& ch)const _SHINSEI_OS_NOEXCEPT{
+		::size_t find(const T& ch)const _SHINSEI_OS_NOEXCEPT{
 			return ::shinsei_string_t_findChar(&obj,&ch);
 		}
 		::size_t kMP(const T*const restrict src,const ::size_t src_len,::size_t*const restrict buf,const ::size_t buf_len)const _SHINSEI_OS_NOEXCEPT{
