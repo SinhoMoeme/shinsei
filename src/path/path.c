@@ -1,324 +1,10 @@
 #include"shinsei/minimal/path.h"
 
-#ifdef _SHINSEI_OS_CPP
-#define this _this
-extern "C"{
-#endif
+#include"shinsei/.internal/cpp_init_source.hpp"
 
-#ifdef _SHINSEI_OS_CONSTEXPR
-	// Copy from minimal/str.h
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_AUTO=0;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM037=37;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM437=437;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM500=500;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ASMO_708=708;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ASMO_449=709;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_TRANSPARENT_ARABIC=710;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_DOS_720=720;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM737=737;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM775=775;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM850=850;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM852=852;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM855=855;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM857=857;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM00858=858;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM860=860;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM861=861;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM862=862;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM863=863;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM864=864;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM865=865;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_CP866=866;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM869=869;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM870=870;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_WINDOWS_874=874;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_CP875=875;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_SHIFT_JIS=932;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_GB2312=936;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_KS_C_5601_1987=949;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_BIG5=950;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM1026=1026;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM01047=1047;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM01140=1140;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM01141=1141;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM01142=1142;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM01143=1143;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM01144=1144;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM01145=1145;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM01146=1146;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM01147=1147;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM01148=1148;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM01149=1149;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_UTF_16=1200;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_UNICODEFFFE=1201;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_WINDOWS_1250=1250;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_WINDOWS_1251=1251;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_WINDOWS_1252=1252;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_WINDOWS_1253=1253;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_WINDOWS_1254=1254;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_WINDOWS_1255=1255;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_WINDOWS_1256=1256;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_WINDOWS_1257=1257;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_WINDOWS_1258=1258;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_JOHAB=1361;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_MACINTOSH=10000;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_JAPANESE=10001;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_CHINESETRAD=10002;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_KOREAN=10003;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_ARABIC=10004;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_HEBREW=10005;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_GREEK=10006;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_CYRILLIC=10007;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_CHINESESIMP=10008;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_ROMANIAN=10010;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_UKRAINIAN=10017;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_THAI=10021;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_MAC_CE=10029;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_ICELANDIC=10079;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_TURKISH=10081;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_MAC_CROATIAN=10082;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_UTF_32=12000;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_UTF_32BE=12001;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_CHINESE_CNS=20000;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_CP20001=20001;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_CHINESE_ETEN=20002;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_CP20003=20003;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_CP20004=20004;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_CP20005=20005;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_IA5=20105;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_IA5_GERMAN=20106;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_IA5_SWEDISH=20107;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_IA5_NORWEGIAN=20108;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_US_ASCII=20127;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_CP20261=20261;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_CP20269=20269;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM273=20273;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM277=20277;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM278=20278;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM280=20280;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM284=20284;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM285=20285;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM290=20290;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM297=20297;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM420=20420;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM423=20423;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM424=20424;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_EBCDIC_KOREANEXTENDED=20833;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM_THAI=20838;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_KOI8_R=20866;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM871=20871;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM880=20880;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM905=20905;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_IBM00924=20924;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_EUC_JP_LEGACY=20932;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_CP20936=20936;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_CP20949=20949;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_CP1025=21025;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_DEPRECATED=21027;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_KOI8_U=21866;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_8859_1=28591;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_8859_2=28592;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_8859_3=28593;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_8859_4=28594;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_8859_5=28595;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_8859_6=28596;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_8859_7=28597;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_8859_8=28598;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_8859_9=28599;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_8859_13=28603;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_8859_15=28605;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_EUROPA=29001;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_8859_8_I=38598;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_2022_JP=50220;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_CSISO2022JP=50221;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_2022_JP_EXT=50222;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_2022_KR=50225;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_CP50227=50227;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_ISO_2022_TC=20559;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_EBCDIC_JA_KATAKANA_EXTENDED=50930;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_EBCDIC_US_CA_JP=50931;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_EBCDIC_KO_EXTENDED=50933;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_EBCDIC_SC_EXTENDED=50935;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_EBCDIC_SC=50936;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_EBCDIC_US_CA_TC=50937;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_EBCDIC_JA_LATIN_EXTENDED=50939;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_EUC_JP=51932;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_EUC_CN=51936;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_EUC_KR=51949;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_EUC_TC=51950;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_HZ_GB_2312=52936;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_GB18030=54936;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_ISCII_DE=57002;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_ISCII_BE=57003;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_ISCII_TA=57004;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_ISCII_TE=57005;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_ISCII_AS=57006;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_ISCII_OR=57007;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_ISCII_KA=57008;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_ISCII_MA=57009;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_ISCII_GU=57010;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_X_ISCII_PA=57011;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_UTF_7=65000;
-	static _SHINSEI_OS_CONSTEXPR unsigned int SHINSEI_CODE_PAGE_UTF_8=65001;
-#else
-	// Copy from minimal/str.h
-	#define SHINSEI_CODE_PAGE_AUTO 0U
-	#define SHINSEI_CODE_PAGE_IBM037 37U
-	#define SHINSEI_CODE_PAGE_IBM437 437U
-	#define SHINSEI_CODE_PAGE_IBM500 500U
-	#define SHINSEI_CODE_PAGE_ASMO_708 708U
-	#define SHINSEI_CODE_PAGE_ASMO_449 709U
-	#define SHINSEI_CODE_PAGE_TRANSPARENT_ARABIC 710U
-	#define SHINSEI_CODE_PAGE_DOS_720 720U
-	#define SHINSEI_CODE_PAGE_IBM737 737U
-	#define SHINSEI_CODE_PAGE_IBM775 775U
-	#define SHINSEI_CODE_PAGE_IBM850 850U
-	#define SHINSEI_CODE_PAGE_IBM852 852U
-	#define SHINSEI_CODE_PAGE_IBM855 855U
-	#define SHINSEI_CODE_PAGE_IBM857 857U
-	#define SHINSEI_CODE_PAGE_IBM00858 858U
-	#define SHINSEI_CODE_PAGE_IBM860 860U
-	#define SHINSEI_CODE_PAGE_IBM861 861U
-	#define SHINSEI_CODE_PAGE_IBM862 862U
-	#define SHINSEI_CODE_PAGE_IBM863 863U
-	#define SHINSEI_CODE_PAGE_IBM864 864U
-	#define SHINSEI_CODE_PAGE_IBM865 865U
-	#define SHINSEI_CODE_PAGE_CP866 866U
-	#define SHINSEI_CODE_PAGE_IBM869 869U
-	#define SHINSEI_CODE_PAGE_IBM870 870U
-	#define SHINSEI_CODE_PAGE_WINDOWS_874 874U
-	#define SHINSEI_CODE_PAGE_CP875 875U
-	#define SHINSEI_CODE_PAGE_SHIFT_JIS 932U
-	#define SHINSEI_CODE_PAGE_GB2312 936U
-	#define SHINSEI_CODE_PAGE_KS_C_5601_1987 949U
-	#define SHINSEI_CODE_PAGE_BIG5 950U
-	#define SHINSEI_CODE_PAGE_IBM1026 1026U
-	#define SHINSEI_CODE_PAGE_IBM01047 1047U
-	#define SHINSEI_CODE_PAGE_IBM01140 1140U
-	#define SHINSEI_CODE_PAGE_IBM01141 1141U
-	#define SHINSEI_CODE_PAGE_IBM01142 1142U
-	#define SHINSEI_CODE_PAGE_IBM01143 1143U
-	#define SHINSEI_CODE_PAGE_IBM01144 1144U
-	#define SHINSEI_CODE_PAGE_IBM01145 1145U
-	#define SHINSEI_CODE_PAGE_IBM01146 1146U
-	#define SHINSEI_CODE_PAGE_IBM01147 1147U
-	#define SHINSEI_CODE_PAGE_IBM01148 1148U
-	#define SHINSEI_CODE_PAGE_IBM01149 1149U
-	#define SHINSEI_CODE_PAGE_UTF_16 1200U
-	#define SHINSEI_CODE_PAGE_UNICODEFFFE 1201U
-	#define SHINSEI_CODE_PAGE_WINDOWS_1250 1250U
-	#define SHINSEI_CODE_PAGE_WINDOWS_1251 1251U
-	#define SHINSEI_CODE_PAGE_WINDOWS_1252 1252U
-	#define SHINSEI_CODE_PAGE_WINDOWS_1253 1253U
-	#define SHINSEI_CODE_PAGE_WINDOWS_1254 1254U
-	#define SHINSEI_CODE_PAGE_WINDOWS_1255 1255U
-	#define SHINSEI_CODE_PAGE_WINDOWS_1256 1256U
-	#define SHINSEI_CODE_PAGE_WINDOWS_1257 1257U
-	#define SHINSEI_CODE_PAGE_WINDOWS_1258 1258U
-	#define SHINSEI_CODE_PAGE_JOHAB 1361U
-	#define SHINSEI_CODE_PAGE_MACINTOSH 10000U
-	#define SHINSEI_CODE_PAGE_X_MAC_JAPANESE 10001U
-	#define SHINSEI_CODE_PAGE_X_MAC_CHINESETRAD 10002U
-	#define SHINSEI_CODE_PAGE_X_MAC_KOREAN 10003U
-	#define SHINSEI_CODE_PAGE_X_MAC_ARABIC 10004U
-	#define SHINSEI_CODE_PAGE_X_MAC_HEBREW 10005U
-	#define SHINSEI_CODE_PAGE_X_MAC_GREEK 10006U
-	#define SHINSEI_CODE_PAGE_X_MAC_CYRILLIC 10007U
-	#define SHINSEI_CODE_PAGE_X_MAC_CHINESESIMP 10008U
-	#define SHINSEI_CODE_PAGE_X_MAC_ROMANIAN 10010U
-	#define SHINSEI_CODE_PAGE_X_MAC_UKRAINIAN 10017U
-	#define SHINSEI_CODE_PAGE_X_MAC_THAI 10021U
-	#define SHINSEI_CODE_PAGE_X_MAC_MAC_CE 10029U
-	#define SHINSEI_CODE_PAGE_X_MAC_ICELANDIC 10079U
-	#define SHINSEI_CODE_PAGE_X_MAC_TURKISH 10081U
-	#define SHINSEI_CODE_PAGE_X_MAC_CROATIAN 10082U
-	#define SHINSEI_CODE_PAGE_UTF_32 12000U
-	#define SHINSEI_CODE_PAGE_UTF_32BE 12001U
-	#define SHINSEI_CODE_PAGE_X_CHINESE_CNS 20000U
-	#define SHINSEI_CODE_PAGE_X_CP20001 20001U
-	#define SHINSEI_CODE_PAGE_X_CHINESE_ETEN 20002U
-	#define SHINSEI_CODE_PAGE_X_CP20003 20003U
-	#define SHINSEI_CODE_PAGE_X_CP20004 20004U
-	#define SHINSEI_CODE_PAGE_X_CP20005 20005U
-	#define SHINSEI_CODE_PAGE_X_IA5 20105U
-	#define SHINSEI_CODE_PAGE_X_IA5_GERMAN 20106U
-	#define SHINSEI_CODE_PAGE_X_IA5_SWEDISH 20107U
-	#define SHINSEI_CODE_PAGE_X_IA5_NORWEGIAN 20108U
-	#define SHINSEI_CODE_PAGE_US_ASCII 20127U
-	#define SHINSEI_CODE_PAGE_X_CP20261 20261U
-	#define SHINSEI_CODE_PAGE_X_CP20269 20269U
-	#define SHINSEI_CODE_PAGE_IBM273 20273U
-	#define SHINSEI_CODE_PAGE_IBM277 20277U
-	#define SHINSEI_CODE_PAGE_IBM278 20278U
-	#define SHINSEI_CODE_PAGE_IBM280 20280U
-	#define SHINSEI_CODE_PAGE_IBM284 20284U
-	#define SHINSEI_CODE_PAGE_IBM285 20285U
-	#define SHINSEI_CODE_PAGE_IBM290 20290U
-	#define SHINSEI_CODE_PAGE_IBM297 20297U
-	#define SHINSEI_CODE_PAGE_IBM420 20420U
-	#define SHINSEI_CODE_PAGE_IBM423 20423U
-	#define SHINSEI_CODE_PAGE_IBM424 20424U
-	#define SHINSEI_CODE_PAGE_X_EBCDIC_KOREANEXTENDED 20833U
-	#define SHINSEI_CODE_PAGE_IBM_THAI 20838U
-	#define SHINSEI_CODE_PAGE_KOI8_R 20866U
-	#define SHINSEI_CODE_PAGE_IBM871 20871U
-	#define SHINSEI_CODE_PAGE_IBM880 20880U
-	#define SHINSEI_CODE_PAGE_IBM905 20905U
-	#define SHINSEI_CODE_PAGE_IBM00924 20924U
-	#define SHINSEI_CODE_PAGE_EUC_JP_LEGACY 20932U
-	#define SHINSEI_CODE_PAGE_X_CP20936 20936U
-	#define SHINSEI_CODE_PAGE_X_CP20949 20949U
-	#define SHINSEI_CODE_PAGE_CP1025 21025U
-	#define SHINSEI_CODE_PAGE_DEPRECATED 21027U
-	#define SHINSEI_CODE_PAGE_KOI8_U 21866U
-	#define SHINSEI_CODE_PAGE_ISO_8859_1 28591U
-	#define SHINSEI_CODE_PAGE_ISO_8859_2 28592U
-	#define SHINSEI_CODE_PAGE_ISO_8859_3 28593U
-	#define SHINSEI_CODE_PAGE_ISO_8859_4 28594U
-	#define SHINSEI_CODE_PAGE_ISO_8859_5 28595U
-	#define SHINSEI_CODE_PAGE_ISO_8859_6 28596U
-	#define SHINSEI_CODE_PAGE_ISO_8859_7 28597U
-	#define SHINSEI_CODE_PAGE_ISO_8859_8 28598U
-	#define SHINSEI_CODE_PAGE_ISO_8859_9 28599U
-	#define SHINSEI_CODE_PAGE_ISO_8859_13 28603U
-	#define SHINSEI_CODE_PAGE_ISO_8859_15 28605U
-	#define SHINSEI_CODE_PAGE_X_EUROPA 29001U
-	#define SHINSEI_CODE_PAGE_ISO_8859_8_I 38598U
-	#define SHINSEI_CODE_PAGE_ISO_2022_JP 50220U
-	#define SHINSEI_CODE_PAGE_CSISO2022JP 50221U
-	#define SHINSEI_CODE_PAGE_ISO_2022_JP_EXT 50222U
-	#define SHINSEI_CODE_PAGE_ISO_2022_KR 50225U
-	#define SHINSEI_CODE_PAGE_X_CP50227 50227U
-	#define SHINSEI_CODE_PAGE_ISO_2022_TC 20559U
-	#define SHINSEI_CODE_PAGE_EBCDIC_JA_KATAKANA_EXTENDED 50930U
-	#define SHINSEI_CODE_PAGE_EBCDIC_US_CA_JP 50931U
-	#define SHINSEI_CODE_PAGE_EBCDIC_KO_EXTENDED 50933U
-	#define SHINSEI_CODE_PAGE_EBCDIC_SC_EXTENDED 50935U
-	#define SHINSEI_CODE_PAGE_EBCDIC_SC 50936U
-	#define SHINSEI_CODE_PAGE_EBCDIC_US_CA_TC 50937U
-	#define SHINSEI_CODE_PAGE_EBCDIC_JA_LATIN_EXTENDED 50939U
-	#define SHINSEI_CODE_PAGE_EUC_JP 51932U
-	#define SHINSEI_CODE_PAGE_EUC_CN 51936U
-	#define SHINSEI_CODE_PAGE_EUC_KR 51949U
-	#define SHINSEI_CODE_PAGE_EUC_TC 51950U
-	#define SHINSEI_CODE_PAGE_HZ_GB_2312 52936U
-	#define SHINSEI_CODE_PAGE_GB18030 54936U
-	#define SHINSEI_CODE_PAGE_X_ISCII_DE 57002U
-	#define SHINSEI_CODE_PAGE_X_ISCII_BE 57003U
-	#define SHINSEI_CODE_PAGE_X_ISCII_TA 57004U
-	#define SHINSEI_CODE_PAGE_X_ISCII_TE 57005U
-	#define SHINSEI_CODE_PAGE_X_ISCII_AS 57006U
-	#define SHINSEI_CODE_PAGE_X_ISCII_OR 57007U
-	#define SHINSEI_CODE_PAGE_X_ISCII_KA 57008U
-	#define SHINSEI_CODE_PAGE_X_ISCII_MA 57009U
-	#define SHINSEI_CODE_PAGE_X_ISCII_GU 57010U
-	#define SHINSEI_CODE_PAGE_X_ISCII_PA 57011U
-	#define SHINSEI_CODE_PAGE_UTF_7 65000U
-	#define SHINSEI_CODE_PAGE_UTF_8 65001U
-#endif
-
+#include"shinsei/.internal/str/ebcdic.h"
 // Copy from str/str.c
-_SHINSEI_OS_INLINE static bool isEBCDICCodePage(const unsigned int id)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isEBCDICCodePage(const uint_fast32_t id)_SHINSEI_OS_NOEXCEPT{
 	switch(id){
 		case SHINSEI_CODE_PAGE_IBM037:
 		case SHINSEI_CODE_PAGE_IBM500:
@@ -372,7 +58,7 @@ _SHINSEI_OS_INLINE static int charSizeU16(const char16_t starter_ch)_SHINSEI_OS_
 	return (starter_ch<0xD800||starter_ch>0xDFFF)+((starter_ch>=0xD800&&starter_ch<=0xDBFF)<<1);
 }
 // Copy from str/str.c
-_SHINSEI_OS_INLINE static int charSizeCP(const unsigned int code_page,const int starter_ch,const int second_ch,const int third_ch,int*const restrict status)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int charSizeCP(const uint_fast32_t code_page,const int starter_ch,const int second_ch,const int third_ch,int*const restrict status)_SHINSEI_OS_NOEXCEPT{
 	switch(code_page){
 		// Count: 105
 		case SHINSEI_CODE_PAGE_AUTO:
@@ -635,7 +321,7 @@ _SHINSEI_OS_INLINE static bool isLowerEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return (unsigned int)(ch-0x81)<=8||(unsigned int)(ch-0x91)<=8||(unsigned int)(ch-0xA2)<=7;
 }
 // Copy from str/str.c
-_SHINSEI_OS_INLINE static bool isLowerCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isLowerCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isLowerEBCDIC(ch)+!ebcdic*isLowerASCII(ch);
 }
@@ -670,7 +356,7 @@ _SHINSEI_OS_INLINE static bool isAlphaEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isUpperEBCDIC(ch)||isLowerEBCDIC(ch);
 }
 // Copy from str/str.c
-_SHINSEI_OS_INLINE static bool isAlphaCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isAlphaCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isAlphaEBCDIC(ch)+!ebcdic*isAlphaASCII(ch);
 }
@@ -700,7 +386,7 @@ _SHINSEI_OS_INLINE static int toUpperEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch+(isLowerEBCDIC(ch)<<6);
 }
 // Copy from str/str.c
-_SHINSEI_OS_INLINE static int toUpperCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int toUpperCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*toUpperEBCDIC(ch)+!ebcdic*toUpperASCII(ch);
 }
@@ -727,7 +413,7 @@ _SHINSEI_OS_INLINE static bool isWindowsPathDelimiterASCII(const int ch)_SHINSEI
 _SHINSEI_OS_INLINE static bool isWindowsPathDelimiterEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch==SHINSEI_PATH_WINDOWS_DELIMITER_EBCDIC||ch==SHINSEI_PATH_UNIX_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isWindowsPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isWindowsPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isWindowsPathDelimiterEBCDIC(ch)+!ebcdic*isWindowsPathDelimiterASCII(ch);
 }
@@ -777,10 +463,10 @@ bool shinsei_isWindowsPathDelimiterWM(const wchar_t**const restrict str_ptr,cons
 		return isWindowsPathDelimiterU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isWindowsPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isWindowsPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isWindowsPathDelimiterCP(code_page,ch);
 }
-bool shinsei_isWindowsPathDelimiterCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isWindowsPathDelimiterCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -825,7 +511,7 @@ _SHINSEI_OS_INLINE static bool isUnixPathDelimiterASCII(const int ch)_SHINSEI_OS
 _SHINSEI_OS_INLINE static bool isUnixPathDelimiterEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch==SHINSEI_PATH_UNIX_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isUnixPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isUnixPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isUnixPathDelimiterEBCDIC(ch)+!ebcdic*isUnixPathDelimiterASCII(ch);
 }
@@ -875,10 +561,10 @@ bool shinsei_isUnixPathDelimiterWM(const wchar_t**const restrict str_ptr,const s
 		return isUnixPathDelimiterU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isUnixPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isUnixPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isUnixPathDelimiterCP(code_page,ch);
 }
-bool shinsei_isUnixPathDelimiterCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isUnixPathDelimiterCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -923,7 +609,7 @@ _SHINSEI_OS_INLINE static bool isLinuxPathDelimiterASCII(const int ch)_SHINSEI_O
 _SHINSEI_OS_INLINE static bool isLinuxPathDelimiterEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch==SHINSEI_PATH_LINUX_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isLinuxPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isLinuxPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isLinuxPathDelimiterEBCDIC(ch)+!ebcdic*isLinuxPathDelimiterASCII(ch);
 }
@@ -973,10 +659,10 @@ bool shinsei_isLinuxPathDelimiterWM(const wchar_t**const restrict str_ptr,const 
 		return isLinuxPathDelimiterU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isLinuxPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isLinuxPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isLinuxPathDelimiterCP(code_page,ch);
 }
-bool shinsei_isLinuxPathDelimiterCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isLinuxPathDelimiterCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1021,7 +707,7 @@ _SHINSEI_OS_INLINE static bool isApplePathDelimiterASCII(const int ch)_SHINSEI_O
 _SHINSEI_OS_INLINE static bool isApplePathDelimiterEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch==SHINSEI_PATH_APPLE_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isApplePathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isApplePathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isApplePathDelimiterEBCDIC(ch)+!ebcdic*isApplePathDelimiterASCII(ch);
 }
@@ -1071,10 +757,10 @@ bool shinsei_isApplePathDelimiterWM(const wchar_t**const restrict str_ptr,const 
 		return isApplePathDelimiterU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isApplePathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isApplePathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isApplePathDelimiterCP(code_page,ch);
 }
-bool shinsei_isApplePathDelimiterCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isApplePathDelimiterCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1119,7 +805,7 @@ _SHINSEI_OS_INLINE static bool isSunPathDelimiterASCII(const int ch)_SHINSEI_OS_
 _SHINSEI_OS_INLINE static bool isSunPathDelimiterEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch==SHINSEI_PATH_SUN_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isSunPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isSunPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isSunPathDelimiterEBCDIC(ch)+!ebcdic*isSunPathDelimiterASCII(ch);
 }
@@ -1169,10 +855,10 @@ bool shinsei_isSunPathDelimiterWM(const wchar_t**const restrict str_ptr,const si
 		return isSunPathDelimiterU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isSunPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isSunPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isSunPathDelimiterCP(code_page,ch);
 }
-bool shinsei_isSunPathDelimiterCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isSunPathDelimiterCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1217,7 +903,7 @@ _SHINSEI_OS_INLINE static bool isFreeBSDPathDelimiterASCII(const int ch)_SHINSEI
 _SHINSEI_OS_INLINE static bool isFreeBSDPathDelimiterEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch==SHINSEI_PATH_FREEBSD_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isFreeBSDPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isFreeBSDPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isFreeBSDPathDelimiterEBCDIC(ch)+!ebcdic*isFreeBSDPathDelimiterASCII(ch);
 }
@@ -1267,10 +953,10 @@ bool shinsei_isFreeBSDPathDelimiterWM(const wchar_t**const restrict str_ptr,cons
 		return isFreeBSDPathDelimiterU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isFreeBSDPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isFreeBSDPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isFreeBSDPathDelimiterCP(code_page,ch);
 }
-bool shinsei_isFreeBSDPathDelimiterCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isFreeBSDPathDelimiterCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1315,7 +1001,7 @@ _SHINSEI_OS_INLINE static bool isCygwinPathDelimiterASCII(const int ch)_SHINSEI_
 _SHINSEI_OS_INLINE static bool isCygwinPathDelimiterEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch==SHINSEI_PATH_CYGWIN_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isCygwinPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isCygwinPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isCygwinPathDelimiterEBCDIC(ch)+!ebcdic*isCygwinPathDelimiterASCII(ch);
 }
@@ -1365,10 +1051,10 @@ bool shinsei_isCygwinPathDelimiterWM(const wchar_t**const restrict str_ptr,const
 		return isCygwinPathDelimiterU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isCygwinPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isCygwinPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isCygwinPathDelimiterCP(code_page,ch);
 }
-bool shinsei_isCygwinPathDelimiterCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isCygwinPathDelimiterCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1413,7 +1099,7 @@ _SHINSEI_OS_INLINE static bool isURLPathDelimiterASCII(const int ch)_SHINSEI_OS_
 _SHINSEI_OS_INLINE static bool isURLPathDelimiterEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch==SHINSEI_PATH_URL_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isURLPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isURLPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isURLPathDelimiterEBCDIC(ch)+!ebcdic*isURLPathDelimiterASCII(ch);
 }
@@ -1463,10 +1149,10 @@ bool shinsei_isURLPathDelimiterWM(const wchar_t**const restrict str_ptr,const si
 		return isURLPathDelimiterU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isURLPathDelimiterCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isURLPathDelimiterCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isURLPathDelimiterCP(code_page,ch);
 }
-bool shinsei_isURLPathDelimiterCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isURLPathDelimiterCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1513,7 +1199,7 @@ _SHINSEI_OS_INLINE static bool isWindowsPathIllegalCharEBCDIC(const int ch)_SHIN
 	if((unsigned int)ch<=0x3F||ch==0xFF) return true;
 	return ch==0x7F||ch==0x5C||ch==0x61||ch==0xE0||ch==0x7A||ch==0x4C||ch==0x6E||ch==0x6F||ch==0x4F;
 }
-_SHINSEI_OS_INLINE static bool isWindowsPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isWindowsPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isWindowsPathIllegalCharEBCDIC(ch)+!ebcdic*isWindowsPathIllegalCharASCII(ch);
 }
@@ -1573,10 +1259,10 @@ bool shinsei_isWindowsPathIllegalCharWM(const wchar_t**const restrict str_ptr,co
 		return isWindowsPathIllegalCharU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isWindowsPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isWindowsPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isWindowsPathIllegalCharCP(code_page,ch);
 }
-bool shinsei_isWindowsPathIllegalCharCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isWindowsPathIllegalCharCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1621,7 +1307,7 @@ _SHINSEI_OS_INLINE static bool isUnixPathIllegalCharASCII(const int ch)_SHINSEI_
 _SHINSEI_OS_INLINE static bool isUnixPathIllegalCharEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch=='\0'||ch==SHINSEI_PATH_UNIX_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isUnixPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isUnixPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isUnixPathIllegalCharEBCDIC(ch)+!ebcdic*isUnixPathIllegalCharASCII(ch);
 }
@@ -1671,10 +1357,10 @@ bool shinsei_isUnixPathIllegalCharWM(const wchar_t**const restrict str_ptr,const
 		return isUnixPathIllegalCharU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isUnixPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isUnixPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isUnixPathIllegalCharCP(code_page,ch);
 }
-bool shinsei_isUnixPathIllegalCharCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isUnixPathIllegalCharCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1719,7 +1405,7 @@ _SHINSEI_OS_INLINE static bool isLinuxPathIllegalCharASCII(const int ch)_SHINSEI
 _SHINSEI_OS_INLINE static bool isLinuxPathIllegalCharEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch=='\0'||ch==SHINSEI_PATH_LINUX_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isLinuxPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isLinuxPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isLinuxPathIllegalCharEBCDIC(ch)+!ebcdic*isLinuxPathIllegalCharASCII(ch);
 }
@@ -1769,10 +1455,10 @@ bool shinsei_isLinuxPathIllegalCharWM(const wchar_t**const restrict str_ptr,cons
 		return isLinuxPathIllegalCharU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isLinuxPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isLinuxPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isLinuxPathIllegalCharCP(code_page,ch);
 }
-bool shinsei_isLinuxPathIllegalCharCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isLinuxPathIllegalCharCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1817,7 +1503,7 @@ _SHINSEI_OS_INLINE static bool isApplePathIllegalCharASCII(const int ch)_SHINSEI
 _SHINSEI_OS_INLINE static bool isApplePathIllegalCharEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch=='\0'||ch==SHINSEI_PATH_APPLE_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isApplePathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isApplePathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isApplePathIllegalCharEBCDIC(ch)+!ebcdic*isApplePathIllegalCharASCII(ch);
 }
@@ -1867,10 +1553,10 @@ bool shinsei_isApplePathIllegalCharWM(const wchar_t**const restrict str_ptr,cons
 		return isApplePathIllegalCharU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isApplePathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isApplePathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isApplePathIllegalCharCP(code_page,ch);
 }
-bool shinsei_isApplePathIllegalCharCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isApplePathIllegalCharCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1915,7 +1601,7 @@ _SHINSEI_OS_INLINE static bool isSunPathIllegalCharASCII(const int ch)_SHINSEI_O
 _SHINSEI_OS_INLINE static bool isSunPathIllegalCharEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch=='\0'||ch==SHINSEI_PATH_SUN_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isSunPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isSunPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isSunPathIllegalCharEBCDIC(ch)+!ebcdic*isSunPathIllegalCharASCII(ch);
 }
@@ -1965,10 +1651,10 @@ bool shinsei_isSunPathIllegalCharWM(const wchar_t**const restrict str_ptr,const 
 		return isSunPathIllegalCharU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isSunPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isSunPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isSunPathIllegalCharCP(code_page,ch);
 }
-bool shinsei_isSunPathIllegalCharCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isSunPathIllegalCharCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -2013,7 +1699,7 @@ _SHINSEI_OS_INLINE static bool isFreeBSDPathIllegalCharASCII(const int ch)_SHINS
 _SHINSEI_OS_INLINE static bool isFreeBSDPathIllegalCharEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch=='\0'||ch==SHINSEI_PATH_FREEBSD_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isFreeBSDPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isFreeBSDPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isFreeBSDPathIllegalCharEBCDIC(ch)+!ebcdic*isFreeBSDPathIllegalCharASCII(ch);
 }
@@ -2063,10 +1749,10 @@ bool shinsei_isFreeBSDPathIllegalCharWM(const wchar_t**const restrict str_ptr,co
 		return isFreeBSDPathIllegalCharU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isFreeBSDPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isFreeBSDPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isFreeBSDPathIllegalCharCP(code_page,ch);
 }
-bool shinsei_isFreeBSDPathIllegalCharCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isFreeBSDPathIllegalCharCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -2111,7 +1797,7 @@ _SHINSEI_OS_INLINE static bool isCygwinPathIllegalCharASCII(const int ch)_SHINSE
 _SHINSEI_OS_INLINE static bool isCygwinPathIllegalCharEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch=='\0'||ch==SHINSEI_PATH_CYGWIN_DELIMITER_EBCDIC;
 }
-_SHINSEI_OS_INLINE static bool isCygwinPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isCygwinPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isCygwinPathIllegalCharEBCDIC(ch)+!ebcdic*isCygwinPathIllegalCharASCII(ch);
 }
@@ -2161,10 +1847,10 @@ bool shinsei_isCygwinPathIllegalCharWM(const wchar_t**const restrict str_ptr,con
 		return isCygwinPathIllegalCharU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isCygwinPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isCygwinPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isCygwinPathIllegalCharCP(code_page,ch);
 }
-bool shinsei_isCygwinPathIllegalCharCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isCygwinPathIllegalCharCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -2211,7 +1897,7 @@ _SHINSEI_OS_INLINE static bool isURLPathIllegalCharEBCDIC(const int ch)_SHINSEI_
 	(void)ch;
 	return false;
 }
-_SHINSEI_OS_INLINE static bool isURLPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isURLPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	(void)code_page;
 	(void)ch;
 	return false;
@@ -2264,10 +1950,10 @@ bool shinsei_isURLPathIllegalCharWM(const wchar_t**const restrict str_ptr,const 
 		return isURLPathIllegalCharU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isURLPathIllegalCharCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isURLPathIllegalCharCP(const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isURLPathIllegalCharCP(code_page,ch);
 }
-bool shinsei_isURLPathIllegalCharCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isURLPathIllegalCharCPM(const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -2974,7 +2660,7 @@ _SHINSEI_OS_INLINE static int windowsPathNormalizeW(wchar_t*const restrict path,
 		return windowsPathNormalizeU16((char16_t*)path,len);
 	#endif
 }
-_SHINSEI_OS_INLINE static int windowsPathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int windowsPathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char q_mark=(char)(ebcdic*0x6F+!ebcdic*'?');
@@ -3213,7 +2899,7 @@ int shinsei_windowsPathNormalizeW(wchar_t*const restrict path,size_t*const restr
 	// len: Pointer to the length of the string. Updated to the new length.
 	return windowsPathNormalizeW(path,len);
 }
-int shinsei_windowsPathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_windowsPathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return windowsPathNormalizeCP(code_page,path,len);
@@ -3509,7 +3195,7 @@ _SHINSEI_OS_INLINE static int unixPathNormalizeW(wchar_t*const restrict path,siz
 	#endif
 }
 
-_SHINSEI_OS_INLINE static int unixPathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int unixPathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char dot=(char)(ebcdic*0x4B+!ebcdic*'.');
@@ -3609,7 +3295,7 @@ int shinsei_unixPathNormalizeW(wchar_t*const restrict path,size_t*const restrict
 	return unixPathNormalizeW(path,len);
 }
 
-int shinsei_unixPathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_unixPathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return unixPathNormalizeCP(code_page,path,len);
@@ -3908,7 +3594,7 @@ _SHINSEI_OS_INLINE static int linuxPathNormalizeW(wchar_t*const restrict path,si
 	#endif
 }
 
-_SHINSEI_OS_INLINE static int linuxPathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int linuxPathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char dot=(char)(ebcdic*0x4B+!ebcdic*'.');
@@ -4008,7 +3694,7 @@ int shinsei_linuxPathNormalizeW(wchar_t*const restrict path,size_t*const restric
 	return linuxPathNormalizeW(path,len);
 }
 
-int shinsei_linuxPathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_linuxPathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return linuxPathNormalizeCP(code_page,path,len);
@@ -4307,7 +3993,7 @@ _SHINSEI_OS_INLINE static int applePathNormalizeW(wchar_t*const restrict path,si
 	#endif
 }
 
-_SHINSEI_OS_INLINE static int applePathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int applePathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char dot=(char)(ebcdic*0x4B+!ebcdic*'.');
@@ -4407,7 +4093,7 @@ int shinsei_applePathNormalizeW(wchar_t*const restrict path,size_t*const restric
 	return applePathNormalizeW(path,len);
 }
 
-int shinsei_applePathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_applePathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return applePathNormalizeCP(code_page,path,len);
@@ -4706,7 +4392,7 @@ _SHINSEI_OS_INLINE static int sunPathNormalizeW(wchar_t*const restrict path,size
 	#endif
 }
 
-_SHINSEI_OS_INLINE static int sunPathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int sunPathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char dot=(char)(ebcdic*0x4B+!ebcdic*'.');
@@ -4806,7 +4492,7 @@ int shinsei_sunPathNormalizeW(wchar_t*const restrict path,size_t*const restrict 
 	return sunPathNormalizeW(path,len);
 }
 
-int shinsei_sunPathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_sunPathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return sunPathNormalizeCP(code_page,path,len);
@@ -5105,7 +4791,7 @@ _SHINSEI_OS_INLINE static int freeBSDPathNormalizeW(wchar_t*const restrict path,
 	#endif
 }
 
-_SHINSEI_OS_INLINE static int freeBSDPathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int freeBSDPathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char dot=(char)(ebcdic*0x4B+!ebcdic*'.');
@@ -5205,7 +4891,7 @@ int shinsei_freeBSDPathNormalizeW(wchar_t*const restrict path,size_t*const restr
 	return freeBSDPathNormalizeW(path,len);
 }
 
-int shinsei_freeBSDPathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_freeBSDPathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return freeBSDPathNormalizeCP(code_page,path,len);
@@ -5504,7 +5190,7 @@ _SHINSEI_OS_INLINE static int cygwinPathNormalizeW(wchar_t*const restrict path,s
 	#endif
 }
 
-_SHINSEI_OS_INLINE static int cygwinPathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int cygwinPathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char dot=(char)(ebcdic*0x4B+!ebcdic*'.');
@@ -5604,7 +5290,7 @@ int shinsei_cygwinPathNormalizeW(wchar_t*const restrict path,size_t*const restri
 	return cygwinPathNormalizeW(path,len);
 }
 
-int shinsei_cygwinPathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_cygwinPathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return cygwinPathNormalizeCP(code_page,path,len);
@@ -5840,7 +5526,7 @@ int shinsei_uRLPathNormalizeW(wchar_t*const restrict path,size_t*const restrict 
 	#endif
 }
 
-int shinsei_uRLPathNormalizeCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_uRLPathNormalizeCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
@@ -6719,7 +6405,7 @@ _SHINSEI_OS_INLINE static int windowsPathNormalizeNoTraversalW(wchar_t*const res
 	#endif
 }
 
-_SHINSEI_OS_INLINE static int windowsPathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int windowsPathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char q_mark=(char)(ebcdic*0x6F+!ebcdic*'?');
@@ -6953,7 +6639,7 @@ int shinsei_windowsPathNormalizeNoTraversalW(wchar_t*const restrict path,size_t*
 	// len: Pointer to the length of the string. Updated to the new length.
 	return windowsPathNormalizeNoTraversalW(path,len);
 }
-int shinsei_windowsPathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_windowsPathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return windowsPathNormalizeNoTraversalCP(code_page,path,len);
@@ -7231,7 +6917,7 @@ _SHINSEI_OS_INLINE static int unixPathNormalizeNoTraversalW(wchar_t*const restri
 	#endif
 }
 
-_SHINSEI_OS_INLINE static int unixPathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int unixPathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char dot=(char)(ebcdic*0x4B+!ebcdic*'.');
@@ -7324,7 +7010,7 @@ int shinsei_unixPathNormalizeNoTraversalW(wchar_t*const restrict path,size_t*con
 	// len: Pointer to the length of the string. Updated to the new length.
 	return unixPathNormalizeNoTraversalW(path,len);
 }
-int shinsei_unixPathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_unixPathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return unixPathNormalizeNoTraversalCP(code_page,path,len);
@@ -7602,7 +7288,7 @@ _SHINSEI_OS_INLINE static int linuxPathNormalizeNoTraversalW(wchar_t*const restr
 	#endif
 }
 
-_SHINSEI_OS_INLINE static int linuxPathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int linuxPathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char dot=(char)(ebcdic*0x4B+!ebcdic*'.');
@@ -7695,7 +7381,7 @@ int shinsei_linuxPathNormalizeNoTraversalW(wchar_t*const restrict path,size_t*co
 	// len: Pointer to the length of the string. Updated to the new length.
 	return linuxPathNormalizeNoTraversalW(path,len);
 }
-int shinsei_linuxPathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_linuxPathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return linuxPathNormalizeNoTraversalCP(code_page,path,len);
@@ -7973,7 +7659,7 @@ _SHINSEI_OS_INLINE static int applePathNormalizeNoTraversalW(wchar_t*const restr
 	#endif
 }
 
-_SHINSEI_OS_INLINE static int applePathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int applePathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char dot=(char)(ebcdic*0x4B+!ebcdic*'.');
@@ -8066,7 +7752,7 @@ int shinsei_applePathNormalizeNoTraversalW(wchar_t*const restrict path,size_t*co
 	// len: Pointer to the length of the string. Updated to the new length.
 	return applePathNormalizeNoTraversalW(path,len);
 }
-int shinsei_applePathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_applePathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return applePathNormalizeNoTraversalCP(code_page,path,len);
@@ -8344,7 +8030,7 @@ _SHINSEI_OS_INLINE static int sunPathNormalizeNoTraversalW(wchar_t*const restric
 	#endif
 }
 
-_SHINSEI_OS_INLINE static int sunPathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int sunPathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char dot=(char)(ebcdic*0x4B+!ebcdic*'.');
@@ -8437,7 +8123,7 @@ int shinsei_sunPathNormalizeNoTraversalW(wchar_t*const restrict path,size_t*cons
 	// len: Pointer to the length of the string. Updated to the new length.
 	return sunPathNormalizeNoTraversalW(path,len);
 }
-int shinsei_sunPathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_sunPathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return sunPathNormalizeNoTraversalCP(code_page,path,len);
@@ -8715,7 +8401,7 @@ _SHINSEI_OS_INLINE static int freeBSDPathNormalizeNoTraversalW(wchar_t*const res
 	#endif
 }
 
-_SHINSEI_OS_INLINE static int freeBSDPathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int freeBSDPathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char dot=(char)(ebcdic*0x4B+!ebcdic*'.');
@@ -8808,7 +8494,7 @@ int shinsei_freeBSDPathNormalizeNoTraversalW(wchar_t*const restrict path,size_t*
 	// len: Pointer to the length of the string. Updated to the new length.
 	return freeBSDPathNormalizeNoTraversalW(path,len);
 }
-int shinsei_freeBSDPathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_freeBSDPathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return freeBSDPathNormalizeNoTraversalCP(code_page,path,len);
@@ -9086,7 +8772,7 @@ _SHINSEI_OS_INLINE static int cygwinPathNormalizeNoTraversalW(wchar_t*const rest
 	#endif
 }
 
-_SHINSEI_OS_INLINE static int cygwinPathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int cygwinPathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char dot=(char)(ebcdic*0x4B+!ebcdic*'.');
@@ -9179,7 +8865,7 @@ int shinsei_cygwinPathNormalizeNoTraversalW(wchar_t*const restrict path,size_t*c
 	// len: Pointer to the length of the string. Updated to the new length.
 	return cygwinPathNormalizeNoTraversalW(path,len);
 }
-int shinsei_cygwinPathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_cygwinPathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	return cygwinPathNormalizeNoTraversalCP(code_page,path,len);
@@ -9388,7 +9074,7 @@ int shinsei_uRLPathNormalizeNoTraversalW(wchar_t*const restrict path,size_t*cons
 		return uRLPathNormalizeNoTraversalU16((char16_t*)path,len);
 	#endif
 }
-int shinsei_uRLPathNormalizeNoTraversalCP(const unsigned int code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_uRLPathNormalizeNoTraversalCP(const uint_fast32_t code_page,char*const restrict path,size_t*const restrict len)_SHINSEI_OS_NOEXCEPT{
 	// path: Buffer containing the string to normalize. Modified in-place.
 	// len: Pointer to the length of the string. Updated to the new length.
 	if(__builtin_expect(!*len,0)) return SHINSEI_PATH_ILLEGAL;
@@ -9663,7 +9349,7 @@ _SHINSEI_OS_INLINE static size_t windowsPathJoinWV(wchar_t*const restrict des_bu
 	des_buf[res]=L'\0';
 	return res;
 }
-_SHINSEI_OS_INLINE static size_t windowsPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static size_t windowsPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(path_cnt<=0||(path_cnt==1&&!first_part_len),0)){
 		if(__builtin_expect(des_buf_len>0,1)) *des_buf='\0';
 		return 0;
@@ -9989,12 +9675,12 @@ size_t shinsei_windowsPathJoinW(wchar_t*const restrict des_buf,const size_t des_
 	va_end(args);
 	return res;
 }
-size_t shinsei_windowsPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_windowsPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	return windowsPathJoinCPV(code_page,des_buf,des_buf_len,path_cnt,first_part,first_part_len,args);
 }
-size_t shinsei_windowsPathJoinCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_windowsPathJoinCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	va_list args;
@@ -10123,7 +9809,7 @@ _SHINSEI_OS_INLINE static size_t unixPathJoinWV(wchar_t*const restrict des_buf,c
 	des_buf[res]=L'\0';
 	return res;
 }
-_SHINSEI_OS_INLINE static size_t unixPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static size_t unixPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(path_cnt<=0||(path_cnt==1&&!first_part_len),0)){
 		if(__builtin_expect(des_buf_len>0,1)) *des_buf='\0';
 		return 0;
@@ -10448,12 +10134,12 @@ size_t shinsei_unixPathJoinW(wchar_t*const restrict des_buf,const size_t des_buf
 	va_end(args);
 	return res;
 }
-size_t shinsei_unixPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_unixPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	return unixPathJoinCPV(code_page,des_buf,des_buf_len,path_cnt,first_part,first_part_len,args);
 }
-size_t shinsei_unixPathJoinCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_unixPathJoinCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	va_list args;
@@ -10582,7 +10268,7 @@ _SHINSEI_OS_INLINE static size_t linuxPathJoinWV(wchar_t*const restrict des_buf,
 	des_buf[res]=L'\0';
 	return res;
 }
-_SHINSEI_OS_INLINE static size_t linuxPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static size_t linuxPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(path_cnt<=0||(path_cnt==1&&!first_part_len),0)){
 		if(__builtin_expect(des_buf_len>0,1)) *des_buf='\0';
 		return 0;
@@ -10907,12 +10593,12 @@ size_t shinsei_linuxPathJoinW(wchar_t*const restrict des_buf,const size_t des_bu
 	va_end(args);
 	return res;
 }
-size_t shinsei_linuxPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_linuxPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	return linuxPathJoinCPV(code_page,des_buf,des_buf_len,path_cnt,first_part,first_part_len,args);
 }
-size_t shinsei_linuxPathJoinCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_linuxPathJoinCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	va_list args;
@@ -11041,7 +10727,7 @@ _SHINSEI_OS_INLINE static size_t applePathJoinWV(wchar_t*const restrict des_buf,
 	des_buf[res]=L'\0';
 	return res;
 }
-_SHINSEI_OS_INLINE static size_t applePathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static size_t applePathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(path_cnt<=0||(path_cnt==1&&!first_part_len),0)){
 		if(__builtin_expect(des_buf_len>0,1)) *des_buf='\0';
 		return 0;
@@ -11366,12 +11052,12 @@ size_t shinsei_applePathJoinW(wchar_t*const restrict des_buf,const size_t des_bu
 	va_end(args);
 	return res;
 }
-size_t shinsei_applePathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_applePathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	return applePathJoinCPV(code_page,des_buf,des_buf_len,path_cnt,first_part,first_part_len,args);
 }
-size_t shinsei_applePathJoinCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_applePathJoinCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	va_list args;
@@ -11500,7 +11186,7 @@ _SHINSEI_OS_INLINE static size_t sunPathJoinWV(wchar_t*const restrict des_buf,co
 	des_buf[res]=L'\0';
 	return res;
 }
-_SHINSEI_OS_INLINE static size_t sunPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static size_t sunPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(path_cnt<=0||(path_cnt==1&&!first_part_len),0)){
 		if(__builtin_expect(des_buf_len>0,1)) *des_buf='\0';
 		return 0;
@@ -11825,12 +11511,12 @@ size_t shinsei_sunPathJoinW(wchar_t*const restrict des_buf,const size_t des_buf_
 	va_end(args);
 	return res;
 }
-size_t shinsei_sunPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_sunPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	return sunPathJoinCPV(code_page,des_buf,des_buf_len,path_cnt,first_part,first_part_len,args);
 }
-size_t shinsei_sunPathJoinCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_sunPathJoinCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	va_list args;
@@ -11959,7 +11645,7 @@ _SHINSEI_OS_INLINE static size_t freeBSDPathJoinWV(wchar_t*const restrict des_bu
 	des_buf[res]=L'\0';
 	return res;
 }
-_SHINSEI_OS_INLINE static size_t freeBSDPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static size_t freeBSDPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(path_cnt<=0||(path_cnt==1&&!first_part_len),0)){
 		if(__builtin_expect(des_buf_len>0,1)) *des_buf='\0';
 		return 0;
@@ -12284,12 +11970,12 @@ size_t shinsei_freeBSDPathJoinW(wchar_t*const restrict des_buf,const size_t des_
 	va_end(args);
 	return res;
 }
-size_t shinsei_freeBSDPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_freeBSDPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	return freeBSDPathJoinCPV(code_page,des_buf,des_buf_len,path_cnt,first_part,first_part_len,args);
 }
-size_t shinsei_freeBSDPathJoinCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_freeBSDPathJoinCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	va_list args;
@@ -12418,7 +12104,7 @@ _SHINSEI_OS_INLINE static size_t cygwinPathJoinWV(wchar_t*const restrict des_buf
 	des_buf[res]=L'\0';
 	return res;
 }
-_SHINSEI_OS_INLINE static size_t cygwinPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static size_t cygwinPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(path_cnt<=0||(path_cnt==1&&!first_part_len),0)){
 		if(__builtin_expect(des_buf_len>0,1)) *des_buf='\0';
 		return 0;
@@ -12743,12 +12429,12 @@ size_t shinsei_cygwinPathJoinW(wchar_t*const restrict des_buf,const size_t des_b
 	va_end(args);
 	return res;
 }
-size_t shinsei_cygwinPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_cygwinPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	return cygwinPathJoinCPV(code_page,des_buf,des_buf_len,path_cnt,first_part,first_part_len,args);
 }
-size_t shinsei_cygwinPathJoinCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_cygwinPathJoinCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	va_list args;
@@ -12877,7 +12563,7 @@ _SHINSEI_OS_INLINE static size_t uRLPathJoinWV(wchar_t*const restrict des_buf,co
 	des_buf[res]=L'\0';
 	return res;
 }
-_SHINSEI_OS_INLINE static size_t uRLPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static size_t uRLPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(path_cnt<=0||(path_cnt==1&&!first_part_len),0)){
 		if(__builtin_expect(des_buf_len>0,1)) *des_buf='\0';
 		return 0;
@@ -13202,12 +12888,12 @@ size_t shinsei_uRLPathJoinW(wchar_t*const restrict des_buf,const size_t des_buf_
 	va_end(args);
 	return res;
 }
-size_t shinsei_uRLPathJoinCPV(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uRLPathJoinCPV(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,va_list args)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	return uRLPathJoinCPV(code_page,des_buf,des_buf_len,path_cnt,first_part,first_part_len,args);
 }
-size_t shinsei_uRLPathJoinCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uRLPathJoinCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const int path_cnt,const char*const restrict first_part,const size_t first_part_len,...)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// first_part_len: The char count of the first part.
 	va_list args;
@@ -13284,7 +12970,7 @@ _SHINSEI_OS_INLINE static size_t splitStringToPartsW(wchar_t*const restrict des_
 	return res;
 }
 // Copy from str/str.c
-_SHINSEI_OS_INLINE static size_t splitStringToPartsCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char delimiter)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static size_t splitStringToPartsCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char delimiter)_SHINSEI_OS_NOEXCEPT{
 	(void)code_page;
 	if(__builtin_expect(!part_len,0)) return 0;
 	if(__builtin_expect(!src_len,0)){
@@ -13387,7 +13073,7 @@ size_t shinsei_splitStringToWindowsPathW(wchar_t*const restrict des_buf,const si
 	// src_len: The char count of the source string.
 	return splitStringToPartsW(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt,SHINSEI_PATH_WINDOWS_DELIMITER_W);
 }
-size_t shinsei_splitStringToWindowsPathCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_splitStringToWindowsPathCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// src_len: The char count of the source string.
 	register const char delimiter=isEBCDICCodePage(code_page)?SHINSEI_PATH_WINDOWS_DELIMITER_EBCDIC:SHINSEI_PATH_WINDOWS_DELIMITER_ASCII;
@@ -13415,7 +13101,7 @@ size_t shinsei_splitStringToUnixPathW(wchar_t*const restrict des_buf,const size_
 	// src_len: The char count of the source string.
 	return splitStringToPartsW(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt,SHINSEI_PATH_UNIX_DELIMITER_W);
 }
-size_t shinsei_splitStringToUnixPathCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_splitStringToUnixPathCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// src_len: The char count of the source string.
 	register const char delimiter=isEBCDICCodePage(code_page)?SHINSEI_PATH_UNIX_DELIMITER_EBCDIC:SHINSEI_PATH_UNIX_DELIMITER_ASCII;
@@ -13443,7 +13129,7 @@ size_t shinsei_splitStringToLinuxPathW(wchar_t*const restrict des_buf,const size
 	// src_len: The char count of the source string.
 	return splitStringToPartsW(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt,SHINSEI_PATH_LINUX_DELIMITER_W);
 }
-size_t shinsei_splitStringToLinuxPathCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_splitStringToLinuxPathCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// src_len: The char count of the source string.
 	register const char delimiter=isEBCDICCodePage(code_page)?SHINSEI_PATH_LINUX_DELIMITER_EBCDIC:SHINSEI_PATH_LINUX_DELIMITER_ASCII;
@@ -13471,7 +13157,7 @@ size_t shinsei_splitStringToApplePathW(wchar_t*const restrict des_buf,const size
 	// src_len: The char count of the source string.
 	return splitStringToPartsW(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt,SHINSEI_PATH_APPLE_DELIMITER_W);
 }
-size_t shinsei_splitStringToApplePathCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_splitStringToApplePathCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// src_len: The char count of the source string.
 	register const char delimiter=isEBCDICCodePage(code_page)?SHINSEI_PATH_APPLE_DELIMITER_EBCDIC:SHINSEI_PATH_APPLE_DELIMITER_ASCII;
@@ -13499,7 +13185,7 @@ size_t shinsei_splitStringToSunPathW(wchar_t*const restrict des_buf,const size_t
 	// src_len: The char count of the source string.
 	return splitStringToPartsW(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt,SHINSEI_PATH_SUN_DELIMITER_W);
 }
-size_t shinsei_splitStringToSunPathCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_splitStringToSunPathCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// src_len: The char count of the source string.
 	register const char delimiter=isEBCDICCodePage(code_page)?SHINSEI_PATH_SUN_DELIMITER_EBCDIC:SHINSEI_PATH_SUN_DELIMITER_ASCII;
@@ -13527,7 +13213,7 @@ size_t shinsei_splitStringToFreeBSDPathW(wchar_t*const restrict des_buf,const si
 	// src_len: The char count of the source string.
 	return splitStringToPartsW(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt,SHINSEI_PATH_FREEBSD_DELIMITER_W);
 }
-size_t shinsei_splitStringToFreeBSDPathCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_splitStringToFreeBSDPathCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// src_len: The char count of the source string.
 	register const char delimiter=isEBCDICCodePage(code_page)?SHINSEI_PATH_FREEBSD_DELIMITER_EBCDIC:SHINSEI_PATH_FREEBSD_DELIMITER_ASCII;
@@ -13555,7 +13241,7 @@ size_t shinsei_splitStringToCygwinPathW(wchar_t*const restrict des_buf,const siz
 	// src_len: The char count of the source string.
 	return splitStringToPartsW(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt,SHINSEI_PATH_CYGWIN_DELIMITER_W);
 }
-size_t shinsei_splitStringToCygwinPathCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_splitStringToCygwinPathCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// src_len: The char count of the source string.
 	register const char delimiter=isEBCDICCodePage(code_page)?SHINSEI_PATH_CYGWIN_DELIMITER_EBCDIC:SHINSEI_PATH_CYGWIN_DELIMITER_ASCII;
@@ -13583,7 +13269,7 @@ size_t shinsei_splitStringToURLPathW(wchar_t*const restrict des_buf,const size_t
 	// src_len: The char count of the source string.
 	return splitStringToPartsW(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt,SHINSEI_PATH_URL_DELIMITER_W);
 }
-size_t shinsei_splitStringToURLPathCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_splitStringToURLPathCP(const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t folder_len,const size_t max_folder_cnt)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// src_len: The char count of the source string.
 	register const char delimiter=isEBCDICCodePage(code_page)?SHINSEI_PATH_URL_DELIMITER_EBCDIC:SHINSEI_PATH_URL_DELIMITER_ASCII;
@@ -13605,7 +13291,4 @@ size_t shinsei_splitStringToURLPathU32(char32_t*const restrict des_buf,const siz
 	return splitStringToPartsU32(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt,SHINSEI_PATH_URL_DELIMITER_U32);
 }
 
-#ifdef _SHINSEI_OS_CPP
-}
-#undef this
-#endif
+#include"shinsei/.internal/cpp_term_source.hpp"

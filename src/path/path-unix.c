@@ -1,9 +1,6 @@
-#include"path.h"
+#include"shinsei/path.h"
 
-#ifdef _SHINSEI_OS_CPP
-#define this _this
-extern "C"{
-#endif
+#include"shinsei/.internal/cpp_init_source.hpp"
 
 bool shinsei_isWindowsPathDelimiterA(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return shinsei_isWindowsPathDelimiterU8((char8_t)ch);
@@ -1894,7 +1891,4 @@ size_t shinsei_splitStringToNativePathN(char8_t*const restrict des_buf,const siz
 	#endif
 }
 
-#ifdef _SHINSEI_OS_CPP
-}
-#undef this
-#endif
+#include"shinsei/.internal/cpp_term_source.hpp"

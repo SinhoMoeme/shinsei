@@ -483,12 +483,14 @@ if(SHINSEI_BUILD_EX)
 		$<TARGET_OBJECTS:shinsei_path_minimal_obj>
 		$<TARGET_OBJECTS:shinsei_sys_minimal_obj>
 		$<TARGET_OBJECTS:shinsei_file_minimal_obj>
+		$<TARGET_OBJECTS:shinsei_network_minimal_obj>
 		$<TARGET_OBJECTS:shinsei_struct_obj>
 		$<TARGET_OBJECTS:shinsei_io_obj>
 		$<TARGET_OBJECTS:shinsei_str_obj>
 		$<TARGET_OBJECTS:shinsei_path_obj>
 		$<TARGET_OBJECTS:shinsei_sys_obj>
 		$<TARGET_OBJECTS:shinsei_file_obj>
+		$<TARGET_OBJECTS:shinsei_network_obj>
 	)
 
 	add_library(shinsei-ex_shared SHARED
@@ -498,12 +500,14 @@ if(SHINSEI_BUILD_EX)
 		$<TARGET_OBJECTS:shinsei_path_minimal_obj>
 		$<TARGET_OBJECTS:shinsei_sys_minimal_obj>
 		$<TARGET_OBJECTS:shinsei_file_minimal_obj>
+		$<TARGET_OBJECTS:shinsei_network_minimal_obj>
 		$<TARGET_OBJECTS:shinsei_struct_obj>
 		$<TARGET_OBJECTS:shinsei_io_obj>
 		$<TARGET_OBJECTS:shinsei_str_obj>
 		$<TARGET_OBJECTS:shinsei_path_obj>
 		$<TARGET_OBJECTS:shinsei_sys_obj>
 		$<TARGET_OBJECTS:shinsei_file_obj>
+		$<TARGET_OBJECTS:shinsei_network_obj>
 	)
 
 	if(SHINSEI_BUILD_EX_PYTHON3)

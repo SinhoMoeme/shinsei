@@ -324,6 +324,7 @@
 	// __builtin_expect
 	#if defined(_SHINSEI_OS_MSVC)
 		#define __builtin_expect(x,y) (x)
+		#define __builtin_expect_with_probability(x,y,z) (x)
 	#endif
 	
 	// __builtin of cstring

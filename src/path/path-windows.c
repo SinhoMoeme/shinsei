@@ -1,10 +1,8 @@
 #include"shinsei/path.h"
 
-#ifdef _SHINSEI_OS_CPP
-#define this _this
-extern "C"{
-#endif
+#include"shinsei/.internal/cpp_init_source.hpp"
 
+// Get system ANSI code page
 #ifdef _SHINSEI_OS_ATOMIC
 	static struct _SHINSEI_OS_ALIGN_BYTE{
 		volatile uint32_t code_page;
@@ -12,12 +10,12 @@ extern "C"{
 #else
 	static struct _SHINSEI_OS_ALIGN_BYTE{
 		INIT_ONCE init_ansi;
-		unsigned int code_page;
+		uint_fast32_t code_page;
 	}cur_mem={
 		.init_ansi=INIT_ONCE_STATIC_INIT
 	};
 	
-	static BOOL WINAPI initANSICallback(PINIT_ONCE init_once,PVOID para,PVOID* ptr_context){
+	static BOOL WINAPI initANSICallback(register PINIT_ONCE init_once,register PVOID para,register PVOID* ptr_context){
 		(void)init_once;
 		(void)para;
 		(void)ptr_context;
@@ -26,24 +24,24 @@ extern "C"{
 	}
 #endif
 
-_SHINSEI_OS_INLINE static unsigned int systemCP(){
+_SHINSEI_OS_INLINE static uint_fast32_t systemCP(){
 	#ifdef _SHINSEI_OS_ATOMIC
-		register unsigned int cp=cur_mem.code_page;
-		if(__builtin_expect(!cp,0)){
-			register unsigned int new_cp=GetACP();
+		register uint_fast32_t cp=cur_mem.code_page;
+		if(__builtin_expect_with_probability(!cp,1,1e-7)){
+			register uint_fast32_t new_cp=GetACP();
 			#ifdef _SHINSEI_OS_MSVC
-				register uint32_t prev=(uint32_t)_InterlockedCompareExchange((volatile long*)&cur_mem.code_page,(long)new_cp,0);
-				cp=(unsigned int)prev+!prev*new_cp;
+				register uint_fast32_t prev=_InterlockedCompareExchange((volatile long*)&cur_mem.code_page,(long)new_cp,0);
+				cp=prev?prev:new_cp;
 			#else
-				uint32_t expected=0;
+				uint_fast32_t expected=0;
 				__atomic_compare_exchange_n(&cur_mem.code_page,&expected,new_cp,0,__ATOMIC_ACQ_REL,__ATOMIC_RELAXED);
-				cp=(unsigned int)expected+!expected*new_cp;
+				cp=expected?expected:new_cp;
 			#endif
 		}
 		return cp;
 	#else
 		InitOnceExecuteOnce(&cur_mem.init_ansi,initANSICallback,nullptr,nullptr);
-		return (unsigned int)cur_mem.code_page;
+		return (uint_fast32_t)cur_mem.code_page;
 	#endif
 }
 
@@ -1267,7 +1265,4 @@ size_t shinsei_splitStringToNativePathN(wchar_t*const restrict des_buf,const siz
 	return shinsei_splitStringToWindowsPathN(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt);
 }
 
-#ifdef _SHINSEI_OS_CPP
-}
-#undef this
-#endif
+#include"shinsei/.internal/cpp_term_source.hpp"
