@@ -5,3 +5,5 @@
 #include"shinsei/minimal/str.h"
 #include"shinsei/minimal/struct.h"
 #include"shinsei/minimal/sys.h"
+#include"shinsei/minimal/file.h"
+#include"shinsei/minimal/network.h"

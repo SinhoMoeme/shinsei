@@ -2,49 +2,49 @@
 
 #include"shinsei/minimal/network.h"
 
-namespace jail301{
+namespace shinsei{
 	static _SHINSEI_OS_CONSTEXPR ::size_t MAX_IPV4_BUF=::SHINSEI_MAX_IPV4_BUF;
-	static _SHINSEI_OS_CONSTEXPR ::size_t MAX_IPV6_BUF=::SHINSEI_MAX_IPv6_BUF;
+	static _SHINSEI_OS_CONSTEXPR ::size_t MAX_IPV6_BUF=::SHINSEI_MAX_IPV6_BUF;
 	static _SHINSEI_OS_CONSTEXPR ::size_t MAX_MAPPED_IPV6_BUF=::SHINSEI_MAX_MAPPED_IPV6_BUF;
 	
 	// Convert string to IPv4 address
-	_SHINSEI_OS_INLINE bool stringToIPv4CP(const ::uint_fast32_t code_page,::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
-		return ::shinsei_stringToIPv4CP(code_page,des,src,src_len);
+	_SHINSEI_OS_INLINE bool stringToIPv4CP(const ::uint_fast32_t cp,::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToIPv4CP(cp,des,src,src_len);
 	}
-	_SHINSEI_OS_INLINE bool stringToIPv4(const ::uint_fast32_t code_page,::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
-		return ::shinsei_stringToIPv4CP(code_page,des,src,src_len);
+	_SHINSEI_OS_INLINE bool stringToIPv4(const ::uint_fast32_t cp,::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToIPv4CP(cp,des,src,src_len);
 	}
 	_SHINSEI_OS_INLINE bool stringToIPv4W(::uint32_t*const restrict des,const wchar_t*const restrict src,const ::size_t src_len){
-		return ::shinsei_string_stringToIPv4W(des,src,src_len);
+		return ::shinsei_stringToIPv4W(des,src,src_len);
 	}
 	_SHINSEI_OS_INLINE bool stringToIPv4(::uint32_t*const restrict des,const wchar_t*const restrict src,const ::size_t src_len){
-		return ::shinsei_string_stringToIPv4W(des,src,src_len);
+		return ::shinsei_stringToIPv4W(des,src,src_len);
 	}
 	_SHINSEI_OS_INLINE bool stringToIPv4U8(::uint32_t*const restrict des,const char8_t*const restrict src,const ::size_t src_len){
-		return ::shinsei_string_stringToIPv4U8(des,src,src_len);
+		return ::shinsei_stringToIPv4U8(des,src,src_len);
 	}
 	_SHINSEI_OS_INLINE bool stringToIPv4(::uint32_t*const restrict des,const char8_t*const restrict src,const ::size_t src_len){
-		return ::shinsei_string_stringToIPv4U8(des,src,src_len);
+		return ::shinsei_stringToIPv4U8(des,src,src_len);
 	}
 	_SHINSEI_OS_INLINE bool stringToIPv4U16(::uint32_t*const restrict des,const char16_t*const restrict src,const ::size_t src_len){
-		return ::shinsei_string_stringToIPv4U16(des,src,src_len);
+		return ::shinsei_stringToIPv4U16(des,src,src_len);
 	}
 	_SHINSEI_OS_INLINE bool stringToIPv4(::uint32_t*const restrict des,const char16_t*const restrict src,const ::size_t src_len){
-		return ::shinsei_string_stringToIPv4U16(des,src,src_len);
+		return ::shinsei_stringToIPv4U16(des,src,src_len);
 	}
 	_SHINSEI_OS_INLINE bool stringToIPv4U32(::uint32_t*const restrict des,const char32_t*const restrict src,const ::size_t src_len){
-		return ::shinsei_string_stringToIPv4U32(des,src,src_len);
+		return ::shinsei_stringToIPv4U32(des,src,src_len);
 	}
 	_SHINSEI_OS_INLINE bool stringToIPv4(::uint32_t*const restrict des,const char32_t*const restrict src,const ::size_t src_len){
-		return ::shinsei_string_stringToIPv4U32(des,src,src_len);
+		return ::shinsei_stringToIPv4U32(des,src,src_len);
 	}
 	
 	// Convert IPv4 address to string
-	_SHINSEI_OS_INLINE ::size_t iPv4ToStringCP(const ::uint_fast32_t code_page,char*const restrict des,const ::uint32_t*const restrict src){
-		return ::shinsei_iPv4ToStringCP(code_page,des,src);
+	_SHINSEI_OS_INLINE ::size_t iPv4ToStringCP(const ::uint_fast32_t cp,char*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_iPv4ToStringCP(cp,des,src);
 	}
-	_SHINSEI_OS_INLINE ::size_t iPv4ToString(const ::uint_fast32_t code_page,char*const restrict des,const ::uint32_t*const restrict src){
-		return ::shinsei_iPv4ToStringCP(code_page,des,src);
+	_SHINSEI_OS_INLINE ::size_t iPv4ToString(const ::uint_fast32_t cp,char*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_iPv4ToStringCP(cp,des,src);
 	}
 	_SHINSEI_OS_INLINE ::size_t iPv4ToStringW(wchar_t*const restrict des,const ::uint32_t*const restrict src){
 		return ::shinsei_iPv4ToStringW(des,src);
@@ -72,11 +72,11 @@ namespace jail301{
 	}
 	
 	// Convert string to IPv6 address
-	_SHINSEI_OS_INLINE bool stringToIPv6CP(const ::uint_fast32_t code_page,::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
-		return ::shinsei_stringToIPv6CP(code_page,des,src,src_len);
+	_SHINSEI_OS_INLINE bool stringToIPv6CP(const ::uint_fast32_t cp,::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToIPv6CP(cp,des,src,src_len);
 	}
-	_SHINSEI_OS_INLINE bool stringToIPv6(const ::uint_fast32_t code_page,::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
-		return ::shinsei_stringToIPv6CP(code_page,des,src,src_len);
+	_SHINSEI_OS_INLINE bool stringToIPv6(const ::uint_fast32_t cp,::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToIPv6CP(cp,des,src,src_len);
 	}
 	_SHINSEI_OS_INLINE bool stringToIPv6W(::uint32_t*const restrict des,const wchar_t*const restrict src,const ::size_t src_len){
 		return ::shinsei_stringToIPv6W(des,src,src_len);
@@ -103,12 +103,12 @@ namespace jail301{
 		return ::shinsei_stringToIPv6U32(des,src,src_len);
 	}
 	
-	// Convert IPv6 address string
-	_SHINSEI_OS_INLINE ::size_t iPv6ToStringCP(const ::uint_fast32_t code_page,char*const restrict des,const ::uint32_t*const restrict src){
-		return ::shinsei_iPv6ToStringCP(code_page,des,src);
+	// Convert IPv6 address to string
+	_SHINSEI_OS_INLINE ::size_t iPv6ToStringCP(const ::uint_fast32_t cp,char*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_iPv6ToStringCP(cp,des,src);
 	}
-	_SHINSEI_OS_INLINE ::size_t iPv6ToString(const ::uint_fast32_t code_page,char*const restrict des,const ::uint32_t*const restrict src){
-		return ::shinsei_iPv6ToStringCP(code_page,des,src);
+	_SHINSEI_OS_INLINE ::size_t iPv6ToString(const ::uint_fast32_t cp,char*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_iPv6ToStringCP(cp,des,src);
 	}
 	_SHINSEI_OS_INLINE ::size_t iPv6ToStringW(wchar_t*const restrict des,const ::uint32_t*const restrict src){
 		return ::shinsei_iPv6ToStringW(des,src);
@@ -133,5 +133,69 @@ namespace jail301{
 	}
 	_SHINSEI_OS_INLINE ::size_t iPv6ToString(char32_t*const restrict des,const ::uint32_t*const restrict src){
 		return ::shinsei_iPv6ToStringU32(des,src);
+	}
+	
+	// Convert string to mappped IPv6 address
+	_SHINSEI_OS_INLINE bool stringToMappedIPv6CP(const ::uint_fast32_t cp,::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToMappedIPv6CP(cp,des,src,src_len);
+	}
+	_SHINSEI_OS_INLINE bool stringToMappedIPv6(const ::uint_fast32_t cp,::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToMappedIPv6CP(cp,des,src,src_len);
+	}
+	_SHINSEI_OS_INLINE bool stringToMappedIPv6W(::uint32_t*const restrict des,const wchar_t*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToMappedIPv6W(des,src,src_len);
+	}
+	_SHINSEI_OS_INLINE bool stringToMappedIPv6(::uint32_t*const restrict des,const wchar_t*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToMappedIPv6W(des,src,src_len);
+	}
+	_SHINSEI_OS_INLINE bool stringToMappedIPv6U8(::uint32_t*const restrict des,const char8_t*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToMappedIPv6U8(des,src,src_len);
+	}
+	_SHINSEI_OS_INLINE bool stringToMappedIPv6(::uint32_t*const restrict des,const char8_t*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToMappedIPv6U8(des,src,src_len);
+	}
+	_SHINSEI_OS_INLINE bool stringToMappedIPv6U16(::uint32_t*const restrict des,const char16_t*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToMappedIPv6U16(des,src,src_len);
+	}
+	_SHINSEI_OS_INLINE bool stringToMappedIPv6(::uint32_t*const restrict des,const char16_t*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToMappedIPv6U16(des,src,src_len);
+	}
+	_SHINSEI_OS_INLINE bool stringToMappedIPv6U32(::uint32_t*const restrict des,const char32_t*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToMappedIPv6U32(des,src,src_len);
+	}
+	_SHINSEI_OS_INLINE bool stringToMappedIPv6(::uint32_t*const restrict des,const char32_t*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToMappedIPv6U32(des,src,src_len);
+	}
+	
+	// Convert mapped IPv6 address to string
+	_SHINSEI_OS_INLINE ::size_t mappedIPv6ToStringCP(const ::uint_fast32_t cp,char*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_mappedIPv6ToStringCP(cp,des,src);
+	}
+	_SHINSEI_OS_INLINE ::size_t mappedIPv6ToString(const ::uint_fast32_t cp,char*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_mappedIPv6ToStringCP(cp,des,src);
+	}
+	_SHINSEI_OS_INLINE ::size_t mappedIPv6ToStringW(wchar_t*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_mappedIPv6ToStringW(des,src);
+	}
+	_SHINSEI_OS_INLINE ::size_t mappedIPv6ToString(wchar_t*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_mappedIPv6ToStringW(des,src);
+	}
+	_SHINSEI_OS_INLINE ::size_t mappedIPv6ToStringU8(char8_t*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_mappedIPv6ToStringU8(des,src);
+	}
+	_SHINSEI_OS_INLINE ::size_t mappedIPv6ToString(char8_t*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_mappedIPv6ToStringU8(des,src);
+	}
+	_SHINSEI_OS_INLINE ::size_t mappedIPv6ToStringU16(char16_t*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_mappedIPv6ToStringU16(des,src);
+	}
+	_SHINSEI_OS_INLINE ::size_t mappedIPv6ToString(char16_t*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_mappedIPv6ToStringU16(des,src);
+	}
+	_SHINSEI_OS_INLINE ::size_t mappedIPv6ToStringU32(char32_t*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_mappedIPv6ToStringU32(des,src);
+	}
+	_SHINSEI_OS_INLINE ::size_t mappedIPv6ToString(char32_t*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_mappedIPv6ToStringU32(des,src);
 	}
 }

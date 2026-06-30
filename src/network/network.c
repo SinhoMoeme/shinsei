@@ -338,17 +338,6 @@ _SHINSEI_OS_INLINE static bool stringToIPv6U16(register uint32_t*const restrict 
 				}
 			}
 		}
-		else if(src[i]==u'.'){
-			if(!has_val||part_idx>6) return false;
-			register size_t ipv4_start=i;
-			while(ipv4_start&&src[ipv4_start-1]!=u':') --ipv4_start;
-			uint32_t ipv4;
-			if(!stringToIPv4U16(&ipv4,src+ipv4_start,src_len-ipv4_start)) return false;
-			parts[part_idx++]=(uint_fast16_t)(ipv4>>16);
-			parts[part_idx++]=(uint_fast16_t)(ipv4&0xFFFF);
-			has_val=false;
-			break;
-		}
 		else return false;
 	}
 	if(has_val){
@@ -410,17 +399,6 @@ _SHINSEI_OS_INLINE static bool stringToIPv6U32(register uint32_t*const restrict 
 				}
 			}
 		}
-		else if(src[i]==U'.'){
-			if(!has_val||part_idx>6) return false;
-			register size_t ipv4_start=i;
-			while(ipv4_start&&src[ipv4_start-1]!=U':') --ipv4_start;
-			uint32_t ipv4;
-			if(!stringToIPv4U32(&ipv4,src+ipv4_start,src_len-ipv4_start)) return false;
-			parts[part_idx++]=(uint_fast16_t)(ipv4>>16);
-			parts[part_idx++]=(uint_fast16_t)(ipv4&0xFFFF);
-			has_val=false;
-			break;
-		}
 		else return false;
 	}
 	if(has_val){
@@ -453,7 +431,6 @@ _SHINSEI_OS_INLINE static bool stringToIPv6U32(register uint32_t*const restrict 
 bool shinsei_stringToIPv6CP(register const uint_fast32_t code_page,register uint32_t*const restrict des,register const char*const restrict src,register const size_t src_len){
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char colon=(char)(ebcdic?0x7A:':');
-	register const char dot=(char)(ebcdic?0x4B:'.');
 	register const char zero=(char)(ebcdic?0xF0:'0');
 	uint_fast16_t parts[8]={0};
 	register size_t part_idx=0;
@@ -486,17 +463,6 @@ bool shinsei_stringToIPv6CP(register const uint_fast32_t code_page,register uint
 				}
 			}
 		}
-		else if(src[i]==dot){
-			if(!has_val||part_idx>6) return false;
-			register size_t ipv4_start=i;
-			while(ipv4_start&&src[ipv4_start-1]!=colon) --ipv4_start;
-			uint32_t ipv4;
-			if(!stringToIPv4CP(code_page,&ipv4,src+ipv4_start,src_len-ipv4_start)) return false;
-			parts[part_idx++]=(uint_fast16_t)(ipv4>>16);
-			parts[part_idx++]=(uint_fast16_t)(ipv4&0xFFFF);
-			has_val=false;
-			break;
-		}
 		else return false;
 	}
 	if(has_val){
@@ -528,9 +494,9 @@ bool shinsei_stringToIPv6CP(register const uint_fast32_t code_page,register uint
 }
 bool shinsei_stringToIPv6W(register uint32_t*const restrict des,register const wchar_t*const restrict src,register const size_t src_len){
 	#ifdef _SHINSEI_WCHAR_U32
-		return stringToIPv6U32(des,src,src_len);
+		return stringToIPv6U32(des,(const char32_t*)src,src_len);
 	#else
-		return stringToIPv6U16(des,src,src_len);
+		return stringToIPv6U16(des,(const char16_t*)src,src_len);
 	#endif
 }
 bool shinsei_stringToIPv6U8(register uint32_t*const restrict des,register const char8_t*const restrict src,register const size_t src_len){
@@ -564,17 +530,6 @@ bool shinsei_stringToIPv6U8(register uint32_t*const restrict des,register const 
 					double_colon_idx=part_idx;
 				}
 			}
-		}
-		else if(src[i]==u8'.'){
-			if(!has_val||part_idx>6) return false;
-			register size_t ipv4_start=i;
-			while(ipv4_start&&src[ipv4_start-1]!=u8':') --ipv4_start;
-			uint32_t ipv4;
-			if(!stringToIPv4U8(&ipv4,src+ipv4_start,src_len-ipv4_start)) return false;
-			parts[part_idx++]=(uint_fast16_t)(ipv4>>16);
-			parts[part_idx++]=(uint_fast16_t)(ipv4&0xFFFF);
-			has_val=false;
-			break;
 		}
 		else return false;
 	}
@@ -612,7 +567,7 @@ bool shinsei_stringToIPv6U32(register uint32_t*const restrict des,register const
 	return stringToIPv6U32(des,src,src_len);
 }
 
-// Convert IPv6 address string
+// Convert IPv6 address to string
 _SHINSEI_OS_INLINE static size_t iPv6ToStringU16(register char16_t*const restrict des,register const uint32_t*const restrict src){
 	uint_fast16_t parts[8];
 	parts[0]=(uint_fast16_t)(src[0]>>16);
@@ -787,9 +742,9 @@ size_t shinsei_iPv6ToStringCP(register const uint_fast32_t code_page,register ch
 }
 size_t shinsei_iPv6ToStringW(register wchar_t*const restrict des,register const uint32_t*const restrict src){
 	#ifdef _SHINSEI_WCHAR_U32
-		return iPv6ToStringU32(des,src);
+		return iPv6ToStringU32((char32_t*)des,src);
 	#else
-		return iPv6ToStringU16(des,src);
+		return iPv6ToStringU16((char16_t*)des,src);
 	#endif
 }
 size_t shinsei_iPv6ToStringU8(register char8_t*const restrict des,register const uint32_t*const restrict src){
@@ -853,6 +808,588 @@ size_t shinsei_iPv6ToStringU16(register char16_t*const restrict des,register con
 }
 size_t shinsei_iPv6ToStringU32(register char32_t*const restrict des,register const uint32_t*const restrict src){
 	return iPv6ToStringU32(des,src);
+}
+
+// Convert mapped IPv6 address to string
+_SHINSEI_OS_INLINE static size_t mappedIPv6ToStringU16(register char16_t*const restrict des,register const uint32_t*const restrict src){
+	uint_fast16_t parts[8];
+	parts[0]=(uint_fast16_t)(src[0]>>16);
+	parts[1]=(uint_fast16_t)(src[0]&0xFFFF);
+	parts[2]=(uint_fast16_t)(src[1]>>16);
+	parts[3]=(uint_fast16_t)(src[1]&0xFFFF);
+	parts[4]=(uint_fast16_t)(src[2]>>16);
+	parts[5]=(uint_fast16_t)(src[2]&0xFFFF);
+	parts[6]=(uint_fast16_t)(src[3]>>16);
+	parts[7]=(uint_fast16_t)(src[3]&0xFFFF);
+	register const bool is_mapped=(!parts[0]&&!parts[1]&&!parts[2]&&!parts[3]&&!parts[4]&&parts[5]==0xFFFF);
+	register const size_t loop_end=is_mapped?6:8;
+	register size_t max_zero_start=8;
+	register size_t max_zero_len=0;
+	register size_t current_zero_start=8;
+	register size_t current_zero_len=0;
+	for(register size_t i=0;i<8;++i){
+		if(!parts[i]){
+			if(!current_zero_len) current_zero_start=i;
+			++current_zero_len;
+		}
+		else{
+			if(current_zero_len>max_zero_len){
+				max_zero_len=current_zero_len;
+				max_zero_start=current_zero_start;
+			}
+			current_zero_len=0;
+		}
+	}
+	if(current_zero_len>max_zero_len){
+		max_zero_len=current_zero_len;
+		max_zero_start=current_zero_start;
+	}
+	if(max_zero_len<2) max_zero_len=0;
+	register size_t res=0;
+	for(register size_t i=0;i<loop_end;++i){
+		if(max_zero_len&&i>=max_zero_start&&i<max_zero_start+max_zero_len){
+			if(i==max_zero_start){
+				des[res++]=u':';
+				if(!i) des[res++]=u':';
+			}
+			continue;
+		}
+		if(i&&!(max_zero_len&&i==max_zero_start+max_zero_len)) des[res++]=u':';
+		register uint_fast16_t val=parts[i];
+		register bool print=false;
+		for(register int_fast8_t shift=12;shift>=0;shift-=4){
+			register uint_fast8_t digit=(val>>shift)&0xF;
+			if(digit||print||!shift){
+				des[res++]=digit<10?u'0'+digit:u'a'+digit-10;
+				print=true;
+			}
+		}
+	}
+	if(is_mapped){
+		des[res++]=u':';
+		res+=iPv4ToStringU16(des+res,&src[3]);
+	}
+	else{
+		if(max_zero_len&&max_zero_start+max_zero_len==8) des[res++]=u':';
+		des[res]=u'\0';
+	}
+	return res;
+}
+_SHINSEI_OS_INLINE static size_t mappedIPv6ToStringU32(register char32_t*const restrict des,register const uint32_t*const restrict src){
+	uint_fast16_t parts[8];
+	parts[0]=(uint_fast16_t)(src[0]>>16);
+	parts[1]=(uint_fast16_t)(src[0]&0xFFFF);
+	parts[2]=(uint_fast16_t)(src[1]>>16);
+	parts[3]=(uint_fast16_t)(src[1]&0xFFFF);
+	parts[4]=(uint_fast16_t)(src[2]>>16);
+	parts[5]=(uint_fast16_t)(src[2]&0xFFFF);
+	parts[6]=(uint_fast16_t)(src[3]>>16);
+	parts[7]=(uint_fast16_t)(src[3]&0xFFFF);
+	register const bool is_mapped=(!parts[0]&&!parts[1]&&!parts[2]&&!parts[3]&&!parts[4]&&parts[5]==0xFFFF);
+	register const size_t loop_end=is_mapped?6:8;
+	register size_t max_zero_start=8;
+	register size_t max_zero_len=0;
+	register size_t current_zero_start=8;
+	register size_t current_zero_len=0;
+	for(register size_t i=0;i<8;++i){
+		if(!parts[i]){
+			if(!current_zero_len) current_zero_start=i;
+			++current_zero_len;
+		}
+		else{
+			if(current_zero_len>max_zero_len){
+				max_zero_len=current_zero_len;
+				max_zero_start=current_zero_start;
+			}
+			current_zero_len=0;
+		}
+	}
+	if(current_zero_len>max_zero_len){
+		max_zero_len=current_zero_len;
+		max_zero_start=current_zero_start;
+	}
+	if(max_zero_len<2) max_zero_len=0;
+	register size_t res=0;
+	for(register size_t i=0;i<loop_end;++i){
+		if(max_zero_len&&i>=max_zero_start&&i<max_zero_start+max_zero_len){
+			if(i==max_zero_start){
+				des[res++]=U':';
+				if(!i) des[res++]=U':';
+			}
+			continue;
+		}
+		if(i&&!(max_zero_len&&i==max_zero_start+max_zero_len)) des[res++]=U':';
+		register uint_fast16_t val=parts[i];
+		register bool print=false;
+		for(register int_fast8_t shift=12;shift>=0;shift-=4){
+			register uint_fast8_t digit=(val>>shift)&0xF;
+			if(digit||print||!shift){
+				des[res++]=digit<10?U'0'+digit:U'a'+digit-10;
+				print=true;
+			}
+		}
+	}
+	if(is_mapped){
+		des[res++]=U':';
+		res+=iPv4ToStringU32(des+res,&src[3]);
+	}
+	else{
+		if(max_zero_len&&max_zero_start+max_zero_len==8) des[res++]=U':';
+		des[res]=U'\0';
+	}
+	return res;
+}
+size_t shinsei_mappedIPv6ToStringCP(register const uint_fast32_t code_page,register char*const restrict des,register const uint32_t*const restrict src){
+	register const bool ebcdic=isEBCDICCodePage(code_page);
+	register const char colon=(char)(ebcdic?0x7A:':');
+	register const char zero=(char)(ebcdic?0xF0:'0');
+	register const char a_lower=(char)(ebcdic?0x81:'a');
+	uint_fast16_t parts[8];
+	parts[0]=(uint_fast16_t)(src[0]>>16);
+	parts[1]=(uint_fast16_t)(src[0]&0xFFFF);
+	parts[2]=(uint_fast16_t)(src[1]>>16);
+	parts[3]=(uint_fast16_t)(src[1]&0xFFFF);
+	parts[4]=(uint_fast16_t)(src[2]>>16);
+	parts[5]=(uint_fast16_t)(src[2]&0xFFFF);
+	parts[6]=(uint_fast16_t)(src[3]>>16);
+	parts[7]=(uint_fast16_t)(src[3]&0xFFFF);
+	register const bool is_mapped=(!parts[0]&&!parts[1]&&!parts[2]&&!parts[3]&&!parts[4]&&parts[5]==0xFFFF);
+	register const size_t loop_end=is_mapped?6:8;
+	register size_t max_zero_start=8;
+	register size_t max_zero_len=0;
+	register size_t current_zero_start=8;
+	register size_t current_zero_len=0;
+	for(register size_t i=0;i<8;++i){
+		if(!parts[i]){
+			if(!current_zero_len) current_zero_start=i;
+			++current_zero_len;
+		}
+		else{
+			if(current_zero_len>max_zero_len){
+				max_zero_len=current_zero_len;
+				max_zero_start=current_zero_start;
+			}
+			current_zero_len=0;
+		}
+	}
+	if(current_zero_len>max_zero_len){
+		max_zero_len=current_zero_len;
+		max_zero_start=current_zero_start;
+	}
+	if(max_zero_len<2) max_zero_len=0;
+	register size_t res=0;
+	for(register size_t i=0;i<loop_end;++i){
+		if(max_zero_len&&i>=max_zero_start&&i<max_zero_start+max_zero_len){
+			if(i==max_zero_start){
+				des[res++]=colon;
+				if(!i) des[res++]=colon;
+			}
+			continue;
+		}
+		if(i&&!(max_zero_len&&i==max_zero_start+max_zero_len)) des[res++]=colon;
+		register uint_fast16_t val=parts[i];
+		register bool print=false;
+		for(register int_fast8_t shift=12;shift>=0;shift-=4){
+			register uint_fast8_t digit=(val>>shift)&0xF;
+			if(digit||print||!shift){
+				des[res++]=(char)(digit<10?zero+digit:a_lower+digit-10);
+				print=true;
+			}
+		}
+	}
+	if(is_mapped){
+		des[res++]=colon;
+		res+=shinsei_iPv4ToStringCP(code_page,des+res,&src[3]);
+	}
+	else{
+		if(max_zero_len&&max_zero_start+max_zero_len==8) des[res++]=colon;
+		des[res]='\0';
+	}
+	return res;
+}
+size_t shinsei_mappedIPv6ToStringW(register wchar_t*const restrict des,register const uint32_t*const restrict src){
+	#ifdef _SHINSEI_WCHAR_U32
+		return mappedIPv6ToStringU32((char32_t*)des,src);
+	#else
+		return mappedIPv6ToStringU16((char16_t*)des,src);
+	#endif
+}
+size_t shinsei_mappedIPv6ToStringU8(register char8_t*const restrict des,register const uint32_t*const restrict src){
+	uint_fast16_t parts[8];
+	parts[0]=(uint_fast16_t)(src[0]>>16);
+	parts[1]=(uint_fast16_t)(src[0]&0xFFFF);
+	parts[2]=(uint_fast16_t)(src[1]>>16);
+	parts[3]=(uint_fast16_t)(src[1]&0xFFFF);
+	parts[4]=(uint_fast16_t)(src[2]>>16);
+	parts[5]=(uint_fast16_t)(src[2]&0xFFFF);
+	parts[6]=(uint_fast16_t)(src[3]>>16);
+	parts[7]=(uint_fast16_t)(src[3]&0xFFFF);
+	register const bool is_mapped=(!parts[0]&&!parts[1]&&!parts[2]&&!parts[3]&&!parts[4]&&parts[5]==0xFFFF);
+	register const size_t loop_end=is_mapped?6:8;
+	register size_t max_zero_start=8;
+	register size_t max_zero_len=0;
+	register size_t current_zero_start=8;
+	register size_t current_zero_len=0;
+	for(register size_t i=0;i<8;++i){
+		if(!parts[i]){
+			if(!current_zero_len) current_zero_start=i;
+			++current_zero_len;
+		}
+		else{
+			if(current_zero_len>max_zero_len){
+				max_zero_len=current_zero_len;
+				max_zero_start=current_zero_start;
+			}
+			current_zero_len=0;
+		}
+	}
+	if(current_zero_len>max_zero_len){
+		max_zero_len=current_zero_len;
+		max_zero_start=current_zero_start;
+	}
+	if(max_zero_len<2) max_zero_len=0;
+	register size_t res=0;
+	for(register size_t i=0;i<loop_end;++i){
+		if(max_zero_len&&i>=max_zero_start&&i<max_zero_start+max_zero_len){
+			if(i==max_zero_start){
+				des[res++]=u8':';
+				if(!i) des[res++]=u8':';
+			}
+			continue;
+		}
+		if(i&&!(max_zero_len&&i==max_zero_start+max_zero_len)) des[res++]=u8':';
+		register uint_fast16_t val=parts[i];
+		register bool print=false;
+		for(register int_fast8_t shift=12;shift>=0;shift-=4){
+			register uint_fast8_t digit=(val>>shift)&0xF;
+			if(digit||print||!shift){
+				des[res++]=digit<10?u8'0'+digit:u8'a'+digit-10;
+				print=true;
+			}
+		}
+	}
+	if(is_mapped){
+		des[res++]=u8':';
+		res+=shinsei_iPv4ToStringU8(des+res,&src[3]);
+	}
+	else{
+		if(max_zero_len&&max_zero_start+max_zero_len==8) des[res++]=u8':';
+		des[res]=u8'\0';
+	}
+	return res;
+}
+size_t shinsei_mappedIPv6ToStringU16(register char16_t*const restrict des,register const uint32_t*const restrict src){
+	return mappedIPv6ToStringU16(des,src);
+}
+size_t shinsei_mappedIPv6ToStringU32(register char32_t*const restrict des,register const uint32_t*const restrict src){
+	return mappedIPv6ToStringU32(des,src);
+}
+
+// Convert string to mapped IPv6 address
+_SHINSEI_OS_INLINE static bool stringToMappedIPv6U16(register uint32_t*const restrict des,register const char16_t*const restrict src,register const size_t src_len){
+	uint_fast16_t parts[8]={0};
+	register size_t part_idx=0;
+	register size_t double_colon_idx=9;
+	register uint_fast32_t val=0;
+	register bool has_val=false;
+	for(register size_t i=0;i<src_len;++i){
+		if(isXDigitU16(src[i])){
+			register const uint_fast8_t digit=(uint_fast8_t)(isDigitU16(src[i])?src[i]-u'0':(src[i]|0x20)-u'a'+10);
+			val=(val<<4)|digit;
+			if(val>0xFFFF) return false;
+			has_val=true;
+		}
+		else if(src[i]==u':'){
+			if(has_val){
+				if(part_idx>=8) return false;
+				parts[part_idx++]=(uint_fast16_t)val;
+				val=0;
+				has_val=false;
+			}
+			else{
+				if(!i){
+					if(i+1>=src_len||src[i+1]!=u':') return false;
+				}
+				else if(double_colon_idx!=9){
+					return false;
+				}
+				else{
+					double_colon_idx=part_idx;
+				}
+			}
+		}
+		else if(src[i]==u'.'){
+			if(!has_val||part_idx>6) return false;
+			register size_t ipv4_start=i;
+			while(ipv4_start&&src[ipv4_start-1]!=u':') --ipv4_start;
+			uint32_t ipv4;
+			if(!stringToIPv4U16(&ipv4,src+ipv4_start,src_len-ipv4_start)) return false;
+			parts[part_idx++]=(uint_fast16_t)(ipv4>>16);
+			parts[part_idx++]=(uint_fast16_t)(ipv4&0xFFFF);
+			has_val=false;
+			break;
+		}
+		else return false;
+	}
+	if(has_val){
+		if(part_idx>=8) return false;
+		parts[part_idx++]=(uint_fast16_t)(val);
+	}
+	else if(double_colon_idx==9&&part_idx!=8){
+		return false;
+	}
+	if(double_colon_idx!=9){
+		if(part_idx>=8) return false;
+		register const size_t to_shift=part_idx-double_colon_idx;
+		register const size_t zeros=8-part_idx;
+		for(register size_t i=to_shift;i;--i){
+			parts[double_colon_idx+zeros+i-1]=parts[double_colon_idx+i-1];
+		}
+		for(register size_t i=0;i<zeros;++i){
+			parts[double_colon_idx+i]=0;
+		}
+	}
+	else if(part_idx!=8){
+		return false;
+	}
+	des[0]=((uint32_t)parts[0]<<16)|parts[1];
+	des[1]=((uint32_t)parts[2]<<16)|parts[3];
+	des[2]=((uint32_t)parts[4]<<16)|parts[5];
+	des[3]=((uint32_t)parts[6]<<16)|parts[7];
+	return true;
+}
+_SHINSEI_OS_INLINE static bool stringToMappedIPv6U32(register uint32_t*const restrict des,register const char32_t*const restrict src,register const size_t src_len){
+	uint_fast16_t parts[8]={0};
+	register size_t part_idx=0;
+	register size_t double_colon_idx=9;
+	register uint_fast32_t val=0;
+	register bool has_val=false;
+	for(register size_t i=0;i<src_len;++i){
+		if(isXDigitU32(src[i])){
+			register const uint_fast8_t digit=(uint_fast8_t)(isDigitU32(src[i])?src[i]-U'0':(src[i]|0x20)-U'a'+10);
+			val=(val<<4)|digit;
+			if(val>0xFFFF) return false;
+			has_val=true;
+		}
+		else if(src[i]==U':'){
+			if(has_val){
+				if(part_idx>=8) return false;
+				parts[part_idx++]=(uint_fast16_t)val;
+				val=0;
+				has_val=false;
+			}
+			else{
+				if(!i){
+					if(i+1>=src_len||src[i+1]!=U':') return false;
+				}
+				else if(double_colon_idx!=9){
+					return false;
+				}
+				else{
+					double_colon_idx=part_idx;
+				}
+			}
+		}
+		else if(src[i]==U'.'){
+			if(!has_val||part_idx>6) return false;
+			register size_t ipv4_start=i;
+			while(ipv4_start&&src[ipv4_start-1]!=U':') --ipv4_start;
+			uint32_t ipv4;
+			if(!stringToIPv4U32(&ipv4,src+ipv4_start,src_len-ipv4_start)) return false;
+			parts[part_idx++]=(uint_fast16_t)(ipv4>>16);
+			parts[part_idx++]=(uint_fast16_t)(ipv4&0xFFFF);
+			has_val=false;
+			break;
+		}
+		else return false;
+	}
+	if(has_val){
+		if(part_idx>=8) return false;
+		parts[part_idx++]=(uint_fast16_t)(val);
+	}
+	else if(double_colon_idx==9&&part_idx!=8){
+		return false;
+	}
+	if(double_colon_idx!=9){
+		if(part_idx>=8) return false;
+		register const size_t to_shift=part_idx-double_colon_idx;
+		register const size_t zeros=8-part_idx;
+		for(register size_t i=to_shift;i;--i){
+			parts[double_colon_idx+zeros+i-1]=parts[double_colon_idx+i-1];
+		}
+		for(register size_t i=0;i<zeros;++i){
+			parts[double_colon_idx+i]=0;
+		}
+	}
+	else if(part_idx!=8){
+		return false;
+	}
+	des[0]=((uint32_t)parts[0]<<16)|parts[1];
+	des[1]=((uint32_t)parts[2]<<16)|parts[3];
+	des[2]=((uint32_t)parts[4]<<16)|parts[5];
+	des[3]=((uint32_t)parts[6]<<16)|parts[7];
+	return true;
+}
+bool shinsei_stringToMappedIPv6CP(register const uint_fast32_t code_page,register uint32_t*const restrict des,register const char*const restrict src,register const size_t src_len){
+	register const bool ebcdic=isEBCDICCodePage(code_page);
+	register const char colon=(char)(ebcdic?0x7A:':');
+	register const char dot=(char)(ebcdic?0x4B:'.');
+	register const char zero=(char)(ebcdic?0xF0:'0');
+	uint_fast16_t parts[8]={0};
+	register size_t part_idx=0;
+	register size_t double_colon_idx=9;
+	register uint_fast32_t val=0;
+	register bool has_val=false;
+	for(register size_t i=0;i<src_len;++i){
+		if(isXDigitCP(code_page,src[i])){
+			register const uint_fast8_t digit=(uint_fast8_t)(isDigitCP(code_page,src[i])?src[i]-zero:ebcdic?(src[i]&0xBF)-0x81+10:(src[i]|0x20)-'a'+10);
+			val=(val<<4)|digit;
+			if(val>0xFFFF) return false;
+			has_val=true;
+		}
+		else if(src[i]==colon){
+			if(has_val){
+				if(part_idx>=8) return false;
+				parts[part_idx++]=(uint_fast16_t)val;
+				val=0;
+				has_val=false;
+			}
+			else{
+				if(!i){
+					if(i+1>=src_len||src[i+1]!=colon) return false;
+				}
+				else if(double_colon_idx!=9){
+					return false;
+				}
+				else{
+					double_colon_idx=part_idx;
+				}
+			}
+		}
+		else if(src[i]==dot){
+			if(!has_val||part_idx>6) return false;
+			register size_t ipv4_start=i;
+			while(ipv4_start&&src[ipv4_start-1]!=colon) --ipv4_start;
+			uint32_t ipv4;
+			if(!stringToIPv4CP(code_page,&ipv4,src+ipv4_start,src_len-ipv4_start)) return false;
+			parts[part_idx++]=(uint_fast16_t)(ipv4>>16);
+			parts[part_idx++]=(uint_fast16_t)(ipv4&0xFFFF);
+			has_val=false;
+			break;
+		}
+		else return false;
+	}
+	if(has_val){
+		if(part_idx>=8) return false;
+		parts[part_idx++]=(uint_fast16_t)(val);
+	}
+	else if(double_colon_idx==9&&part_idx!=8){
+		return false;
+	}
+	if(double_colon_idx!=9){
+		if(part_idx>=8) return false;
+		register const size_t to_shift=part_idx-double_colon_idx;
+		register const size_t zeros=8-part_idx;
+		for(register size_t i=to_shift;i;--i){
+			parts[double_colon_idx+zeros+i-1]=parts[double_colon_idx+i-1];
+		}
+		for(register size_t i=0;i<zeros;++i){
+			parts[double_colon_idx+i]=0;
+		}
+	}
+	else if(part_idx!=8){
+		return false;
+	}
+	des[0]=((uint32_t)parts[0]<<16)|parts[1];
+	des[1]=((uint32_t)parts[2]<<16)|parts[3];
+	des[2]=((uint32_t)parts[4]<<16)|parts[5];
+	des[3]=((uint32_t)parts[6]<<16)|parts[7];
+	return true;
+}
+bool shinsei_stringToMappedIPv6W(register uint32_t*const restrict des,register const wchar_t*const restrict src,register const size_t src_len){
+	#ifdef _SHINSEI_WCHAR_U32
+		return stringToMappedIPv6U32(des,(const char32_t*)src,src_len);
+	#else
+		return stringToMappedIPv6U16(des,(const char16_t*)src,src_len);
+	#endif
+}
+bool shinsei_stringToMappedIPv6U8(register uint32_t*const restrict des,register const char8_t*const restrict src,register const size_t src_len){
+	uint_fast16_t parts[8]={0};
+	register size_t part_idx=0;
+	register size_t double_colon_idx=9;
+	register uint_fast32_t val=0;
+	register bool has_val=false;
+	for(register size_t i=0;i<src_len;++i){
+		if(isXDigitU8(src[i])){
+			register const uint_fast8_t digit=(uint_fast8_t)(isDigitU8(src[i])?src[i]-u8'0':(src[i]|0x20)-u8'a'+10);
+			val=(val<<4)|digit;
+			if(val>0xFFFF) return false;
+			has_val=true;
+		}
+		else if(src[i]==u8':'){
+			if(has_val){
+				if(part_idx>=8) return false;
+				parts[part_idx++]=(uint_fast16_t)val;
+				val=0;
+				has_val=false;
+			}
+			else{
+				if(!i){
+					if(i+1>=src_len||src[i+1]!=u8':') return false;
+				}
+				else if(double_colon_idx!=9){
+					return false;
+				}
+				else{
+					double_colon_idx=part_idx;
+				}
+			}
+		}
+		else if(src[i]==u8'.'){
+			if(!has_val||part_idx>6) return false;
+			register size_t ipv4_start=i;
+			while(ipv4_start&&src[ipv4_start-1]!=u8':') --ipv4_start;
+			uint32_t ipv4;
+			if(!stringToIPv4U8(&ipv4,src+ipv4_start,src_len-ipv4_start)) return false;
+			parts[part_idx++]=(uint_fast16_t)(ipv4>>16);
+			parts[part_idx++]=(uint_fast16_t)(ipv4&0xFFFF);
+			has_val=false;
+			break;
+		}
+		else return false;
+	}
+	if(has_val){
+		if(part_idx>=8) return false;
+		parts[part_idx++]=(uint_fast16_t)(val);
+	}
+	else if(double_colon_idx==9&&part_idx!=8){
+		return false;
+	}
+	if(double_colon_idx!=9){
+		if(part_idx>=8) return false;
+		register const size_t to_shift=part_idx-double_colon_idx;
+		register const size_t zeros=8-part_idx;
+		for(register size_t i=to_shift;i;--i){
+			parts[double_colon_idx+zeros+i-1]=parts[double_colon_idx+i-1];
+		}
+		for(register size_t i=0;i<zeros;++i){
+			parts[double_colon_idx+i]=0;
+		}
+	}
+	else if(part_idx!=8){
+		return false;
+	}
+	des[0]=((uint32_t)parts[0]<<16)|parts[1];
+	des[1]=((uint32_t)parts[2]<<16)|parts[3];
+	des[2]=((uint32_t)parts[4]<<16)|parts[5];
+	des[3]=((uint32_t)parts[6]<<16)|parts[7];
+	return true;
+}
+bool shinsei_stringToMappedIPv6U16(register uint32_t*const restrict des,register const char16_t*const restrict src,register const size_t src_len){
+	return stringToMappedIPv6U16(des,src,src_len);
+}
+bool shinsei_stringToMappedIPv6U32(register uint32_t*const restrict des,register const char32_t*const restrict src,register const size_t src_len){
+	return stringToMappedIPv6U32(des,src,src_len);
 }
 
 #include"shinsei/.internal/cpp_term.hpp"

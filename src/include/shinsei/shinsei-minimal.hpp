@@ -6,3 +6,4 @@
 #include"shinsei/minimal/struct.hpp"
 #include"shinsei/minimal/sys.hpp"
 #include"shinsei/minimal/file.hpp"
+#include"shinsei/minimal/network.hpp"
