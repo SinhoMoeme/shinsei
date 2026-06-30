@@ -1,6 +1,6 @@
 #include"shinsei/network.h"
 
-#include"shinsei/.internal/cpp_init_source.hpp"
+#include"shinsei/.internal/cpp_init.hpp"
 
 // Convert string to IPv4 address
 _SHINSEI_LIB_API bool shinsei_stringToIPv4A(register uint32_t*const restrict des,register const char*const restrict src,register const size_t src_len){
@@ -34,4 +34,4 @@ _SHINSEI_LIB_API size_t shinsei_iPv6ToStringN(register char8_t*const restrict de
 	return shinsei_iPv6ToStringU8(des,src);
 }
 
-#include"shinsei/.internal/cpp_term_source.hpp"
+#include"shinsei/.internal/cpp_term.hpp"

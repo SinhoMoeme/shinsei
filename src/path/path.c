@@ -1,6 +1,6 @@
 #include"shinsei/minimal/path.h"
 
-#include"shinsei/.internal/cpp_init_source.hpp"
+#include"shinsei/.internal/cpp_init.hpp"
 
 #include"shinsei/.internal/str/ebcdic.h"
 // Copy from str/str.c
@@ -13291,4 +13291,4 @@ size_t shinsei_splitStringToURLPathU32(char32_t*const restrict des_buf,const siz
 	return splitStringToPartsU32(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt,SHINSEI_PATH_URL_DELIMITER_U32);
 }
 
-#include"shinsei/.internal/cpp_term_source.hpp"
+#include"shinsei/.internal/cpp_term.hpp"

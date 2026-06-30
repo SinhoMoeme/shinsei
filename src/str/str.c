@@ -165,7 +165,7 @@ bool shinsei_isANSICodePage(const unsigned int id)_SHINSEI_OS_NOEXCEPT{
 	}
 	return false;
 }
-_SHINSEI_OS_INLINE static bool isEBCDICCodePage(const unsigned int id)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isEBCDICCodePage(register const unsigned int id)_SHINSEI_OS_NOEXCEPT{
 	switch(id){
 		case SHINSEI_CODE_PAGE_IBM037:
 		case SHINSEI_CODE_PAGE_IBM500:
@@ -219,7 +219,7 @@ _SHINSEI_OS_INLINE static int charSizeU8(const char8_t starter_ch)_SHINSEI_OS_NO
 _SHINSEI_OS_INLINE static int charSizeU16(const char16_t starter_ch)_SHINSEI_OS_NOEXCEPT{
 	return (starter_ch<0xD800||starter_ch>0xDFFF)+((starter_ch>=0xD800&&starter_ch<=0xDBFF)<<1);
 }
-_SHINSEI_OS_INLINE static int charSizeCP(const unsigned int code_page,const int starter_ch,const int second_ch,const int third_ch,int*const restrict status)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int charSizeCP(register const uint_fast32_t code_page,const int starter_ch,const int second_ch,const int third_ch,int*const restrict status)_SHINSEI_OS_NOEXCEPT{
 	switch(code_page){
 		// Count: 105
 		case SHINSEI_CODE_PAGE_AUTO:
@@ -480,7 +480,7 @@ int shinsei_charSizeW(const wint_t starter_ch)_SHINSEI_OS_NOEXCEPT{
 		return charSizeU16((char16_t)starter_ch);
 	#endif
 }
-int shinsei_charSizeCP(const unsigned int code_page,const int starter_ch,const int second_ch,const int third_ch,int*const restrict status)_SHINSEI_OS_NOEXCEPT{
+int shinsei_charSizeCP(register const uint_fast32_t code_page,const int starter_ch,const int second_ch,const int third_ch,int*const restrict status)_SHINSEI_OS_NOEXCEPT{
 	return charSizeCP(code_page,starter_ch,second_ch,third_ch,status);
 }
 int shinsei_charSizeU8(const char8_t starter_ch)_SHINSEI_OS_NOEXCEPT{
@@ -497,7 +497,7 @@ int shinsei_charSizeU32(const char32_t starter_ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static bool isBDigitASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return (unsigned int)(ch-'0')<=1;
 }
-_SHINSEI_OS_INLINE static bool isBDigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isBDigitCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*((unsigned int)(ch-0xF0)<=1)+!ebcdic*isBDigitASCII(ch);
 }
@@ -543,10 +543,10 @@ bool shinsei_isBDigitWM(const wchar_t**const restrict str_ptr,const size_t len)_
 		return isBDigitU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isBDigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isBDigitCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isBDigitCP(code_page,ch);
 }
-bool shinsei_isBDigitCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isBDigitCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -591,7 +591,7 @@ _SHINSEI_OS_INLINE static bool isODigitASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static bool isODigitEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return (unsigned int)(ch-0xF0)<=7;
 }
-_SHINSEI_OS_INLINE static bool isODigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isODigitCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isODigitEBCDIC(ch)+!ebcdic*isODigitASCII(ch);
 }
@@ -637,10 +637,10 @@ bool shinsei_isODigitWM(const wchar_t**const restrict str_ptr,const size_t len)_
 		return isODigitU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isODigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isODigitCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isODigitCP(code_page,ch);
 }
-bool shinsei_isODigitCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isODigitCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -679,18 +679,18 @@ bool shinsei_isODigitU32M(const char32_t**const restrict str_ptr,const size_t le
 	return isODigitU32M(str_ptr,len);
 }
 
-_SHINSEI_OS_INLINE static bool isDigitASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isDigitASCII(register const int ch)_SHINSEI_OS_NOEXCEPT{
 	return (unsigned int)(ch-'0')<=9;
 }
-_SHINSEI_OS_INLINE static bool isDigitEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isDigitEBCDIC(register const int ch)_SHINSEI_OS_NOEXCEPT{
 	return (unsigned int)(ch-0xF0)<=9;
 }
-_SHINSEI_OS_INLINE static bool isDigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isDigitCP(register const uint_fast32_t code_page,register const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
-	return ebcdic*isDigitEBCDIC(ch)+!ebcdic*isDigitASCII(ch);
+	return ebcdic?isDigitEBCDIC(ch):isDigitASCII(ch);
 }
 _SHINSEI_OS_INLINE static bool isDigitU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
-	return (unsigned int)(ch-u8'0')<=9;
+	return (ch-u8'0')<=9;
 }
 _SHINSEI_OS_INLINE static bool isDigitU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!len,0)) return false;
@@ -698,10 +698,10 @@ _SHINSEI_OS_INLINE static bool isDigitU8M(const char8_t**const restrict str_ptr,
 	if(__builtin_expect(len<size,0)) return false;
 	*str_ptr+=size;
 	if(size>1) return false;
-	return (unsigned int)((*str_ptr)[-1]-u8'0')<=9;
+	return ((*str_ptr)[-1]-u8'0')<=9;
 }
 _SHINSEI_OS_INLINE static bool isDigitU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT{
-	return (unsigned int)(ch-u'0')<=9;
+	return (ch-u'0')<=9;
 }
 _SHINSEI_OS_INLINE static bool isDigitU16M(const char16_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!len,0)) return false;
@@ -709,18 +709,18 @@ _SHINSEI_OS_INLINE static bool isDigitU16M(const char16_t**const restrict str_pt
 	if(__builtin_expect(len<size,0)) return false;
 	*str_ptr+=size;
 	if(size>1) return false;
-	return (unsigned int)((*str_ptr)[-1]-u'0')<=9;
+	return ((*str_ptr)[-1]-u'0')<=9;
 }
 _SHINSEI_OS_INLINE static bool isDigitU32(const char32_t ch)_SHINSEI_OS_NOEXCEPT{
-	return (unsigned int)(ch-U'0')<=9;
+	return (ch-U'0')<=9;
 }
 _SHINSEI_OS_INLINE static bool isDigitU32M(const char32_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(len<1,0)) return false;
 	*str_ptr+=1;
-	return (unsigned int)((*str_ptr)[-1]-U'0')<=9;
+	return ((*str_ptr)[-1]-U'0')<=9;
 }
 bool shinsei_isDigitW(const wint_t ch)_SHINSEI_OS_NOEXCEPT{
-	return (unsigned int)(ch-L'0')<=9;
+	return (ch-L'0')<=9;
 }
 bool shinsei_isDigitWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the character unit size.
@@ -731,10 +731,10 @@ bool shinsei_isDigitWM(const wchar_t**const restrict str_ptr,const size_t len)_S
 		return isDigitU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isDigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isDigitCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isDigitCP(code_page,ch);
 }
-bool shinsei_isDigitCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isDigitCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -779,15 +779,15 @@ _SHINSEI_OS_INLINE static bool isXDigitASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static bool isXDigitEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isDigitEBCDIC(ch)||(unsigned int)(ch-0x81)<=5||(unsigned int)(ch-0xC1)<=5;
 }
-_SHINSEI_OS_INLINE static bool isXDigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isXDigitCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
-	return ebcdic*isXDigitEBCDIC(ch)+!ebcdic*isXDigitASCII(ch);
+	return ebcdic?isXDigitEBCDIC(ch):isXDigitASCII(ch);
 }
 _SHINSEI_OS_INLINE static bool isXDigitW(const wint_t ch)_SHINSEI_OS_NOEXCEPT{ // Used in isHexColor
-	return (unsigned int)(ch-L'0')<=9||(unsigned int)((ch|0x20)-L'a')<=5;
+	return (uint_fast32_t)(ch-L'0')<=9||(uint_fast32_t)((ch|0x20)-L'a')<=5;
 }
 _SHINSEI_OS_INLINE static bool isXDigitU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT{
-	return (unsigned int)(ch-u8'0')<=9||(unsigned int)((ch|0x20)-u8'a')<=5;
+	return (ch-u8'0')<=9||((ch|0x20)-u8'a')<=5;
 }
 _SHINSEI_OS_INLINE static bool isXDigitU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!len,0)) return false;
@@ -795,10 +795,10 @@ _SHINSEI_OS_INLINE static bool isXDigitU8M(const char8_t**const restrict str_ptr
 	if(__builtin_expect(len<size,0)) return false;
 	*str_ptr+=size;
 	if(size>1) return false;
-	return (unsigned int)((*str_ptr)[-1]-u8'0')<=9||(unsigned int)(((*str_ptr)[-1]|0x20)-u8'a')<=5;
+	return ((*str_ptr)[-1]-u8'0')<=9||(((*str_ptr)[-1]|0x20)-u8'a')<=5;
 }
 _SHINSEI_OS_INLINE static bool isXDigitU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT{
-	return (unsigned int)(ch-u'0')<=9||(unsigned int)((ch|0x20)-u'a')<=5;
+	return (ch-u'0')<=9||((ch|0x20)-u'a')<=5;
 }
 _SHINSEI_OS_INLINE static bool isXDigitU16M(const char16_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(!len,0)) return false;
@@ -806,15 +806,15 @@ _SHINSEI_OS_INLINE static bool isXDigitU16M(const char16_t**const restrict str_p
 	if(__builtin_expect(len<size,0)) return false;
 	*str_ptr+=size;
 	if(size>1) return false;
-	return (unsigned int)((*str_ptr)[-1]-u'0')<=9||(unsigned int)(((*str_ptr)[-1]|0x20)-u'a')<=5;
+	return ((*str_ptr)[-1]-u'0')<=9||(((*str_ptr)[-1]|0x20)-u'a')<=5;
 }
 _SHINSEI_OS_INLINE static bool isXDigitU32(const char32_t ch)_SHINSEI_OS_NOEXCEPT{
-	return (unsigned int)(ch-U'0')<=9||(unsigned int)((ch|0x20)-U'a')<=5;
+	return (ch-U'0')<=9||((ch|0x20)-U'a')<=5;
 }
 _SHINSEI_OS_INLINE static bool isXDigitU32M(const char32_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	if(__builtin_expect(len<1,0)) return false;
 	*str_ptr+=1;
-	return (unsigned int)((*str_ptr)[-1]-U'0')<=9||(unsigned int)(((*str_ptr)[-1]|0x20)-U'a')<=5;
+	return ((*str_ptr)[-1]-U'0')<=9||(((*str_ptr)[-1]|0x20)-U'a')<=5;
 }
 bool shinsei_isXDigitW(const wint_t ch)_SHINSEI_OS_NOEXCEPT{
 	return isXDigitW(ch);
@@ -828,10 +828,10 @@ bool shinsei_isXDigitWM(const wchar_t**const restrict str_ptr,const size_t len)_
 		return isXDigitU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isXDigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isXDigitCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isXDigitCP(code_page,ch);
 }
-bool shinsei_isXDigitCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isXDigitCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -876,7 +876,7 @@ _SHINSEI_OS_INLINE static bool isUpperASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static bool isUpperEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return (unsigned int)(ch-0xC1)<=8||(unsigned int)(ch-0xD1)<=8||(unsigned int)(ch-0xE2)<=7;
 }
-_SHINSEI_OS_INLINE static bool isUpperCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isUpperCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isUpperEBCDIC(ch)+!ebcdic*isUpperASCII(ch);
 }
@@ -925,10 +925,10 @@ bool shinsei_isUpperWM(const wchar_t**const restrict str_ptr,const size_t len)_S
 		return isUpperU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isUpperCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isUpperCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isUpperCP(code_page,ch);
 }
-bool shinsei_isUpperCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isUpperCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -973,7 +973,7 @@ _SHINSEI_OS_INLINE static bool isLowerASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static bool isLowerEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return (unsigned int)(ch-0x81)<=8||(unsigned int)(ch-0x91)<=8||(unsigned int)(ch-0xA2)<=7;
 }
-_SHINSEI_OS_INLINE static bool isLowerCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isLowerCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isLowerEBCDIC(ch)+!ebcdic*isLowerASCII(ch);
 }
@@ -1022,10 +1022,10 @@ bool shinsei_isLowerWM(const wchar_t**const restrict str_ptr,const size_t len)_S
 		return isLowerU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isLowerCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isLowerCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isLowerCP(code_page,ch);
 }
-bool shinsei_isLowerCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isLowerCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1070,7 +1070,7 @@ _SHINSEI_OS_INLINE static bool isAlphaASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static bool isAlphaEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isUpperEBCDIC(ch)||isLowerEBCDIC(ch);
 }
-_SHINSEI_OS_INLINE static bool isAlphaCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isAlphaCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isAlphaEBCDIC(ch)+!ebcdic*isAlphaASCII(ch);
 }
@@ -1116,10 +1116,10 @@ bool shinsei_isAlphaWM(const wchar_t**const restrict str_ptr,const size_t len)_S
 		return isAlphaU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isAlphaCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isAlphaCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isAlphaCP(code_page,ch);
 }
-bool shinsei_isAlphaCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isAlphaCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1164,7 +1164,7 @@ _SHINSEI_OS_INLINE static bool isAlnumASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static bool isAlnumEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isDigitEBCDIC(ch)||isAlphaEBCDIC(ch);
 }
-_SHINSEI_OS_INLINE static bool isAlnumCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isAlnumCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isAlnumEBCDIC(ch)+!ebcdic*isAlnumASCII(ch);
 }
@@ -1210,10 +1210,10 @@ bool shinsei_isAlnumWM(const wchar_t**const restrict str_ptr,const size_t len)_S
 		return isAlnumU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isAlnumCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isAlnumCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isAlnumCP(code_page,ch);
 }
-bool shinsei_isAlnumCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isAlnumCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1258,7 +1258,7 @@ _SHINSEI_OS_INLINE static bool isBlankASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static bool isBlankEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch==0x40||ch==0x05;
 }
-_SHINSEI_OS_INLINE static bool isBlankCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isBlankCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isBlankEBCDIC(ch)+!ebcdic*isBlankASCII(ch);
 }
@@ -1304,10 +1304,10 @@ bool shinsei_isBlankWM(const wchar_t**const restrict str_ptr,const size_t len)_S
 		return isBlankU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isBlankCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isBlankCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isBlankCP(code_page,ch);
 }
-bool shinsei_isBlankCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isBlankCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1352,7 +1352,7 @@ _SHINSEI_OS_INLINE static bool isCntrlASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static bool isCntrlEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return (unsigned int)ch<=0x3F||ch==0xFF;
 }
-_SHINSEI_OS_INLINE static bool isCntrlCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isCntrlCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isCntrlEBCDIC(ch)+!ebcdic*isCntrlASCII(ch);
 }
@@ -1398,10 +1398,10 @@ bool shinsei_isCntrlWM(const wchar_t**const restrict str_ptr,const size_t len)_S
 		return isCntrlU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isCntrlCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isCntrlCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isCntrlCP(code_page,ch);
 }
-bool shinsei_isCntrlCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isCntrlCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1446,7 +1446,7 @@ _SHINSEI_OS_INLINE static bool isPrintASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static bool isPrintEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return !isCntrlEBCDIC(ch);
 }
-_SHINSEI_OS_INLINE static bool isPrintCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isPrintCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isPrintEBCDIC(ch)+!ebcdic*isPrintASCII(ch);
 }
@@ -1492,10 +1492,10 @@ bool shinsei_isPrintWM(const wchar_t**const restrict str_ptr,const size_t len)_S
 		return isPrintU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isPrintCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isPrintCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isPrintCP(code_page,ch);
 }
-bool shinsei_isPrintCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isPrintCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1540,7 +1540,7 @@ _SHINSEI_OS_INLINE static bool isGraphASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static bool isGraphEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isPrintEBCDIC(ch)&&ch!=0x40;
 }
-_SHINSEI_OS_INLINE static bool isGraphCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isGraphCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isGraphEBCDIC(ch)+!ebcdic*isGraphASCII(ch);
 }
@@ -1586,10 +1586,10 @@ bool shinsei_isGraphWM(const wchar_t**const restrict str_ptr,const size_t len)_S
 		return isGraphU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isGraphCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isGraphCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isGraphCP(code_page,ch);
 }
-bool shinsei_isGraphCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isGraphCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1634,7 +1634,7 @@ _SHINSEI_OS_INLINE static bool isPunctASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static bool isPunctEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isGraphEBCDIC(ch)&&!isAlnumEBCDIC(ch);
 }
-_SHINSEI_OS_INLINE static bool isPunctCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isPunctCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isPunctEBCDIC(ch)+!ebcdic*isPunctASCII(ch);
 }
@@ -1680,10 +1680,10 @@ bool shinsei_isPunctWM(const wchar_t**const restrict str_ptr,const size_t len)_S
 		return isPunctU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isPunctCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isPunctCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isPunctCP(code_page,ch);
 }
-bool shinsei_isPunctCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isPunctCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1728,7 +1728,7 @@ _SHINSEI_OS_INLINE static bool isSpaceASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static bool isSpaceEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch==0x40||ch==0x05||ch==0x25||ch==0x0B||ch==0x0C||ch==0x0D;
 }
-_SHINSEI_OS_INLINE static bool isSpaceCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isSpaceCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isSpaceEBCDIC(ch)+!ebcdic*isSpaceASCII(ch);
 }
@@ -1775,10 +1775,10 @@ bool shinsei_isSpaceWM(const wchar_t**const restrict str_ptr,const size_t len)_S
 		return isSpaceU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isSpaceCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isSpaceCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isSpaceCP(code_page,ch);
 }
-bool shinsei_isSpaceCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isSpaceCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1823,7 +1823,7 @@ _SHINSEI_OS_INLINE static bool isJSONWhitespaceASCII(const int ch)_SHINSEI_OS_NO
 _SHINSEI_OS_INLINE static bool isJSONWhitespaceEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch==0x40||ch==0x05||ch==0x25||ch==0x0D;
 }
-_SHINSEI_OS_INLINE static bool isJSONWhitespaceCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static bool isJSONWhitespaceCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*isJSONWhitespaceEBCDIC(ch)+!ebcdic*isJSONWhitespaceASCII(ch);
 }
@@ -1869,10 +1869,10 @@ bool shinsei_isJSONWhitespaceWM(const wchar_t**const restrict str_ptr,const size
 		return isJSONWhitespaceU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-bool shinsei_isJSONWhitespaceCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isJSONWhitespaceCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return isJSONWhitespaceCP(code_page,ch);
 }
-bool shinsei_isJSONWhitespaceCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_isJSONWhitespaceCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return false;
@@ -1917,7 +1917,7 @@ _SHINSEI_OS_INLINE static int toUpperASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static int toUpperEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch+(isLowerEBCDIC(ch)<<6);
 }
-_SHINSEI_OS_INLINE static int toUpperCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int toUpperCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*toUpperEBCDIC(ch)+!ebcdic*toUpperASCII(ch);
 }
@@ -1967,10 +1967,10 @@ wint_t shinsei_toUpperWM(const wchar_t**const restrict str_ptr,const size_t len)
 		return toUpperU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-int shinsei_toUpperCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+int shinsei_toUpperCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return toUpperCP(code_page,ch);
 }
-int shinsei_toUpperCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+int shinsei_toUpperCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return 0;
@@ -2015,7 +2015,7 @@ _SHINSEI_OS_INLINE static int toLowerASCII(const int ch)_SHINSEI_OS_NOEXCEPT{
 _SHINSEI_OS_INLINE static int toLowerEBCDIC(const int ch)_SHINSEI_OS_NOEXCEPT{
 	return ch-(isUpperEBCDIC(ch)<<6);
 }
-_SHINSEI_OS_INLINE static int toLowerCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int toLowerCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	return ebcdic*toLowerEBCDIC(ch)+!ebcdic*toLowerASCII(ch);
 }
@@ -2065,10 +2065,10 @@ wint_t shinsei_toLowerWM(const wchar_t**const restrict str_ptr,const size_t len)
 		return toLowerU16M((const char16_t**)str_ptr,len);
 	#endif
 }
-int shinsei_toLowerCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
+int shinsei_toLowerCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT{
 	return toLowerCP(code_page,ch);
 }
-int shinsei_toLowerCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
+int shinsei_toLowerCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT{
 	// str_ptr: Pointer to the string pointer, advanced safely by the CP character byte size.
 	// len: Remaining size of the string buffer in bytes. 0 or more.
 	if(__builtin_expect(!len,0)) return 0;
@@ -2128,7 +2128,7 @@ _SHINSEI_OS_INLINE static int isHexColorU32(const char32_t*const restrict str,co
 	register const int res=(!isXDigitU32(ptr[0])||!isXDigitU32(ptr[1])||!isXDigitU32(ptr[2]))||(len>=6&&(!isXDigitU32(ptr[3])||!isXDigitU32(ptr[4])||!isXDigitU32(ptr[5])));
 	return !res*(int)len;
 }
-_SHINSEI_OS_INLINE static int isHexColorCP(const unsigned int code_page,const char*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static int isHexColorCP(register const uint_fast32_t code_page,const char*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	// Posiable length: 3 ("123"), 4 ("#123"), 6("123456") and 7("#123456")
 	if(len!=7&&len!=4&&len!=6&&len!=3) return 0;
 	register const bool ebcdic=isEBCDICCodePage(code_page);
@@ -2145,7 +2145,7 @@ int shinsei_isHexColorW(const wchar_t*const restrict str,const size_t len)_SHINS
 	register const int res=(!isXDigitW(ptr[0])||!isXDigitW(ptr[1])||!isXDigitW(ptr[2]))||(len>=6&&(!isXDigitW(ptr[3])||!isXDigitW(ptr[4])||!isXDigitW(ptr[5])));
 	return !res*(int)len;
 }
-int shinsei_isHexColorCP(const unsigned int code_page,const char*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_isHexColorCP(register const uint_fast32_t code_page,const char*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	// len: Size of the string buffer in character units.
 	// Possible length: 3 ("123"), 4 ("#123"), 6("123456") and 7("#123456")
 	return isHexColorCP(code_page,str,len);
@@ -2474,7 +2474,7 @@ size_t shinsei_stringLinesW(size_t*restrict idx_buf,size_t idx_buf_len,wchar_t*r
 	str[str_len+1]=L'\0';
 	return res+1;
 }
-size_t shinsei_stringLinesCP(const unsigned int code_page,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_stringLinesCP(register const uint_fast32_t code_page,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 	// idx_buf_len: Size of the index buffer. 0 or more.
 	// str_len: Size of the string buffer. The value is size of string + 2 for 2 terminator 0.
 	if(__builtin_expect(!str_len,0)) return 0;
@@ -2592,7 +2592,7 @@ size_t shinsei_findStringsW(size_t*restrict idx_buf,size_t idx_buf_len,wchar_t*r
 	str[str_len+1]=L'\0';
 	return res+1;
 }
-size_t shinsei_findStringsCP(const unsigned int code_page,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_findStringsCP(register const uint_fast32_t code_page,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT{
 	// idx_buf_len: Size of the index buffer. 0 or more.
 	// str_len: Size of the string buffer. The value is size of string + 2 for 2 terminator 0.
 	(void)code_page;
@@ -2705,7 +2705,7 @@ _SHINSEI_OS_INLINE static size_t splitStringToPartsW(wchar_t*const restrict des_
 	des_buf[now]=L'\0';
 	return res;
 }
-_SHINSEI_OS_INLINE static size_t splitStringToPartsCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char delimiter)_SHINSEI_OS_NOEXCEPT{
+_SHINSEI_OS_INLINE static size_t splitStringToPartsCP(register const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char delimiter)_SHINSEI_OS_NOEXCEPT{
 	(void)code_page;
 	if(__builtin_expect(!part_len,0)) return 0;
 	if(__builtin_expect(!src_len,0)){
@@ -2803,7 +2803,7 @@ size_t shinsei_splitStringToPartsW(wchar_t*const restrict des_buf,const size_t d
 	// src_len: The char count of the source string.
 	return splitStringToPartsW(des_buf,des_buf_len,src,src_len,part_len,max_part_cnt,delimiter);
 }
-size_t shinsei_splitStringToPartsCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char delimiter)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_splitStringToPartsCP(register const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char delimiter)_SHINSEI_OS_NOEXCEPT{
 	// des_buf_len: Size of the destination string + 1 for terminator 0.
 	// src_len: The char count of the source string.
 	return splitStringToPartsCP(code_page,des_buf,des_buf_len,src,src_len,part_len,max_part_cnt,delimiter);
@@ -3938,7 +3938,7 @@ size_t shinsei_int8ToBase62StringU32(char32_t*const restrict des,const int_fast8
 }
 
 // Int8/UInt8 string converters (CP)
-size_t shinsei_uInt8ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -3962,7 +3962,7 @@ size_t shinsei_uInt8ToStringCP(const unsigned int code_page,char*const restrict 
 	}
 	return res;
 }
-size_t shinsei_uInt8ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -3986,7 +3986,7 @@ size_t shinsei_uInt8ToBinStringCP(const unsigned int code_page,char*const restri
 	}
 	return res;
 }
-size_t shinsei_uInt8ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -4010,7 +4010,7 @@ size_t shinsei_uInt8ToOctStringCP(const unsigned int code_page,char*const restri
 	}
 	return res;
 }
-size_t shinsei_uInt8ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -4034,7 +4034,7 @@ size_t shinsei_uInt8ToHexStringCP(const unsigned int code_page,char*const restri
 	}
 	return res;
 }
-size_t shinsei_uInt8ToBase36StringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -4058,7 +4058,7 @@ size_t shinsei_uInt8ToBase36StringCP(const unsigned int code_page,char*const res
 	}
 	return res;
 }
-size_t shinsei_uInt8ToBase62StringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt8ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -4082,7 +4082,7 @@ size_t shinsei_uInt8ToBase62StringCP(const unsigned int code_page,char*const res
 	}
 	return res;
 }
-size_t shinsei_int8ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -4108,7 +4108,7 @@ size_t shinsei_int8ToStringCP(const unsigned int code_page,char*const restrict d
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int8ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -4134,7 +4134,7 @@ size_t shinsei_int8ToBinStringCP(const unsigned int code_page,char*const restric
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int8ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -4160,7 +4160,7 @@ size_t shinsei_int8ToOctStringCP(const unsigned int code_page,char*const restric
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int8ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -4186,7 +4186,7 @@ size_t shinsei_int8ToHexStringCP(const unsigned int code_page,char*const restric
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int8ToBase36StringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -4212,7 +4212,7 @@ size_t shinsei_int8ToBase36StringCP(const unsigned int code_page,char*const rest
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int8ToBase62StringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int8ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -5352,7 +5352,7 @@ size_t shinsei_int16ToBase62StringU32(char32_t*const restrict des,const int_fast
 }
 
 // Int16/UInt16 string converters (CP)
-size_t shinsei_uInt16ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -5376,7 +5376,7 @@ size_t shinsei_uInt16ToStringCP(const unsigned int code_page,char*const restrict
 	}
 	return res;
 }
-size_t shinsei_uInt16ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -5400,7 +5400,7 @@ size_t shinsei_uInt16ToBinStringCP(const unsigned int code_page,char*const restr
 	}
 	return res;
 }
-size_t shinsei_uInt16ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -5424,7 +5424,7 @@ size_t shinsei_uInt16ToOctStringCP(const unsigned int code_page,char*const restr
 	}
 	return res;
 }
-size_t shinsei_uInt16ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -5448,7 +5448,7 @@ size_t shinsei_uInt16ToHexStringCP(const unsigned int code_page,char*const restr
 	}
 	return res;
 }
-size_t shinsei_uInt16ToBase36StringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -5472,7 +5472,7 @@ size_t shinsei_uInt16ToBase36StringCP(const unsigned int code_page,char*const re
 	}
 	return res;
 }
-size_t shinsei_uInt16ToBase62StringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt16ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -5496,7 +5496,7 @@ size_t shinsei_uInt16ToBase62StringCP(const unsigned int code_page,char*const re
 	}
 	return res;
 }
-size_t shinsei_int16ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -5522,7 +5522,7 @@ size_t shinsei_int16ToStringCP(const unsigned int code_page,char*const restrict 
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int16ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -5548,7 +5548,7 @@ size_t shinsei_int16ToBinStringCP(const unsigned int code_page,char*const restri
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int16ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -5574,7 +5574,7 @@ size_t shinsei_int16ToOctStringCP(const unsigned int code_page,char*const restri
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int16ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -5600,7 +5600,7 @@ size_t shinsei_int16ToHexStringCP(const unsigned int code_page,char*const restri
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int16ToBase36StringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -5626,7 +5626,7 @@ size_t shinsei_int16ToBase36StringCP(const unsigned int code_page,char*const res
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int16ToBase62StringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int16ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -6766,7 +6766,7 @@ size_t shinsei_int32ToBase62StringU32(char32_t*const restrict des,const int_fast
 }
 
 // Int32/UInt32 string converters (CP)
-size_t shinsei_uInt32ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -6790,7 +6790,7 @@ size_t shinsei_uInt32ToStringCP(const unsigned int code_page,char*const restrict
 	}
 	return res;
 }
-size_t shinsei_uInt32ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -6814,7 +6814,7 @@ size_t shinsei_uInt32ToBinStringCP(const unsigned int code_page,char*const restr
 	}
 	return res;
 }
-size_t shinsei_uInt32ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -6838,7 +6838,7 @@ size_t shinsei_uInt32ToOctStringCP(const unsigned int code_page,char*const restr
 	}
 	return res;
 }
-size_t shinsei_uInt32ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -6862,7 +6862,7 @@ size_t shinsei_uInt32ToHexStringCP(const unsigned int code_page,char*const restr
 	}
 	return res;
 }
-size_t shinsei_uInt32ToBase36StringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -6886,7 +6886,7 @@ size_t shinsei_uInt32ToBase36StringCP(const unsigned int code_page,char*const re
 	}
 	return res;
 }
-size_t shinsei_uInt32ToBase62StringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt32ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -6910,7 +6910,7 @@ size_t shinsei_uInt32ToBase62StringCP(const unsigned int code_page,char*const re
 	}
 	return res;
 }
-size_t shinsei_int32ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -6936,7 +6936,7 @@ size_t shinsei_int32ToStringCP(const unsigned int code_page,char*const restrict 
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int32ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -6962,7 +6962,7 @@ size_t shinsei_int32ToBinStringCP(const unsigned int code_page,char*const restri
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int32ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -6988,7 +6988,7 @@ size_t shinsei_int32ToOctStringCP(const unsigned int code_page,char*const restri
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int32ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -7014,7 +7014,7 @@ size_t shinsei_int32ToHexStringCP(const unsigned int code_page,char*const restri
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int32ToBase36StringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -7040,7 +7040,7 @@ size_t shinsei_int32ToBase36StringCP(const unsigned int code_page,char*const res
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int32ToBase62StringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int32ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -8180,7 +8180,7 @@ size_t shinsei_int64ToBase62StringU32(char32_t*const restrict des,const int_fast
 }
 
 // Int64/UInt64 string converters (CP)
-size_t shinsei_uInt64ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -8204,7 +8204,7 @@ size_t shinsei_uInt64ToStringCP(const unsigned int code_page,char*const restrict
 	}
 	return res;
 }
-size_t shinsei_uInt64ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -8228,7 +8228,7 @@ size_t shinsei_uInt64ToBinStringCP(const unsigned int code_page,char*const restr
 	}
 	return res;
 }
-size_t shinsei_uInt64ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -8252,7 +8252,7 @@ size_t shinsei_uInt64ToOctStringCP(const unsigned int code_page,char*const restr
 	}
 	return res;
 }
-size_t shinsei_uInt64ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -8276,7 +8276,7 @@ size_t shinsei_uInt64ToHexStringCP(const unsigned int code_page,char*const restr
 	}
 	return res;
 }
-size_t shinsei_uInt64ToBase36StringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -8300,7 +8300,7 @@ size_t shinsei_uInt64ToBase36StringCP(const unsigned int code_page,char*const re
 	}
 	return res;
 }
-size_t shinsei_uInt64ToBase62StringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_uInt64ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	if(!src){
@@ -8324,7 +8324,7 @@ size_t shinsei_uInt64ToBase62StringCP(const unsigned int code_page,char*const re
 	}
 	return res;
 }
-size_t shinsei_int64ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -8350,7 +8350,7 @@ size_t shinsei_int64ToStringCP(const unsigned int code_page,char*const restrict 
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int64ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -8376,7 +8376,7 @@ size_t shinsei_int64ToBinStringCP(const unsigned int code_page,char*const restri
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int64ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -8402,7 +8402,7 @@ size_t shinsei_int64ToOctStringCP(const unsigned int code_page,char*const restri
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int64ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -8428,7 +8428,7 @@ size_t shinsei_int64ToHexStringCP(const unsigned int code_page,char*const restri
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int64ToBase36StringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -8454,7 +8454,7 @@ size_t shinsei_int64ToBase36StringCP(const unsigned int code_page,char*const res
 	if(neg) des[0]=(char)(ebcdic*0x60+!ebcdic*'-');
 	return res;
 }
-size_t shinsei_int64ToBase62StringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_int64ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char*const digits=(const char*)(ebcdic*(uintptr_t)SHINSEI_DIGITS_EBCDIC+!ebcdic*(uintptr_t)SHINSEI_DIGITS_ASCII);
 	register const bool neg=src<0;
@@ -8926,7 +8926,7 @@ int_fast8_t shinsei_base62StringToInt8U32(const char32_t*const restrict src,cons
 }
 
 // String to int8/uint8 converters (CP)
-uint_fast8_t shinsei_stringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_stringToUInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast8_t res=0;
@@ -8935,7 +8935,7 @@ uint_fast8_t shinsei_stringToUInt8CP(const unsigned int code_page,const char*con
 	}
 	return res;
 }
-uint_fast8_t shinsei_binStringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_binStringToUInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast8_t res=0;
@@ -8944,7 +8944,7 @@ uint_fast8_t shinsei_binStringToUInt8CP(const unsigned int code_page,const char*
 	}
 	return res;
 }
-uint_fast8_t shinsei_octStringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_octStringToUInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast8_t res=0;
@@ -8953,7 +8953,7 @@ uint_fast8_t shinsei_octStringToUInt8CP(const unsigned int code_page,const char*
 	}
 	return res;
 }
-uint_fast8_t shinsei_hexStringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_hexStringToUInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast8_t res=0;
@@ -8974,7 +8974,7 @@ uint_fast8_t shinsei_hexStringToUInt8CP(const unsigned int code_page,const char*
 	}
 	return res;
 }
-uint_fast8_t shinsei_base36StringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_base36StringToUInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast8_t res=0;
@@ -8995,7 +8995,7 @@ uint_fast8_t shinsei_base36StringToUInt8CP(const unsigned int code_page,const ch
 	}
 	return res;
 }
-uint_fast8_t shinsei_base62StringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast8_t shinsei_base62StringToUInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast8_t res=0;
@@ -9017,7 +9017,7 @@ uint_fast8_t shinsei_base62StringToUInt8CP(const unsigned int code_page,const ch
 	return res;
 }
 
-int_fast8_t shinsei_stringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_stringToInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9030,7 +9030,7 @@ int_fast8_t shinsei_stringToInt8CP(const unsigned int code_page,const char*const
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_binStringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_binStringToInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9043,7 +9043,7 @@ int_fast8_t shinsei_binStringToInt8CP(const unsigned int code_page,const char*co
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_octStringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_octStringToInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9056,7 +9056,7 @@ int_fast8_t shinsei_octStringToInt8CP(const unsigned int code_page,const char*co
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_hexStringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_hexStringToInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9081,7 +9081,7 @@ int_fast8_t shinsei_hexStringToInt8CP(const unsigned int code_page,const char*co
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_base36StringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_base36StringToInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9106,7 +9106,7 @@ int_fast8_t shinsei_base36StringToInt8CP(const unsigned int code_page,const char
 	}
 	return (int_fast8_t)(!neg*res-neg*res);
 }
-int_fast8_t shinsei_base62StringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast8_t shinsei_base62StringToInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9577,7 +9577,7 @@ int_fast16_t shinsei_base62StringToInt16U32(const char32_t*const restrict src,co
 }
 
 // String to int16/uint16 converters (CP)
-uint_fast16_t shinsei_stringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_stringToUInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast16_t res=0;
@@ -9586,7 +9586,7 @@ uint_fast16_t shinsei_stringToUInt16CP(const unsigned int code_page,const char*c
 	}
 	return res;
 }
-uint_fast16_t shinsei_binStringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_binStringToUInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast16_t res=0;
@@ -9595,7 +9595,7 @@ uint_fast16_t shinsei_binStringToUInt16CP(const unsigned int code_page,const cha
 	}
 	return res;
 }
-uint_fast16_t shinsei_octStringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_octStringToUInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast16_t res=0;
@@ -9604,7 +9604,7 @@ uint_fast16_t shinsei_octStringToUInt16CP(const unsigned int code_page,const cha
 	}
 	return res;
 }
-uint_fast16_t shinsei_hexStringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_hexStringToUInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast16_t res=0;
@@ -9625,7 +9625,7 @@ uint_fast16_t shinsei_hexStringToUInt16CP(const unsigned int code_page,const cha
 	}
 	return res;
 }
-uint_fast16_t shinsei_base36StringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_base36StringToUInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast16_t res=0;
@@ -9646,7 +9646,7 @@ uint_fast16_t shinsei_base36StringToUInt16CP(const unsigned int code_page,const 
 	}
 	return res;
 }
-uint_fast16_t shinsei_base62StringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast16_t shinsei_base62StringToUInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast16_t res=0;
@@ -9668,7 +9668,7 @@ uint_fast16_t shinsei_base62StringToUInt16CP(const unsigned int code_page,const 
 	return res;
 }
 
-int_fast16_t shinsei_stringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_stringToInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9681,7 +9681,7 @@ int_fast16_t shinsei_stringToInt16CP(const unsigned int code_page,const char*con
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_binStringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_binStringToInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9694,7 +9694,7 @@ int_fast16_t shinsei_binStringToInt16CP(const unsigned int code_page,const char*
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_octStringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_octStringToInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9707,7 +9707,7 @@ int_fast16_t shinsei_octStringToInt16CP(const unsigned int code_page,const char*
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_hexStringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_hexStringToInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9732,7 +9732,7 @@ int_fast16_t shinsei_hexStringToInt16CP(const unsigned int code_page,const char*
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_base36StringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_base36StringToInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -9757,7 +9757,7 @@ int_fast16_t shinsei_base36StringToInt16CP(const unsigned int code_page,const ch
 	}
 	return (int_fast16_t)(!neg*res-neg*res);
 }
-int_fast16_t shinsei_base62StringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast16_t shinsei_base62StringToInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -10228,7 +10228,7 @@ int_fast32_t shinsei_base62StringToInt32U32(const char32_t*const restrict src,co
 }
 
 // String to int32/uint32 converters (CP)
-uint_fast32_t shinsei_stringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_stringToUInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast32_t res=0;
@@ -10237,7 +10237,7 @@ uint_fast32_t shinsei_stringToUInt32CP(const unsigned int code_page,const char*c
 	}
 	return res;
 }
-uint_fast32_t shinsei_binStringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_binStringToUInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast32_t res=0;
@@ -10246,7 +10246,7 @@ uint_fast32_t shinsei_binStringToUInt32CP(const unsigned int code_page,const cha
 	}
 	return res;
 }
-uint_fast32_t shinsei_octStringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_octStringToUInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast32_t res=0;
@@ -10255,7 +10255,7 @@ uint_fast32_t shinsei_octStringToUInt32CP(const unsigned int code_page,const cha
 	}
 	return res;
 }
-uint_fast32_t shinsei_hexStringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_hexStringToUInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast32_t res=0;
@@ -10276,7 +10276,7 @@ uint_fast32_t shinsei_hexStringToUInt32CP(const unsigned int code_page,const cha
 	}
 	return res;
 }
-uint_fast32_t shinsei_base36StringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_base36StringToUInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast32_t res=0;
@@ -10297,7 +10297,7 @@ uint_fast32_t shinsei_base36StringToUInt32CP(const unsigned int code_page,const 
 	}
 	return res;
 }
-uint_fast32_t shinsei_base62StringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast32_t shinsei_base62StringToUInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast32_t res=0;
@@ -10319,7 +10319,7 @@ uint_fast32_t shinsei_base62StringToUInt32CP(const unsigned int code_page,const 
 	return res;
 }
 
-int_fast32_t shinsei_stringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_stringToInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -10332,7 +10332,7 @@ int_fast32_t shinsei_stringToInt32CP(const unsigned int code_page,const char*con
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_binStringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_binStringToInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -10345,7 +10345,7 @@ int_fast32_t shinsei_binStringToInt32CP(const unsigned int code_page,const char*
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_octStringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_octStringToInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -10358,7 +10358,7 @@ int_fast32_t shinsei_octStringToInt32CP(const unsigned int code_page,const char*
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_hexStringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_hexStringToInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -10383,7 +10383,7 @@ int_fast32_t shinsei_hexStringToInt32CP(const unsigned int code_page,const char*
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_base36StringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_base36StringToInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -10408,7 +10408,7 @@ int_fast32_t shinsei_base36StringToInt32CP(const unsigned int code_page,const ch
 	}
 	return (int_fast32_t)(!neg*res-neg*res);
 }
-int_fast32_t shinsei_base62StringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast32_t shinsei_base62StringToInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -10879,7 +10879,7 @@ int_fast64_t shinsei_base62StringToInt64U32(const char32_t*const restrict src,co
 }
 
 // String to int64/uint64 converters (CP)
-uint_fast64_t shinsei_stringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_stringToUInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast64_t res=0;
@@ -10888,7 +10888,7 @@ uint_fast64_t shinsei_stringToUInt64CP(const unsigned int code_page,const char*c
 	}
 	return res;
 }
-uint_fast64_t shinsei_binStringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_binStringToUInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast64_t res=0;
@@ -10897,7 +10897,7 @@ uint_fast64_t shinsei_binStringToUInt64CP(const unsigned int code_page,const cha
 	}
 	return res;
 }
-uint_fast64_t shinsei_octStringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_octStringToUInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast64_t res=0;
@@ -10906,7 +10906,7 @@ uint_fast64_t shinsei_octStringToUInt64CP(const unsigned int code_page,const cha
 	}
 	return res;
 }
-uint_fast64_t shinsei_hexStringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_hexStringToUInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast64_t res=0;
@@ -10927,7 +10927,7 @@ uint_fast64_t shinsei_hexStringToUInt64CP(const unsigned int code_page,const cha
 	}
 	return res;
 }
-uint_fast64_t shinsei_base36StringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_base36StringToUInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast64_t res=0;
@@ -10948,7 +10948,7 @@ uint_fast64_t shinsei_base36StringToUInt64CP(const unsigned int code_page,const 
 	}
 	return res;
 }
-uint_fast64_t shinsei_base62StringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+uint_fast64_t shinsei_base62StringToUInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register uint_fast64_t res=0;
@@ -10970,7 +10970,7 @@ uint_fast64_t shinsei_base62StringToUInt64CP(const unsigned int code_page,const 
 	return res;
 }
 
-int_fast64_t shinsei_stringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_stringToInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -10983,7 +10983,7 @@ int_fast64_t shinsei_stringToInt64CP(const unsigned int code_page,const char*con
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_binStringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_binStringToInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -10996,7 +10996,7 @@ int_fast64_t shinsei_binStringToInt64CP(const unsigned int code_page,const char*
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_octStringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_octStringToInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -11009,7 +11009,7 @@ int_fast64_t shinsei_octStringToInt64CP(const unsigned int code_page,const char*
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_hexStringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_hexStringToInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -11034,7 +11034,7 @@ int_fast64_t shinsei_hexStringToInt64CP(const unsigned int code_page,const char*
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_base36StringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_base36StringToInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -11059,7 +11059,7 @@ int_fast64_t shinsei_base36StringToInt64CP(const unsigned int code_page,const ch
 	}
 	return (int_fast64_t)(!neg*res-neg*res);
 }
-int_fast64_t shinsei_base62StringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+int_fast64_t shinsei_base62StringToInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	register const bool ebcdic=isEBCDICCodePage(code_page);
 	register const char zero=(char)(ebcdic*0xF0+!ebcdic*'0');
 	register const char minus=(char)(ebcdic*0x60+!ebcdic*'-');
@@ -11114,7 +11114,7 @@ size_t shinsei_strLenU32(const char32_t*const restrict str)_SHINSEI_OS_NOEXCEPT{
 #endif
 }
 
-size_t shinsei_strLenCP(const unsigned int code_page,const char*const restrict str)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_strLenCP(register const uint_fast32_t code_page,const char*const restrict str)_SHINSEI_OS_NOEXCEPT{
 	(void)code_page;
 	return __builtin_strlen(str);
 }
@@ -11124,7 +11124,7 @@ void shinsei_strCpyW(wchar_t*const restrict des,const wchar_t*const restrict src
 	des[len]=0;
 	return;
 }
-void shinsei_strCpyCP(const unsigned int code_page,char*const restrict des,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
+void shinsei_strCpyCP(register const uint_fast32_t code_page,char*const restrict des,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT{
 	(void)code_page;
 	__builtin_memcpy(des,src,len*sizeof(char));
 	des[len]=0;
@@ -11153,7 +11153,7 @@ size_t shinsei_strCatW(wchar_t*const restrict des,const size_t des_len,const wch
 	des[res]=0;
 	return res;
 }
-size_t shinsei_strCatCP(const unsigned int code_page,char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_strCatCP(register const uint_fast32_t code_page,char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
 	(void)code_page;
 	__builtin_memcpy(des+des_len,src,src_len*sizeof(char));
 	register const size_t res=des_len+src_len;
@@ -11185,7 +11185,7 @@ int shinsei_strCmpW(const wchar_t*const restrict des,const size_t des_len,const 
 	register const int res=__builtin_memcmp(des,src,min_len*sizeof(wchar_t));
 	return (res>0)-(res<0)+!res*((des_len>src_len)-(des_len<src_len));
 }
-int shinsei_strCmpCP(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
+int shinsei_strCmpCP(register const uint_fast32_t code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
 	(void)code_page;
 	register const size_t min_len=(des_len<src_len)*des_len+(des_len>=src_len)*src_len;
 	register const int res=__builtin_memcmp(des,src,min_len*sizeof(char));
@@ -11212,7 +11212,7 @@ size_t shinsei_strChrW(const wchar_t*const restrict des,const size_t des_len,con
 	register const void* res=(const void*)(size_t)wmemchr((const wchar_t*)des,src,des_len);
 	return (res==nullptr)*SIZE_MAX+(res!=nullptr)*(size_t)((const wchar_t*)res-des);
 }
-size_t shinsei_strChrCP(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char src)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_strChrCP(register const uint_fast32_t code_page,const char*const restrict des,const size_t des_len,const char src)_SHINSEI_OS_NOEXCEPT{
 	(void)code_page;
 	register const void* res=__builtin_memchr(des,src,des_len);
 	return (res==nullptr)*SIZE_MAX+(res!=nullptr)*(size_t)((const char*)res-des);
@@ -11254,7 +11254,7 @@ size_t shinsei_strStrW(const wchar_t*const restrict des,const size_t des_len,con
 	}
 	return SIZE_MAX;
 }
-size_t shinsei_strStrCP(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_strStrCP(register const uint_fast32_t code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT{
 	(void)code_page;
 	if(__builtin_expect(!src_len,0)) return 0;
 	if(__builtin_expect(des_len<src_len,0)) return SIZE_MAX;
@@ -11318,7 +11318,7 @@ size_t shinsei_strKMPW(const wchar_t*const restrict des,const size_t des_len,con
 	}
 	return SIZE_MAX;
 }
-size_t shinsei_strKMPCP(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT{
+size_t shinsei_strKMPCP(register const uint_fast32_t code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT{
 	(void)code_page;
 	if(__builtin_expect(!src_len,0)) return 0;
 	if(__builtin_expect(des_len<src_len,0)) return SIZE_MAX;
@@ -12017,7 +12017,7 @@ bool shinsei_string_t_attach(shinsei_string_t*const restrict this,const shinsei_
 }
 
 // Attach the string from values
-bool shinsei_string_t_attachValue(shinsei_string_t*const restrict this,const int_fast32_t ctrl,const unsigned int code_page,const size_t size,const size_t cap,void*const ptr,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
+bool shinsei_string_t_attachValue(shinsei_string_t*const restrict this,const int_fast32_t ctrl,register const uint_fast32_t code_page,const size_t size,const size_t cap,void*const ptr,const size_t char_size)_SHINSEI_OS_NOEXCEPT{
 	register const bool des_inlined=str_inlined(this);
 	this->char_size=char_size;
 	if(!des_inlined){
@@ -12049,12 +12049,12 @@ void shinsei_string_t_enableCodePage(shinsei_string_t*const restrict this,const 
 	return;
 }
 
-void shinsei_string_t_setCodePage(shinsei_string_t*const restrict this,const unsigned int code_page)_SHINSEI_OS_NOEXCEPT{
+void shinsei_string_t_setCodePage(shinsei_string_t*const restrict this,register const uint_fast32_t code_page)_SHINSEI_OS_NOEXCEPT{
 	this->code_page=code_page;
 	return;
 }
 
-void shinsei_string_t_codePage(shinsei_string_t*const restrict this,const bool enabled,const unsigned int code_page)_SHINSEI_OS_NOEXCEPT{
+void shinsei_string_t_codePage(shinsei_string_t*const restrict this,const bool enabled,register const uint_fast32_t code_page)_SHINSEI_OS_NOEXCEPT{
 	this->ctrl=(this->ctrl&~_SHINSEI_CTRL_CODE_PAGE)|(enabled*_SHINSEI_CTRL_CODE_PAGE);
 	this->code_page=code_page;
 	return;

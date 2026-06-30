@@ -522,15 +522,15 @@ _SHINSEI_LIB_API bool shinsei_isANSICodePage(const unsigned int id)_SHINSEI_OS_N
 _SHINSEI_LIB_API bool shinsei_isEBCDICCodePage(const unsigned int id)_SHINSEI_OS_NOEXCEPT;
 
 _SHINSEI_LIB_API int shinsei_charSizeW(const wint_t starter_ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int shinsei_charSizeCP(const unsigned int code_page,const int starter_ch,const int second_ch,const int third_ch,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int shinsei_charSizeCP(register const uint_fast32_t code_page,const int starter_ch,const int second_ch,const int third_ch,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API int shinsei_charSizeU8(const char8_t starter_ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API int shinsei_charSizeU16(const char16_t starter_ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API int shinsei_charSizeU32(const char32_t starter_ch)_SHINSEI_OS_NOEXCEPT;
 
 _SHINSEI_LIB_API bool shinsei_isBDigitW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isBDigitWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isBDigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isBDigitCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isBDigitCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isBDigitCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isBDigitU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isBDigitU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isBDigitU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -540,8 +540,8 @@ _SHINSEI_LIB_API bool shinsei_isBDigitU32M(const char32_t**const restrict str_pt
 
 _SHINSEI_LIB_API bool shinsei_isODigitW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isODigitWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isODigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isODigitCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isODigitCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isODigitCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isODigitU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isODigitU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isODigitU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -551,8 +551,8 @@ _SHINSEI_LIB_API bool shinsei_isODigitU32M(const char32_t**const restrict str_pt
 
 _SHINSEI_LIB_API bool shinsei_isDigitW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isDigitWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isDigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isDigitCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isDigitCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isDigitCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isDigitU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isDigitU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isDigitU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -562,8 +562,8 @@ _SHINSEI_LIB_API bool shinsei_isDigitU32M(const char32_t**const restrict str_ptr
 
 _SHINSEI_LIB_API bool shinsei_isXDigitW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isXDigitWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isXDigitCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isXDigitCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isXDigitCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isXDigitCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isXDigitU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isXDigitU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isXDigitU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -573,8 +573,8 @@ _SHINSEI_LIB_API bool shinsei_isXDigitU32M(const char32_t**const restrict str_pt
 
 _SHINSEI_LIB_API bool shinsei_isUpperW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isUpperWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isUpperCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isUpperCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isUpperCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isUpperCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isUpperU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isUpperU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isUpperU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -584,8 +584,8 @@ _SHINSEI_LIB_API bool shinsei_isUpperU32M(const char32_t**const restrict str_ptr
 
 _SHINSEI_LIB_API bool shinsei_isLowerW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isLowerWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isLowerCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isLowerCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isLowerCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isLowerCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isLowerU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isLowerU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isLowerU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -595,8 +595,8 @@ _SHINSEI_LIB_API bool shinsei_isLowerU32M(const char32_t**const restrict str_ptr
 
 _SHINSEI_LIB_API bool shinsei_isAlphaW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isAlphaWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isAlphaCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isAlphaCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isAlphaCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isAlphaCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isAlphaU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isAlphaU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isAlphaU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -606,8 +606,8 @@ _SHINSEI_LIB_API bool shinsei_isAlphaU32M(const char32_t**const restrict str_ptr
 
 _SHINSEI_LIB_API bool shinsei_isAlnumW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isAlnumWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isAlnumCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isAlnumCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isAlnumCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isAlnumCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isAlnumU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isAlnumU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isAlnumU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -617,8 +617,8 @@ _SHINSEI_LIB_API bool shinsei_isAlnumU32M(const char32_t**const restrict str_ptr
 
 _SHINSEI_LIB_API bool shinsei_isBlankW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isBlankWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isBlankCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isBlankCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isBlankCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isBlankCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isBlankU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isBlankU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isBlankU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -628,8 +628,8 @@ _SHINSEI_LIB_API bool shinsei_isBlankU32M(const char32_t**const restrict str_ptr
 
 _SHINSEI_LIB_API bool shinsei_isCntrlW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isCntrlWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isCntrlCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isCntrlCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isCntrlCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isCntrlCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isCntrlU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isCntrlU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isCntrlU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -639,8 +639,8 @@ _SHINSEI_LIB_API bool shinsei_isCntrlU32M(const char32_t**const restrict str_ptr
 
 _SHINSEI_LIB_API bool shinsei_isPrintW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isPrintWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isPrintCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isPrintCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isPrintCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isPrintCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isPrintU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isPrintU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isPrintU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -650,8 +650,8 @@ _SHINSEI_LIB_API bool shinsei_isPrintU32M(const char32_t**const restrict str_ptr
 
 _SHINSEI_LIB_API bool shinsei_isGraphW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isGraphWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isGraphCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isGraphCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isGraphCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isGraphCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isGraphU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isGraphU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isGraphU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -661,8 +661,8 @@ _SHINSEI_LIB_API bool shinsei_isGraphU32M(const char32_t**const restrict str_ptr
 
 _SHINSEI_LIB_API bool shinsei_isPunctW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isPunctWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isPunctCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isPunctCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isPunctCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isPunctCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isPunctU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isPunctU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isPunctU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -672,8 +672,8 @@ _SHINSEI_LIB_API bool shinsei_isPunctU32M(const char32_t**const restrict str_ptr
 
 _SHINSEI_LIB_API bool shinsei_isSpaceW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isSpaceWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isSpaceCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isSpaceCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isSpaceCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isSpaceCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isSpaceU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isSpaceU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isSpaceU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -683,8 +683,8 @@ _SHINSEI_LIB_API bool shinsei_isSpaceU32M(const char32_t**const restrict str_ptr
 
 _SHINSEI_LIB_API bool shinsei_isJSONWhitespaceW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isJSONWhitespaceWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isJSONWhitespaceCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_isJSONWhitespaceCPM(const unsigned int code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isJSONWhitespaceCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_isJSONWhitespaceCPM(register const uint_fast32_t code_page,const char**const restrict str_ptr,const size_t len,int*const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isJSONWhitespaceU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isJSONWhitespaceU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_isJSONWhitespaceU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -694,8 +694,8 @@ _SHINSEI_LIB_API bool shinsei_isJSONWhitespaceU32M(const char32_t**const restric
 
 _SHINSEI_LIB_API wint_t shinsei_toUpperW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API wint_t shinsei_toUpperWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int shinsei_toUpperCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int shinsei_toUpperCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int shinsei_toUpperCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int shinsei_toUpperCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API char8_t shinsei_toUpperU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API char8_t shinsei_toUpperU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API char16_t shinsei_toUpperU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -705,8 +705,8 @@ _SHINSEI_LIB_API char32_t shinsei_toUpperU32M(const char32_t**const restrict str
 
 _SHINSEI_LIB_API wint_t shinsei_toLowerW(const wint_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API wint_t shinsei_toLowerWM(const wchar_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int shinsei_toLowerCP(const unsigned int code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int shinsei_toLowerCPM(const unsigned int code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int shinsei_toLowerCP(register const uint_fast32_t code_page,const int ch)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int shinsei_toLowerCPM(register const uint_fast32_t code_page,const char** const restrict str_ptr,const size_t len,int* const restrict status)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API char8_t shinsei_toLowerU8(const char8_t ch)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API char8_t shinsei_toLowerU8M(const char8_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API char16_t shinsei_toLowerU16(const char16_t ch)_SHINSEI_OS_NOEXCEPT;
@@ -715,7 +715,7 @@ _SHINSEI_LIB_API char32_t shinsei_toLowerU32(const char32_t ch)_SHINSEI_OS_NOEXC
 _SHINSEI_LIB_API char32_t shinsei_toLowerU32M(const char32_t**const restrict str_ptr,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
 _SHINSEI_LIB_API int shinsei_isHexColorW(const wchar_t*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int shinsei_isHexColorCP(const unsigned int code_page,const char*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int shinsei_isHexColorCP(register const uint_fast32_t code_page,const char*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API int shinsei_isHexColorU8(const char8_t*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API int shinsei_isHexColorU16(const char16_t*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API int shinsei_isHexColorU32(const char32_t*const restrict str,const size_t len)_SHINSEI_OS_NOEXCEPT;
@@ -735,68 +735,68 @@ _SHINSEI_LIB_API size_t shinsei_uTF8ToUTF32(char32_t*const restrict des,const si
 _SHINSEI_LIB_API size_t shinsei_uTF8ToUTF16(char16_t*const restrict des,const size_t des_len,const char8_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
 
 _SHINSEI_LIB_API size_t shinsei_stringLinesW(size_t*restrict idx_buf,size_t idx_buf_len,wchar_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_stringLinesCP(const unsigned int code_page,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_stringLinesCP(register const uint_fast32_t code_page,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_stringLinesU8(size_t*restrict idx_buf,size_t idx_buf_len,char8_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_stringLinesU16(size_t*restrict idx_buf,size_t idx_buf_len,char16_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_stringLinesU32(size_t*restrict idx_buf,size_t idx_buf_len,char32_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
 
 _SHINSEI_LIB_API size_t shinsei_findStringsW(size_t*restrict idx_buf,size_t idx_buf_len,wchar_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_findStringsCP(const unsigned int code_page,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_findStringsCP(register const uint_fast32_t code_page,size_t*restrict idx_buf,size_t idx_buf_len,char*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_findStringsU8(size_t*restrict idx_buf,size_t idx_buf_len,char8_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_findStringsU16(size_t*restrict idx_buf,size_t idx_buf_len,char16_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_findStringsU32(size_t*restrict idx_buf,size_t idx_buf_len,char32_t*restrict str,const size_t str_len)_SHINSEI_OS_NOEXCEPT;
 
 _SHINSEI_LIB_API size_t shinsei_splitStringToPartsW(wchar_t*const restrict des_buf,const size_t des_buf_len,const wchar_t*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const wchar_t delimiter)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_splitStringToPartsCP(const unsigned int code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char delimiter)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_splitStringToPartsCP(register const uint_fast32_t code_page,char*const restrict des_buf,const size_t des_buf_len,const char*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char delimiter)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_splitStringToPartsU8(char8_t*const restrict des_buf,const size_t des_buf_len,const char8_t*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char8_t delimiter)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_splitStringToPartsU16(char16_t*const restrict des_buf,const size_t des_buf_len,const char16_t*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char16_t delimiter)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_splitStringToPartsU32(char32_t*const restrict des_buf,const size_t des_buf_len,const char32_t*const restrict src,const size_t src_len,const size_t part_len,const size_t max_part_cnt,const char32_t delimiter)_SHINSEI_OS_NOEXCEPT;
 
 // strLen
 _SHINSEI_LIB_API size_t shinsei_strLenW(const wchar_t*const restrict str)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_strLenCP(const unsigned int code_page,const char*const restrict str)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_strLenCP(register const uint_fast32_t code_page,const char*const restrict str)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strLenU8(const char8_t*const restrict str)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strLenU16(const char16_t*const restrict str)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strLenU32(const char32_t*const restrict str)_SHINSEI_OS_NOEXCEPT;
 
 // strCpy
 _SHINSEI_LIB_API void shinsei_strCpyW(wchar_t*const restrict des,const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API void shinsei_strCpyCP(const unsigned int code_page,char*const restrict des,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API void shinsei_strCpyCP(register const uint_fast32_t code_page,char*const restrict des,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_strCpyU8(char8_t*const restrict des,const char8_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_strCpyU16(char16_t*const restrict des,const char16_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_strCpyU32(char32_t*const restrict des,const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
 // strCat
 _SHINSEI_LIB_API size_t shinsei_strCatW(wchar_t*const restrict des,const size_t des_len,const wchar_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_strCatCP(const unsigned int code_page,char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_strCatCP(register const uint_fast32_t code_page,char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strCatU8(char8_t*const restrict des,const size_t des_len,const char8_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strCatU16(char16_t*const restrict des,const size_t des_len,const char16_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strCatU32(char32_t*const restrict des,const size_t des_len,const char32_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
 
 // strCmp
 _SHINSEI_LIB_API int shinsei_strCmpW(const wchar_t*const restrict des,const size_t des_len,const wchar_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int shinsei_strCmpCP(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int shinsei_strCmpCP(register const uint_fast32_t code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API int shinsei_strCmpU8(const char8_t*const restrict des,const size_t des_len,const char8_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API int shinsei_strCmpU16(const char16_t*const restrict des,const size_t des_len,const char16_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API int shinsei_strCmpU32(const char32_t*const restrict des,const size_t des_len,const char32_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
 
 // strChr
 _SHINSEI_LIB_API size_t shinsei_strChrW(const wchar_t*const restrict des,const size_t des_len,const wchar_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_strChrCP(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_strChrCP(register const uint_fast32_t code_page,const char*const restrict des,const size_t des_len,const char src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strChrU8(const char8_t*const restrict des,const size_t des_len,const char8_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strChrU16(const char16_t*const restrict des,const size_t des_len,const char16_t src)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strChrU32(const char32_t*const restrict des,const size_t des_len,const char32_t src)_SHINSEI_OS_NOEXCEPT;
 
 // strStr
 _SHINSEI_LIB_API size_t shinsei_strStrW(const wchar_t*const restrict des,const size_t des_len,const wchar_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_strStrCP(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_strStrCP(register const uint_fast32_t code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strStrU8(const char8_t*const restrict des,const size_t des_len,const char8_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strStrU16(const char16_t*const restrict des,const size_t des_len,const char16_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strStrU32(const char32_t*const restrict des,const size_t des_len,const char32_t*const restrict src,const size_t src_len)_SHINSEI_OS_NOEXCEPT;
 
 // strKMP
 _SHINSEI_LIB_API size_t shinsei_strKMPW(const wchar_t*const restrict des,const size_t des_len,const wchar_t*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_strKMPCP(const unsigned int code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_strKMPCP(register const uint_fast32_t code_page,const char*const restrict des,const size_t des_len,const char*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strKMPU8(const char8_t*const restrict des,const size_t des_len,const char8_t*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strKMPU16(const char16_t*const restrict des,const size_t des_len,const char16_t*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API size_t shinsei_strKMPU32(const char32_t*const restrict des,const size_t des_len,const char32_t*const restrict src,const size_t src_len,size_t*const restrict buf,const size_t buf_len)_SHINSEI_OS_NOEXCEPT;
@@ -862,19 +862,19 @@ _SHINSEI_LIB_API size_t shinsei_int8ToBase36StringU32(char32_t*const restrict de
 _SHINSEI_LIB_API size_t shinsei_int8ToBase62StringU32(char32_t*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT;
 
 // Int8/UInt8 string converters (CP)
-_SHINSEI_LIB_API size_t shinsei_uInt8ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt8ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt8ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt8ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt8ToBase36StringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt8ToBase62StringCP(const unsigned int code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt8ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt8ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt8ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt8ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt8ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt8ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast8_t src)_SHINSEI_OS_NOEXCEPT;
 
-_SHINSEI_LIB_API size_t shinsei_int8ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int8ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int8ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int8ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int8ToBase36StringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int8ToBase62StringCP(const unsigned int code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int8ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int8ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int8ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int8ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int8ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int8ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast8_t src)_SHINSEI_OS_NOEXCEPT;
 
 // Int16/UInt16 string converters (W)
 _SHINSEI_LIB_API size_t shinsei_uInt16ToStringW(wchar_t*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT;
@@ -937,19 +937,19 @@ _SHINSEI_LIB_API size_t shinsei_int16ToBase36StringU32(char32_t*const restrict d
 _SHINSEI_LIB_API size_t shinsei_int16ToBase62StringU32(char32_t*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT;
 
 // Int16/UInt16 string converters (CP)
-_SHINSEI_LIB_API size_t shinsei_uInt16ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt16ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt16ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt16ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt16ToBase36StringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt16ToBase62StringCP(const unsigned int code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt16ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt16ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt16ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt16ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt16ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt16ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast16_t src)_SHINSEI_OS_NOEXCEPT;
 
-_SHINSEI_LIB_API size_t shinsei_int16ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int16ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int16ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int16ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int16ToBase36StringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int16ToBase62StringCP(const unsigned int code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int16ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int16ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int16ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int16ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int16ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int16ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast16_t src)_SHINSEI_OS_NOEXCEPT;
 
 // Int32/UInt32 string converters (W)
 _SHINSEI_LIB_API size_t shinsei_uInt32ToStringW(wchar_t*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT;
@@ -1012,19 +1012,19 @@ _SHINSEI_LIB_API size_t shinsei_int32ToBase36StringU32(char32_t*const restrict d
 _SHINSEI_LIB_API size_t shinsei_int32ToBase62StringU32(char32_t*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT;
 
 // Int32/UInt32 string converters (CP)
-_SHINSEI_LIB_API size_t shinsei_uInt32ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt32ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt32ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt32ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt32ToBase36StringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt32ToBase62StringCP(const unsigned int code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt32ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt32ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt32ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt32ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt32ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt32ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast32_t src)_SHINSEI_OS_NOEXCEPT;
 
-_SHINSEI_LIB_API size_t shinsei_int32ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int32ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int32ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int32ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int32ToBase36StringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int32ToBase62StringCP(const unsigned int code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int32ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int32ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int32ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int32ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int32ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int32ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast32_t src)_SHINSEI_OS_NOEXCEPT;
 
 // Int64/UInt64 string converters (W)
 _SHINSEI_LIB_API size_t shinsei_uInt64ToStringW(wchar_t*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
@@ -1087,19 +1087,19 @@ _SHINSEI_LIB_API size_t shinsei_int64ToBase36StringU32(char32_t*const restrict d
 _SHINSEI_LIB_API size_t shinsei_int64ToBase62StringU32(char32_t*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 
 // Int64/UInt64 string converters (CP)
-_SHINSEI_LIB_API size_t shinsei_uInt64ToStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt64ToBinStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt64ToOctStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt64ToHexStringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt64ToBase36StringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_uInt64ToBase62StringCP(const unsigned int code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt64ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt64ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt64ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt64ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt64ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_uInt64ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const uint_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 
-_SHINSEI_LIB_API size_t shinsei_int64ToStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int64ToBinStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int64ToOctStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int64ToHexStringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int64ToBase36StringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API size_t shinsei_int64ToBase62StringCP(const unsigned int code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int64ToStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int64ToBinStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int64ToOctStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int64ToHexStringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int64ToBase36StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API size_t shinsei_int64ToBase62StringCP(register const uint_fast32_t code_page,char*const restrict des,const int_fast64_t src)_SHINSEI_OS_NOEXCEPT;
 
 // String to int8/uint8 converters (W)
 _SHINSEI_LIB_API uint_fast8_t shinsei_stringToUInt8W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
@@ -1162,19 +1162,19 @@ _SHINSEI_LIB_API int_fast8_t shinsei_base36StringToInt8U32(const char32_t*const 
 _SHINSEI_LIB_API int_fast8_t shinsei_base62StringToInt8U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
 // String to int8/uint8 converters (CP)
-_SHINSEI_LIB_API uint_fast8_t shinsei_stringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast8_t shinsei_binStringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast8_t shinsei_octStringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast8_t shinsei_hexStringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast8_t shinsei_base36StringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast8_t shinsei_base62StringToUInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast8_t shinsei_stringToUInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast8_t shinsei_binStringToUInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast8_t shinsei_octStringToUInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast8_t shinsei_hexStringToUInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast8_t shinsei_base36StringToUInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast8_t shinsei_base62StringToUInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
-_SHINSEI_LIB_API int_fast8_t shinsei_stringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast8_t shinsei_binStringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast8_t shinsei_octStringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast8_t shinsei_hexStringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast8_t shinsei_base36StringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast8_t shinsei_base62StringToInt8CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast8_t shinsei_stringToInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast8_t shinsei_binStringToInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast8_t shinsei_octStringToInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast8_t shinsei_hexStringToInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast8_t shinsei_base36StringToInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast8_t shinsei_base62StringToInt8CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
 // String to int16/uint16 converters (W)
 _SHINSEI_LIB_API uint_fast16_t shinsei_stringToUInt16W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
@@ -1237,19 +1237,19 @@ _SHINSEI_LIB_API int_fast16_t shinsei_base36StringToInt16U32(const char32_t*cons
 _SHINSEI_LIB_API int_fast16_t shinsei_base62StringToInt16U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
 // String to int16/uint16 converters (CP)
-_SHINSEI_LIB_API uint_fast16_t shinsei_stringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast16_t shinsei_binStringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast16_t shinsei_octStringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast16_t shinsei_hexStringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast16_t shinsei_base36StringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast16_t shinsei_base62StringToUInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast16_t shinsei_stringToUInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast16_t shinsei_binStringToUInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast16_t shinsei_octStringToUInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast16_t shinsei_hexStringToUInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast16_t shinsei_base36StringToUInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast16_t shinsei_base62StringToUInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
-_SHINSEI_LIB_API int_fast16_t shinsei_stringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast16_t shinsei_binStringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast16_t shinsei_octStringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast16_t shinsei_hexStringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast16_t shinsei_base36StringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast16_t shinsei_base62StringToInt16CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast16_t shinsei_stringToInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast16_t shinsei_binStringToInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast16_t shinsei_octStringToInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast16_t shinsei_hexStringToInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast16_t shinsei_base36StringToInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast16_t shinsei_base62StringToInt16CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
 // String to int32/uint32 converters (W)
 _SHINSEI_LIB_API uint_fast32_t shinsei_stringToUInt32W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
@@ -1312,19 +1312,19 @@ _SHINSEI_LIB_API int_fast32_t shinsei_base36StringToInt32U32(const char32_t*cons
 _SHINSEI_LIB_API int_fast32_t shinsei_base62StringToInt32U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
 // String to int32/uint32 converters (CP)
-_SHINSEI_LIB_API uint_fast32_t shinsei_stringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast32_t shinsei_binStringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast32_t shinsei_octStringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast32_t shinsei_hexStringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast32_t shinsei_base36StringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast32_t shinsei_base62StringToUInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast32_t shinsei_stringToUInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast32_t shinsei_binStringToUInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast32_t shinsei_octStringToUInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast32_t shinsei_hexStringToUInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast32_t shinsei_base36StringToUInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast32_t shinsei_base62StringToUInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
-_SHINSEI_LIB_API int_fast32_t shinsei_stringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast32_t shinsei_binStringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast32_t shinsei_octStringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast32_t shinsei_hexStringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast32_t shinsei_base36StringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast32_t shinsei_base62StringToInt32CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast32_t shinsei_stringToInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast32_t shinsei_binStringToInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast32_t shinsei_octStringToInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast32_t shinsei_hexStringToInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast32_t shinsei_base36StringToInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast32_t shinsei_base62StringToInt32CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
 // String to int64/uint64 converters (W)
 _SHINSEI_LIB_API uint_fast64_t shinsei_stringToUInt64W(const wchar_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
@@ -1387,19 +1387,19 @@ _SHINSEI_LIB_API int_fast64_t shinsei_base36StringToInt64U32(const char32_t*cons
 _SHINSEI_LIB_API int_fast64_t shinsei_base62StringToInt64U32(const char32_t*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
 // String to int64/uint64 converters (CP)
-_SHINSEI_LIB_API uint_fast64_t shinsei_stringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast64_t shinsei_binStringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast64_t shinsei_octStringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast64_t shinsei_hexStringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast64_t shinsei_base36StringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API uint_fast64_t shinsei_base62StringToUInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast64_t shinsei_stringToUInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast64_t shinsei_binStringToUInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast64_t shinsei_octStringToUInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast64_t shinsei_hexStringToUInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast64_t shinsei_base36StringToUInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API uint_fast64_t shinsei_base62StringToUInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
-_SHINSEI_LIB_API int_fast64_t shinsei_stringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast64_t shinsei_binStringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast64_t shinsei_octStringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast64_t shinsei_hexStringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast64_t shinsei_base36StringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API int_fast64_t shinsei_base62StringToInt64CP(const unsigned int code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast64_t shinsei_stringToInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast64_t shinsei_binStringToInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast64_t shinsei_octStringToInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast64_t shinsei_hexStringToInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast64_t shinsei_base36StringToInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API int_fast64_t shinsei_base62StringToInt64CP(register const uint_fast32_t code_page,const char*const restrict src,const size_t len)_SHINSEI_OS_NOEXCEPT;
 
 // Legacy
 
@@ -1472,13 +1472,13 @@ _SHINSEI_LIB_API bool shinsei_string_t_setSize(shinsei_string_t*const restrict t
 _SHINSEI_LIB_API void shinsei_string_t_move(shinsei_string_t*const restrict this,shinsei_string_t* const restrict src)_SHINSEI_OS_NOEXCEPT;
 
 _SHINSEI_LIB_API bool shinsei_string_t_attach(shinsei_string_t*const restrict this,const shinsei_string_t*const restrict src)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API bool shinsei_string_t_attachValue(shinsei_string_t*const restrict this,const int_fast32_t ctrl,const unsigned int code_page,const size_t size,const size_t cap,void*const ptr,const size_t char_size)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API bool shinsei_string_t_attachValue(shinsei_string_t*const restrict this,const int_fast32_t ctrl,register const uint_fast32_t code_page,const size_t size,const size_t cap,void*const ptr,const size_t char_size)_SHINSEI_OS_NOEXCEPT;
 
 _SHINSEI_LIB_API bool shinsei_string_t_isCodepage(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API unsigned int shinsei_string_t_getCodePage(const shinsei_string_t*const restrict this)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API void shinsei_string_t_enableCodePage(shinsei_string_t*const restrict this,const bool enabled)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API void shinsei_string_t_setCodePage(shinsei_string_t*const restrict this,const unsigned int code_page)_SHINSEI_OS_NOEXCEPT;
-_SHINSEI_LIB_API void shinsei_string_t_codePage(shinsei_string_t*const restrict this,const bool enabled,const unsigned int code_page)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API void shinsei_string_t_setCodePage(shinsei_string_t*const restrict this,register const uint_fast32_t code_page)_SHINSEI_OS_NOEXCEPT;
+_SHINSEI_LIB_API void shinsei_string_t_codePage(shinsei_string_t*const restrict this,const bool enabled,register const uint_fast32_t code_page)_SHINSEI_OS_NOEXCEPT;
 
 _SHINSEI_LIB_API bool shinsei_string_t_as(shinsei_string_t*const restrict this,const size_t char_size)_SHINSEI_OS_NOEXCEPT;
 _SHINSEI_LIB_API bool shinsei_string_t_asCapacity(shinsei_string_t*const restrict this,const size_t cap,const size_t char_size)_SHINSEI_OS_NOEXCEPT;

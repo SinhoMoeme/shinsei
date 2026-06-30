@@ -1,6 +1,6 @@
 #include"shinsei/network.h"
 
-#include"shinsei/.internal/cpp_init_source.hpp"
+#include"shinsei/.internal/cpp_init.hpp"
 
 // Get system ANSI code page
 #ifdef _SHINSEI_OS_ATOMIC
@@ -77,4 +77,4 @@ _SHINSEI_LIB_API size_t shinsei_iPv6ToStringN(register wchar_t*const restrict de
 	return shinsei_iPv6ToStringW(des,src);
 }
 
-#include"shinsei/.internal/cpp_term_source.hpp"
+#include"shinsei/.internal/cpp_term.hpp"

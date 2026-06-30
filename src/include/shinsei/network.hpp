@@ -8,9 +8,15 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool shinsei_stringToIPv4A(::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
 		return ::shinsei_stringToIpv4A(des,src,src_len);
 	}
+	_SHINSEI_OS_INLINE bool shinsei_stringToIPv4(::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToIpv4A(des,src,src_len);
+	}
 	
 	// Convert IPv4 address to string
 	_SHINSEI_OS_INLINE ::size_t shinsei_iPv4ToStringA(char*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_iPv4ToStringA(des,src);
+	}
+	_SHINSEI_OS_INLINE ::size_t shinsei_iPv4ToString(char*const restrict des,const ::uint32_t*const restrict src){
 		return ::shinsei_iPv4ToStringA(des,src);
 	}
 	
@@ -18,9 +24,15 @@ namespace shinsei{
 	_SHINSEI_OS_INLINE bool shinsei_stringToIPv6A(::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
 		return ::shinsei_stringToIPv6A(des,src,src_len);
 	}
+	_SHINSEI_OS_INLINE bool shinsei_stringToIPv6(::uint32_t*const restrict des,const char*const restrict src,const ::size_t src_len){
+		return ::shinsei_stringToIPv6A(des,src,src_len);
+	}
 	
 	// Convert IPv6 address string
 	_SHINSEI_OS_INLINE ::size_t shinsei_iPv6ToStringA(char*const restrict des,const ::uint32_t*const restrict src){
+		return ::shinsei_iPv6ToStringA(des,src);
+	}
+	_SHINSEI_OS_INLINE ::size_t shinsei_iPv6ToString(char*const restrict des,const ::uint32_t*const restrict src){
 		return ::shinsei_iPv6ToStringA(des,src);
 	}
 	

@@ -1,6 +1,6 @@
 #include"shinsei/path.h"
 
-#include"shinsei/.internal/cpp_init_source.hpp"
+#include"shinsei/.internal/cpp_init.hpp"
 
 // Get system ANSI code page
 #ifdef _SHINSEI_OS_ATOMIC
@@ -1265,4 +1265,4 @@ size_t shinsei_splitStringToNativePathN(wchar_t*const restrict des_buf,const siz
 	return shinsei_splitStringToWindowsPathN(des_buf,des_buf_len,src,src_len,folder_len,max_folder_cnt);
 }
 
-#include"shinsei/.internal/cpp_term_source.hpp"
+#include"shinsei/.internal/cpp_term.hpp"
